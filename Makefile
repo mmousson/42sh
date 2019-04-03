@@ -6,7 +6,7 @@
 #    By: mmousson <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/04 01:20:57 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/04 01:24:54 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,14 @@ all: lib_rule $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) $(LIBSFOLDERS) $(LIBS)
-	@printf "\033[1;36m[42SH COMPILATION SUCCESSFUL]\033[0m\n"
+	@if [ -e files_missing ]; then \
+		printf "\033[1;36m[42SH COMPILATION FAILED]\033[0m\n"; \
+	else \
+		printf "\033[1;36m[42SH COMPILATION SUCCESSFUL]\033[0m\n"; \
+	fi;
+	@$(RM) files_missing
+	@$(RM) tmp_log
+	@$(RM) tmp_errors
 
 $(OBJDIR):
 	@$(shell mkdir -p $(OBJDIR))

@@ -2,3 +2,5 @@
 *.o
 *.d
 .o
+tmp_log
+tmp_errors
