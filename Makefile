@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmousson <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/04 01:24:54 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/04 04:48:16 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ OBJDIR = .o
 
 NAME = 42sh
 
-SRCS =		./src/core/main.c
+SRCS =		./src/core/main.c					\
+			./src/job_control/initialize.c		\
+			./src/job_control/launch_process.c
 
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 DEPS = $(subst .c,.d,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
@@ -52,7 +54,7 @@ $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 		printf "   \033[1;33m[WARNING]\n\033[0m" && /bin/cat ./tmp_log; \
 	else \
 		printf "   \033[1;32m[OK]\n\033[0m"; \
-	fi;	
+	fi;
 
 clean:
 	@$(MAKE) -C $(LIBFT) clean --no-print-directory

@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sh42.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/04 04:58:04 by mmousson         ###   ########.fr       */
+/*   Created: 2019/04/04 04:27:15 by mmousson          #+#    #+#             */
+/*   Updated: 2019/04/04 04:58:06 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <termios.h>
-#include "sh42.h"
+#ifndef SH_42_H
+# define SH_42_H
 
-int		main(int argc, char **argv)
-{
-	struct termios	bkp_conf;
+int	init_job_ctrl(struct termios *bkp_conf);
 
-	(void)argc;
-	(void)argv;
-	if (init_job_ctrl(&bkp_conf) == -1)
-		return (128);
-	sleep(2);
-	if (isatty(STDIN_FILENO))
-	tcsetattr(STDIN_FILENO, TCSANOW, &bkp_conf);
-	return (0);
-}
+#endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_control_42.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 01:46:31 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/04 02:00:39 by mmousson         ###   ########.fr       */
+/*   Created: 2019/04/04 04:27:21 by mmousson          #+#    #+#             */
+/*   Updated: 2019/04/04 04:33:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define JOB_CONTROL_42_h
 
 # include <termios.h>
+# include "termcap.h"
 
 /*
 **	Boolean data-type
@@ -21,8 +22,8 @@
 
 typedef enum			e_bool
 {
-	false				0;
-	true				1;
+	false,
+	true
 }						t_bool;
 
 /*
@@ -65,5 +66,13 @@ typedef struct			s_job
 	struct termios		tmodes;
 	struct s_job		*next;
 }						t_job;
+
+/*
+**	Job-objects' utility functions
+*/
+
+t_job					*find_job(pid_t pgid);
+int						job_is_stopped(t_job *job);
+int						job_is_completed(t_job *job);
 
 #endif
