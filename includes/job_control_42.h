@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:27:21 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/04 04:33:41 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/04 06:22:57 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct			s_job
 **	Job-objects' utility functions
 */
 
-t_job					*find_job(pid_t pgid);
+t_job					*find_job (pid_t pgid, t_job *first_job);
 int						job_is_stopped(t_job *job);
 int						job_is_completed(t_job *job);
 
