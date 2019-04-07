@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/04 04:48:16 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/07 11:20:50 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,22 +31,22 @@ DEPS = $(subst .c,.d,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 all: lib_rule $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) -o $(NAME) $(LIBSFOLDERS) $(LIBS)
-	@if [ -e files_missing ]; then \
-		printf "\033[1;36m[42SH COMPILATION FAILED]\033[0m\n"; \
-	else \
-		printf "\033[1;36m[42SH COMPILATION SUCCESSFUL]\033[0m\n"; \
-	fi;
-	@$(RM) files_missing
 	@$(RM) tmp_log
 	@$(RM) tmp_errors
+	@if [ -e files_missing ]; then \
+		printf "\033[1;31m\n[42SH COMPILATION FAILED]\033[0m\n"; \
+	else \
+		$(CC) $(OBJS) -o $(NAME) $(LIBSFOLDERS) $(LIBS); \
+		printf "\033[1;36m\n[42SH COMPILATION SUCCESSFUL]\033[0m\n"; \
+	fi;
+	@$(RM) files_missing
 
 $(OBJDIR):
 	@$(shell mkdir -p $(OBJDIR))
 
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 	@$(shell mkdir -p $(dir $@))
-	@printf "Precompiling $(notdir $@)..."
+	@printf "%-40s" "Precompiling $(notdir $@)..."
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $< 2> ./tmp_log || /usr/bin/touch ./tmp_errors
 	@if [ -e tmp_errors ]; then \
 		printf "\033[1;31m[KO]\n\033[0m" && /bin/cat 1>&2 ./tmp_log && touch files_missing; \
@@ -70,9 +70,17 @@ fclean:
 
 re: fclean all
 
+fclean_nolib:
+	@$(RM) $(OBJS) $(DEPS)
+	@printf "\033[1;33m[42SH OBJECT FILES CLEANED]\033[0m\n"
+	@$(RM) $(NAME)
+	@printf "\033[1;35m[42SH BINARY DELETED]\033[0m\n"
+
+re_nolib: fclean_nolib all
+
 lib_rule:
 	@$(MAKE) -C $(LIBFT) --no-print-directory
 
 .NOTPARALLEL:
-.PHONY: lib_rule all clean fclean re
+.PHONY: lib_rule all clean fclean re re_nolib fclean_nolib
 -include $(DEPS)

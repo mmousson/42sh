@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include "libft.h"
@@ -17,7 +18,11 @@
 
 /*
 **	Set back the child's Job Control handlers to default
-**	That way, they will be ignored by inheriting the shell's behaviour
+**	That way, they will not be ignored by inheriting the shell's behaviour
+**
+**	Arguments: NONE
+**
+**	Return Value: NONE
 */
 
 static void	reset_signals_actions(void)
@@ -32,6 +37,13 @@ static void	reset_signals_actions(void)
 
 /*
 **	Handle the redirection of I/O channels
+**
+**	Arguments:
+**	input -> Target input file descriptor channel
+**	output -> Target output file descriptor channel
+**	error -> Target error output file descriptor channel
+**
+**	Return Value: NONE
 */
 
 static void	setup_redirections(int input, int output, int error)
@@ -60,7 +72,7 @@ static void	setup_redirections(int input, int output, int error)
 **	First, we reset the default signal actions since they have been set to be
 **	ignored by the shell when enabling Job Control, and this behaviour will be
 **	transmitted to child processes by inheritance. Of course, if we are running
-**	non-intercatively, there's nothing to do about it
+**	non-intercatively, there's nothing to worry about and nothing to do
 **
 **	We setup the redirection of I/O channels right before calling execve
 **	so we can support multiple redirection in a single job
@@ -69,9 +81,18 @@ static void	setup_redirections(int input, int output, int error)
 **	exit with error code 126 (Complying with POSIX Standard)
 **	Note: Having execve fail at that point will cause a memory leak which can
 **	NOT be prevented
+**
+**	Arguments:
+**	proc -> The Data Structure representing the process to launch
+**	pgid -> The ID of the process group being child of the shell
+**		if 'pgid' == 0, then the process becomes the Process Group Leader
+**		and its ID becomes the Process Group ID
+**	io_chan -> Data structure holding Target I/O channels infos
+**
+**	Return Value: NONE
 */
 
-void		child_process(t_process *process, pid_t pgid)
+void		child_process(t_process *proc, pid_t pgid, t_io_channels io_chan)
 {
 	pid_t	child_id;
 	t_bool	interactive;
@@ -85,10 +106,10 @@ void		child_process(t_process *process, pid_t pgid)
 		setpgid(child_id, pgid);
 		reset_signals_actions();
 	}
-	setup_redirections(process);
-	execve(process->argv[0], process->argv, process->environ);
+	setup_redirections(io_chan.input, io_chan.output, io_chan.error);
+	execve(proc->argv[0], proc->argv, proc->environ);
 	ft_putstr_fd("Failed to execute process: ", STDERR_FILENO);
-	ft_putendl_fd(file, STDERR_FILENO);
+	ft_putendl_fd(proc->argv[0], STDERR_FILENO);
 	ft_putendl_fd("Reason: The file is marked as executable but could not "
 		"be run by the operating system", STDERR_FILENO);
 	exit(126);
