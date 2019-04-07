@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_control_42.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:27:21 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/04 06:22:57 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/07 10:03:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define JOB_CONTROL_42_h
 
 # include <termios.h>
-# include "termcap.h"
 
 /*
 **	Boolean data-type
@@ -39,6 +38,7 @@ typedef struct			s_process
 {
 	pid_t				pid;
 	char				**argv;
+	char				**environ;
 	t_bool				completed;
 	t_bool				stopped;
 	int					status;

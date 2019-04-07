@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   sh42.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:27:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/04 04:58:06 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/07 10:49:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_42_H
 # define SH_42_H
+
+/*
+**	==================== Main functions ====================
+**
+**	init_job_ctrl -> job_control/initialize.c
+*/
 
 int	init_job_ctrl(struct termios *bkp_conf);
 
