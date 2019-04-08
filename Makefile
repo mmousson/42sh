@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/08 08:41:07 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/08 12:12:36 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,12 @@ NAME = 42sh
 
 SRCS =		./src/core/main.c					\
 			./src/job_control/initialize.c		\
-			./src/job_control/launch_process.c	\
-			./src/job_control/job_engine.c		
+			./src/job_control/child_process.c	\
+			./src/job_control/parent_process.c	\
+			./src/job_control/job_engine.c		\
+			./src/job_control/foreground.c		\
+			./src/job_control/background.c		\
+			./src/job_control/utility.c
 
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 DEPS = $(subst .c,.d,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))

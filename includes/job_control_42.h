@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 09:47:32 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/08 12:11:16 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,22 @@
 
 # include <sys/types.h>
 # include <termios.h>
+
+/*
+**	Shell PGID and Terminal Configuration that we need to know accross
+**	all Job Control's source files
+*/
+
+extern pid_t			shell_proc_group_id;
+extern struct termios	shell_term_conf;
+
+/*
+**	Those two defines will serve to tell the Foreground and Background
+**	handlers if a Job is Starting Up or Continuing
+*/
+
+# define START_JOB 0
+# define CONTINUE_JOB 1
 
 /*
 **	Boolean data-type
@@ -88,11 +104,12 @@ typedef struct			s_job
 */
 
 int						job_launch(t_job *job, int fg);
-void					parent_process(t_job *job, pid_t pid);
+void					parent_process(t_job *job, t_process *proc, pid_t pid);
 void					child_process(t_process *proc, int foreground,
 	pid_t pgid);
-int						send_job_to_foreground();
-int						send_job_to_background();
+int						send_job_to_foreground(t_job *job, int must_continue);
+int						send_job_to_background(t_job *job, int must_continue);
+int						wait_job_completion(t_job *job);
 
 /*
 **	=================== Job-objects' utility functions ===================
