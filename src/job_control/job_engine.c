@@ -15,7 +15,15 @@
 #include "job_control_42.h"
 
 /*
+**	Function to setup pipe redirection (STDIN & STDOUT)
+**	If a pipe syscall fails, display an error message and make the shell exit
 **
+**	Arguments:
+**	job -> The job that is being launched
+**	process -> the next-to-be-launched process
+**	p -> int array to store Writing and Reading end of the pipe
+**
+**	Return Value: NONE
 */
 
 static void				pipe_setup(t_job *job, t_process *process, int p[2])
@@ -35,7 +43,18 @@ static void				pipe_setup(t_job *job, t_process *process, int p[2])
 }
 
 /*
+**	Function responsible of clearing the pipe redirection if one have been made
+**	We verify that by checking if the job's expected I/O channels are different
+**	from the current process I/O channels
+**	Finally, if there's a next process to launch, make it read from the Reading
+**	end of the pipe
 **
+**	Arguments:
+**	job -> The job that is being launched
+**	process -> the next-to-be-launched process
+**	p -> int array to store Writing and Reading end of the pipe
+**
+**	Return Value: NONE
 */
 
 static void				pipe_cleanup(t_job *job, t_process *process, int p[2])
@@ -47,20 +66,6 @@ static void				pipe_cleanup(t_job *job, t_process *process, int p[2])
 	if (process->next)
 		process->next->io_channels.input = p[0];
 }
-
-/*
-**
-**
-**	chan -> A pointer to the Data-Structure holding the I/O channels infos
-**		of the next-to-be-launched process
-**
-**	Return Value: NONE
-*/
-
-// static void				io_channels_setup(t_io_channels *chan)
-// {
-
-// }
 
 /*
 **	Function that makes the parent wait for all the processes in a job to
@@ -110,7 +115,6 @@ int						job_launch(t_job *job, int fg)
 	current_process = job->first_process;
 	while (current_process)
 	{
-		// io_channels_setup(&(current_process->io_channels));
 		pipe_setup(job, current_process, p);
 		if ((pid = fork()) == 0)
 			child_process(current_process, job->pgid, fg);
