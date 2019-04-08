@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/04 04:58:04 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/08 09:49:33 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int		main(int argc, char **argv)
 		return (128);
 	sleep(2);
 	if (isatty(STDIN_FILENO))
-	tcsetattr(STDIN_FILENO, TCSANOW, &bkp_conf);
+		tcsetattr(STDIN_FILENO, TCSANOW, &bkp_conf);
 	return (0);
 }

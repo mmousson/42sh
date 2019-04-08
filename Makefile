@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/07 11:20:50 by marvin           ###   ########.fr        #
+#    Updated: 2019/04/08 08:41:07 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ NAME = 42sh
 
 SRCS =		./src/core/main.c					\
 			./src/job_control/initialize.c		\
-			./src/job_control/launch_process.c
+			./src/job_control/launch_process.c	\
+			./src/job_control/job_engine.c		
 
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 DEPS = $(subst .c,.d,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))

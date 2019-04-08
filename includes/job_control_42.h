@@ -6,12 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 03:10:18 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/08 09:47:32 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef JOB_CONTROL_42_H
-# define JOB_CONTROL_42_h
+# define JOB_CONTROL_42_H
 
 # include <sys/types.h>
 # include <termios.h>
@@ -78,6 +78,23 @@ typedef struct			s_job
 }						t_job;
 
 /*
+**	==================== Job Control's main functions ====================
+**
+**	job_launch -> job_control/job_engine.c
+**	parent_process -> job_control/parent_process.c
+**	child_process -> job_control/child_process.c
+**	send_job_to_foreground -> job_control/foreground.c
+**	send_job_to_background -> job_control/background.c
+*/
+
+int						job_launch(t_job *job, int fg);
+void					parent_process(t_job *job, pid_t pid);
+void					child_process(t_process *proc, int foreground,
+	pid_t pgid);
+int						send_job_to_foreground();
+int						send_job_to_background();
+
+/*
 **	=================== Job-objects' utility functions ===================
 **
 **	find_job -> job_control/utility.c
@@ -88,14 +105,5 @@ typedef struct			s_job
 t_job					*find_job (pid_t pgid, t_job *first_job);
 int						job_is_stopped(t_job *job);
 int						job_is_completed(t_job *job);
-
-/*
-**	==================== Job Control's main functions ====================
-**
-**	child_process -> job_control/launch_process.c
-*/
-
-void					child_process(t_process *proc, int foreground,
-	pid_t pgid);
 
 #endif
