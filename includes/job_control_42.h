@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 13:07:37 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/08 17:22:37 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ extern struct termios	shell_term_conf;
 # define CONTINUE_JOB 1
 # define BACKGROUND_LAUNCH 0
 # define FOREGROUND_LAUNCH 1
+# define WAITPID_ERROR -1
 
 /*
 **	Boolean data-type

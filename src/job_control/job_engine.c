@@ -88,7 +88,7 @@ int					wait_job_completion(t_job *job)
 	process = job->first_process;
 	while (process)
 	{
-		wait(&ret);
+		waitpid(WAIT_ANY, &ret, WUNTRACED);
 		process = process->next;
 	}
 	return (ret);
