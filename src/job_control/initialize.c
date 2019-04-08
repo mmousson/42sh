@@ -5,14 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 04:26:21 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/04 04:58:22 by mmousson         ###   ########.fr       */
+/*   Created: 2019/04/07 11:33:23 by mmousson          #+#    #+#             */
+/*   Updated: 2019/04/07 11:34:31 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <termios.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/types.h>
 
 /*
 **	This functions checks if the shell is launched as an intercative one

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 09:50:06 by marvin            #+#    #+#             */
-/*   Updated: 2019/04/07 09:50:06 by marvin           ###   ########.fr       */
+/*   Created: 2019/04/07 11:33:16 by mmousson          #+#    #+#             */
+/*   Updated: 2019/04/07 11:33:16 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,13 @@ static void	setup_redirections(int input, int output, int error)
 **	Return Value: NONE
 */
 
-void		child_process(t_process *proc, pid_t pgid, t_io_channels io_chan)
+void		child_process(t_process *proc, int foreground, pid_t pgid)
 {
-	pid_t	child_id;
-	t_bool	interactive;
+	pid_t			child_id;
+	t_bool			interactive;
+	t_io_channels	io_chan;
 
+	io_chan = proc->io_channels;
 	interactive = isatty(0);
 	if (interactive)
 	{
@@ -104,6 +106,8 @@ void		child_process(t_process *proc, pid_t pgid, t_io_channels io_chan)
 		if (pgid == 0)
 			pgid = child_id;
 		setpgid(child_id, pgid);
+		if (foreground)
+			tcsetpgrp(STDIN_FILENO, pgid);
 		reset_signals_actions();
 	}
 	setup_redirections(io_chan.input, io_chan.output, io_chan.error);

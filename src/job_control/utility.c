@@ -6,10 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/04 06:22:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/08 02:18:56 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <sys/types.h>
 #include "job_control_42.h"
 
 /* Find the active job with the indicated pgid.  */

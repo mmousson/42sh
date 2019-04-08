@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   job_control_42.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 04:27:21 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/07 11:28:10 by marvin           ###   ########.fr       */
+/*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
+/*   Updated: 2019/04/08 03:10:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef JOB_CONTROL_42_H
 # define JOB_CONTROL_42_h
 
+# include <sys/types.h>
 # include <termios.h>
 
 /*
@@ -51,7 +52,6 @@ typedef struct			s_process
 	char				**environ;
 	t_bool				completed;
 	t_bool				stopped;
-	t_bool				foreground;
 	t_io_channels		io_channels;
 	int					status;
 	struct s_process	*next;
@@ -95,7 +95,7 @@ int						job_is_completed(t_job *job);
 **	child_process -> job_control/launch_process.c
 */
 
-void					child_process(t_process *proc, pid_t pgid,
-	t_io_channels io_chan);
+void					child_process(t_process *proc, int foreground,
+	pid_t pgid);
 
 #endif
