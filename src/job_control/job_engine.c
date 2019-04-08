@@ -96,7 +96,7 @@ int					wait_job_completion(t_job *job)
 
 /*
 **	Job Control's core function
-**	It lauches all the processes contained in a job
+**	It launches all the processes contained in a job
 **
 **	Arguments:
 **	job -> A pointer to the Data-Structure holding the informations about

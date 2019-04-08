@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 12:11:16 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/08 13:07:37 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ extern pid_t			shell_proc_group_id;
 extern struct termios	shell_term_conf;
 
 /*
-**	Those two defines will serve to tell the Foreground and Background
+**	The two first defines will serve to tell the Foreground and Background
 **	handlers if a Job is Starting Up or Continuing
+**	The two last will simply tell the engine in which group ti launch the job
 */
 
 # define START_JOB 0
 # define CONTINUE_JOB 1
+# define BACKGROUND_LAUNCH 0
+# define FOREGROUND_LAUNCH 1
 
 /*
 **	Boolean data-type

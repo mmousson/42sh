@@ -6,9 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 11:42:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/08 13:07:46 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
+#include "libft.h"
+#include "job_control_42.h"
 
 #include <unistd.h>
 #include <termios.h>
@@ -18,11 +22,43 @@ struct termios	shell_term_conf;
 
 int				main(int argc, char **argv)
 {
+	t_job	*test;
+
 	(void)argc;
 	(void)argv;
 	if (init_job_ctrl(&shell_term_conf) == -1)
 		return (128);
-	sleep(2);
+
+	test = malloc(sizeof(t_job));
+	test->pgid = 0;
+	test->first_process = malloc(sizeof(t_process));
+	test->first_process->next = malloc(sizeof(t_process));
+	test->first_process->next->next = NULL;
+	test->first_process->environ = NULL;
+	test->first_process->next->environ = NULL;
+	test->first_process->io_channels.input = 0;
+	test->first_process->io_channels.output = 1;
+	test->first_process->io_channels.error = 2;
+	test->first_process->next->io_channels.input = 0;
+	test->first_process->next->io_channels.output = 1;
+	test->first_process->next->io_channels.error = 2;
+	test->first_process->argv = malloc(sizeof(char *) * 3);
+	test->first_process->next->argv = malloc(sizeof(char *) * 3);
+	test->first_process->argv[0] = ft_strdup("/bin/ls");
+	test->first_process->argv[1] = ft_strdup("-l");
+	test->first_process->argv[2] = NULL;
+	test->first_process->next->argv[0] = ft_strdup("/usr/bin/wc");
+	test->first_process->next->argv[1] = ft_strdup("-c");
+	test->first_process->argv[2] = NULL;
+	test->command = ft_strdup("/bin/cat -e | /usr/bin/wc -c");
+	test->io_channels.input = 0;
+	test->io_channels.output = 1;
+	test->io_channels.error = 2;
+	test->next = NULL;
+	test->first_process->next = NULL;
+
+	job_launch(test, BACKGROUND_LAUNCH);
+
 	if (isatty(STDIN_FILENO))
 		tcsetattr(STDIN_FILENO, TCSANOW, &shell_term_conf);
 	return (0);
