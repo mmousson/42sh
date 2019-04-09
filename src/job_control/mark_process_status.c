@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 09:13:19 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/09 19:28:03 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/09 20:03:30 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,33 @@ static void					print_sig_def(int signo)
 		ptr++;
 	}
 	ft_putendl_fd("Undefined SIGNAL", STDERR_FILENO);
+}
+
+/*
+**	Function to display all needed informations about a process terminated by
+**	a SIGNAL, namely:
+**	Process ID, Process Name and Job Name followed by
+**	SIGNAL name and informations
+**
+**	Arguments:
+**	proc -> A pointer to the Data-Structure representing the terminated process
+**	cmd -> The command line backup representing the Job
+**	status -> The value returned by the terminated process
+**
+**	Return Value: NONE
+*/
+
+void						format_process_info(t_process *proc, char *cmd,
+	int status)
+{
+	ft_putstr_fd("\n42sh: Process ", STDERR_FILENO);
+	ft_putnbr_fd(proc->pid, STDERR_FILENO);
+	ft_putstr_fd(", '", STDERR_FILENO);
+	ft_putstr_fd(proc->argv[0], STDERR_FILENO);
+	ft_putstr_fd("' in job '", STDERR_FILENO);
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd("' terminated by signal: ", STDERR_FILENO);
+	print_sig_def(WTERMSIG(status));
 }
 
 /*
@@ -83,15 +110,9 @@ static int					loop_jobs(t_job *job, pid_t pid, int status)
 			else
 			{
 				proc->completed = true;
-				if (WIFSIGNALED(status) && !job->notified)
-				{
-					ft_putstr_fd("\n42sh: Job '", STDERR_FILENO);
-					ft_putstr_fd(job->command, STDERR_FILENO);
-					ft_putstr_fd("' terminated by signal: ", STDERR_FILENO);
-					print_sig_def(WTERMSIG(status));
-				}
+				if (WIFSIGNALED(status))
+					format_process_info(proc, job->command, status);
 			}
-			job->notified = true;
 			return (0);
 		}
 		proc = proc->next;
