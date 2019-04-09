@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 02:18:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/09 19:49:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int		job_is_completed (t_job *j)
 	{
 		if (!p->completed)
 			return (0);
+		p = p->next;
 	}
 	return (1);
 }

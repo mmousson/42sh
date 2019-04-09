@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 09:13:19 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/09 10:15:44 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/09 19:28:03 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ static void					print_sig_def(int signo)
 **	1 -> No match has been found in the currently searched job
 */
 
-static int					loop_jobs(t_process *proc, pid_t pid, int status,
-	char *command)
+static int					loop_jobs(t_job *job, pid_t pid, int status)
 {
+	t_process	*proc;
+
+	proc = job->first_process;
 	while (proc)
 	{
 		if (proc->pid == pid)
@@ -81,14 +83,15 @@ static int					loop_jobs(t_process *proc, pid_t pid, int status,
 			else
 			{
 				proc->completed = true;
-				if (WIFSIGNALED(status))
+				if (WIFSIGNALED(status) && !job->notified)
 				{
 					ft_putstr_fd("\n42sh: Job '", STDERR_FILENO);
-					ft_putstr_fd(command, STDERR_FILENO);
+					ft_putstr_fd(job->command, STDERR_FILENO);
 					ft_putstr_fd("' terminated by signal: ", STDERR_FILENO);
 					print_sig_def(WTERMSIG(status));
 				}
 			}
+			job->notified = true;
 			return (0);
 		}
 		proc = proc->next;
@@ -131,7 +134,7 @@ int							mark_process_status(t_job *first_job, pid_t pid,
 		job = first_job;
 		while (job)
 		{
-			if (loop_jobs(job->first_process, pid, status, job->command) == 0)
+			if (loop_jobs(job, pid, status) == 0)
 				return (0);
 			job = job->next;
 		}

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/09 09:52:45 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/09 19:23:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct			s_job
 	pid_t				pgid;
 	t_process			*first_process;
 	char				*command;
+	t_bool				notified;
 	t_io_channels		io_channels;
 	struct termios		tmodes;
 	struct s_job		*next;
