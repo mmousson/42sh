@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:36 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 12:37:12 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/09 23:13:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	send_job_to_background(t_job *job, int must_continue)
 			ft_putendl_fd(job->command, STDERR_FILENO);
 			exit(126);
 		}
+		ft_putstr_fd("\nSend Job '", STDERR_FILENO);
+		ft_putstr_fd(job->command, STDERR_FILENO);
+		ft_putendl_fd("' to background", STDERR_FILENO);
 	}
 	return (0);
 }

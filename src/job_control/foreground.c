@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 12:37:31 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/09 23:24:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,16 @@ int	send_job_to_foreground(t_job *job, int must_continue)
 	tcsetpgrp(STDIN_FILENO, job->pgid);
 	if (must_continue == CONTINUE_JOB)
 	{
-		tcsetattr(STDIN_FILENO, TCSADRAIN, &job->tmodes);
+		//tcsetattr(STDIN_FILENO, TCSADRAIN, &job->tmodes);
 		if (kill(-(job->pgid), SIGCONT) == -1)
 		{
 			ft_putstr_fd("Couldn't wake up the job: ", STDERR_FILENO);
 			ft_putendl_fd(job->command, STDERR_FILENO);
 			exit(126);
 		}
+		ft_putstr_fd("\nSend Job '", STDERR_FILENO);
+		ft_putstr_fd(job->command, STDERR_FILENO);
+		ft_putendl_fd("' to foreground", STDERR_FILENO);
 	}
 	ret = wait_job_completion(job);
 	tcsetpgrp(STDIN_FILENO, shell_proc_group_id);

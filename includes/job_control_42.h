@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/09 19:55:28 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/09 23:15:33 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ extern t_sig_matcher	g_sig_table[];
 /*
 **	The two first defines will serve to tell the Foreground and Background
 **	handlers if a Job is Starting Up or Continuing
-**	The two last will simply tell the engine in which group ti launch the job
+**	The two next will simply tell the engine in which group to launch the job
+**	The two last will be used to flag waitpid's return value
 */
 
 # define START_JOB 0
@@ -116,6 +117,7 @@ typedef struct			s_job
 	t_process			*first_process;
 	char				*command;
 	t_io_channels		io_channels;
+	t_bool				notified;
 	struct termios		tmodes;
 	struct s_job		*next;
 }						t_job;
@@ -143,6 +145,7 @@ int						wait_job_completion(t_job *job);
 int						mark_process_status(t_job *first_job, pid_t pid,
 	int status);
 void					update_status (t_job *first_job);
+void					unstop_job(t_job *job, int foreground);
 
 /*
 **	=================== Job-objects' utility functions ===================
