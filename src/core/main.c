@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 13:25:19 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/09 08:39:07 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int				main(int argc, char **argv)
 	test->io_channels.error = 2;
 	test->next = NULL;
 	test->first_process->next = NULL;
+
+	ft_putendl_fd("Launching job : '/bin/cat -e | /usr/bin/wc -c'", STDOUT_FILENO);
 
 	job_launch(test, FOREGROUND_LAUNCH);
 

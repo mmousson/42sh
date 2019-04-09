@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 17:22:37 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/09 09:52:45 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,30 @@
 # include <termios.h>
 
 /*
+**	Structure which will be used to to describe an entry for the
+**	lookup table used to convert between Sibals IDs and Names
+**	and Vice_versa
+**	i.e: Matching a SIGNAL number will display a log message
+**	along with the SIGNAL name
+**	(See job_control/sig_table.c and job_control/mark_process_status.c
+**	for in-code usage & definition)
+*/
+
+typedef struct			s_sig_matcher
+{
+	int					signo;
+	char				*sig_name;
+	char				*msg;
+}						t_sig_matcher;
+
+/*
 **	Shell PGID and Terminal Configuration that we need to know accross
 **	all Job Control's source files
 */
 
 extern pid_t			shell_proc_group_id;
 extern struct termios	shell_term_conf;
+extern t_sig_matcher	g_sig_table[];
 
 /*
 **	The two first defines will serve to tell the Foreground and Background
@@ -35,6 +53,7 @@ extern struct termios	shell_term_conf;
 # define BACKGROUND_LAUNCH 0
 # define FOREGROUND_LAUNCH 1
 # define WAITPID_ERROR -1
+# define WAITPID_NO_MATCH 1
 
 /*
 **	Boolean data-type
@@ -45,6 +64,10 @@ typedef enum			e_bool
 	false,
 	true
 }						t_bool;
+
+/*
+**	Structure holding I/O channels of a spawned process
+*/
 
 typedef struct			s_io_channels
 {
@@ -105,6 +128,9 @@ typedef struct			s_job
 **	child_process -> job_control/child_process.c
 **	send_job_to_foreground -> job_control/foreground.c
 **	send_job_to_background -> job_control/background.c
+**	wait_job_completion -> job_control/job_engine.c
+** 	mark_process_status -> job_control/mark_process_status.c
+**	update_status -> job_control/update_job_status.c
 */
 
 int						job_launch(t_job *job, int fg);
@@ -114,6 +140,9 @@ void					child_process(t_process *proc, int foreground,
 int						send_job_to_foreground(t_job *job, int must_continue);
 int						send_job_to_background(t_job *job, int must_continue);
 int						wait_job_completion(t_job *job);
+int						mark_process_status(t_job *first_job, pid_t pid,
+	int status);
+void					update_status (t_job *first_job);
 
 /*
 **	=================== Job-objects' utility functions ===================

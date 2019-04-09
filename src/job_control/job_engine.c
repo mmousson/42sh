@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
 #include <unistd.h>
+#include <sys/wait.h>
 #include "libft.h"
 #include "job_control_42.h"
 
@@ -81,15 +81,17 @@ static void				pipe_cleanup(t_job *job, t_process *process, int p[2])
 
 int					wait_job_completion(t_job *job)
 {
-	int			ret;
-	t_process	*process;
+	int		ret;
+	pid_t pid;
 
 	ret = 0;
-	process = job->first_process;
-	while (process)
+	while (42)
 	{
-		waitpid(WAIT_ANY, &ret, WUNTRACED);
-		process = process->next;
+		pid = waitpid (WAIT_ANY, &ret, WUNTRACED);
+		if (!(!mark_process_status (job, pid, ret)
+			&& !job_is_stopped (job)
+			&& !job_is_completed (job)))
+			break ;
 	}
 	return (ret);
 }
@@ -118,7 +120,7 @@ int						job_launch(t_job *job, int fg)
 	{
 		pipe_setup(job, current_process, p);
 		if ((pid = fork()) == 0)
-			child_process(current_process, job->pgid, fg);
+			child_process(current_process, fg, job->pgid);
 		else if (pid > 0)
 			parent_process(job, current_process, pid);
 		else

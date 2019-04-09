@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:23 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 12:02:48 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/09 08:30:56 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		init_job_ctrl(struct termios *bkp_conf)
 		signal(SIGTSTP, SIG_IGN);
 		signal(SIGTTIN, SIG_IGN);
 		signal(SIGTTOU, SIG_IGN);
-		signal(SIGCHLD, SIG_IGN);
+		// signal(SIGCHLD, SIG_IGN);
 		shell_proc_group_id = getpid();
 		if (setpgid(shell_proc_group_id, shell_proc_group_id) < 0)
 		{
