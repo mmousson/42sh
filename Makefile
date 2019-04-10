@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/09 23:10:02 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/10 03:20:23 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS =		./src/core/main.c						\
 			./src/job_control/mark_process_status.c	\
 			./src/job_control/update_job_status.c	\
 			./src/job_control/sig_table.c			\
+			./src/job_control/sigchld_handler.c		\
 			./src/job_control/utility.c
 
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))

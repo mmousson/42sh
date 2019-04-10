@@ -6,12 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/09 19:49:19 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/10 03:19:03 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <sys/types.h>
+#include "libft.h"
 #include "job_control_42.h"
 
 /* Find the active job with the indicated pgid.  */
@@ -90,4 +91,17 @@ int		job_is_completed (t_job *j)
 		p = p->next;
 	}
 	return (1);
+}
+
+/*
+**
+*/
+
+void	inform_user_about_job_completion(t_job *j, char *msg)
+{
+	ft_putstr_fd("\nJob '", STDERR_FILENO);
+	ft_putstr_fd(j->command, STDERR_FILENO);
+	ft_putstr_fd("' has ", STDERR_FILENO);
+	ft_putendl_fd(msg, STDERR_FILENO);
+	j->notified = true;
 }

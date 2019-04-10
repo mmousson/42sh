@@ -7,3 +7,4 @@ tmp_errors
 .vscode
 files_missing
 libft/libft.a
+a.out

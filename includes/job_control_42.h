@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/09 23:15:33 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/10 03:27:31 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ extern t_sig_matcher	g_sig_table[];
 **	The two first defines will serve to tell the Foreground and Background
 **	handlers if a Job is Starting Up or Continuing
 **	The two next will simply tell the engine in which group to launch the job
+**	The two next will be used to flag the action taken by
+**		'first_job_get_or_set' function defined in job_control/sigchl_handler.c
 **	The two last will be used to flag waitpid's return value
 */
 
@@ -53,6 +55,8 @@ extern t_sig_matcher	g_sig_table[];
 # define CONTINUE_JOB 1
 # define BACKGROUND_LAUNCH 0
 # define FOREGROUND_LAUNCH 1
+# define SET 0
+# define GET 1
 # define WAITPID_ERROR -1
 # define WAITPID_NO_MATCH 1
 
@@ -133,6 +137,8 @@ typedef struct			s_job
 **	wait_job_completion -> job_control/job_engine.c
 ** 	mark_process_status -> job_control/mark_process_status.c
 **	update_status -> job_control/update_job_status.c
+**	unstop_job -> job_control/update_job_status.c
+**	sigchld_handler -> job_control/sigchld_handler.c
 */
 
 int						job_launch(t_job *job, int fg);
@@ -146,6 +152,7 @@ int						mark_process_status(t_job *first_job, pid_t pid,
 	int status);
 void					update_status (t_job *first_job);
 void					unstop_job(t_job *job, int foreground);
+void					sigchld_handler(int signo);
 
 /*
 **	=================== Job-objects' utility functions ===================
@@ -158,5 +165,8 @@ void					unstop_job(t_job *job, int foreground);
 t_job					*find_job (pid_t pgid, t_job *first_job);
 int						job_is_stopped(t_job *job);
 int						job_is_completed(t_job *job);
+void					inform_user_about_job_completion(t_job *j, char *msg);
+void					first_job_set_and_get(t_job **to_set_or_get,
+	int set_or_get);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/09 23:40:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/10 03:30:22 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@
 #include "sh42.h"
 
 struct termios	shell_term_conf;
-
-void trap(int signo)
-{
-	(void)signo;
-	ft_putendl_fd("42sh: Process 17678, '/bin/cat -e | /usr/bin/wc -c' in job '/bin/cat -e | /usr/bin/wc -c' terminated by signal: SIGTERM (Polite quit request)", STDERR_FILENO);
-}
 
 int				main(int argc, char **argv)
 {
@@ -67,15 +61,17 @@ int				main(int argc, char **argv)
 
 	ft_putendl_fd("Launching job : '/bin/cat -e | /usr/bin/wc -c'", STDOUT_FILENO);
 
+	first_job_set_and_get(&test, SET);
+
 	job_launch(test, FOREGROUND_LAUNCH);
 	ft_putendl_fd("fg", STDERR_FILENO);
 	if (test->notified)
 		unstop_job(test, FOREGROUND_LAUNCH);
-	ft_putendl_fd("bg", STDERR_FILENO);	
+	ft_putendl_fd("bg", STDERR_FILENO);
 	if (test->notified)
 		unstop_job(test, BACKGROUND_LAUNCH);
 	ft_putendl_fd("pkill cat wc", STDERR_FILENO);
-	signal(SIGCHLD, trap);
+	signal(SIGCHLD, sigchld_handler);
 	kill(-(test->pgid), SIGTERM);
 	sleep(5);
 	if (isatty(STDIN_FILENO))
