@@ -8,3 +8,5 @@ tmp_errors
 files_missing
 libft/libft.a
 a.out
+test.c
+void

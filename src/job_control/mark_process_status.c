@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 09:13:19 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 02:41:55 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/10 07:49:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,7 @@ static int					loop_jobs(t_job *job, pid_t pid, int status)
 			if (WIFSTOPPED(status))
 			{
 				proc->stopped = true;
-				if (job->notified)
-					return (0);
-				inform_user_about_job_completion(job, "stopped");
+				inform_user_about_job_completion(job, STOP_MSG);
 			}
 			else
 			{

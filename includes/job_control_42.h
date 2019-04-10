@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 03:27:31 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/10 07:48:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ extern t_sig_matcher	g_sig_table[];
 # define WAITPID_ERROR -1
 # define WAITPID_NO_MATCH 1
 
+# define STOP_MSG "stopped"
+# define COMPLETED_MSG "completed"
+
 /*
 **	Boolean data-type
 */
@@ -111,6 +114,7 @@ typedef struct			s_process
 **	pgid -> Process Group ID
 **	command -> Backup of the 'job' command line, used for message display
 **	io_channels -> I/O file descriptors
+**	notified -> Bool value saving if job's termination/stop has been notified
 **	tmodes -> Backup of the terminal modes before launching the 'job'
 **	next -> Next Active 'job'
 */

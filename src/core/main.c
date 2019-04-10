@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 03:30:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/10 05:12:07 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "libft.h"
 #include "job_control_42.h"
 
+#include <errno.h>
+#include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
 #include <termios.h>
@@ -57,22 +59,27 @@ int				main(int argc, char **argv)
 	test->io_channels.output = 1;
 	test->io_channels.error = 2;
 	test->next = NULL;
-	 test->first_process->next = NULL;
+	test->first_process->next = NULL;
 
 	ft_putendl_fd("Launching job : '/bin/cat -e | /usr/bin/wc -c'", STDOUT_FILENO);
 
 	first_job_set_and_get(&test, SET);
 
 	job_launch(test, FOREGROUND_LAUNCH);
+
 	ft_putendl_fd("fg", STDERR_FILENO);
 	if (test->notified)
 		unstop_job(test, FOREGROUND_LAUNCH);
+
 	ft_putendl_fd("bg", STDERR_FILENO);
 	if (test->notified)
 		unstop_job(test, BACKGROUND_LAUNCH);
+
 	ft_putendl_fd("pkill cat wc", STDERR_FILENO);
 	signal(SIGCHLD, sigchld_handler);
+
 	kill(-(test->pgid), SIGTERM);
+
 	sleep(5);
 	if (isatty(STDIN_FILENO))
 		tcsetattr(STDIN_FILENO, TCSANOW, &shell_term_conf);
