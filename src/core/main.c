@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 05:12:07 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/10 12:29:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ struct termios	shell_term_conf;
 int				main(int argc, char **argv)
 {
 	t_job	*test;
+	char	*fg_argv[] = { "fg" };
+	char	*bg_argv[] = { "bg" };
 
 	(void)argc;
 	(void)argv;
+
 	if (init_job_ctrl(&shell_term_conf) == -1)
 		return (128);
 
@@ -69,11 +72,11 @@ int				main(int argc, char **argv)
 
 	ft_putendl_fd("fg", STDERR_FILENO);
 	if (test->notified)
-		unstop_job(test, FOREGROUND_LAUNCH);
+		fg(1, fg_argv, NULL);
 
 	ft_putendl_fd("bg", STDERR_FILENO);
 	if (test->notified)
-		unstop_job(test, BACKGROUND_LAUNCH);
+		bg(1, bg_argv, NULL);
 
 	ft_putendl_fd("pkill cat wc", STDERR_FILENO);
 	signal(SIGCHLD, sigchld_handler);

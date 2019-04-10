@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 09:32:07 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 11:00:37 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/10 11:58:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int				fg(int argc, char **argv, char ***env)
 	pid_t	jobspec;
 
 	(void)env;
-	current = first_job_set_and_get(&current, GET);
+	first_job_set_and_get(&current, GET);
 	jobspec = get_jobspec(argc == 1 ? NULL : argv[1]);
 	while (current)
 	{
-		if (current->pgid == jobspec)
+		if (jobspec == -1 || current->pgid == jobspec)
 		{
 			unstop_job(current, FOREGROUND_LAUNCH);
 			return (FG_JOB_FOUND);

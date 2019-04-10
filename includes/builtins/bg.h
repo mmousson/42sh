@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh42.h                                             :+:      :+:    :+:   */
+/*   bg.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 12:29:55 by mmousson         ###   ########.fr       */
+/*   Created: 2019/04/10 12:01:59 by mmousson          #+#    #+#             */
+/*   Updated: 2019/04/10 12:07:01 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_42_H
-# define SH_42_H
+#ifndef BG_H
+# define BG_H
 
-/*
-**	==================== Main functions ====================
-**
-**	init_job_ctrl -> job_control/initialize.c
-*/
+# include "libft.h"
+# include "job_control_42.h"
 
-int	init_job_ctrl(struct termios *bkp_conf);
-
-/*
-**	==================== BUILTIN functions ====================
-**
-**	bg -> builtins/bg.c
-**	fg -> builtins/fg.c
-*/
-
-int	bg(int argc, char **argv, char ***env);
-int	fg(int argc, char **argv, char ***env);
+# define BG_JOB_FOUND 0
+# define BG_NO_SUCH_JOB 1
+# define BG_NO_JOB_CONTROL 2
 
 #endif
