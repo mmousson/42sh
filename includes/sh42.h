@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 12:29:55 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/11 20:04:27 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	init_job_ctrl(struct termios *bkp_conf);
 
 int	bg(int argc, char **argv, char ***env);
 int	fg(int argc, char **argv, char ***env);
+int	jobs(int argc, char **argv, char ***env);
 
 #endif

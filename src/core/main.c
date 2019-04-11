@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 12:29:21 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/11 20:05:08 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int				main(int argc, char **argv)
 
 	job_launch(test, FOREGROUND_LAUNCH);
 
+	jobs(1, NULL, NULL);
+
 	ft_putendl_fd("fg", STDERR_FILENO);
 	if (test->notified)
 		fg(1, fg_argv, NULL);
@@ -81,7 +83,7 @@ int				main(int argc, char **argv)
 	ft_putendl_fd("pkill cat wc", STDERR_FILENO);
 	signal(SIGCHLD, sigchld_handler);
 
-	kill(-(test->pgid), SIGTERM);
+	kill(-(test->pgid), SIGSEGV);
 
 	sleep(5);
 	if (isatty(STDIN_FILENO))
