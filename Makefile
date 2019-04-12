@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/11 20:00:47 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/12 10:30:32 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ NAME = 42sh
 SRCS =		./src/core/main.c						\
 			./src/builtins/fg.c						\
 			./src/builtins/bg.c						\
-			./src/builtins/jobs.c					\
+			./src/builtins/jobs/jobs.c				\
+			./src/builtins/jobs/parse_options.c		\
 			./src/job_control/initialize.c			\
 			./src/job_control/child_process.c		\
 			./src/job_control/parent_process.c		\
