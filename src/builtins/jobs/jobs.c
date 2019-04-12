@@ -6,11 +6,69 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:34:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/12 10:34:21 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/12 11:10:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "jobs.h"
+
+static int	specific_job_exists(t_job *head, pid_t jobspec, int options)
+{
+	int	i;
+
+	i = 1;
+	while (head)
+	{
+		if (head->pgid == jobspec)
+		{
+			format_job_info(head, options, i);
+			ft_putchar('\n');
+			return (1);
+		}
+		head = head->next;
+		i++;
+	}
+	return (0);
+}
+
+static int	list_specific_jobs(t_job *head, int options, int argc, char **argv)
+{
+	int		ret;
+	pid_t	jobspec;
+	t_job	*bkp;
+
+	bkp = head;
+	ret = JOBS_OK;
+	while (argc > 0)
+	{
+		jobspec = ft_atoi(argv[0]);
+		if (!specific_job_exists(head, jobspec, options))
+		{
+			ft_putstr_fd("42sh: jobs: ", STDERR_FILENO);
+			ft_putstr_fd(argv[0], STDERR_FILENO);
+			ft_putendl_fd(": There are no suitable jobs", STDERR_FILENO);
+			ret = JOBS_ERROR;
+		}
+		argc--;
+		argv++;
+	}
+	return (ret);
+}
+
+static int	list_all_jobs(t_job *head, int options)
+{
+	int	i;
+
+	i = 1;
+	while (head)
+	{
+		format_job_info(head, options, i);
+		ft_putchar('\n');
+		head = head->next;
+		i++;
+	}
+	return (0);
+}
 
 /*
 **	============================ BUITLIN COMMAND ============================
@@ -44,12 +102,11 @@ int			jobs(int argc, char **argv, char ***env)
 		return (JOBS_OK);
 	if ((options = parse_options(argc, argv, &parsed)) == -1)
 		return (JOBS_INVALID_OPTION);
-	while (head)
-	{
-		format_job_info(head, options, i);
-		ft_putchar('\n');
-		head = head->next;
-		i++;
-	}
+	if (argc - parsed == 0)
+		return (list_all_jobs(head, options));
+	else if (argc - parsed > 0)
+		return (list_specific_jobs(head, options, argc, argv));
+	else
+		return (JOBS_ERROR);
 	return (JOBS_OK);
 }

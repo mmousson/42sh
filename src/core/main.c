@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/12 10:07:34 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/12 11:12:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int				main(int argc, char **argv)
 	t_job	*test;
 	char	*fg_argv[] = { "fg" };
 	char	*bg_argv[] = { "bg" };
-	char	*jobs_argv[] = { "jobs", "-l" };
+	char	*jobs_argv[] = { "jobs", "12" };
 
 	(void)argc;
 	(void)argv;
@@ -63,7 +63,7 @@ int				main(int argc, char **argv)
 	test->io_channels.output = 1;
 	test->io_channels.error = 2;
 	test->next = NULL;
-	test->first_process->next = NULL;
+	// test->first_process->next = NULL;
 
 	ft_putendl_fd("Launching job : '/bin/cat -e | /usr/bin/wc -c'", STDOUT_FILENO);
 
@@ -71,7 +71,10 @@ int				main(int argc, char **argv)
 
 	job_launch(test, FOREGROUND_LAUNCH);
 
-	ft_putendl_fd("jobs -l", STDERR_FILENO);
+	ft_putendl_fd("\njobs\n", STDERR_FILENO);
+	jobs(1, jobs_argv, NULL);
+	ft_putchar('\n');
+	ft_putendl_fd("jobs 12\n", STDERR_FILENO);
 	jobs(2, jobs_argv, NULL);
 
 	ft_putendl_fd("fg", STDERR_FILENO);
