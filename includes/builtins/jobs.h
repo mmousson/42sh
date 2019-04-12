@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:38:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/11 20:31:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/12 07:52:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "job_control_42.h"
 
 # define ALLOWED_OPTIONS "lp"
+# define JOBS_L_INDEX 0
+# define JOBS_P_INDEX 1
 
 # define JOBS_OK 0
 # define JOBS_ERROR 1
