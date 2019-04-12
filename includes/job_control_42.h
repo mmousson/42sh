@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 07:48:52 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/12 09:56:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct			s_job
 	char				*command;
 	t_io_channels		io_channels;
 	t_bool				notified;
+	int					status;
 	struct termios		tmodes;
 	struct s_job		*next;
 }						t_job;

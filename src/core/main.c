@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/12 08:41:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/12 10:07:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int				main(int argc, char **argv)
 
 	job_launch(test, FOREGROUND_LAUNCH);
 
-	jobs(1, jobs_argv, NULL);
+	ft_putendl_fd("jobs -l", STDERR_FILENO);
+	jobs(2, jobs_argv, NULL);
 
 	ft_putendl_fd("fg", STDERR_FILENO);
 	if (test->notified)
