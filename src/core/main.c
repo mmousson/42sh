@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 05:46:18 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 06:03:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int				main(int argc, char **argv)
 	char	*fg_argv[] = { "fg" };
 	char	*bg_argv[] = { "bg" };
 	char	*jobs_argv[] = { "jobs", "12" };
+	char	*alias_argv[] = { "alias", "nornor=norminette | grep -C1 Error" };
 
 	(void)argc;
 	(void)argv;
@@ -66,6 +67,10 @@ int				main(int argc, char **argv)
 	test->next = NULL;
 	test->first_process->next = NULL;
 
+	ft_putendl_fd("alias", STDERR_FILENO);
+
+	alias(2, alias_argv, NULL);
+
 	ft_putendl_fd("Launching job : '/bin/cat -e | /usr/bin/wc -c'", STDOUT_FILENO);
 
 	first_job_set_and_get(&test, SET);
@@ -79,12 +84,10 @@ int				main(int argc, char **argv)
 	jobs(2, jobs_argv, NULL);
 
 	ft_putendl_fd("fg", STDERR_FILENO);
-	if (test->notified)
-		fg(1, fg_argv, NULL);
+	fg(1, fg_argv, NULL);
 
 	ft_putendl_fd("bg", STDERR_FILENO);
-	if (test->notified)
-		bg(1, bg_argv, NULL);
+	bg(1, bg_argv, NULL);
 
 	ft_putendl_fd("pkill cat wc", STDERR_FILENO);
 	signal(SIGCHLD, sigchld_handler);

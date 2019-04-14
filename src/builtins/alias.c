@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 23:09:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 04:35:41 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 06:06:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	display_all_aliases(void)
 	{
 		ft_putstr("alias ");
 		ft_putstr(local->token);
-		ft_putchar('=\'');
+		ft_putstr("=\'");
 		ft_putstr(local->replacement);
 		ft_putstr("\'\n");
 		local = local->next;
@@ -62,7 +62,7 @@ static int	display_alias_definition(char *tmp)
 		{
 			ft_putstr("alias ");
 			ft_putstr(local->token);
-			ft_putchar('=\'');
+			ft_putstr("=\'");
 			ft_putstr(local->replacement);
 			ft_putstr("\'\n");
 			return (ALIAS_OK);
@@ -146,7 +146,7 @@ static int	check_key(char *key)
 		if (ft_strequ(tmp, local->token))
 		{
 			ft_strdel(&(local->replacement));
-			local->replacement = ft_strdup(key + ft_strlen(tmp));
+			local->replacement = ft_strdup(key + ft_strlen(tmp) + 1);
 			ft_strdel(&tmp);
 			return (ALIAS_OK);
 		}
@@ -178,7 +178,6 @@ static int	check_key(char *key)
 int	alias(int argc, char **argv, char ***env)
 {
 	int		ret;
-	t_alias	*local;
 
 	ret = 0;
 	(void)env;
@@ -187,7 +186,7 @@ int	alias(int argc, char **argv, char ***env)
 	while (--argc > 0)
 	{
 		argv++;
-		ret = (replace_alias(argv[0]) || ret) ? ALIAS_ERROR : ALIAS_OK;
+		ret = (check_key(argv[0]) || ret) ? ALIAS_ERROR : ALIAS_OK;
 	}
 	write_alias_list_to_file();
 	return (ret);

@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/14 05:45:52 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/14 05:54:31 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ OBJDIR = .o
 NAME = 42sh
 
 SRCS =		./src/core/main.c							\
+			./src/builtins/alias.c						\
 			./src/builtins/fg.c							\
 			./src/builtins/bg.c							\
 			./src/builtins/jobs/jobs.c					\

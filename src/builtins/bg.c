@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:02:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/13 22:36:01 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 06:01:50 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int				bg(int argc, char **argv, char ***env)
 	t_job	*current;
 
 	(void)env;
-	if (isatty(0))
+	if (!isatty(0))
 		return (BG_NO_JOB_CONTROL);
 	first_job_set_and_get(&current, GET);
 	if (argc == 1)
