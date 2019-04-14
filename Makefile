@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/12 10:59:01 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/13 23:02:19 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRCS =		./src/core/main.c						\
 			./src/job_control/update_job_status.c	\
 			./src/job_control/sig_table.c			\
 			./src/job_control/sigchld_handler.c		\
-			./src/job_control/utility.c
+			./src/job_control/utility.c				\
+			./src/utility/get_user_home.c
 
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 DEPS = $(subst .c,.d,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
