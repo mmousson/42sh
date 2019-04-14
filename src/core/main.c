@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 09:09:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 12:20:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int				main(int argc, char **argv)
 	char	*jobs_argv[] = { "jobs", "12" };
 	char	*alias_argv[] = { "alias", "ls=ls -G", "nornor=norminette | grep -C1 Error" };
 	char	*unalias_argv[] = { "unalias", "--", "-a" };
+	char	*type_argv[] = { "type", "--", "-a", "ls", "ls", "echo" };
 
 	(void)argc;
 	(void)argv;
@@ -68,10 +69,12 @@ int				main(int argc, char **argv)
 	test->next = NULL;
 	test->first_process->next = NULL;
 
-	ft_putendl_fd("alias", STDERR_FILENO);
+	ft_putendl_fd("alias ls=\"ls -G\" nornor=\"norminette | grep -C1 Error\"\n", STDERR_FILENO);
 	alias(3, alias_argv, NULL);
+	ft_putendl_fd("\ntype -- -a ls ls echo\n", STDERR_FILENO);
+	type(6, type_argv, NULL);
 
-	ft_putendl_fd("unalias -- -a", STDERR_FILENO);
+	ft_putendl_fd("\nunalias -- -a\n", STDERR_FILENO);
 	unalias(3, unalias_argv, NULL);
 
 	ft_putendl_fd("Launching job : '/bin/cat -e | /usr/bin/wc -c'", STDOUT_FILENO);

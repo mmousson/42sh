@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 08:16:45 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 12:03:10 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,51 @@ typedef struct		s_alias
 	struct s_alias	*next;
 }					t_alias;
 
+typedef struct		s_builtins
+{
+	char			*name;
+	int				(*handler) (int argc, char **argv, char ***env);
+}					t_builtins;
+
 extern t_alias		*alias_list;
+extern t_builtins	g_builtins[];
 
 /*
 **	==================== Main functions ====================
 **
 **	alias_init -> utility/alias_init.c
 **	free_alias_list -> utility/free_alias_list.c
+**	is_builtin -> utility/builtins_utilty.c
 **	init_job_ctrl -> job_control/initialize.c
 */
 
 int					alias_init(void);
 void				free_alias_list(void);
+int					is_builtin(char *name);
 int					init_job_ctrl(struct termios *bkp_conf);
 
 /*
 **	==================== BUILTIN functions ====================
 **
+**	alias -> builtins/alias.c
 **	bg -> builtins/bg.c
+**	cd -> builtins/cd.c
+**	echo -> builtins/echo.c
+**	ft_exit -> builtins/ft_exit.c
 **	fg -> builtins/fg.c
 **	jobs -> builtins/jobs.c
-**	alias -> builtins/alias.c
+**	type -> builtins/type.c
 **	unalias -> builtins/unalias.c
 */
 
+int					alias(int argc, char **argv, char ***env);
 int					bg(int argc, char **argv, char ***env);
+int					cd(int argc, char **argv, char ***env);
+int					echo(int argc, char **argv, char ***env);
+int					ft_exit(int argc, char **argv, char ***env);
 int					fg(int argc, char **argv, char ***env);
 int					jobs(int argc, char **argv, char ***env);
-int					alias(int argc, char **argv, char ***env);
+int					type(int argc, char **argv, char ***env);
 int					unalias(int argc, char **argv, char ***env);
 
 /*

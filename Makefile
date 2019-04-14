@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/14 08:45:38 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/14 12:09:07 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,16 @@ NAME = 42sh
 
 SRCS =		./src/core/main.c							\
 			./src/builtins/alias.c						\
-			./src/builtins/unalias.c					\
-			./src/builtins/fg.c							\
 			./src/builtins/bg.c							\
+			./src/builtins/cd.c							\
+			./src/builtins/echo.c						\
+			./src/builtins/fg.c							\
+			./src/builtins/ft_exit.c					\
 			./src/builtins/jobs/jobs.c					\
 			./src/builtins/jobs/parse_options.c			\
 			./src/builtins/jobs/jobs_format_msg.c		\
+			./src/builtins/type.c						\
+			./src/builtins/unalias.c					\
 			./src/job_control/initialize.c				\
 			./src/job_control/child_process.c			\
 			./src/job_control/parent_process.c			\
@@ -40,7 +44,9 @@ SRCS =		./src/core/main.c							\
 			./src/job_control/sig_table.c				\
 			./src/job_control/sigchld_handler.c			\
 			./src/job_control/utility.c					\
+			./src/utility/alias_exists.c				\
 			./src/utility/alias_init.c					\
+			./src/utility/builtins_utility.c			\
 			./src/utility/free_alias_list.c				\
 			./src/utility/get_user_home.c				\
 			./src/utility/write_alias_list_to_file.c
