@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 12:03:10 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 14:12:03 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int					init_job_ctrl(struct termios *bkp_conf);
 **	echo -> builtins/echo.c
 **	ft_exit -> builtins/ft_exit.c
 **	fg -> builtins/fg.c
+**	hash -> builtins/hash.c
 **	jobs -> builtins/jobs.c
 **	type -> builtins/type.c
 **	unalias -> builtins/unalias.c
@@ -76,6 +77,7 @@ int					cd(int argc, char **argv, char ***env);
 int					echo(int argc, char **argv, char ***env);
 int					ft_exit(int argc, char **argv, char ***env);
 int					fg(int argc, char **argv, char ***env);
+int					hash(int argc, char *8argv, char ***env);
 int					jobs(int argc, char **argv, char ***env);
 int					type(int argc, char **argv, char ***env);
 int					unalias(int argc, char **argv, char ***env);
