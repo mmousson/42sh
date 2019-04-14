@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/12 12:21:44 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 05:46:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int				main(int argc, char **argv)
 
 	if (init_job_ctrl(&shell_term_conf) == -1)
 		return (128);
+	alias_init();
 
 	test = malloc(sizeof(t_job));
 	test->pgid = 0;

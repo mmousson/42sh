@@ -6,12 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 05:03:46 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 05:45:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_42_H
 # define SH_42_H
+
+# include <termios.h>
 
 # define ALIAS_FILE "/.42sh_aliases"
 
@@ -36,9 +38,11 @@ extern t_alias		*alias_list;
 /*
 **	==================== Main functions ====================
 **
+**	alias_init -> utility/alias_init.c
 **	init_job_ctrl -> job_control/initialize.c
 */
 
+int					alias_init(void);
 int					init_job_ctrl(struct termios *bkp_conf);
 
 /*
@@ -65,6 +69,7 @@ int					unalias(int argc, char **argv, char ***env);
 */
 
 char				*get_user_home(void);
+char				*get_aliases_file_full_path(void);
 void				write_alias_list_to_file(void);
 
 #endif
