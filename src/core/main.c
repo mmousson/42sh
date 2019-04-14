@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 08:17:37 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 09:09:47 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int				main(int argc, char **argv)
 	char	*fg_argv[] = { "fg" };
 	char	*bg_argv[] = { "bg" };
 	char	*jobs_argv[] = { "jobs", "12" };
-	char	*alias_argv[] = { "alias", "nornor=norminette | grep -C1 Error" };
+	char	*alias_argv[] = { "alias", "ls=ls -G", "nornor=norminette | grep -C1 Error" };
+	char	*unalias_argv[] = { "unalias", "--", "-a" };
 
 	(void)argc;
 	(void)argv;
@@ -68,8 +69,10 @@ int				main(int argc, char **argv)
 	test->first_process->next = NULL;
 
 	ft_putendl_fd("alias", STDERR_FILENO);
+	alias(3, alias_argv, NULL);
 
-	alias(2, alias_argv, NULL);
+	ft_putendl_fd("unalias -- -a", STDERR_FILENO);
+	unalias(3, unalias_argv, NULL);
 
 	ft_putendl_fd("Launching job : '/bin/cat -e | /usr/bin/wc -c'", STDOUT_FILENO);
 

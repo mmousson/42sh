@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/14 08:18:03 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/14 08:45:38 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ NAME = 42sh
 
 SRCS =		./src/core/main.c							\
 			./src/builtins/alias.c						\
+			./src/builtins/unalias.c					\
 			./src/builtins/fg.c							\
 			./src/builtins/bg.c							\
 			./src/builtins/jobs/jobs.c					\

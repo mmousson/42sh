@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 23:09:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 06:06:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 09:09:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int	add_alias(char *key, char *tmp)
 	if ((new = ft_memalloc(sizeof(t_alias))) == NULL)
 		return (ALIAS_ERROR);
 	new->token = tmp;
-	if ((new->replacement = ft_strdup(key + ft_strlen(tmp))) == NULL)
+	if ((new->replacement = ft_strdup(key + ft_strlen(tmp) + 1)) == NULL)
 	{
 		ft_strdel(&tmp);
 		ft_memdel((void **)&(new));

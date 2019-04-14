@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 04:35:48 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 06:04:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 08:52:15 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		write_alias_list_to_file(void)
 
 	if ((alias_file = get_aliases_file_full_path()) == NULL)
 		return ;
-	fd = open(alias_file, O_CREAT | O_RDWR, 0644);
+	fd = open(alias_file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	ft_strdel(&alias_file);
 	if (fd == -1)
 	{
