@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 14:12:03 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 15:19:40 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,30 @@ typedef struct		s_builtins
 	int				(*handler) (int argc, char **argv, char ***env);
 }					t_builtins;
 
+# define HASH_POWER 31
+# define HASH_MOD 2731
+
+typedef struct		s_hash
+{
+	char			*full_path;
+	struct s_hash	*next;
+}					t_hash;
+
 extern t_alias		*alias_list;
 extern t_builtins	g_builtins[];
+extern t_hash		g_hash[HASH_MOD];
 
 /*
 **	==================== Main functions ====================
 **
+**	init_hash_table -> builtins/hash.c
 **	alias_init -> utility/alias_init.c
 **	free_alias_list -> utility/free_alias_list.c
 **	is_builtin -> utility/builtins_utilty.c
 **	init_job_ctrl -> job_control/initialize.c
 */
 
+void				init_hash_table(void);
 int					alias_init(void);
 void				free_alias_list(void);
 int					is_builtin(char *name);

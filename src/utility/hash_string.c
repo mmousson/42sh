@@ -6,9 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 13:18:18 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 14:05:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 15:13:27 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "sh42.h"
 
 /*
 **	This function generates a hash of a string
@@ -23,8 +25,8 @@
 
 int	hash_string(char *string)
 {
-	const int	power = 31;
-	const int	mod = 2731;
+	const int	power = HASH_POWER;
+	const int	mod = HASH_MOD;
 	int			result;
 	int			current_power;;
 	int			i;
