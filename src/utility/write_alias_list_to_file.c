@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 04:35:48 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 04:55:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 05:05:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static char	*get_aliases_file_full_path(void)
 
 	if ((user_home = get_user_home()) == NULL)
 		return (NULL);
-	alias_file = ft_strjoin(tmp, ALIAS_FILE);
-	ft_strdel(&user_home);
+	alias_file = ft_strjoin(user_home, ALIAS_FILE);
 	return (alias_file);
 }
 
@@ -61,11 +60,17 @@ void		write_alias_list_to_file(void)
 	t_alias	*current;
 
 	if ((alias_file = get_aliases_file_full_path()) == NULL)
+	{
+		ft_putendl_fd("42sh: Error: Effective USER ID invalid", STDERR_FILENO);
 		return ;
+	}
 	fd = open(alias_file, O_CREAT | O_RDWR, 0644);
 	ft_strdel(&alias_file);
 	if (fd == -1)
+	{
+		ft_putendl_fd("42sh: Error: could not open alias file", STDERR_FILENO);
 		return ;
+	}
 	current = alias_list;
 	while (current)
 	{

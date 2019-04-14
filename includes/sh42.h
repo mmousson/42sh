@@ -6,14 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 04:44:16 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 05:03:46 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_42_H
 # define SH_42_H
 
-# define ALIAS_FILE ".42sh_aliases"
+# define ALIAS_FILE "/.42sh_aliases"
 
 /*
 **	Structure representing the alias list in the current shell execution
