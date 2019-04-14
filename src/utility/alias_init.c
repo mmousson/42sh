@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 05:21:50 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 05:48:58 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 08:17:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int			alias_init(void)
 		{
 			if (line == NULL || ft_fill_link(line) == -1)
 			{
-				// ft_free_alias_list(head);
+				free_alias_list();
 				ft_strdel(&line);
 				close(fd);
 				return (0);

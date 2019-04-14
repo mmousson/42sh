@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/14 05:54:31 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/14 08:18:03 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS =		./src/core/main.c							\
 			./src/job_control/sigchld_handler.c			\
 			./src/job_control/utility.c					\
 			./src/utility/alias_init.c					\
+			./src/utility/free_alias_list.c				\
 			./src/utility/get_user_home.c				\
 			./src/utility/write_alias_list_to_file.c
 

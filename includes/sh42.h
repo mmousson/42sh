@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 05:45:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/14 08:16:45 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ extern t_alias		*alias_list;
 **	==================== Main functions ====================
 **
 **	alias_init -> utility/alias_init.c
+**	free_alias_list -> utility/free_alias_list.c
 **	init_job_ctrl -> job_control/initialize.c
 */
 
 int					alias_init(void);
+void				free_alias_list(void);
 int					init_job_ctrl(struct termios *bkp_conf);
 
 /*
