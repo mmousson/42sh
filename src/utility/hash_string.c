@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 13:18:18 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/15 23:16:27 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 00:15:27 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 /*
 **	This function generates a hash of a string
 **	Needed by the 'hash' builtin
+**	The idea is to add the 1-based alphabetical value of each character
+**	mutliplied by their respective rank in the string, raised to
+**	the power 'HASH_POWER'
+**	This method demonstrated no collision so far with the 2245 binaries present
+**	in the system
+**	Although, if the user were to add a lot of binaries to the PATH, collisions
+**	are bound to happen
+**	Collision-resolution technique is explained in the file
+**	'builtins/hash/add_hash_entry.c'
 **
 **	Arguments:
 **	string -> The string to hash

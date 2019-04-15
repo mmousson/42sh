@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/15 23:12:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 00:44:42 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ typedef struct		s_alias
 	struct s_alias	*next;
 }					t_alias;
 
+/*
+**	Structure used to declare an array of function pointers associated with
+**	specfic string
+**
+**	name -> String associated with the corresponding function pointer
+**	handler -> The actual function pointer
+*/
+
 typedef struct		s_builtins
 {
 	char			*name;
@@ -41,6 +49,15 @@ typedef struct		s_builtins
 
 # define HASH_POWER 31
 # define HASH_MOD 2731
+
+/*
+**	Structure representing an element of the shell's hashtable
+**
+**	hits -> The number of times the command was used since it was added to the
+**		hashtable
+**	full_path -> The absolute path to the utility
+**	next -> Next element in case of collisions
+*/
 
 typedef struct		s_hash
 {
@@ -57,6 +74,9 @@ extern t_hash		g_hash[HASH_MOD];
 **	==================== Main functions ====================
 **
 **	init_hash_table -> builtins/hash.c
+**	hash_string -> utility/hash_string.c
+**	add_hash_entry -> builtins/hash/add_hash_entry.c
+**	search_utility -> utility/search_utility.c
 **	alias_init -> utility/alias_init.c
 **	free_alias_list -> utility/free_alias_list.c
 **	is_builtin -> utility/builtins_utilty.c
