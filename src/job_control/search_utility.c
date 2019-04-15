@@ -6,12 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:21:03 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 15:53:34 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/15 21:55:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include "libft.h"
+#include "sh42.h"
 
 /*
 **	In case of a matching entry in the currently searched directory, we
@@ -78,8 +79,8 @@ static char	*search_directory(char *dir_name, char *utility, DIR *dir)
 }
 
 /*
-**	This utility function all the folders specified in PATH for a binary
-**	matching the name 'name'
+**	This utility function searches all the folders specified in PATH for a
+**	binary matching the name 'name'
 **	If it founds one, it will return a freshly allocated pointer to a string
 **	holding the full path to the binary
 **	If the binary doesn't exist in PATH, it will return (NULL)
@@ -114,5 +115,7 @@ char		*search_utility(char *name)
 		ft_strdel(&(paths[i]));
 	}
 	ft_memdel((void *)(&paths));
+	if (result != NULL)
+		add_hash_entry(hash_string(result), result);
 	return (result);
 }

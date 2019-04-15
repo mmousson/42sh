@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 15:19:50 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/15 23:20:31 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int				main(int argc, char **argv)
 	char	*alias_argv[] = { "alias", "ls=ls -G", "nornor=norminette | grep -C1 Error" };
 	char	*unalias_argv[] = { "unalias", "--", "-a" };
 	char	*type_argv[] = { "type", "--", "-a", "ls", "ls", "echo" };
+	char	*hash_arg[] = { "hash", "--", "-r" };
+	char	*hash_arg2[] = { "hash", "ls", "-r", "ls" };
 
 	(void)argc;
 	(void)argv;
@@ -69,6 +71,14 @@ int				main(int argc, char **argv)
 	test->io_channels.error = 2;
 	test->next = NULL;
 	test->first_process->next = NULL;
+
+	ft_putendl_fd("hash -- -r", 2);
+	hash(3, hash_arg, NULL);
+	ft_putendl_fd("hash ls -r ls", 2);
+	hash(4, hash_arg2, NULL);
+	ft_putendl_fd("hash", 2);
+	hash(1, NULL, NULL);
+	ft_putchar('\n');
 
 	ft_putendl_fd("alias ls=\"ls -G\" nornor=\"norminette | grep -C1 Error\"\n", STDERR_FILENO);
 	alias(3, alias_argv, NULL);

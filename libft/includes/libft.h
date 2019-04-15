@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 02:11:28 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/22 19:32:22 by marvin           ###   ########.fr       */
+/*   Updated: 2019/04/15 22:36:44 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char				*ft_strmultiply(char *factor1, char *factor2,
 char				*ft_strdivide_two(char *str);
 void				*ft_rotate_left(void *array, size_t array_size, size_t n,
 						size_t data_size);
+int					ft_order_of_magnitude(int nb);
 int					get_next_line(const int fd, char **line);
 int					ft_strendswith(char *str, const char *end);
 void				ft_strremove_at(char *str, size_t index);

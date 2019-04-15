@@ -91,6 +91,7 @@ SRC =	ft_memset.c				\
 		ft_strdivide_two.c		\
 		ft_strendswith.c		\
 		ft_strremove_at.c		\
+		ft_order_of_magnitude.c	\
 		ft_fabs.c				\
 		get_next_line.c
 

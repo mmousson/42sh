@@ -9,6 +9,5 @@ files_missing
 libft/libft.a
 a.out
 test.c
-hash
 void
 search_utility

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 15:19:40 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/15 23:12:56 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct		s_builtins
 
 typedef struct		s_hash
 {
+	int				hits;
 	char			*full_path;
 	struct s_hash	*next;
 }					t_hash;
@@ -63,6 +64,9 @@ extern t_hash		g_hash[HASH_MOD];
 */
 
 void				init_hash_table(void);
+int					hash_string(char *string);
+void				add_hash_entry(int string_hash, char *full_path);
+char				*search_utility(char *name);
 int					alias_init(void);
 void				free_alias_list(void);
 int					is_builtin(char *name);
@@ -89,7 +93,7 @@ int					cd(int argc, char **argv, char ***env);
 int					echo(int argc, char **argv, char ***env);
 int					ft_exit(int argc, char **argv, char ***env);
 int					fg(int argc, char **argv, char ***env);
-int					hash(int argc, char *8argv, char ***env);
+int					hash(int argc, char **argv, char ***env);
 int					jobs(int argc, char **argv, char ***env);
 int					type(int argc, char **argv, char ***env);
 int					unalias(int argc, char **argv, char ***env);
