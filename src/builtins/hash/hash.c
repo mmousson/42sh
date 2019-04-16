@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:10:42 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 05:27:51 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 07:43:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static int	display_table(void)
 		if (g_hash[i].full_path != NULL)
 		{
 			current = &(g_hash[i]);
-			if (!witness)
+			if (!witness++)
 				ft_putendl("hits\tcommand");
 			while (current)
 			{

@@ -6,12 +6,26 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 22:24:24 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 00:38:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 07:42:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "sh42.h"
+
+static int	already_exists(int index, char *name)
+{
+	t_hash	*current;
+
+	current = &(g_hash[index]);
+	while (current)
+	{
+		if (ft_strequ(current->utility_name, name))
+			return (1);
+		current = current->next;
+	}
+	return (0);
+}
 
 /*
 **	This function adds the 'full_path' string at the 'string_hash' index
@@ -32,15 +46,18 @@
 **	Return Value: NONE
 */
 
-void		add_hash_entry(int string_hash, char *full_path)
+void		add_hash_entry(int string_hash, char *util_name, char *full_path)
 {
 	t_hash	*target;
 	t_hash	*new_entry;
 
+	if (already_exists(string_hash, util_name))
+		return ;
 	if (g_hash[string_hash].full_path == NULL)
 	{
 		g_hash[string_hash].hits = 0;
 		g_hash[string_hash].full_path = ft_strdup(full_path);
+		g_hash[string_hash].utility_name = ft_strdup(util_name);
 	}
 	else
 	{
@@ -48,6 +65,7 @@ void		add_hash_entry(int string_hash, char *full_path)
 			return ;
 		new_entry->hits = 0;
 		new_entry->full_path = ft_strdup(full_path);
+		new_entry->utility_name = ft_strdup(util_name);
 		new_entry->next = NULL;
 		target = &(g_hash[string_hash]);
 		while (target->next)
