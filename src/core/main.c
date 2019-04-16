@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 10:27:12 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 12:13:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int				main(int argc, char **argv)
 	char	*hash_arg[] = { "hash", "--", "-r" };
 	char	*hash_arg2[] = { "hash", "ls", "-r", "ls", "cat" };
 	char	*test_arg[] = { "test", "12", "-eq", "24" };
+	char	*test_arg2[] = { "test", "-d", "libft" };
+	char	*test_arg3[] = { "test", "!", "-d", "libft" };
+	char	*test_arg4[] = { "test", "-r", "norights" };
 
 	(void)argc;
 	(void)argv;
@@ -74,7 +77,14 @@ int				main(int argc, char **argv)
 	test->first_process->next = NULL;
 
 	ft_putendl_fd("'test' utility", 2);
+	ft_putendl_fd("test 12 -eq 24", 2);
 	printf("test = %d\n", ft_test(4, test_arg, NULL));
+	ft_putendl_fd("test -d libft", 2);
+	printf("test = %d\n", ft_test(3, test_arg2, NULL));
+	ft_putendl_fd("test ! -d libft", 2);
+	printf("test = %d\n", ft_test(4, test_arg3, NULL));
+	ft_putendl_fd("test -r norights", 2);
+	printf("test = %d\n", ft_test(3, test_arg4, NULL));
 
 	ft_putendl_fd("\nhash -- -r", 2);
 	hash(3, hash_arg, NULL);

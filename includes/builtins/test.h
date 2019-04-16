@@ -6,13 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 08:13:04 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 09:55:52 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 11:59:59 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEST_H
 # define TEST_H
 
+# include <sys/stat.h>
 # include "libft.h"
 # include "sh42.h"
 
@@ -23,6 +24,8 @@
 # define TEST_TRUE 0
 # define TEST_FALSE 1
 # define TEST_ERROR 2
+# define IGNORE_TYPE -1
+# define CHECK_SIZE -2
 
 /*
 **	Set the length of the two dispatchers used by 'test' utility
@@ -30,7 +33,7 @@
 **	UNARY_TABLE_LEN for binary comparison
 */
 
-# define UNARY_TABLE_LEN 15
+# define UNARY_TABLE_LEN 16
 # define BINARY_TABLE_LEN 8
 
 /*
@@ -44,7 +47,8 @@
 typedef struct		s_unary_matcher
 {
 	char				*unary_name;
-	int					(*handler) (char *string);
+	int					(*handler) (const char *string, const int mask);
+	int					mask;
 }						t_unary_matcher;
 
 /*
@@ -77,7 +81,7 @@ extern t_binary_matcher	g_binary_table[];
 **	integer_expected -> builtins/test/binary_primary/equality_comparison.c
 */
 
-int						two_args(char **argv);
+int						two_args(char **a);
 int						three_args(char **argv);
 int						four_args(char **argv);
 int						integer_expected(const char *s);
@@ -98,5 +102,16 @@ int						test_gt(const char *n1, const char *n2);
 int						test_ge(const char *n1, const char *n2);
 int						test_lt(const char *n1, const char *n2);
 int						test_le(const char *n1, const char *n2);
+
+/*
+**	Unary function comparators
+**	test_z (-z) -> builtins/test/unary_primary/string_len.c
+**	test_n (-n) -> builtins/test/unary_primary/string_len.c
+**	test_files (-bcdefgLprSsuwxz) -> builtins/test/unary_primary/test_files.c
+*/
+
+int						test_z(const char *string, const int mask);
+int						test_n(const char *string, const int mask);
+int						check_type(const char *pathname, const int bitmask);
 
 #endif

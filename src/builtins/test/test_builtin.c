@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 09:23:25 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 10:10:52 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 12:17:16 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,22 @@
 */
 
 t_unary_matcher		g_unary_table[UNARY_TABLE_LEN] = {
-	{"-b", NULL},
-	{"-c", NULL},
-	{"-d", NULL},
-	{"-e", NULL},
-	{"-f", NULL},
-	{"-g", NULL},
-	{"-L", NULL},
-	{"-p", NULL},
-	{"-r", NULL},
-	{"-S", NULL},
-	{"-s", NULL},
-	{"-u", NULL},
-	{"-w", NULL},
-	{"-x", NULL},
-	{"-z", NULL}
+	{"-b", &check_type, S_IFBLK},
+	{"-c", &check_type, S_IFCHR},
+	{"-d", &check_type, S_IFDIR},
+	{"-e", &check_type, IGNORE_TYPE},
+	{"-f", &check_type, S_IFREG},
+	{"-g", &check_type, S_ISGID},
+	{"-L", &check_type, S_IFLNK},
+	{"-n", &test_n, IGNORE_TYPE},
+	{"-p", &check_type, S_IFIFO},
+	{"-r", &check_type, R_OK},
+	{"-S", &check_type, S_IFSOCK},
+	{"-s", &check_type, CHECK_SIZE},
+	{"-u", &check_type, S_ISUID},
+	{"-w", &check_type, W_OK},
+	{"-x", &check_type, X_OK},
+	{"-z", &test_z, IGNORE_TYPE}
 };
 
 /*
