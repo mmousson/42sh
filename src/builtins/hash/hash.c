@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:10:42 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 01:15:43 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 05:27:51 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,50 @@ static int	display_table(void)
 }
 
 /*
+**	This function parses the option(s) in a POSIX-compliant way
+**	The double hyphen "--" stops the parsing and breaks the loop
+**	In this builtin, we don't need to return a structure or anything like
+**	that, because the only supported option (-r) doesn't affect the behaviour
+**	of the utility
+**	We just need to return whther or not a problem occured
+**
+**	Arguments:
+**	ac -> A pointer to the argument counter of the main function
+**	av -> A pointer to the arguments array of the main function
+**
+**	Return Value:
+**	1  -> Everything went well
+**	-1 -> Unsupported option detected
+*/
+
+static int	parse_options(int *ac, char ***av)
+{
+	int		i;
+
+	while (*ac > 1 && (*av)[1][0] == '-')
+	{
+		i = 0;
+		(*ac)--;
+		(*av)++;
+		if (ft_strequ((*av)[0], "--"))
+			break;
+		while ((*av)[0][++i] != '\0')
+		{
+			if ((*av)[0][i] == 'r')
+				purge_hash_table();
+			else
+			{
+				ft_putstr_fd("42sh: hash: -", STDERR_FILENO);
+				ft_putchar_fd((*av)[0][i], STDERR_FILENO);
+				ft_putendl_fd(": invalid option", STDERR_FILENO);
+				return (-1);
+			}
+		}
+	}
+	return (1);
+}
+
+/*
 **	============================= BUITLIN COMMAND =============================
 **	Builtin command to handle the maintenance of the shell's hashtable
 **	First parse the utility's options
@@ -137,12 +181,11 @@ int			hash(int argc, char **argv, char ***env)
 	option_on = 1;
 	if (argc == 1)
 		return (display_table());
+	else if (parse_options(&argc, &argv) == -1)
+		return (HASH_NO_SUCH_OPTION);
 	while (argc > 1)
 	{
-		ft_strequ("--", argv[1]) ? option_on = 0 : (0);
-		else if (ft_strequ("-r", argv[1]) && option_on)
-			purge_hash_table();
-		else if ((tmp = search_utility(argv[1])) == NULL)
+		if ((tmp = search_utility(argv[1])) == NULL)
 		{
 			ft_putstr_fd("42sh: hash: ", STDERR_FILENO);
 			ft_putstr_fd(argv[1], STDERR_FILENO);
