@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 07:43:12 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 10:27:12 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int				main(int argc, char **argv)
 	char	*type_argv[] = { "type", "--", "-a", "ls", "ls", "echo" };
 	char	*hash_arg[] = { "hash", "--", "-r" };
 	char	*hash_arg2[] = { "hash", "ls", "-r", "ls", "cat" };
+	char	*test_arg[] = { "test", "12", "-eq", "24" };
 
 	(void)argc;
 	(void)argv;
@@ -72,7 +73,10 @@ int				main(int argc, char **argv)
 	test->next = NULL;
 	test->first_process->next = NULL;
 
-	ft_putendl_fd("hash -- -r", 2);
+	ft_putendl_fd("'test' utility", 2);
+	printf("test = %d\n", ft_test(4, test_arg, NULL));
+
+	ft_putendl_fd("\nhash -- -r", 2);
 	hash(3, hash_arg, NULL);
 	ft_putendl_fd("hash ls -r ls cat", 2);
 	hash(5, hash_arg2, NULL);

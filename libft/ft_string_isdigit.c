@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   four_argc.c                                        :+:      :+:    :+:   */
+/*   ft_string_isdigit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/16 08:19:20 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 09:52:36 by mmousson         ###   ########.fr       */
+/*   Created: 2019/04/16 09:21:37 by mmousson          #+#    #+#             */
+/*   Updated: 2019/04/16 10:24:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "libft.h"
 
-/*
-**
-*/
-
-int	four_args(char **argv)
+int	ft_string_isdigit(const char *s)
 {
-	if (ft_strequ(argv[1], "!"))
-		return (!three_args(++argv));
-	else
+	while (*s != '\0')
 	{
-		ft_putendl_fd("42sh: test: too many arguments",
-			STDERR_FILENO);
-		return (TEST_FALSE);
+		if (!ft_isdigit(*s))
+			return (0);
+		s++;
 	}
+	return (1);
 }

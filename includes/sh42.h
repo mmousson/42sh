@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 07:39:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 10:10:46 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int					ft_exit(int argc, char **argv, char ***env);
 int					fg(int argc, char **argv, char ***env);
 int					hash(int argc, char **argv, char ***env);
 int					jobs(int argc, char **argv, char ***env);
+int					ft_test(int argc, char **argv, char ***env);
 int					type(int argc, char **argv, char ***env);
 int					unalias(int argc, char **argv, char ***env);
 

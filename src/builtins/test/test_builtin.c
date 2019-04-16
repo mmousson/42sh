@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 09:23:25 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 09:11:02 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/16 10:10:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,21 @@ t_unary_matcher		g_unary_table[UNARY_TABLE_LEN] = {
 */
 
 t_binary_matcher	g_binary_table[BINARY_TABLE_LEN] = {
-	{"=", NULL},
-	{"!=", NULL},
-	{"eq", NULL},
-	{"ne", NULL},
-	{"gt", NULL},
-	{"ge", NULL},
-	{"lt", NULL},
-	{"le", NULL}
+	{"=", &ft_strcmp},
+	{"!=", &ft_strequ},
+	{"-eq", &test_eq},
+	{"-ne", &test_ne},
+	{"-gt", &test_gt},
+	{"-ge", &test_ge},
+	{"-lt", &test_lt},
+	{"-le", &test_le}
 };
 
 /*
 **
 */
 
-int					test(int argc, char **argv, char ***env)
+int					ft_test(int argc, char **argv, char ***env)
 {
 	(void)env;
 	if (argc == 1)
@@ -66,15 +66,14 @@ int					test(int argc, char **argv, char ***env)
 			return (TEST_FALSE);
 	}
 	else if (argc == 3)
-		return (two_args(argc, argv));
+		return (two_args(argv));
 	else if (argc == 4)
-		return (three_args(argc, argv));
+		return (three_args(argv));
 	else if (argc == 5)
-		return (four_args(argc, argv));
+		return (four_args(argv));
 	else
 	{
-		ft_putendl_fd("Passing more than 4 arguments to 'test' builtin results"
-			" in unspecified behaviour", STDERR_FILENO);
-		return (TEST_FALSE);
+		ft_putendl_fd("42sh: test: too many arguments", STDERR_FILENO);
+		return (TEST_ERROR);
 	}
 }
