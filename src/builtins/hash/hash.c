@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:10:42 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 07:43:52 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/17 20:18:47 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,11 +174,9 @@ static int	parse_options(int *ac, char ***av)
 
 int			hash(int argc, char **argv, char ***env)
 {
-	int		option_on;
 	char	*tmp;
 
 	(void)env;
-	option_on = 1;
 	if (argc == 1)
 		return (display_table());
 	else if (parse_options(&argc, &argv) == -1)

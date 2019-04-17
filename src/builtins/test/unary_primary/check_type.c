@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 11:23:46 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 12:16:45 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/17 20:21:02 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **
 */
 
-int	check_type(const char *pathname, const int bitmask)
+int	check_type(const char *pathname, const unsigned int bitmask)
 {
 	struct stat	sb;
 

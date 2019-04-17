@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 08:13:04 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 11:59:59 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/17 20:23:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define TEST_TRUE 0
 # define TEST_FALSE 1
 # define TEST_ERROR 2
-# define IGNORE_TYPE -1
-# define CHECK_SIZE -2
+# define IGNORE_TYPE 1
+# define CHECK_SIZE 2
 
 /*
 **	Set the length of the two dispatchers used by 'test' utility
@@ -47,7 +47,7 @@
 typedef struct		s_unary_matcher
 {
 	char				*unary_name;
-	int					(*handler) (const char *string, const int mask);
+	int					(*handler) (const char *str, const unsigned int mask);
 	int					mask;
 }						t_unary_matcher;
 
@@ -110,8 +110,9 @@ int						test_le(const char *n1, const char *n2);
 **	test_files (-bcdefgLprSsuwxz) -> builtins/test/unary_primary/test_files.c
 */
 
-int						test_z(const char *string, const int mask);
-int						test_n(const char *string, const int mask);
-int						check_type(const char *pathname, const int bitmask);
+int						test_z(const char *string, const unsigned int mask);
+int						test_n(const char *string, const unsigned int mask);
+int						check_type(const char *pathname,
+	const unsigned int bitmask);
 
 #endif
