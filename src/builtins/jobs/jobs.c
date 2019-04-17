@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:34:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/12 12:35:44 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/17 23:47:48 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ static int	list_specific_jobs(t_job *head, int options, int argc, char **argv)
 {
 	int		ret;
 	pid_t	jobspec;
-	t_job	*bkp;
 
-	bkp = head;
 	ret = JOBS_OK;
 	while (argc > 0)
 	{
@@ -132,12 +130,10 @@ static int	list_all_jobs(t_job *head, int options)
 
 int			jobs(int argc, char **argv, char ***env)
 {
-	int		i;
 	int		parsed;
 	int		options;
 	t_job	*head;
 
-	i = 1;
 	parsed = 0;
 	(void)env;
 	argc--;

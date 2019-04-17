@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 11:57:44 by roliveir          #+#    #+#             */
-/*   Updated: 2019/01/29 18:14:22 by roliveir         ###   ########.fr       */
+/*   Created: 2018/11/06 00:26:46 by mmousson          #+#    #+#             */
+/*   Updated: 2018/11/06 02:55:01 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isascii(int c)
+int	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
+	return (c >= 0 && c <= 127);
 }

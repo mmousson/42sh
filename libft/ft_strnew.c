@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   temp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 15:18:25 by roliveir          #+#    #+#             */
-/*   Updated: 2019/01/30 07:51:16 by roliveir         ###   ########.fr       */
+/*   Created: 2018/11/06 01:55:40 by mmousson          #+#    #+#             */
+/*   Updated: 2018/11/06 01:56:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
 #include "libft.h"
 
-char		*ft_strnew(size_t size)
+char	*ft_strnew(size_t size)
 {
-	char	*mem;
-	size_t	i;
+	char	*s;
 
-	i = 0;
-	if (!(mem = (char*)malloc(size + 1)))
+	if (!(s = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
-	ft_bzero(mem, size);
-	mem[size] = '\0';
-	return (mem);
+	ft_memset(s, '\0', size + 1);
+	return (s);
 }

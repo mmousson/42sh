@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   coordinates_calc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 03:23:54 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/06 19:10:48 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/17 23:58:40 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_getpos(t_env *env, int pos, int k)
 		else
 		{
 			max++;
-			x = k ? x = 1 : x;
+			(x = k) ? x = 1 : x;
 		}
 	}
 	return (x);

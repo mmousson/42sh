@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getvi_keys.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:16:24 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/11 19:37:23 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/17 23:52:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 int					ft_vi(t_env *env, char *str)
 {
-	int				i;
-
-	i = -1;
 	if (!ft_tmp(env, str))
 		return (0);
 	return (1);

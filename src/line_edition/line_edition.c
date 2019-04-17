@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_edition.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 22:59:54 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/10 17:16:44 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/18 00:05:32 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,8 @@ static int			ft_choose_mode(t_env *env, char *str, int ret)
 
 int					ft_update_line(t_env *env, char *str, int ret)
 {
-	int				i;
 	int				cap;
 
-	i = -1;
 	if (!str)
 		return (0);
 	env->len = (int)ft_strlen(env->line) + 1;

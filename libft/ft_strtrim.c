@@ -3,30 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 16:04:21 by roliveir          #+#    #+#             */
-/*   Updated: 2019/01/29 20:57:44 by roliveir         ###   ########.fr       */
+/*   Created: 2018/11/06 05:27:50 by mmousson          #+#    #+#             */
+/*   Updated: 2018/11/08 04:31:50 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static char	ft_is_space(char c)
+{
+	return (c == ' ' || c == '\n' || c == '\t');
+}
+
 char		*ft_strtrim(char const *s)
 {
-	size_t	start;
-	size_t	len;
+	size_t i;
+	size_t j;
 
+	i = 0;
 	if (!s)
 		return (NULL);
-	start = 0;
-	len = ft_strlen(s) - 1;
-	while ((s[start] == ' ' || s[start] == '\n' || s[start]
-				== '\t') && s[start])
-		start++;
-	if (s[start] == '\0')
-		return (ft_strsub(s, 0, 0));
-	while ((s[len] == ' ' || s[len] == '\n' || s[len] == '\t') && len)
-		len--;
-	return (ft_strsub(s, start, len - start + 1));
+	if (*s == '\0')
+		return (ft_strdup(""));
+	while (ft_is_space(s[i]))
+		i++;
+	if (s[i] == '\0')
+		return (ft_strdup(""));
+	j = ft_strlen(s);
+	while (ft_is_space(s[j - 1]) && j > i)
+		j--;
+	return (ft_strsub(s, i, (j - i)));
 }

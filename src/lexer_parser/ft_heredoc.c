@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 01:06:53 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/01 02:51:46 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/04/17 23:50:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexpars.h"
-#include "libft.h"
-#include <unistd.h>
-#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include "lexpars.h"
+#include "libft.h"
 
 void	ft_launch_here(t_args *args, char *end, int fd)
 {

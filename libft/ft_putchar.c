@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 18:25:33 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/01/29 21:02:30 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/18 00:02:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <wchar.h>
 #include <unistd.h>
+#include "libft.h"
 
 static void			ft_write_4(wchar_t ch)
 {

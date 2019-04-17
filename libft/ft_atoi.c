@@ -3,35 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 10:50:04 by roliveir          #+#    #+#             */
-/*   Updated: 2019/01/29 18:04:36 by roliveir         ###   ########.fr       */
+/*   Created: 2018/11/06 00:23:28 by mmousson          #+#    #+#             */
+/*   Updated: 2019/02/19 13:59:47 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int					ft_atoi(const char *str)
-{
-	unsigned char	*mstr;
-	int				is_neg;
-	int				final;
-	int				i;
+#include "libft.h"
 
-	i = 0;
-	mstr = (unsigned char*)str;
-	final = 0;
-	is_neg = 1;
-	while ((mstr[i] >= 9 && mstr[i] <= 13) || mstr[i] == 32)
-		i++;
-	if (mstr[i] == '-')
-		is_neg = -1;
-	if (mstr[i] == '-' || mstr[i] == '+')
-		i++;
-	while (mstr[i] >= '0' && mstr[i] <= '9')
+int	ft_atoi(const char *s)
+{
+	int				neg;
+	long long int	res;
+
+	if (s == NULL)
+		return (0);
+	neg = 1;
+	res = 0;
+	while (*s == 32 || (*s >= 9 && *s <= 13))
+		s++;
+	if (*s == '-' || *s == '+')
 	{
-		final *= 10;
-		final += (mstr[i] - '0');
-		i++;
+		if (*s == '-')
+			neg = -1;
+		s++;
 	}
-	return (is_neg * final);
+	while (*s >= '0' && *s <= '9')
+	{
+		res = (res * 10LL) + (long long)(*s - '0');
+		s++;
+	}
+	return ((int)(res * neg));
 }

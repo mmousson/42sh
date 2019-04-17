@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   temp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 16:25:39 by roliveir          #+#    #+#             */
-/*   Updated: 2019/01/29 18:44:40 by roliveir         ###   ########.fr       */
+/*   Created: 2018/11/06 01:23:56 by mmousson          #+#    #+#             */
+/*   Updated: 2018/11/06 01:28:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char		*ft_strcat(char *s1, const char *s2)
+char	*ft_strcat(char *dest, const char *src)
 {
-	int		i;
-	int		k;
+	char	*res;
 
-	i = 0;
-	k = 0;
-	while (s1[i])
-		i++;
-	while (s2[k])
-	{
-		s1[i] = s2[k];
-		k++;
-		i++;
-	}
-	s1[i] = '\0';
-	return (s1);
+	res = dest;
+	while (*dest)
+		dest++;
+	while (*src)
+		*dest++ = *src++;
+	*dest = '\0';
+	return (res);
 }

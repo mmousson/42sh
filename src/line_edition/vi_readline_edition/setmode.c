@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setmode.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:34:56 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/11 15:03:41 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/17 23:57:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int			ft_new_mode(t_env *env, t_emode mode)
 	i = 0;
 	while (i < MODE)
 	{
-		if (i == mode)
+		if (i == (int)mode)
 			env->mode->mode[i] = 1;
 		else
 			env->mode->mode[i] = 0;

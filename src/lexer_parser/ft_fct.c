@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fct.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 06:36:11 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/07 18:10:16 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/18 00:13:54 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "lexpars.h"
 #include "libft.h"
-#include <stdlib.h>
-#include "built_in.h"
 
 int				ft_fct(t_word *word, char **path, char **arge)
 {

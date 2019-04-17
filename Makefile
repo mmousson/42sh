@@ -6,9 +6,16 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/14 08:45:38 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/18 00:13:22 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+include builtins.mk
+include core.mk
+include job_control.mk
+include lexer_parser.mk
+include line_edition.mk
+include utility.mk
 
 CC = gcc
 LIBFT = libft
@@ -20,30 +27,6 @@ CPPFLAGS += -MMD -MP
 OBJDIR = .o
 
 NAME = 42sh
-
-SRCS =		./src/core/main.c							\
-			./src/builtins/alias.c						\
-			./src/builtins/unalias.c					\
-			./src/builtins/fg.c							\
-			./src/builtins/bg.c							\
-			./src/builtins/jobs/jobs.c					\
-			./src/builtins/jobs/parse_options.c			\
-			./src/builtins/jobs/jobs_format_msg.c		\
-			./src/job_control/initialize.c				\
-			./src/job_control/child_process.c			\
-			./src/job_control/parent_process.c			\
-			./src/job_control/job_engine.c				\
-			./src/job_control/foreground.c				\
-			./src/job_control/background.c				\
-			./src/job_control/mark_process_status.c		\
-			./src/job_control/update_job_status.c		\
-			./src/job_control/sig_table.c				\
-			./src/job_control/sigchld_handler.c			\
-			./src/job_control/utility.c					\
-			./src/utility/alias_init.c					\
-			./src/utility/free_alias_list.c				\
-			./src/utility/get_user_home.c				\
-			./src/utility/write_alias_list_to_file.c
 
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 DEPS = $(subst .c,.d,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
@@ -69,7 +52,7 @@ $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 	@printf "%-42s" "Precompiling $(notdir $@)..."
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $< 2> ./tmp_log || /usr/bin/touch ./tmp_errors
 	@if [ -e tmp_errors ]; then \
-		printf "\033[1;31m[KO]\n\033[0m" && /bin/cat 1>&2 ./tmp_log && touch files_missing; \
+		printf "   \033[1;31m[KO]\n\033[0m" && /bin/cat 1>&2 ./tmp_log && touch files_missing; \
 	elif test -s ./tmp_log; then \
 		printf "   \033[1;33m[WARNING]\n\033[0m" && /bin/cat ./tmp_log; \
 	else \

@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 18:15:49 by roliveir          #+#    #+#             */
-/*   Updated: 2019/03/06 01:22:49 by roliveir         ###   ########.fr       */
+/*   Created: 2018/11/06 01:10:16 by mmousson          #+#    #+#             */
+/*   Updated: 2019/02/16 02:09:11 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-int		ft_putstr(char const *s)
+void	ft_putstr(char const *s)
 {
-	if (s)
-		write(1, s, ft_strlen(s));
-	return (0);
+	if (s == NULL)
+		return ;
+	write(1, s, ft_strlen((char *)s));
 }

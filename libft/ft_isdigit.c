@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 11:31:44 by roliveir          #+#    #+#             */
-/*   Updated: 2019/01/29 18:14:28 by roliveir         ###   ########.fr       */
+/*   Created: 2018/11/06 00:27:02 by mmousson          #+#    #+#             */
+/*   Updated: 2018/11/06 02:54:51 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
+	return (c >= '0' && c <= '9');
 }

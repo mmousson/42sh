@@ -3,27 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 10:28:02 by roliveir          #+#    #+#             */
-/*   Updated: 2019/01/29 18:45:40 by roliveir         ###   ########.fr       */
+/*   Created: 2018/11/06 01:36:24 by mmousson          #+#    #+#             */
+/*   Updated: 2019/02/19 20:25:03 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int					ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int				i;
-	unsigned char	*ms1;
-	unsigned char	*ms2;
-
-	i = 0;
-	ms1 = (unsigned char*)s1;
-	ms2 = (unsigned char*)s2;
-	while (ms1[i] || ms2[i])
+	while (*s1 == *s2 && *s1 && *s2)
 	{
-		if (ms1[i] != ms2[i])
-			return (ms1[i] - ms2[i]);
-		i++;
+		s1++;
+		s2++;
 	}
-	return (ms1[i] - ms2[i]);
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

@@ -1,0 +1,29 @@
+SRCS +=	./src/lexer_parser/exec_cmd.c			\
+		./src/lexer_parser/ft_args.c			\
+		./src/lexer_parser/ft_charac.c			\
+		./src/lexer_parser/ft_cmd.c				\
+		./src/lexer_parser/ft_empargs.c			\
+		./src/lexer_parser/ft_eperl.c			\
+		./src/lexer_parser/ft_error.c			\
+		./src/lexer_parser/ft_fct.c				\
+		./src/lexer_parser/ft_free_arg.c		\
+		./src/lexer_parser/ft_free.c			\
+		./src/lexer_parser/ft_get.c				\
+		./src/lexer_parser/ft_heredoc.c			\
+		./src/lexer_parser/ft_init.c			\
+		./src/lexer_parser/ft_launch_red.c		\
+		./src/lexer_parser/ft_lim.c				\
+		./src/lexer_parser/ft_manage_pipe.c		\
+		./src/lexer_parser/ft_pars.c			\
+		./src/lexer_parser/ft_path.c			\
+		./src/lexer_parser/ft_pile.c			\
+		./src/lexer_parser/ft_pipe_close.c		\
+		./src/lexer_parser/ft_print_cmd.c		\
+		./src/lexer_parser/ft_quit.c			\
+		./src/lexer_parser/ft_quote.c			\
+		./src/lexer_parser/ft_redirect.c		\
+		./src/lexer_parser/ft_split_path.c		\
+		./src/lexer_parser/ft_stargs.c			\
+		./src/lexer_parser/ft_tabl.c			\
+		./src/lexer_parser/ft_target.c			\
+		./src/lexer_parser/lex.c

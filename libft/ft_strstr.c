@@ -3,36 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 18:02:34 by roliveir          #+#    #+#             */
-/*   Updated: 2019/01/29 20:56:49 by roliveir         ###   ########.fr       */
+/*   Created: 2018/11/06 02:02:27 by mmousson          #+#    #+#             */
+/*   Updated: 2018/11/08 02:57:33 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char		*ft_strstr(const char *haystack, const char *needle)
-{
-	int		i;
-	int		k;
-	char	*m_haystack;
-	char	*m_needle;
+#include "libft.h"
 
-	i = 0;
-	k = 0;
-	m_haystack = (char*)haystack;
-	m_needle = (char*)needle;
-	if (m_needle[0] == '\0')
-		return (m_haystack);
-	while (m_haystack[i])
+char	*ft_strstr(const char *haystack, const char *needle)
+{
+	size_t len;
+
+	len = ft_strlen(needle);
+	if (*needle == '\0')
+		return ((char *)haystack);
+	while (*haystack)
 	{
-		k = 0;
-		while (m_haystack[i + k] == m_needle[k])
-		{
-			if (m_needle[k + 1] == '\0')
-				return (m_haystack + i);
-			k++;
-		}
-		i++;
+		if (*haystack && ft_strncmp(haystack, needle, len) == 0)
+			return ((char *)haystack);
+		haystack++;
 	}
-	return (0);
+	return (NULL);
 }

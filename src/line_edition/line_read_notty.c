@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_read_notty.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 21:27:30 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/06 21:36:02 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/18 00:06:58 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int					ft_read_isarg(t_env *env, char *argv)
 		ft_errorterm(TMALLOC, env);
 	if ((fd = open(argv, O_RDONLY)) < 1)
 	{
-		ft_printf("21sh: cannot open %s\n", argv);
+		ft_putstr_fd("42sh: Could not open: ", STDERR_FILENO);
+		ft_putendl_fd(argv, STDERR_FILENO);
 		ft_quiterm(env);
 	}
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)

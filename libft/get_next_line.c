@@ -3,70 +3,114 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 15:53:38 by roliveir          #+#    #+#             */
-/*   Updated: 2019/02/03 10:18:36 by roliveir         ###   ########.fr       */
+/*   Created: 2019/02/21 17:01:42 by marvin            #+#    #+#             */
+/*   Updated: 2019/02/26 16:50:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include "libft.h"
 
-static int		get_newline(char **isread, char **line, int fd)
+static int	free_all(char *line)
 {
-	int			i;
-	char		*temp;
+	if (line)
+		free(line);
+	return (-1);
+}
 
-	i = 0;
-	while (isread[fd][i] != '\n' && isread[fd][i])
-		i++;
-	if (isread[fd][i] == '\n')
+static int	ft_check(char *cpy, char **line, char **buf)
+{
+	char	*tmp;
+
+	if (!(*buf = ft_strdup(ft_strchr(cpy, '\n') + 1)))
+		return (free_all(*line));
+	if (*buf[0] == '\0')
+		ft_strdel(buf);
+	if (!(tmp = ft_strdup(*line)))
+		return (free_all(*line));
+	free(*line);
+	if (!(*line = ft_strsub(tmp, 0, ft_strchr(tmp, '\n') - tmp)))
 	{
-		if (!(*line = ft_strsub(isread[fd], 0, i)))
-			return (-1);
-		if (!(temp = ft_strdup(isread[fd] + i + 1)))
-			return (-1);
-		free(isread[fd]);
-		isread[fd] = temp;
-		if (isread[fd][0] == '\0')
-			ft_strdel(&isread[fd]);
+		free(tmp);
+		return (free_all(*line));
 	}
-	else if (isread[fd][i] == '\0')
+	free(tmp);
+	return (0);
+}
+
+static int	ft_read(int fd, char **line, char **buf, int *byt)
+{
+	char	*tmp;
+	char	cpy[BUFF_SIZE + 1];
+
+	while ((*byt = read(fd, cpy, BUFF_SIZE)))
 	{
-		if (!(*line = ft_strdup(isread[fd])))
-			return (-1);
-		ft_strdel(&isread[fd]);
+		if (*byt == -1)
+			return (free_all(*line));
+		cpy[*byt] = '\0';
+		if (!(tmp = ft_strdup(*line)))
+			return (free_all(*line));
+		free(*line);
+		if (!(*line = ft_strjoin(tmp, cpy)))
+			return (free_all(*line));
+		free(tmp);
+		if (ft_strchr(cpy, '\n'))
+		{
+			if ((ft_check(cpy, line, buf)))
+				return (free_all(*buf));
+			break ;
+		}
 	}
+	return (*byt);
+}
+
+static int	ft_splitfun(char **line, char **buf)
+{
+	char		*tmp;
+
+	free(*line);
+	if (!(*line = ft_strsub(*buf, 0, ft_strchr(*buf, '\n') \
+					- *buf)))
+		return (free_all(*line));
+	if (!(tmp = ft_strdup(ft_strchr(*buf, '\n') + 1)))
+	{
+		free(*buf);
+		return (free_all(*line));
+	}
+	free(*buf);
+	if (!(*buf = ft_strdup(tmp)))
+	{
+		free(tmp);
+		return (free_all(*line));
+	}
+	free(tmp);
 	return (1);
 }
 
-int				get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line)
 {
-	static char	*isread[1023];
-	char		buf[BUFF_SIZE + 1];
-	int			ret;
-	char		*tmp;
+	static char	*buf[10240];
+	int			byt;
 
-	ret = 1;
-	if (fd < 0 || !line || BUFF_SIZE < 1 || fd > 1022)
+	if (fd > 10239 || !line || fd < 0 || (!(*line = ft_strnew(0))))
 		return (-1);
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	byt = 0;
+	if (buf[fd] && ft_strchr(buf[fd], '\n'))
+		return (ft_splitfun(line, &buf[fd]));
+	if (buf[fd])
 	{
-		if (!isread[fd])
-			isread[fd] = ft_strnew(1);
-		buf[ret] = '\0';
-		if ((tmp = ft_strjoin(isread[fd], buf)) == NULL)
+		free(*line);
+		if (!(*line = ft_strdup(buf[fd])))
 			return (-1);
-		free(isread[fd]);
-		isread[fd] = tmp;
-		if (ft_strchr(buf, '\n'))
-			return (get_newline(isread, line, fd));
+		free(buf[fd]);
+		buf[fd] = 0;
 	}
-	if (ret == -1)
+	if (ft_read(fd, &(*line), &buf[fd], &byt) == -1)
 		return (-1);
-	else if (ret == 0 && isread[fd] == NULL)
-		return (0);
-	return (get_newline(isread, line, fd));
+	if (byt < 1 && !ft_strlen(*line))
+		return (byt + (free_all(*line) + 1));
+	return (1);
 }
