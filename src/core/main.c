@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 12:13:28 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 00:46:06 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include "sh42.h"
 
 struct termios	shell_term_conf;
+int				vi_on = 0;
+t_vars			*shell_var_list = NULL;
 
 int				main(int argc, char **argv)
 {
@@ -38,6 +40,7 @@ int				main(int argc, char **argv)
 	char	*test_arg2[] = { "test", "-d", "libft" };
 	char	*test_arg3[] = { "test", "!", "-d", "libft" };
 	char	*test_arg4[] = { "test", "-r", "norights" };
+	char	*set_argv[] = { "set", "-o", "bleu" };
 
 	(void)argc;
 	(void)argv;
@@ -75,6 +78,8 @@ int				main(int argc, char **argv)
 	test->io_channels.error = 2;
 	test->next = NULL;
 	test->first_process->next = NULL;
+
+	set(2, set_argv, NULL);
 
 	ft_putendl_fd("'test' utility", 2);
 	ft_putendl_fd("test 12 -eq 24", 2);

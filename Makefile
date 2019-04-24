@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/17 10:35:06 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/24 23:36:20 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS =		./src/core/main.c											\
 			./src/builtins/jobs/jobs.c									\
 			./src/builtins/jobs/parse_options.c							\
 			./src/builtins/jobs/jobs_format_msg.c						\
+			./src/builtins/set.c										\
 			./src/builtins/test/binary_primary/equality_comparison.c	\
 			./src/builtins/test/binary_primary/magnitude_comparison.c	\
 			./src/builtins/test/unary_primary/check_type.c				\
