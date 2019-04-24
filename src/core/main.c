@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 00:25:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 00:46:06 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int				main(int argc, char **argv)
 	test->next = NULL;
 	test->first_process->next = NULL;
 
-	set(3, set_argv, NULL);
+	set(2, set_argv, NULL);
 
 	ft_putendl_fd("'test' utility", 2);
 	ft_putendl_fd("test 12 -eq 24", 2);
