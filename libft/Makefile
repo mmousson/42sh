@@ -44,6 +44,7 @@ SRC =	ft_memset.c				\
 		ft_isalpha.c			\
 		ft_isdigit.c			\
 		ft_isxdigit.c			\
+		ft_string_isdigit.c		\
 		ft_isalnum.c			\
 		ft_isascii.c			\
 		ft_isprint.c			\
@@ -91,6 +92,7 @@ SRC =	ft_memset.c				\
 		ft_strdivide_two.c		\
 		ft_strendswith.c		\
 		ft_strremove_at.c		\
+		ft_order_of_magnitude.c	\
 		ft_fabs.c				\
 		get_next_line.c
 

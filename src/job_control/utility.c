@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/12 10:06:28 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/17 20:18:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,12 @@ t_job	*find_job (pid_t pgid, t_job *first_job)
 int		job_is_stopped (t_job *j)
 {
 	t_process	*p;
-	int			status;
 
-	status = 0;
 	p = j->first_process;
 	while (p)
 	{
 		if (!p->completed && !p->stopped)
 			return (0);
-		status = p->status;
 		p = p->next;
 	}
 	j->status = 18;

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 08:16:45 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:44:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,45 +33,135 @@ typedef struct		s_alias
 	struct s_alias	*next;
 }					t_alias;
 
+/*
+**	Structure used to declare an array of function pointers associated with
+**	specfic string
+**
+**	name -> String associated with the corresponding function pointer
+**	handler -> The actual function pointer
+*/
+
+typedef struct		s_builtins
+{
+	char			*name;
+	int				(*handler) (int argc, char **argv, char ***env);
+}					t_builtins;
+
+# define HASH_POWER 31
+# define HASH_MOD 2731
+
+/*
+**	Structure representing an element of the shell's hashtable
+**
+**	hits -> The number of times the command was used since it was added to the
+**		hashtable
+**	full_path -> The absolute path to the utility
+**	next -> Next element in case of collisions
+*/
+
+typedef struct		s_hash
+{
+	int				hits;
+	char			*utility_name;
+	char			*full_path;
+	struct s_hash	*next;
+}					t_hash;
+
+/*
+**
+*/
+
+typedef struct		s_vars
+{
+	char			*name;
+	char			*value;
+	struct s_vars	*next;
+}					t_vars;
+
+/*
+**	g_builtins[] -> defined in utility/builtins_utility.c
+*/
+
+extern int			vi_on;
+extern t_vars		*shell_var_list;
 extern t_alias		*alias_list;
+extern t_builtins	g_builtins[];
+extern t_hash		g_hash[HASH_MOD];
 
 /*
 **	==================== Main functions ====================
 **
+**	init_hash_table -> builtins/hash.c
+**	hash_string -> utility/hash_string.c
+**	add_hash_entry -> builtins/hash/add_hash_entry.c
+**	search_utility -> utility/search_utility.c
 **	alias_init -> utility/alias_init.c
 **	free_alias_list -> utility/free_alias_list.c
+**	is_builtin -> utility/builtins_utilty.c
 **	init_job_ctrl -> job_control/initialize.c
 */
 
+void				init_hash_table(void);
+int					hash_string(char *string);
+void				add_hash_entry(int string_hash, char *utility_name,
+	char *full_path);
+char				*search_utility(char *name);
 int					alias_init(void);
 void				free_alias_list(void);
+int					is_builtin(char *name);
 int					init_job_ctrl(struct termios *bkp_conf);
 
 /*
 **	==================== BUILTIN functions ====================
 **
-**	bg -> builtins/bg.c
-**	fg -> builtins/fg.c
-**	jobs -> builtins/jobs.c
 **	alias -> builtins/alias.c
+**	bg -> builtins/bg.c
+**	cd -> builtins/cd.c
+**	echo -> builtins/echo.c
+**	ft_exit -> builtins/ft_exit.c
+**	fg -> builtins/fg.c
+**	hash -> builtins/hash.c
+**	jobs -> builtins/jobs.c
+**	set -> builtins/set.c
+**	type -> builtins/type.c
 **	unalias -> builtins/unalias.c
 */
 
-int					bg(int argc, char **argv, char ***env);
-int					fg(int argc, char **argv, char ***env);
-int					jobs(int argc, char **argv, char ***env);
 int					alias(int argc, char **argv, char ***env);
+int					bg(int argc, char **argv, char ***env);
+int					cd(int argc, char **argv, char ***env);
+int					echo(int argc, char **argv, char ***env);
+int					ft_export(int argc, char **argv, char ***env);
+int					ft_exit(int argc, char **argv, char ***env);
+int					fg(int argc, char **argv, char ***env);
+int					hash(int argc, char **argv, char ***env);
+int					jobs(int argc, char **argv, char ***env);
+int					set(int argc, char **argv, char ***env);
+int					unset(int argc, char **argv, char ***env);
+int					ft_test(int argc, char **argv, char ***env);
+int					type(int argc, char **argv, char ***env);
 int					unalias(int argc, char **argv, char ***env);
 
 /*
 **	==================== UTILITY functions ====================
 **
+**	duplicate_environ -> utility/duplicate_environ.c
 **	get_user_home -> utility/get_user_home.c
 **	write_alias_list_to_file -> utility/write_alias_list_to_file.c
+**	add_internal_var -> utility/add_internal_var.c
+**	internal_variable_exists -> utility/internal_variable_exists.c
 */
 
+char				**duplicate_environ(char **env);
 char				*get_user_home(void);
 char				*get_aliases_file_full_path(void);
 void				write_alias_list_to_file(void);
+void				ft_add_entry_to_environ(char ***environ, char *key,
+	char *value);
+int					ft_rm_entry_from_environ(char ***environ, char *key);
+char				*ft_get_env_var(char ***environ, char *key);
+int					ft_get_environ_length(char **tab);
+void				add_internal_var(char *name, char *value);
+char				*internal_var_exists(char *name);
 
 #endif

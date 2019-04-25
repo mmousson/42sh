@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 02:11:28 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/22 19:32:22 by marvin           ###   ########.fr       */
+/*   Updated: 2019/04/16 09:56:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isxdigit(int c);
+int					ft_string_isdigit(const char *s);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
@@ -86,6 +87,7 @@ char				*ft_strmultiply(char *factor1, char *factor2,
 char				*ft_strdivide_two(char *str);
 void				*ft_rotate_left(void *array, size_t array_size, size_t n,
 						size_t data_size);
+int					ft_order_of_magnitude(int nb);
 int					get_next_line(const int fd, char **line);
 int					ft_strendswith(char *str, const char *end);
 void				ft_strremove_at(char *str, size_t index);
