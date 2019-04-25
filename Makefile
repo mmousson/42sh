@@ -6,9 +6,14 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/25 06:44:35 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/25 09:43:59 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+include core.mk
+include builtins.mk
+include job_control.mk
+include utility.mk
 
 CC = gcc
 LIBFT = libft
@@ -20,56 +25,6 @@ CPPFLAGS += -MMD -MP
 OBJDIR = .o
 
 NAME = 42sh
-
-SRCS =		./src/core/main.c											\
-			./src/builtins/alias.c										\
-			./src/builtins/bg.c											\
-			./src/builtins/cd.c											\
-			./src/builtins/echo.c										\
-			./src/builtins/export.c										\
-			./src/builtins/fg.c											\
-			./src/builtins/ft_exit.c									\
-			./src/builtins/hash/hash.c									\
-			./src/builtins/hash/add_hash_entry.c						\
-			./src/builtins/hash/init_hash_table.c						\
-			./src/builtins/jobs/jobs.c									\
-			./src/builtins/jobs/parse_options.c							\
-			./src/builtins/jobs/jobs_format_msg.c						\
-			./src/builtins/set.c										\
-			./src/builtins/test/binary_primary/equality_comparison.c	\
-			./src/builtins/test/binary_primary/magnitude_comparison.c	\
-			./src/builtins/test/unary_primary/check_type.c				\
-			./src/builtins/test/unary_primary/string_len.c				\
-			./src/builtins/test/two_argc.c								\
-			./src/builtins/test/three_argc.c							\
-			./src/builtins/test/four_argc.c								\
-			./src/builtins/test/test_builtin.c							\
-			./src/builtins/type.c										\
-			./src/builtins/unalias.c									\
-			./src/builtins/unset.c										\
-			./src/job_control/initialize.c								\
-			./src/job_control/child_process.c							\
-			./src/job_control/parent_process.c							\
-			./src/job_control/job_engine.c								\
-			./src/job_control/foreground.c								\
-			./src/job_control/background.c								\
-			./src/job_control/mark_process_status.c						\
-			./src/job_control/update_job_status.c						\
-			./src/job_control/search_utility.c							\
-			./src/job_control/sig_table.c								\
-			./src/job_control/sigchld_handler.c							\
-			./src/job_control/utility.c									\
-			./src/utility/add_internal_var.c							\
-			./src/utility/alias_exists.c								\
-			./src/utility/alias_init.c									\
-			./src/utility/builtins_utility.c							\
-			./src/utility/environ_aux_functions.c						\
-			./src/utility/environ_utilities.c							\
-			./src/utility/free_alias_list.c								\
-			./src/utility/get_user_home.c								\
-			./src/utility/hash_string.c									\
-			./src/utility/internal_var_exists.c							\
-			./src/utility/write_alias_list_to_file.c
 
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 DEPS = $(subst .c,.d,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
