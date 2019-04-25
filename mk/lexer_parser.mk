@@ -1,0 +1,22 @@
+SRCS +=	./src/lexer/lex.c\
+		    ./src/lexer/process.c\
+		    ./src/lexer/ft_init.c\
+		    ./src/lexer/get_ch.c\
+		    ./src/lexer/more.c\
+		    ./src/lexer/add_char.c\
+		    ./src/lexer/print_state.c\
+		    ./src/lexer/get_state.c\
+				./src/parser/pars.c\
+				./src/parser/pars_line.c\
+				./src/parser/ft_select_pars.c\
+				./src/parser/ft_cleans_spa.c\
+				./src/parser/pars_cmd.c\
+				./src/parser/pars_pipe.c\
+				./src/parser/pars_word.c\
+				./src/parser/pars_nword.c\
+				./src/parser/pars_part.c\
+				./src/parser/pars_red.c\
+				./src/parser/pars_rer_lr.c\
+				./src/parser/tool_pars.c\
+				./src/parser/print_tree.c\
+				./src/parser/work_tree.c

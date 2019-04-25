@@ -20,7 +20,7 @@
 # define BUFF_SIZE 1664
 
 char				*ft_strapp(char *str, char c);
-void				ft_putchar(int c);
+int					ft_putchar(wchar_t ch);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
 void				ft_putnbr(int n);
@@ -57,7 +57,7 @@ char				*ft_strrchr(const char *str, int c);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*ft_strrstr(const char *haystack, const char *needle);
 char				*ft_strnstr(const char *haystack, const char *needle,
-						size_t len);
+	size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				*ft_memalloc(size_t size);
@@ -73,6 +73,7 @@ int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoinf(char *s1, char *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int nb);
@@ -81,12 +82,14 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_stradd(char *addend1, char *addend2,
-						short rm_front_zeros);
+	short rm_front_zeros);
 char				*ft_strmultiply(char *factor1, char *factor2,
-						short rm_front_zeros);
+	short rm_front_zeros);
 char				*ft_strdivide_two(char *str);
 void				*ft_rotate_left(void *array, size_t array_size, size_t n,
-						size_t data_size);
+	size_t data_size);
+int					get_line(const int fd, char **line, char **isread);
+void				ft_del_words_tables(char ***tab);
 int					ft_order_of_magnitude(int nb);
 int					get_next_line(const int fd, char **line);
 int					ft_strendswith(char *str, const char *end);
@@ -113,7 +116,6 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstpush(t_list **alst, t_list *new);
-
 int					ft_abs(int x);
 int					ft_min(int x, int y);
 double				ft_dmin(int count, ...);

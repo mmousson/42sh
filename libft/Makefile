@@ -67,6 +67,7 @@ SRC =	ft_memset.c				\
 		ft_strnequ.c			\
 		ft_strsub.c				\
 		ft_strjoin.c			\
+		ft_strjoinf.c			\
 		ft_strtrim.c			\
 		ft_strsplit.c			\
 		ft_itoa.c				\
@@ -94,6 +95,8 @@ SRC =	ft_memset.c				\
 		ft_strremove_at.c		\
 		ft_order_of_magnitude.c	\
 		ft_fabs.c				\
+		get_line.c				\
+		ft_del_words_tables.c	\
 		get_next_line.c
 
 OBJ = $(subst .c,.o,$(addprefix ./$(OBJDIR)/,$(SRC)))
