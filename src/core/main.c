@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 00:46:06 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:48:26 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ struct termios	shell_term_conf;
 int				vi_on = 0;
 t_vars			*shell_var_list = NULL;
 
-int				main(int argc, char **argv)
+int				main(int argc, char **argv, char **environ)
 {
 	t_job	*test;
 	char	*fg_argv[] = { "fg" };
@@ -41,6 +41,9 @@ int				main(int argc, char **argv)
 	char	*test_arg3[] = { "test", "!", "-d", "libft" };
 	char	*test_arg4[] = { "test", "-r", "norights" };
 	char	*set_argv[] = { "set", "-o", "bleu" };
+	char	*export_argv[] = { "export", "-p" };
+	char	*export_argv2[] = { "export", "TEST" };
+	char	**env = duplicate_environ(environ);
 
 	(void)argc;
 	(void)argv;
@@ -79,16 +82,27 @@ int				main(int argc, char **argv)
 	test->next = NULL;
 	test->first_process->next = NULL;
 
-	set(2, set_argv, NULL);
+	ft_putendl_fd("==> Adding internal var: TEST=blue", STDERR_FILENO);
+	add_internal_var("TEST", "blue");
+
+	ft_putendl_fd("==> Calling 'set'", STDERR_FILENO);
+	set(1, set_argv, NULL);
+
+	ft_putendl_fd("==> Calling 'export -p'", STDERR_FILENO);
+	ft_export(2, export_argv, &env);
+	ft_putendl_fd("==> Calling 'export TEST'", STDERR_FILENO);
+	ft_export(2, export_argv2, &env);
+	ft_putendl_fd("==> Calling 'export -p'", STDERR_FILENO);
+	ft_export(2, export_argv, &env);
 
 	ft_putendl_fd("'test' utility", 2);
-	ft_putendl_fd("test 12 -eq 24", 2);
+	ft_putendl_fd("==> test 12 -eq 24", 2);
 	printf("test = %d\n", ft_test(4, test_arg, NULL));
-	ft_putendl_fd("test -d libft", 2);
+	ft_putendl_fd("==> test -d libft", 2);
 	printf("test = %d\n", ft_test(3, test_arg2, NULL));
-	ft_putendl_fd("test ! -d libft", 2);
+	ft_putendl_fd("==> test ! -d libft", 2);
 	printf("test = %d\n", ft_test(4, test_arg3, NULL));
-	ft_putendl_fd("test -r norights", 2);
+	ft_putendl_fd("==> test -r norights", 2);
 	printf("test = %d\n", ft_test(3, test_arg4, NULL));
 
 	ft_putendl_fd("\nhash -- -r", 2);

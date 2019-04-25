@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 01:51:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 03:10:33 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 06:44:12 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static void	search_in_environment(char *name, char ***env)
 int	unset(int argc, char **argv, char ***env)
 {
 	int		i;
-	int		j;
 
 	i = 0;
 	while (++i < argc)

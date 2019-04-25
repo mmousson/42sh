@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 03:23:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:44:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,10 @@ typedef struct		s_vars
 	struct s_vars	*next;
 }					t_vars;
 
+/*
+**	g_builtins[] -> defined in utility/builtins_utility.c
+*/
+
 extern int			vi_on;
 extern t_vars		*shell_var_list;
 extern t_alias		*alias_list;
@@ -127,11 +131,13 @@ int					alias(int argc, char **argv, char ***env);
 int					bg(int argc, char **argv, char ***env);
 int					cd(int argc, char **argv, char ***env);
 int					echo(int argc, char **argv, char ***env);
+int					ft_export(int argc, char **argv, char ***env);
 int					ft_exit(int argc, char **argv, char ***env);
 int					fg(int argc, char **argv, char ***env);
 int					hash(int argc, char **argv, char ***env);
 int					jobs(int argc, char **argv, char ***env);
 int					set(int argc, char **argv, char ***env);
+int					unset(int argc, char **argv, char ***env);
 int					ft_test(int argc, char **argv, char ***env);
 int					type(int argc, char **argv, char ***env);
 int					unalias(int argc, char **argv, char ***env);
@@ -139,10 +145,14 @@ int					unalias(int argc, char **argv, char ***env);
 /*
 **	==================== UTILITY functions ====================
 **
+**	duplicate_environ -> utility/duplicate_environ.c
 **	get_user_home -> utility/get_user_home.c
 **	write_alias_list_to_file -> utility/write_alias_list_to_file.c
+**	add_internal_var -> utility/add_internal_var.c
+**	internal_variable_exists -> utility/internal_variable_exists.c
 */
 
+char				**duplicate_environ(char **env);
 char				*get_user_home(void);
 char				*get_aliases_file_full_path(void);
 void				write_alias_list_to_file(void);
@@ -151,5 +161,7 @@ void				ft_add_entry_to_environ(char ***environ, char *key,
 int					ft_rm_entry_from_environ(char ***environ, char *key);
 char				*ft_get_env_var(char ***environ, char *key);
 int					ft_get_environ_length(char **tab);
+void				add_internal_var(char *name, char *value);
+char				*internal_var_exists(char *name);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 02:45:10 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 03:05:04 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:10:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,37 @@ int			ft_rm_entry_from_environ(char ***environ, char *key)
 		}
 	*environ = env;
 	return (1);
+}
+
+/*
+**
+*/
+
+char		**duplicate_environ(char **env)
+{
+	int		i;
+	int		length;
+	char	**res;
+
+	i = -1;
+	if ((length = ft_get_environ_length(env)) == -1)
+		return (NULL);
+	if ((res = (char **)ft_memalloc(sizeof(char *) * (length + 1))) == NULL)
+	{
+		ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
+		return (NULL);
+	}
+	while (++i < length)
+	{
+		if ((res[i] = ft_strdup(env[i])) == NULL)
+		{
+			while (--i >= 0)
+				ft_strdel(&(res[i]));
+			ft_memdel((void **)&(res));
+			ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
+			return (NULL);
+		}
+	}
+	res[i] = NULL;
+	return (res);
 }
