@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 00:22:35 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 03:23:56 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,10 @@ int					unalias(int argc, char **argv, char ***env);
 char				*get_user_home(void);
 char				*get_aliases_file_full_path(void);
 void				write_alias_list_to_file(void);
+void				ft_add_entry_to_environ(char ***environ, char *key,
+	char *value);
+int					ft_rm_entry_from_environ(char ***environ, char *key);
+char				*ft_get_env_var(char ***environ, char *key);
+int					ft_get_environ_length(char **tab);
 
 #endif

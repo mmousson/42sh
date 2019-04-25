@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/24 23:36:20 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/25 02:59:18 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,8 @@ SRCS =		./src/core/main.c											\
 			./src/utility/alias_exists.c								\
 			./src/utility/alias_init.c									\
 			./src/utility/builtins_utility.c							\
+			./src/utility/environ_aux_functions.c						\
+			./src/utility/environ_utilities.c							\
 			./src/utility/free_alias_list.c								\
 			./src/utility/hash_string.c									\
 			./src/utility/get_user_home.c								\
