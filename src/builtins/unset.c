@@ -6,14 +6,20 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 01:51:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 03:03:19 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 03:10:33 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unset.h"
 
 /*
+**	This function will delete a variable 'name'
+**	from the shell's internal variables list
 **
+**	Arguments:
+**	name -> The variable's name to look for
+**
+**	Return Value: NONE
 */
 
 static void	search_in_shell_internal_vars(char *name)
@@ -41,7 +47,14 @@ static void	search_in_shell_internal_vars(char *name)
 }
 
 /*
+**	This functions will delete a variable 'name'
+**	from the shell's environment
 **
+**	Arguments:
+**	name -> The variable's name to look for
+**	env -> The shell's environment array
+**
+**	Return Value: NONE
 */
 
 static void	search_in_environment(char *name, char ***env)
@@ -54,9 +67,15 @@ static void	search_in_environment(char *name, char ***env)
 }
 
 /*
+**	============================= BUITLIN COMMAND =============================
+**	Main function for the 'unset' utility
+**	No accepted options
+**	The normal behaviour of this utility is to remove all variables whose name
+**	are listed in the utility arguments
+**	from the shell's internal variables list AND the environment
 **
+**	Return Value: ALWAYS 0
 */
-
 int	unset(int argc, char **argv, char ***env)
 {
 	int		i;
