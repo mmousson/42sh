@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/11 19:37:22 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/25 10:54:10 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <termios.h>
 # include <termcap.h>
+#include "libft.h"
 
 # define LJUMP "\033\033[D"
 # define RJUMP "\033\033[C"
@@ -49,13 +50,14 @@ typedef enum			e_prompt
 	PDQUOTE = 8,
 	PPIPE = 6,
 	PHEREDOC = 9,
+	PBACKS = 4,
+	PDEF = 2
 }						t_prompt;
 
 typedef enum			e_emode
 {
 	MNORMAL,
 	MVI,
-	MREADLINE
 }						t_emode;
 
 typedef struct			s_tc
@@ -101,13 +103,30 @@ typedef struct			s_history
 	struct s_history	*prev;
 }						t_history;
 
+typedef struct			s_undo
+{
+	char				*command;
+	struct s_undo		*next;
+}						t_undo;
+
 typedef struct			s_mode
 {
-	int					mode[MODE];
 	int					n_select;
 	int					v_command;
 	int					v_insert;
+	int					v_visual;
+	int					v_yank;
+	int					v_del;
 	int					v_count;
+	int					v_prior[4];
+	char				v_lastc;
+	char				v_lasta;
+	int					v_replace;
+	int					v_pos;
+	int					mode[MODE];
+	char				s_buffer[BUFF_SIZE];
+	int					saved;
+	t_undo				*undo;
 }						t_mode;
 
 typedef struct			s_env
@@ -131,74 +150,76 @@ typedef struct			s_env
 	int					len;
 }						t_env;
 
+struct s_env			g_env;
+
 /*
 ** term_config
 */
 
-void					ft_configterm(t_env *env);
-void					ft_errorterm(t_error error, t_env *env);
-void					ft_term_manager(t_env *env);
-int						ft_quiterm(t_env *env);
-void					ft_delenv(t_env *env);
-void					ft_switch_term(t_env *env, int reset);
-void					ft_update_termsize(t_env *env);
+void					ft_configterm(void);
+void					ft_errorterm(t_error error);
+void					ft_term_manager(void);
+int						ft_quiterm(void);
+void					ft_delenv(void);
+void					ft_switch_term(int reset);
+void					ft_update_termsize(void);
 
 /*
 **	line_read
 */
 
-int						ft_reader(t_env *env, char *argv);
-int						ft_update_line(t_env *env, char *str, int ret);
-char					*ft_get_line(t_env *env, t_prompt prompt, char *argv);
-int						ft_line_manager(t_env *env, char *str, int ret);
-int						ft_line_arrow(t_env *env, char *str);
-int						ft_line_ascii(t_env *env, char *str, int ret);
-int						ft_line_history(t_env *env, char *str);
-int						ft_read_isnotatty(t_env *env);
-int						ft_read_isarg(t_env *env, char *argv);
+int						ft_reader(char *argv);
+int						ft_update_line(char *str, int ret);
+char					*ft_get_line(t_prompt prompt, char *argv);
+int						ft_line_manager(char *str, int ret);
+int						ft_line_arrow(char *str);
+int						ft_line_ascii(char *str, int ret);
+int						ft_line_history(char *str);
+int						ft_read_isnotatty(void);
+int						ft_read_isarg(char *argv);
 
 /*
 ** termcaps
 */
 
 int						ft_addtermcaps(t_tc *tc);
-void					ft_active_termcaps(t_env *env);
+void					ft_active_termcaps(void);
 int						ft_check_termcaps(t_tc tc);
 
 /*
 ** cursor_motion
 */
 
-void					ft_cursor_motion(t_env *env, t_move move, int len);
-void					ft_cursor_ry(t_env *env);
-void					ft_ljump(t_env *env);
-void					ft_rjump(t_env *env);
-void					ft_home(t_env *env);
-void					ft_end(t_env *env);
-void					ft_clear_line(t_env *env);
-int						ft_getx(t_env *env, int pos);
-int						ft_gety(t_env *env, int pos);
-int						ft_get_termroom(t_env *env);
-void					ft_reset_cursor(t_env *env);
-int						ft_get_origin_pos(t_env *env);
+void					ft_cursor_motion(t_move move, int len);
+void					ft_cursor_ry(void);
+void					ft_ljump(void);
+void					ft_rjump(void);
+void					ft_home(int blank);
+void					ft_end(void);
+void					ft_clear_line(void);
+int						ft_getx(int pos);
+int						ft_gety(int pos);
+int						ft_get_termroom(void);
+void					ft_reset_cursor(void);
+int						ft_get_origin_pos(void);
 
 /*
 **	line_alloc
 */
 
-char					*ft_addstr(t_env *env, char *str);
-char					*ft_delchar(t_env *env, int size);
-char					*ft_delchar_bs(t_env *env , int size);
-char					*ft_alloc_history(t_env *env, int stline);
+char					*ft_addstr(char *str);
+char					*ft_delchar(int size);
+char					*ft_delchar_bs(int size);
+char					*ft_alloc_history(int stline);
 char					*ft_get_prompt(t_prompt prompt);
 
 /*
 **	history
 */
 
-void					ft_get_uhistory(t_env *env);
-void					ft_get_dhistory(t_env *env);
-void					ft_reset_history(t_env *env);
+void					ft_get_uhistory(int count);
+void					ft_get_dhistory(int count);
+void					ft_reset_history(void);
 
 /*
 **	signal
@@ -206,7 +227,6 @@ void					ft_reset_history(t_env *env);
 
 void					ft_signal_handler(int val);
 void					ft_signal(int sg);
-t_env					*signal_saved(t_env *env);
 void					ft_sigint(void);
 void					ft_sigwinch(void);
 void					ft_reset_signal(int val);
@@ -217,9 +237,9 @@ void					ft_setsig_child(int val);
 **	cpy/past
 */
 
-void					ft_paste(t_env *env, char *str);
-void					ft_init_cpy(t_env *env);
-int						ft_line_cpy(t_env *env, char *str, int ret);
+void					ft_paste(char *str, int count);
+void					ft_init_cpy(void);
+int						ft_line_cpy(char *str, int ret);
 
 /*
 **	key
@@ -233,31 +253,47 @@ int						ft_isaltv(char *str);
 **	print
 */
 
-void					ft_print_line(t_env *env);
+void					ft_print_line(void);
 
 /*
 **	mode
 */
 
 
-int						ft_vi(t_env *env, char *str);
-int						ft_read_line(t_env *env, char *str);
-int						ft_tmp(t_env *env, char *str);
+int						ft_vi(char *str);
+int						ft_read_line(char *str);
+int						ft_tmp(char *str);
 
 /*
 **	vi_mode
 */
 
-int						ft_line_vi(t_env *env, char *str, int ret);
-int						ft_vi_command(t_env *env, char *str, int ret);
-int						ft_hash_insert(t_env *env);
-void						ft_get_count(t_env *env, char *str);
-void						ft_reset_count(t_env *env, char *str);
-int						ft_reset_mode(t_env *env);
-
-/*
-**	read_line_mode
-*/
-
-int						ft_line_readline(t_env *env, char *str, int ret);
+int						ft_line_vi(char *str, int ret);
+int						ft_vi_command(char *str, int ret);
+int						ft_vi_motion(char *str, int ret);
+int						ft_vi_delete(char *str, int ret);
+int						ft_vi_yank(char *str, int ret);
+int						ft_vi_visual(char *str, int ret);
+int						ft_vi_history(char *str, int ret);
+int						ft_vi_insert(char *str, int ret);
+int						ft_vi_paste(char *str, int ret);
+int						ft_vi_undo(char *str, int ret);
+int						ft_hash_insert(void);
+int						ft_get_count(char *str);
+void					ft_reset_count(char *str);
+int						ft_reset_mode(int ins, int com);
+void					ft_wjump(int count);
+void					ft_ejump(int count);
+void					ft_bjump(int count);
+void					ft_pipejump(int count);
+void					ft_jump_occur(char c, int i, int count);
+int						ft_get_prior_flag(char *str);
+void					ft_repeat(void);
+void					ft_rev_repeat(void);
+char					*ft_replace_str(char *str, int len);
+void					ft_cdel(void);
+void					ft_vi_cpy(void);
+void					ft_init_undo(void);
+void					ft_add_undo(void);
+int						ft_delundo(t_undo *undo);
 #endif

@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/18 00:13:22 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/25 11:24:09 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(NAME): $(OBJS)
 	@if [ -e files_missing ]; then \
 		printf "\033[1;31m\n[42SH COMPILATION FAILED]\033[0m\n"; \
 	else \
-		$(CC) $(OBJS) -o $(NAME) $(LIBSFOLDERS) $(LIBS); \
+		$(CC) $(OBJS) -o $(NAME) $(LIBSFOLDERS) $(LIBS) -ltermcap; \
 		printf "\033[1;36m\n[42SH COMPILATION SUCCESSFUL]\033[0m\n"; \
 	fi;
 	@$(RM) files_missing

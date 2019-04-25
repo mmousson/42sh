@@ -6,52 +6,51 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 02:00:25 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/10 16:44:30 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/25 10:45:54 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
-#include "libft.h"
 
-static void			ft_newline(t_env *env)
+static void			ft_newline(void)
 {
 	int				i;
 
 	i = 0;
-	if (!env->tc->tc)
+	if (!g_env.tc->tc)
 		return ;
-	tputs(env->tc->mr, 1, ft_putchar);
+	tputs(g_env.tc->mr, 1, ft_putchar);
 	ft_putchar('%');
-	tputs(env->tc->me, 1, ft_putchar);
-	while (++i < env->cm->term_x)
+	tputs(g_env.tc->me, 1, ft_putchar);
+	while (++i < g_env.cm->term_x)
 		ft_putchar(' ');
-	tputs(env->tc->cr, 1, ft_putchar);
-	tputs(env->tc->dl, 1, ft_putchar);
+	tputs(g_env.tc->cr, 1, ft_putchar);
+	tputs(g_env.tc->dl, 1, ft_putchar);
 }
 
-static void			ft_setprompt(t_env *env, t_prompt prompt)
+static void			ft_setprompt(t_prompt prompt)
 {
-	ft_newline(env);
-	if (!(env->line = ft_get_prompt(prompt)))
-		ft_errorterm(TMALLOC, env);
-	env->cm->pos = prompt;
-	env->p_size = prompt;
-	env->prompt = prompt;
-	env->len = prompt;
+	ft_newline();
+	if (!(g_env.line = ft_get_prompt(prompt)))
+		ft_errorterm(TMALLOC);
+	g_env.cm->pos = prompt;
+	g_env.p_size = prompt;
+	g_env.prompt = prompt;
+	g_env.len = prompt;
 }
 
-static char			*ft_cutline(t_env *env, t_prompt prompt)
+static char			*ft_cutline(t_prompt prompt)
 {
 	char			*tmp;
 
-	if (!(tmp = ft_strdup(env->line + prompt)))
-		ft_errorterm(TMALLOC, env);
-	ft_strdel(&env->line);
-	env->line = tmp;
+	if (!(tmp = ft_strdup(g_env.line + prompt)))
+		ft_errorterm(TMALLOC);
+	ft_strdel(&g_env.line);
+	g_env.line = tmp;
 	return (tmp);
 }
 
-void				ft_term_manager(t_env *env)
+void				ft_term_manager(void)
 {
 	t_tc			*tc;
 	t_cm			*cm;
@@ -63,43 +62,42 @@ void				ft_term_manager(t_env *env)
 	cpy = (t_cpy*)ft_memalloc(sizeof(t_cpy));
 	mode = (t_mode*)ft_memalloc(sizeof(t_mode));
 	if (!tc || !cm || !cpy || !mode)
-		ft_errorterm(TMALLOC, env);
-	env->ry = NULL;
+		ft_errorterm(TMALLOC);
+	g_env.ry = NULL;
 	ft_bzero(tc, sizeof(t_tc));
 	ft_bzero(cm, sizeof(t_cm));
 	ft_bzero(cpy, sizeof(t_cpy));
 	ft_bzero(mode, sizeof(t_mode));
-	env->tc = tc;
-	env->tc->tc = 1;
-	env->cm = cm;
-	env->cpy = cpy;
-	env->mode = mode;
-	env->mode->mode[0] = 1;
-	ft_configterm(env);
-	signal_saved(env);
+	g_env.tc = tc;
+	g_env.tc->tc = 1;
+	g_env.cm = cm;
+	g_env.cpy = cpy;
+	g_env.mode = mode;
+	g_env.mode->mode[0] = 1;
+	ft_configterm();
 }
 
-char				*ft_get_line(t_env *env, t_prompt prompt, char *argv)
+char				*ft_get_line(t_prompt prompt, char *argv)
 {
 	int			ret;
 
 	ret = 0;
-	if (env->isatty)
-		ft_switch_term(env, 0);
-	env->ctrld = 0;
-	env->tc->tc = 1;
-	if (!ft_check_termcaps(*env->tc))
-		env->tc->tc = 0;
+	if (g_env.isatty)
+		ft_switch_term(0);
+	g_env.ctrld = 0;
+	g_env.tc->tc = 1;
+	if (!ft_check_termcaps(*g_env.tc))
+		g_env.tc->tc = 0;
 	while (!ret)
 	{
-		if (env->isatty)
-			ft_setprompt(env, prompt);
-		ret = ft_reader(env, argv);
+		if (g_env.isatty)
+			ft_setprompt(prompt);
+		ret = ft_reader(argv);
 	}
-	if (env->isatty)
+	if (g_env.isatty)
 	{
-		ft_switch_term(env, 1);
-		return (ft_cutline(env, prompt));
+		ft_switch_term(1);
+		return (ft_cutline(prompt));
 	}
-	return (env->line);
+	return (g_env.line);
 }

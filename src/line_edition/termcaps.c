@@ -6,13 +6,12 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 19:20:09 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/06 21:01:30 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:45:22 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 #include <stdlib.h>
-#include "libft.h"
 
 int					ft_check_termcaps(t_tc tc)
 {
@@ -29,11 +28,11 @@ int					ft_check_termcaps(t_tc tc)
 	return (1);
 }
 
-void				ft_active_termcaps(t_env *env)
+void				ft_active_termcaps(void)
 {
-	if (!env->tc->tc)
+	if (!g_env.tc->tc)
 		return ;
-	tputs(env->tc->key[0], 1, ft_putchar);
+	tputs(g_env.tc->key[0], 1, ft_putchar);
 }
 
 int					ft_addtermcaps(t_tc *tc)

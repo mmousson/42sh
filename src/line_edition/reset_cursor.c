@@ -6,19 +6,18 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:22:35 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/07 16:38:34 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:44:40 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
-#include "libft.h"
 
-static int			ft_lenline(t_env *env, int pos)
+static int			ft_lenline(int pos)
 {
 	int				len;
 
 	len = 0;
-	while (ft_getx(env, pos))
+	while (ft_getx(pos))
 	{
 		pos--;
 		len++;
@@ -26,39 +25,39 @@ static int			ft_lenline(t_env *env, int pos)
 	return (len);
 }
 
-static void			ft_back_left(t_env *env, int pos)
+static void			ft_back_left(int pos)
 {
 	int				i;
 	int				len_line;
 
-	while (pos != env->cm->pos)
+	while (pos != g_env.cm->pos)
 	{
 		i = -1;
-		if (!ft_getx(env, pos))
+		if (!ft_getx(pos))
 		{
-			len_line = ft_lenline(env, pos - 1);
-			tputs(env->tc->up, 1, ft_putchar);
-			if (pos - len_line > env->cm->pos)
+			len_line = ft_lenline(pos - 1);
+			tputs(g_env.tc->up, 1, ft_putchar);
+			if (pos - len_line > g_env.cm->pos)
 				pos -= len_line;
 			else
 			{
 				while (++i < len_line)
-					tputs(env->tc->nd, 1, ft_putchar);
+					tputs(g_env.tc->nd, 1, ft_putchar);
 			}
 		}
 		else
-			tputs(env->tc->le, 1, ft_putchar);
+			tputs(g_env.tc->le, 1, ft_putchar);
 		pos--;
 	}
 }
 
-void				ft_reset_cursor(t_env *env)
+void				ft_reset_cursor(void)
 {
-	ft_back_left(env, env->len);
-	if (!ft_getx(env, env->cm->pos)
-			&& env->len % env->cm->term_x == 0)
+	ft_back_left(g_env.len);
+	if (!ft_getx(g_env.cm->pos)
+			&& g_env.len % g_env.cm->term_x == 0)
 	{
-		tputs(env->tc->cr, 1, ft_putchar);
-		tputs(env->tc->doo, 1, ft_putchar);
+		tputs(g_env.tc->cr, 1, ft_putchar);
+		tputs(g_env.tc->doo, 1, ft_putchar);
 	}
 }
