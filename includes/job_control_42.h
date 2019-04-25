@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/12 09:56:14 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 02:32:59 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct			s_sig_matcher
 /*
 **	Shell PGID and Terminal Configuration that we need to know accross
 **	all Job Control's source files
+**	Also, the SIGNAL table defintion must be accessible from all Job_Control
+**	source files
 */
 
 extern pid_t			shell_proc_group_id;

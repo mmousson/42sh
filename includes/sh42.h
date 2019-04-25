@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 10:10:46 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/25 03:01:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,19 @@ typedef struct		s_hash
 	struct s_hash	*next;
 }					t_hash;
 
+/*
+**
+*/
+
+typedef struct		s_vars
+{
+	char			*name;
+	char			*value;
+	struct s_vars	*next;
+}					t_vars;
+
+extern int			vi_on;
+extern t_vars		*shell_var_list;
 extern t_alias		*alias_list;
 extern t_builtins	g_builtins[];
 extern t_hash		g_hash[HASH_MOD];
@@ -105,6 +118,7 @@ int					init_job_ctrl(struct termios *bkp_conf);
 **	fg -> builtins/fg.c
 **	hash -> builtins/hash.c
 **	jobs -> builtins/jobs.c
+**	set -> builtins/set.c
 **	type -> builtins/type.c
 **	unalias -> builtins/unalias.c
 */
@@ -117,6 +131,7 @@ int					ft_exit(int argc, char **argv, char ***env);
 int					fg(int argc, char **argv, char ***env);
 int					hash(int argc, char **argv, char ***env);
 int					jobs(int argc, char **argv, char ***env);
+int					set(int argc, char **argv, char ***env);
 int					ft_test(int argc, char **argv, char ***env);
 int					type(int argc, char **argv, char ***env);
 int					unalias(int argc, char **argv, char ***env);
@@ -131,5 +146,10 @@ int					unalias(int argc, char **argv, char ***env);
 char				*get_user_home(void);
 char				*get_aliases_file_full_path(void);
 void				write_alias_list_to_file(void);
+void				ft_add_entry_to_environ(char ***environ, char *key,
+	char *value);
+int					ft_rm_entry_from_environ(char ***environ, char *key);
+char				*ft_get_env_var(char ***environ, char *key);
+int					ft_get_environ_length(char **tab);
 
 #endif
