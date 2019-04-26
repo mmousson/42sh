@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/25 11:24:09 by roliveir         ###   ########.fr        #
+#    Updated: 2019/04/26 14:10:04 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,14 +49,14 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 	@$(shell mkdir -p $(dir $@))
-	@printf "%-42s" "Precompiling $(notdir $@)..."
+	@printf "%-45s" "Precompiling $(notdir $@)..."
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $< 2> ./tmp_log || /usr/bin/touch ./tmp_errors
 	@if [ -e tmp_errors ]; then \
-		printf "   \033[1;31m[KO]\n\033[0m" && /bin/cat 1>&2 ./tmp_log && touch files_missing; \
+		printf "\033[1;31m[KO]\n\033[0m" && /bin/cat 1>&2 ./tmp_log && touch files_missing; \
 	elif test -s ./tmp_log; then \
-		printf "   \033[1;33m[WARNING]\n\033[0m" && /bin/cat ./tmp_log; \
+		printf "\033[1;33m[WARNING]\n\033[0m" && /bin/cat ./tmp_log; \
 	else \
-		printf "   \033[1;32m[OK]\n\033[0m"; \
+		printf "\033[1;32m[OK]\n\033[0m"; \
 	fi;
 	@$(RM) ./tmp_errors
 

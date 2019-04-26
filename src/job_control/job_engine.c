@@ -110,19 +110,13 @@ int					wait_job_completion(t_job *job)
 int						job_launch(t_job *job, int fg)
 {
 	int			p[2];
-	pid_t		pid;
 	t_process	*current_process;
 
 	current_process = job->first_process;
 	while (current_process)
 	{
 		pipe_setup(job, current_process, p);
-		if ((pid = fork()) == 0)
-			child_process(current_process, fg, job->pgid);
-		else if (pid > 0)
-			parent_process(job, current_process, pid);
-		else
-			ft_putendl_fd("Fork Failed", STDERR_FILENO);
+		job_command_search_and_exec(job, current_process, fg);
 		pipe_cleanup(job, current_process, p);
 		current_process = current_process->next;
 	}

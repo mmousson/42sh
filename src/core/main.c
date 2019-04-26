@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 13:13:53 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 14:12:24 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	char		*job1_second_proc_argv[] = {"cat", "-e", NULL};
 
 	test.pgid = 0;
-	test.command = job1_command;
+	test.command = ft_strdup(job1_command);
 	test.io_channels.input = 0;
 	test.io_channels.output = 1;
 	test.io_channels.error = 2;
@@ -73,8 +73,8 @@ int					main(int argc, char **argv, char **arge_sys)
 
 	printf("Test OK\n");
 
-	test.first_process->argv = job1_first_proc_argv;
-	test.first_process->environ = env;
+	test.first_process->argv = duplicate_environ(job1_first_proc_argv);
+	test.first_process->environ = &env;
 	test.first_process->io_channels.input = 0;
 	test.first_process->io_channels.output = 1;
 	test.first_process->io_channels.error = 2;
@@ -82,8 +82,8 @@ int					main(int argc, char **argv, char **arge_sys)
 
 	printf("First process OK\n");
 
-	test.first_process->next->argv = job1_second_proc_argv;
-	test.first_process->next->environ = env;
+	test.first_process->next->argv = duplicate_environ(job1_second_proc_argv);
+	test.first_process->next->environ = &env;
 	test.first_process->next->io_channels.input = 0;
 	test.first_process->next->io_channels.output = 1;
 	test.first_process->next->io_channels.error = 2;
