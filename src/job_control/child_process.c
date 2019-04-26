@@ -50,16 +50,19 @@ static void	setup_redirections(int input, int output, int error)
 {
 	if (input != STDIN_FILENO)
 	{
+		ft_putendl_fd("input", 2);
 		dup2 (input, STDIN_FILENO);
 		close (input);
 	}
 	if (output != STDOUT_FILENO)
 	{
+		ft_putendl_fd("output", 2);
 		dup2 (output, STDOUT_FILENO);
 		close (output);
 	}
 	if (error != STDERR_FILENO)
 	{
+		ft_putendl_fd("error", 2);
 		dup2 (error, STDERR_FILENO);
 		close (error);
 	}

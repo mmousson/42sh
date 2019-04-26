@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:56:59 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/26 13:33:29 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/26 21:03:23 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,9 @@ JOB_CTRL_PATH = ./src/job_control/
 JOB_CTRL =	initialize.c					\
 			child_process.c					\
 			parent_process.c				\
-			job_engine.c					\
+			job_builtins_pipe_utility.c		\
 			job_command_search_and_exec.c	\
+			job_engine.c					\
 			foreground.c					\
 			background.c					\
 			mark_process_status.c			\

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 16:59:09 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 20:49:30 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,9 @@ int					main(int argc, char **argv, char **arge_sys)
 	second_job.first_process->next->io_channels.error = 2;
 
 	second_job.first_process->next->next = NULL;
+
+	// test.next = NULL;
+	// test.first_process->next = NULL;
 
 	while (ptr != NULL)
 	{

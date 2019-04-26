@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 16:23:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 00:47:00 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,22 @@ static void	launch_proc(t_job *job, t_process *proc, int fg)
 }
 
 /*
+**	Function searching through the known PATH environment variable
+**	for an utility named after the 'prov->argv[0]' string
+**	If first checks if the name is available in the hash table, and if not
+**	it will call the 'search_utility' function to try and get the full path
+**	of the utility
+**	If even that function can't find the utility, the shell shall write
+**	an error message and set the process' exit status as 127
 **
+**	Arguments:
+**	job -> A pointer to the Data-Structure holding the informations about
+**		the job that is being launched
+**	proc -> A pointer to the Data-Structure holding the informations about
+**		the process that is being launched
+**	fg -> Whther the process/builtin should be launched in foreground
+**
+**	Return Value: NONE
 */
 
 static void	search_using_path(t_job *job, t_process *proc, int fg)
@@ -81,18 +96,44 @@ static void	search_using_path(t_job *job, t_process *proc, int fg)
 
 /*
 ** =================> COMMAND SEARCH AND EXECUTION ALGORITHM <================
+**	If the command name contains at least one slash, then launch the process
+**	with the same name with execve after forking
+**
+**	If it does not containm any slashes, then:
+**		If the command name is a Builtin Utility, then invoke that Utility
+**
+**		Otherwise, the command shall be searched for using the PATH env var
+**			If the search is successful, then launch the name resulting from
+**				the search with execve after forking
+**
+**			If the search is unsuccessful, the command shall fail with
+**			an exit status of 127 and the shell shall write an error message
+**
+**	Arguments:
+**	job ->
+**	proc ->
+**	fg ->
+**	pipe ->
+**
+**	Return Value: NONE
 */
 
-void		job_command_search_and_exec(t_job *job, t_process *proc, int fg)
+void		job_command_search_and_exec(t_job *job, t_process *proc, int fg,
+	int *pipe)
 {
-	int		p;
+	int	p;
+	int	bkp_fd1;
 
 	if (ft_strchr(proc->argv[0], '/') != NULL)
 		launch_proc(job, proc, fg);
 	else
 	{
 		if ((p = is_builtin(proc->argv[0])) != -1)
+		{
+			bkp_fd1 = job_builtins_pipe_setup(proc, pipe);
 			g_builtins[p].handler(argc(proc->argv), proc->argv, proc->environ);
+			job_builtins_pipe_cleanup(proc, bkp_fd1);
+		}
 		else
 			search_using_path(job, proc, fg);
 	}
