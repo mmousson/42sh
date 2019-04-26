@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 12:57:49 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:12:49 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <termios.h>
 # include <termcap.h>
-#include "libft.h"
+# include "libft.h"
 
 # define UJUMP "\033\033[A"
 # define DJUMP "\033\033[B"
@@ -262,7 +262,6 @@ void					ft_print_line(void);
 **	mode
 */
 
-
 int						ft_vi(char *str);
 int						ft_read_line(char *str);
 int						ft_tmp(char *str);
@@ -273,6 +272,7 @@ int						ft_tmp(char *str);
 
 int						ft_rd_left(char *str, int ret);
 int						ft_rd_right(char *str, int ret);
+
 /*
 **	vi_mode
 */

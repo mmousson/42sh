@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:17:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 10:48:51 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:18:25 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				ft_get_count(char *str)
 	return (0);
 }
 
-void				ft_reset_count(char *str)
+void			ft_reset_count(char *str)
 {
 	int			tmp;
 	int			i;
@@ -38,10 +38,10 @@ void				ft_reset_count(char *str)
 		return ;
 	tmp = ft_atoi(str);
 	if (!tmp && str[0] != '0' && g_env.mode->v_count)
-		g_env.mode->v_count = 0;	
+		g_env.mode->v_count = 0;
 }
 
-int					ft_get_prior_flag(char *str)
+int				ft_get_prior_flag(char *str)
 {
 	int			i;
 

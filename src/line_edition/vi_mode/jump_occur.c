@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 10:59:13 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 11:34:59 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:17:50 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void			ft_fjump(char c, int len)
 		return ;
 	while (g_env.line[i] && g_env.line[i] != c)
 		i++;
-	ft_cursor_motion(MRIGHT, i - g_env.cm->pos);	
+	ft_cursor_motion(MRIGHT, i - g_env.cm->pos);
 }
 
 static void			ft_bigfjump(char c)
@@ -48,6 +48,7 @@ static void			ft_bigtjump(char c)
 	ft_bigfjump(c);
 	ft_cursor_motion(MRIGHT, 1);
 }
+
 void				ft_jump_occur(char c, int i, int count)
 {
 	int				len;

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:46:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 11:37:02 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:33:31 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int					ft_line_history(char *str)
 }
 
 int					ft_line_arrow(char *str, int ret)
-{	
+{
 	if (ft_rd_left(str, ret))
 		ft_cursor_motion(MLEFT, 1);
 	else if (ft_rd_right(str, ret))
@@ -78,7 +78,10 @@ int					ft_line_ascii(char *str, int ret)
 int					ft_line_manager(char *str, int ret)
 {
 	if (str[0] == '\n' && ret == 1)
+	{
+		ft_end();
 		return (0);
+	}
 	else if (str[0] == CTRLD && ret == 1 && g_env.len == g_env.p_size + 1)
 	{
 		g_env.ctrld = 1;

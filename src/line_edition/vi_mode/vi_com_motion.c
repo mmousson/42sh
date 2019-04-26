@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:20:36 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 10:49:36 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:20:00 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int			ft_vi_spec_motion(char *str, int ret)
 int					ft_vi_motion(char *str, int ret)
 {
 	if (ft_vi_priorjump(str, ret))
-			return (1);
+		return (1);
 	else if (str[0] == ' ' && ret == 1)
 		ft_cursor_motion(MRIGHT, g_env.mode->v_count);
 	else if (str[0] == 'h' && ret == 1)

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 03:23:54 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:48:45 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:31:27 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ static int	ft_getpos(int pos, int k)
 		else
 		{
 			max++;
-			x = k ? x = 1 : x;
+			x = k ? 1 : x;
 		}
 	}
 	return (x);
 }
+
 int			ft_getx(int pos)
 {
 	return (ft_getpos(pos, 1));

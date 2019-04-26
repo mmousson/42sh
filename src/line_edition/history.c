@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 23:07:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:46:40 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:14:54 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int				ft_is_uhistory(int count)
 {
-	int				lstlen;
+	int					lstlen;
 	t_history			*tmp;
 
 	lstlen = 0;

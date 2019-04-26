@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 22:59:54 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 09:10:08 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:15:31 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void				ft_paste(char *str, int count)
 static int			ft_choose_mode(char *str, int ret)
 {
 	int				cap;
-	
+
 	if (g_env.mode->n_select)
 		cap = ft_line_cpy(str, ret);
 	else if (g_env.mode->mode[MVI])

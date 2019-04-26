@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 21:28:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 09:26:26 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:16:11 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int			ft_read_notermcaps(void)
 	ft_strdel(&isread);
 	if (ret == 0 && !g_env.sigc)
 		g_env.ctrld = 1;
-	return (1); 
+	return (1);
 }
 
 static int			ft_read_isatty(void)

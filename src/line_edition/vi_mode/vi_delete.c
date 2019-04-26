@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 19:54:00 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 10:02:32 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:19:24 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static void		ft_delall_line(void)
 
 static void		ft_isdelete(char *str, int ret, int start)
 {
-		if (!g_env.mode->v_del && (str[0] == 'c' || str[0] == 'd'
-					|| str[0] == 'C' || str[0] == 'D' || str[0] == 'S'
-					|| str[0] == 'x' || str[0] == 'X') && ret == 1)
-		{
-			if (start)
-				ft_add_undo();
-			else
-				ft_undo_update_pos();
-		}
+	if (!g_env.mode->v_del && (str[0] == 'c' || str[0] == 'd'
+				|| str[0] == 'C' || str[0] == 'D' || str[0] == 'S'
+				|| str[0] == 'x' || str[0] == 'X') && ret == 1)
+	{
+		if (start)
+			ft_add_undo();
+		else
+			ft_undo_update_pos();
+	}
 }
 
 static int		ft_vi_delete3(char *str, int ret)
