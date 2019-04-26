@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 14:20:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 16:59:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,21 @@ int					main(int argc, char **argv, char **arge_sys)
 	//============ TESTING ============
 	(void)line;
 	(void)argv;
+	t_job		*ptr;
 	t_job		test;
+	t_job		second_job;
 	t_process	first_process;
 	t_process	second_process;
+	t_process	third_process;
+	t_process	fourth_process;
 	char		*job1_command = "ls -l -a -F | cat -e";
-	char		*job1_first_proc_argv[] = {"ls", "-l", "-a", "-F", NULL};
-	char		*job1_second_proc_argv[] = {"ls", "-e", NULL};
+	char		*job1_first_proc_argv[] = {"echo", "blue", "vert", "f", NULL};
+	char		*job1_second_proc_argv[] = {"cat", "-e", NULL};
+	char		*job2_command = "echo bleu vert rouge | cat -e";
+	char		*job2_first_proc_argv[] = {"ls", "bleu", "vert", "rouge", NULL};
+	char		*job2_second_proc_argv[] = {"cat", "-e", NULL};
 
+	ptr = &test;
 	test.pgid = 0;
 	test.command = ft_strdup(job1_command);
 	test.io_channels.input = 0;
@@ -69,9 +77,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	test.io_channels.error = 2;
 	test.notified = false;
 	test.first_process = &first_process;
-	test.next = NULL;
-
-	printf("Test OK\n");
+	test.next = &second_job;
 
 	test.first_process->argv = duplicate_environ(job1_first_proc_argv);
 	test.first_process->environ = &env;
@@ -80,21 +86,43 @@ int					main(int argc, char **argv, char **arge_sys)
 	test.first_process->io_channels.error = 2;
 	test.first_process->next = &second_process;
 
-	printf("First process OK\n");
-
 	test.first_process->next->argv = duplicate_environ(job1_second_proc_argv);
 	test.first_process->next->environ = &env;
 	test.first_process->next->io_channels.input = 0;
 	test.first_process->next->io_channels.output = 1;
 	test.first_process->next->io_channels.error = 2;
 
-	printf("Second process OK\n");
-
 	test.first_process->next->next = NULL;
 
-	printf("All done\n");
+	second_job.pgid = 0;
+	second_job.command = ft_strdup(job2_command);
+	second_job.io_channels.input = 0;
+	second_job.io_channels.output = 1;
+	second_job.io_channels.error = 2;
+	second_job.notified = false;
+	second_job.first_process = &third_process;
+	second_job.next = NULL;
 
-	job_launch(&test, FOREGROUND_LAUNCH);
+	second_job.first_process->argv = duplicate_environ(job2_first_proc_argv);
+	second_job.first_process->environ = &env;
+	second_job.first_process->io_channels.input = 0;
+	second_job.first_process->io_channels.output = 1;
+	second_job.first_process->io_channels.error = 2;
+	second_job.first_process->next = &fourth_process;
+
+	second_job.first_process->next->argv = duplicate_environ(job2_second_proc_argv);
+	second_job.first_process->next->environ = &env;
+	second_job.first_process->next->io_channels.input = 0;
+	second_job.first_process->next->io_channels.output = 1;
+	second_job.first_process->next->io_channels.error = 2;
+
+	second_job.first_process->next->next = NULL;
+
+	while (ptr != NULL)
+	{
+		job_launch(ptr, FOREGROUND_LAUNCH);
+		ptr = ptr->next;
+	}
 
 	sleep(1);
 

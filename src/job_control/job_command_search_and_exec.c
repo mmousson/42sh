@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 14:58:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 16:23:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@
 #include "job_control_42.h"
 
 /*
+**	Function computing the number of strings contained in an array (char **)
+**	Hence the name 'argc' => Arg count
 **
+**	Arguments:
+**	argv -> The array of strings to count the number of elements from
+**
+**	Return Value: The computed argc count
 */
 
 static int	argc(char **argv)
@@ -30,7 +36,7 @@ static int	argc(char **argv)
 }
 
 /*
-**
+**	Function launching a process if it is not a built-in utlity
 */
 
 static void	launch_proc(t_job *job, t_process *proc, int fg)
