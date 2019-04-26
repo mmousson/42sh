@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <sys/wait.h>
 #include "libft.h"
 #include "job_control_42.h"
 
