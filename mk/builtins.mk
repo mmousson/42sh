@@ -1,25 +1,41 @@
-SRCS +=		./src/builtins/alias.c										\
-			./src/builtins/bg.c											\
-			./src/builtins/cd.c											\
-			./src/builtins/echo.c										\
-			./src/builtins/export.c										\
-			./src/builtins/fg.c											\
-			./src/builtins/ft_exit.c									\
-			./src/builtins/hash/hash.c									\
-			./src/builtins/hash/add_hash_entry.c						\
-			./src/builtins/hash/init_hash_table.c						\
-			./src/builtins/jobs/jobs.c									\
-			./src/builtins/jobs/parse_options.c							\
-			./src/builtins/jobs/jobs_format_msg.c						\
-			./src/builtins/set.c										\
-			./src/builtins/test/binary_primary/equality_comparison.c	\
-			./src/builtins/test/binary_primary/magnitude_comparison.c	\
-			./src/builtins/test/unary_primary/check_type.c				\
-			./src/builtins/test/unary_primary/string_len.c				\
-			./src/builtins/test/two_argc.c								\
-			./src/builtins/test/three_argc.c							\
-			./src/builtins/test/four_argc.c								\
-			./src/builtins/test/test_builtin.c							\
-			./src/builtins/type.c										\
-			./src/builtins/unalias.c									\
-			./src/builtins/unset.c
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    builtins.mk                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/04/26 11:49:45 by mmousson          #+#    #+#              #
+#    Updated: 2019/04/26 11:49:46 by mmousson         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+BUILTINS_PATH = ./src/builtins/
+BUILTINS =	alias.c										\
+			bg.c										\
+			cd.c										\
+			echo.c										\
+			export.c									\
+			fg.c										\
+			ft_exit.c									\
+			hash/hash.c									\
+			hash/add_hash_entry.c						\
+			hash/init_hash_table.c						\
+			jobs/jobs.c									\
+			jobs/parse_options.c						\
+			jobs/jobs_format_msg.c						\
+			set.c										\
+			test/binary_primary/equality_comparison.c	\
+			test/binary_primary/magnitude_comparison.c	\
+			test/unary_primary/check_type.c				\
+			test/unary_primary/string_len.c				\
+			test/two_argc.c								\
+			test/three_argc.c							\
+			test/four_argc.c							\
+			test/test_builtin.c							\
+			type.c										\
+			unalias.c									\
+			unset.c
+
+BUILTINS_SRCS = $(addprefix $(BUILTINS_PATH),$(BUILTINS))
+SRCS += $(BUILTINS_SRCS)

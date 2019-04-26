@@ -1,12 +1,29 @@
-SRCS +=		./src/job_control/initialize.c								\
-			./src/job_control/child_process.c							\
-			./src/job_control/parent_process.c							\
-			./src/job_control/job_engine.c								\
-			./src/job_control/foreground.c								\
-			./src/job_control/background.c								\
-			./src/job_control/mark_process_status.c						\
-			./src/job_control/update_job_status.c						\
-			./src/job_control/search_utility.c							\
-			./src/job_control/sig_table.c								\
-			./src/job_control/sigchld_handler.c							\
-			./src/job_control/utility.c
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    job_control.mk                                     :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/04/26 11:56:59 by mmousson          #+#    #+#              #
+#    Updated: 2019/04/26 11:58:50 by mmousson         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+JOB_CTRL_PATH = ./src/job_control/
+
+JOB_CTRL =	initialize.c			\
+			child_process.c			\
+			parent_process.c		\
+			job_engine.c			\
+			foreground.c			\
+			background.c			\
+			mark_process_status.c	\
+			update_job_status.c		\
+			search_utility.c		\
+			sig_table.c				\
+			sigchld_handler.c		\
+			utility.c
+
+JOB_CTRL_SRCS = $(addprefix $(JOB_CTRL_PATH),$(JOB_CTRL))
+SRCS += $(JOB_CTRL_SRCS)
