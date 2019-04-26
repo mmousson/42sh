@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 13:51:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 14:46:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ extern t_hash		g_hash[HASH_MOD];
 
 void				init_hash_table(void);
 int					hash_string(char *string);
+int					hash_already_exists(int index, char *name);
 void				add_hash_entry(int string_hash, char *utility_name,
 	char *full_path);
 char				*search_utility(char *name);

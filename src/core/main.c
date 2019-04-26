@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 14:12:24 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 14:20:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	t_process	second_process;
 	char		*job1_command = "ls -l -a -F | cat -e";
 	char		*job1_first_proc_argv[] = {"ls", "-l", "-a", "-F", NULL};
-	char		*job1_second_proc_argv[] = {"cat", "-e", NULL};
+	char		*job1_second_proc_argv[] = {"ls", "-e", NULL};
 
 	test.pgid = 0;
 	test.command = ft_strdup(job1_command);

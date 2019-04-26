@@ -6,14 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 22:24:24 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 07:42:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 14:56:50 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "sh42.h"
 
-static int	already_exists(int index, char *name)
+int		hash_already_exists(int index, char *name)
 {
 	t_hash	*current;
 
@@ -46,12 +46,12 @@ static int	already_exists(int index, char *name)
 **	Return Value: NONE
 */
 
-void		add_hash_entry(int string_hash, char *util_name, char *full_path)
+void	add_hash_entry(int string_hash, char *util_name, char *full_path)
 {
 	t_hash	*target;
 	t_hash	*new_entry;
 
-	if (already_exists(string_hash, util_name))
+	if (hash_already_exists(string_hash, util_name))
 		return ;
 	if (g_hash[string_hash].full_path == NULL)
 	{

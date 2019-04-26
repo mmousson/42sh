@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 14:11:01 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 14:58:56 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,26 @@ static void	launch_proc(t_job *job, t_process *proc, int fg)
 
 static void	search_using_path(t_job *job, t_process *proc, int fg)
 {
+	int		hash;
 	char	*to_del;
 
 	to_del = proc->argv[0];
-	if ((proc->argv[0] = search_utility(proc->argv[0])) == NULL)
+	hash = hash_string(proc->argv[0]);
+	if (hash_already_exists(hash, proc->argv[0]))
+	{
+		g_hash[hash].hits += 1;
+		proc->argv[0] = g_hash[hash].full_path;
+	}
+	else if ((proc->argv[0] = search_utility(proc->argv[0])) == NULL)
 	{
 		proc->argv[0] = to_del;
 		proc->status = 127;
-		ft_putstr_fd("42sh: Unknown command", STDERR_FILENO);
+		ft_putstr_fd("42sh: Unknown command ", STDERR_FILENO);
 		ft_putendl_fd(to_del, STDERR_FILENO);
+		return ;
 	}
-	else
-	{
-		ft_strdel(&to_del);
-		launch_proc(job, proc, fg);
-	}
+	ft_strdel(&to_del);
+	launch_proc(job, proc, fg);
 }
 
 /*
