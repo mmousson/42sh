@@ -6,24 +6,30 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 19:54:00 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:34:00 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 10:02:32 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static void		ft_delall_line()
+static void		ft_delall_line(void)
 {
 	g_env.mode->v_pos = g_env.len;
 	ft_home(1);
 	ft_cdel();
 }
 
-static void		ft_isdelete(char *str)
+static void		ft_isdelete(char *str, int ret, int start)
 {
-	ft_reset_count(str);
-	if (!g_env.mode->v_del)
-		ft_add_undo();
+		if (!g_env.mode->v_del && (str[0] == 'c' || str[0] == 'd'
+					|| str[0] == 'C' || str[0] == 'D' || str[0] == 'S'
+					|| str[0] == 'x' || str[0] == 'X') && ret == 1)
+		{
+			if (start)
+				ft_add_undo();
+			else
+				ft_undo_update_pos();
+		}
 }
 
 static int		ft_vi_delete3(char *str, int ret)
@@ -50,7 +56,8 @@ static int		ft_vi_delete3(char *str, int ret)
 	}
 	else
 		return (0);
-	ft_isdelete(str);
+	ft_isdelete(str, ret, 0);
+	ft_reset_count(str);
 	return (1);
 }
 
@@ -66,12 +73,14 @@ static int		ft_vi_delete2(char *str, int ret)
 	}
 	else if (!g_env.mode->v_del)
 		return (ft_vi_delete3(str, ret));
-	ft_isdelete(str);
+	ft_isdelete(str, ret, 0);
+	ft_reset_count(str);
 	return (1);
 }
 
 int				ft_vi_delete(char *str, int ret)
 {
+	ft_isdelete(str, ret, 1);
 	if ((str[0] == 'c' || str[0] == 'd') && ret == 1)
 	{
 		if (str[0] == 'd')
@@ -85,6 +94,7 @@ int				ft_vi_delete(char *str, int ret)
 	}
 	else if (!g_env.mode->v_del)
 		return (ft_vi_delete2(str, ret));
-	ft_isdelete(str);
+	ft_isdelete(str, ret, 0);
+	ft_reset_count(str);
 	return (1);
 }

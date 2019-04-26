@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 04:08:34 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:48:31 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/25 18:28:03 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void			ft_free_cpy(void)
 	ft_memdel((void**)&(g_env.cpy));
 }
 
-static void			ft_free_undo(t_undo *undo)
+void				ft_free_undo(t_undo *undo)
 {
 	if (!undo)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:17:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:35:39 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 10:48:51 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ int					ft_get_prior_flag(char *str)
 		ft_cdel();
 	if (g_env.mode->v_yank)
 		ft_vi_cpy();
+	ft_reset_count(str);
 	return (1);
 }

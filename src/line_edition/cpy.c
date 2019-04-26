@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 02:36:49 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 08:49:21 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 11:36:59 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ int					ft_line_cpy(char *str, int ret)
 {
 	if (str[0] == 27 && ret == 1)
 		ft_escap_cpy(1);
-	else if (ft_isaltc(str))
+	else if (ft_isaltc(str, ret))
 		ft_cpy(1);
-	else if (ft_isaltx(str))
+	else if (ft_isaltx(str, ret))
 		ft_cut();
-	ft_line_arrow(str);
+	ft_line_arrow(str, ret);
 	return (1);
 }

@@ -6,17 +6,17 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:46:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:47:18 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 11:37:02 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static int			ft_cpy_pst(char *str)
+static int			ft_cpy_pst(char *str, int ret)
 {
-	if (ft_isaltc(str) && !g_env.mode->n_select)
+	if (ft_isaltc(str, ret) && !g_env.mode->n_select)
 		ft_init_cpy();
-	else if (ft_isaltv(str) && !g_env.mode->n_select)
+	else if (ft_isaltv(str, ret) && !g_env.mode->n_select)
 		ft_paste(g_env.cpy->str, 1);
 	else
 		return (0);
@@ -34,15 +34,15 @@ int					ft_line_history(char *str)
 	return (1);
 }
 
-int					ft_line_arrow(char *str)
-{
-	if (!ft_strcmp(g_env.tc->key[MLEFT], str))
+int					ft_line_arrow(char *str, int ret)
+{	
+	if (ft_rd_left(str, ret))
 		ft_cursor_motion(MLEFT, 1);
-	else if (!ft_strcmp(g_env.tc->key[MRIGHT], str))
+	else if (ft_rd_right(str, ret))
 		ft_cursor_motion(MRIGHT, 1);
-	else if (g_env.mode->mode[MNORMAL] && !ft_strcmp(str, RJUMP))
+	else if (g_env.mode->mode[MNORMAL] && ft_isaltf(str, ret))
 		ft_rjump();
-	else if (g_env.mode->mode[MNORMAL] && !ft_strcmp(str, LJUMP))
+	else if (g_env.mode->mode[MNORMAL] && ft_isaltb(str, ret))
 		ft_ljump();
 	else if (g_env.mode->mode[MNORMAL] && !ft_strcmp(str, UJUMP))
 		ft_cursor_motion(MLEFT, g_env.cm->term_x);
@@ -86,9 +86,9 @@ int					ft_line_manager(char *str, int ret)
 	}
 	else if (ft_line_ascii(str, ret))
 		return (1);
-	else if (ft_line_arrow(str))
+	else if (ft_line_arrow(str, ret))
 		return (1);
-	else if (ft_cpy_pst(str))
+	else if (ft_cpy_pst(str, ret))
 		return (1);
 	else if (ft_line_history(str))
 		return (1);

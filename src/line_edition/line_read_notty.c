@@ -6,13 +6,12 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 21:27:30 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 11:19:43 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:03:31 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 #include <unistd.h>
-#include "printf.h"
 #include <fcntl.h>
 
 int					ft_read_isnotatty(void)
@@ -47,8 +46,8 @@ int					ft_read_isarg(char *argv)
 		ft_errorterm(TMALLOC);
 	if ((fd = open(argv, O_RDONLY)) < 1)
 	{
-		ft_putstr_fd("42sh: cannot open: ", STDERR_FILENO);
-		ft_putendl_fd(argv, STDERR_FILENO);
+		ft_putstr_fd("21sh: cannot open ", 2);
+		ft_putendl_fd(argv, 2);
 		ft_quiterm();
 	}
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)

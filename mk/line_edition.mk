@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/26 11:51:22 by mmousson         ###   ########.fr        #
+#    Updated: 2019/04/26 13:07:10 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ LINE_EDIT =	cpy.c				\
 			reset_cursor.c		\
 			term_manager.c		\
 			coordinates_calc.c	\
-			termcaps.c
+			termcaps.c			\
+			isctrl_motion.c
 
 LINE_EDIT_SRCS = $(addprefix $(LINE_EDIT_PATH),$(LINE_EDIT))
 VIMODE_SRCS = $(addprefix $(VIMODE_PATH),$(VIMODE))

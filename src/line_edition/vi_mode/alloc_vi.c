@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 14:59:39 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 09:50:06 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:59:47 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void			ft_init_undo(void)
 		ft_errorterm(TMALLOC);
 	if (!(g_env.mode->undo->command = ft_get_prompt(g_env.prompt)))
 		ft_errorterm(TMALLOC);
+	g_env.mode->undo->pos = g_env.prompt;
 	g_env.mode->undo->next = NULL;
 }
 
@@ -71,34 +72,40 @@ void			ft_add_undo(void)
 	tmp = g_env.mode->undo;
 	while (g_env.mode->undo->next)
 		g_env.mode->undo = g_env.mode->undo->next;
+	if (!ft_strcmp(g_env.mode->undo->command, g_env.line))
+	{
+		g_env.mode->undo = tmp;
+		return ;
+	}
 	if (!(g_env.mode->undo->next = (t_undo*)ft_memalloc(sizeof(t_undo))))
 		ft_errorterm(TMALLOC);
 	if (!(g_env.mode->undo->next->command = ft_strdup(g_env.line)))
 		ft_errorterm(TMALLOC);
+	g_env.mode->undo->next->pos = g_env.cm->pos;
 	g_env.mode->undo->next->next = NULL;
 	g_env.mode->undo = tmp;
 }
 
-int				ft_delundo(t_undo *undo)
+int				ft_delundo(void)
 {
 	t_undo		*tmp;
 
-	if (!undo)
+	if (!g_env.mode->undo)
 		return (0);
-	tmp = undo;
-	while (undo->next && undo->next->next)
-		undo = undo->next;
-	if (!undo->next)
+	tmp = g_env.mode->undo;
+	while (g_env.mode->undo->next && g_env.mode->undo->next->next)
+		g_env.mode->undo = g_env.mode->undo->next;
+	if (!g_env.mode->undo->next)
 	{
-		ft_strdel(&(undo->command));
-		ft_memdel((void**)&undo);
+		ft_strdel(&(g_env.mode->undo->command));
+		ft_memdel((void**)&g_env.mode->undo);
 		return (0);
 	}
 	else
 	{
-		ft_strdel(&(undo->next->command));
-		ft_memdel((void**)&(undo->next));
-		undo = tmp;
+		ft_strdel(&(g_env.mode->undo->next->command));
+		ft_memdel((void**)&(g_env.mode->undo->next));
+		g_env.mode->undo = tmp;
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:34:56 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:24:43 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 11:36:57 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int					ft_tmp(char *str)
 	return (0);
 }
 
-int					ft_reset_mode(int ins, int com)
+int					ft_reset_mode(int ins, int com, int replace)
 {
 	int				i;
 
 	i = -1;
 	if (!g_env.mode->mode[MVI])
 		return (0);
-	g_env.mode->v_replace = 0;
+	g_env.mode->v_replace = replace;
 	g_env.mode->v_del = 0;
 	g_env.mode->v_insert = ins;
 	g_env.mode->v_command = com;

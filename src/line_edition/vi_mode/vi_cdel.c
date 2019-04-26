@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 15:34:42 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:26:07 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 09:48:44 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void			ft_cdel(void)
 {
+	if (g_env.mode->v_del)
+		ft_add_undo();
 	if (g_env.mode->v_pos == g_env.cm->pos)
 		return ;
 	if (g_env.mode->v_pos < g_env.cm->pos)
@@ -23,9 +25,8 @@ void			ft_cdel(void)
 	}
 	else
 		g_env.line = ft_delchar_bs(g_env.mode->v_pos - g_env.cm->pos);
-	if (g_env.mode->v_del)
-		ft_add_undo();
 	g_env.mode->v_del = 0;
 	g_env.mode->v_pos = 0;
-	ft_reset_mode(1, 0);
+	ft_undo_update_pos();
+	ft_reset_mode(1, 0, 0);
 }

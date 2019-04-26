@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 15:45:38 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:37:09 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 10:51:33 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ int				ft_vi_insert(char *str, int ret)
 	else if (str[0] == 'A' && ret == 1)
 		ft_cursor_motion(MRIGHT, g_env.len - g_env.cm->pos);
 	else if (str[0] == 'R' && ret == 1)
-		g_env.mode->v_replace = 1;
+	{
+		ft_add_undo();
+		return (ft_reset_mode(1, 0, 1) + 1);
+	}
 	else
 		return (0);
-	ft_reset_mode(1, 0);
+	ft_reset_mode(1, 0, 0);
 	return (1);
 }

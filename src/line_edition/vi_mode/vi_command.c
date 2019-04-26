@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 14:46:23 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:30:49 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:59:43 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ static int		ft_vi_nextcommand(char *str, int ret)
 
 int				ft_vi_command(char *str, int ret)
 {
+	ft_init_undo();
 	if (str[0] == 27 && ret == 1)
-		return (ft_reset_mode(0, 1) + 1);
+		return (ft_reset_mode(0, 1, 0) + 1);
 	if (ft_get_count(str)
 		|| ft_get_prior_flag(str))
 		return (1);
@@ -48,5 +49,5 @@ int				ft_vi_command(char *str, int ret)
 		return (1);
 	else if (ft_vi_nextcommand(str, ret))
 		return (1);
-	return (ft_reset_mode(0, 1) + 1);
+	return (ft_reset_mode(0, 1, 0) + 1);
 }

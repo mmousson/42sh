@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:54:10 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:57:49 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # include <termcap.h>
 #include "libft.h"
 
-# define LJUMP "\033\033[D"
-# define RJUMP "\033\033[C"
 # define UJUMP "\033\033[A"
 # define DJUMP "\033\033[B"
 # define TEND "\033OF"
 # define CTRLD '\004'
+# define CTRLB '\002'
+# define CTRLF '\006'
 
 # define MODE 3
 
@@ -106,6 +106,7 @@ typedef struct			s_history
 typedef struct			s_undo
 {
 	char				*command;
+	int					pos;
 	struct s_undo		*next;
 }						t_undo;
 
@@ -172,7 +173,7 @@ int						ft_reader(char *argv);
 int						ft_update_line(char *str, int ret);
 char					*ft_get_line(t_prompt prompt, char *argv);
 int						ft_line_manager(char *str, int ret);
-int						ft_line_arrow(char *str);
+int						ft_line_arrow(char *str, int ret);
 int						ft_line_ascii(char *str, int ret);
 int						ft_line_history(char *str);
 int						ft_read_isnotatty(void);
@@ -245,9 +246,11 @@ int						ft_line_cpy(char *str, int ret);
 **	key
 */
 
-int						ft_isaltc(char *str);
-int						ft_isaltx(char *str);
-int						ft_isaltv(char *str);
+int						ft_isaltc(char *str, int ret);
+int						ft_isaltx(char *str, int ret);
+int						ft_isaltv(char *str, int ret);
+int						ft_isaltf(char *str, int ret);
+int						ft_isaltb(char *str, int ret);
 
 /*
 **	print
@@ -265,6 +268,12 @@ int						ft_read_line(char *str);
 int						ft_tmp(char *str);
 
 /*
+**	vi_readline
+*/
+
+int						ft_rd_left(char *str, int ret);
+int						ft_rd_right(char *str, int ret);
+/*
 **	vi_mode
 */
 
@@ -281,7 +290,7 @@ int						ft_vi_undo(char *str, int ret);
 int						ft_hash_insert(void);
 int						ft_get_count(char *str);
 void					ft_reset_count(char *str);
-int						ft_reset_mode(int ins, int com);
+int						ft_reset_mode(int ins, int com, int replace);
 void					ft_wjump(int count);
 void					ft_ejump(int count);
 void					ft_bjump(int count);
@@ -295,5 +304,7 @@ void					ft_cdel(void);
 void					ft_vi_cpy(void);
 void					ft_init_undo(void);
 void					ft_add_undo(void);
-int						ft_delundo(t_undo *undo);
+int						ft_delundo(void);
+void					ft_undo_update_pos(void);
+void					ft_free_undo(t_undo *undo);
 #endif
