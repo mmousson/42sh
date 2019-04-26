@@ -13,29 +13,29 @@
 LEXER_PATH = ./src/lexer/
 PARSER_PATH = ./src/parser/
 
-LEXER =		lex.c				\
-			process.c			\
-			ft_init.c			\
-			get_ch.c			\
-			more.c				\
-			add_char.c			\
-			print_state.c		\
-			get_state.c
+LEXER =		lex.c					\
+			lex_add_char.c			\
+			lex_get_ch.c			\
+			lex_get_state.c			\
+			lex_init.c				\
+			lex_more.c				\
+			lex_print_state.c		\
+			lex_process.c
 
-PARSER =	pars.c				\
-			pars_line.c			\
-			ft_select_pars.c	\
-			ft_cleans_spa.c		\
-			pars_cmd.c			\
-			pars_pipe.c			\
-			pars_word.c			\
-			pars_nword.c		\
-			pars_part.c			\
-			pars_red.c			\
-			pars_rer_lr.c		\
-			tool_pars.c			\
-			print_tree.c		\
-			work_tree.c
+PARSER =	pars.c					\
+			pars_cleans_spa.c		\
+			pars_line.c				\
+			pars_cmd.c				\
+			pars_nword.c			\
+			pars_part.c				\
+			pars_pipe.c				\
+			pars_print_tree.c		\
+			pars_red.c				\
+			pars_rer_lr.c			\
+			pars_select_pars.c		\
+			pars_tool_pars.c		\
+			pars_word.c				\
+			pars_work_tree.c
 
 LEXER_SRCS = $(addprefix $(LEXER_PATH),$(LEXER))
 PARSER_SRCS = $(addprefix $(PARSER_PATH),$(PARSER))
