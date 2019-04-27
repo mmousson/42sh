@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fg.c                                               :+:      :+:    :+:   */
+/*   builtin_fg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 09:32:07 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 11:58:17 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:01:15 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static pid_t	get_jobspec(char *arg)
 **		was sent to foreground, and the shell still has control over terminal
 */
 
-int				fg(int argc, char **argv, char ***env)
+int				blt_fg(int argc, char **argv, char ***env)
 {
 	t_job	*current;
 	pid_t	jobspec;

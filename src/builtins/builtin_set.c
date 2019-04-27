@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set.c                                              :+:      :+:    :+:   */
+/*   builtin_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 21:24:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 01:11:27 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:04:11 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ static int	set_lineedit_mode(char *mode)
 **	SET_INVALID_OPTION (2) -> The user provided an invalid option / option_name
 */
 
-int			set(int argc, char **argv, char ***env)
+int			blt_set(int argc, char **argv, char ***env)
 {
 	int	options;
 	int	parsed;

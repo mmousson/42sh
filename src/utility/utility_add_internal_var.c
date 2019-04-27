@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_internal_var.c                                 :+:      :+:    :+:   */
+/*   utility_add_internal_var.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 06:20:40 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 06:40:01 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:15:36 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_vars	*create_new_link(char *name, char *value)
 **	Return Value: NONE
 */
 
-void			add_internal_var(char *name, char *value)
+void			utility_add_internal_var(char *name, char *value)
 {
 	t_vars	*prev;
 	t_vars	*current;

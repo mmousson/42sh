@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 20:49:30 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 14:50:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int					main(int argc, char **argv, char **arge_sys)
 	ret = 1;
 	if (init_job_ctrl(&shell_term_conf) == -1)
 		return (128);
-	alias_init();
-	env = duplicate_environ(arge_sys);
+	init_alias();
+	env = utility_duplicate_environ(arge_sys);
 	ft_bzero(&g_env, sizeof(t_env));
 	ft_term_manager();
 	// while (ret)
@@ -79,14 +79,14 @@ int					main(int argc, char **argv, char **arge_sys)
 	test.first_process = &first_process;
 	test.next = &second_job;
 
-	test.first_process->argv = duplicate_environ(job1_first_proc_argv);
+	test.first_process->argv = utility_duplicate_environ(job1_first_proc_argv);
 	test.first_process->environ = &env;
 	test.first_process->io_channels.input = 0;
 	test.first_process->io_channels.output = 1;
 	test.first_process->io_channels.error = 2;
 	test.first_process->next = &second_process;
 
-	test.first_process->next->argv = duplicate_environ(job1_second_proc_argv);
+	test.first_process->next->argv = utility_duplicate_environ(job1_second_proc_argv);
 	test.first_process->next->environ = &env;
 	test.first_process->next->io_channels.input = 0;
 	test.first_process->next->io_channels.output = 1;
@@ -103,14 +103,14 @@ int					main(int argc, char **argv, char **arge_sys)
 	second_job.first_process = &third_process;
 	second_job.next = NULL;
 
-	second_job.first_process->argv = duplicate_environ(job2_first_proc_argv);
+	second_job.first_process->argv = utility_duplicate_environ(job2_first_proc_argv);
 	second_job.first_process->environ = &env;
 	second_job.first_process->io_channels.input = 0;
 	second_job.first_process->io_channels.output = 1;
 	second_job.first_process->io_channels.error = 2;
 	second_job.first_process->next = &fourth_process;
 
-	second_job.first_process->next->argv = duplicate_environ(job2_second_proc_argv);
+	second_job.first_process->next->argv = utility_duplicate_environ(job2_second_proc_argv);
 	second_job.first_process->next->environ = &env;
 	second_job.first_process->next->io_channels.input = 0;
 	second_job.first_process->next->io_channels.output = 1;

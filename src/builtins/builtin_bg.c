@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bg.c                                               :+:      :+:    :+:   */
+/*   builtin_bg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:02:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 06:01:50 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:00:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int		format_bg_infos(t_job *current, int argc, char **argv)
 **	BG_NO_JOB_CONTROL (2) -> The Job Control is disabled
 */
 
-int				bg(int argc, char **argv, char ***env)
+int				blt_bg(int argc, char **argv, char ***env)
 {
 	t_job	*current;
 

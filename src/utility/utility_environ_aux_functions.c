@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ_aux_functions.c                            :+:      :+:    :+:   */
+/*   utility_environ_aux_functions.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 00:54:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 08:55:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:14:54 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 **	Otherwise, a pointer to the variable's value (after the first '=' sign)
 */
 
-char	*ft_get_env_var(char ***environ, char *key)
+char	*utility_get_env_var(char ***environ, char *key)
 {
 	int			i;
 	size_t		key_len;
@@ -69,7 +69,7 @@ char	*ft_get_env_var(char ***environ, char *key)
 **	Otherwise the actual length of the shell's environment
 */
 
-int		ft_get_environ_length(char **tab)
+int		utility_get_environ_length(char **tab)
 {
 	int	res;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 05:42:31 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 11:20:31 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:01:10 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ static int	export_var(char *def, char ***env)
 			ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
 			return (EXPORT_ERROR);
 		}
-		ft_add_entry_to_environ(env, name, def + ft_strlen(def) + 1);
-		add_internal_var(name, def + ft_strlen(def) + 1);
+		utility_add_entry_to_environ(env, name, def + ft_strlen(def) + 1);
+		utility_add_internal_var(name, def + ft_strlen(def) + 1);
 		ft_strdel(&name);
 	}
-	else if ((name = internal_var_exists(def)) != NULL)
-		ft_add_entry_to_environ(env, def, name);
+	else if ((name = utility_internal_var_exists(def)) != NULL)
+		utility_add_entry_to_environ(env, def, name);
 	return (EXPORT_OK);
 }
 
@@ -123,7 +123,7 @@ static int	list_vars(char **env)
 **
 */
 
-int			ft_export(int argc, char **argv, char ***env)
+int			blt_export(int argc, char **argv, char ***env)
 {
 	int	i;
 	int	ret;

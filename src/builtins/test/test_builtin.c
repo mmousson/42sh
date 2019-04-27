@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 09:23:25 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 12:17:16 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:20:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_binary_matcher	g_binary_table[BINARY_TABLE_LEN] = {
 **
 */
 
-int					ft_test(int argc, char **argv, char ***env)
+int					blt_test(int argc, char **argv, char ***env)
 {
 	(void)env;
 	if (argc == 1)

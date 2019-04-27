@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_utility.c                                 :+:      :+:    :+:   */
+/*   utility_builtins_utility.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 11:51:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 15:23:35 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:09:27 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@
 */
 
 t_builtins	g_builtins[] = {
-	{"alias", &alias},
-	{"bg", &bg},
-	{"cd", &cd},
-	{"echo", &echo},
-	{"exit", &ft_exit},
-	{"export", &ft_export},
-	{"fg", &fg},
-	{"hash", &hash},
-	{"jobs", &jobs},
-	{"set", &set},
-	{"test", &ft_test},
-	{"type", &type},
-	{"unalias", &unalias},
-	{"unset", &unset},
+	{"alias", &blt_alias},
+	{"bg", &blt_bg},
+	{"cd", &blt_cd},
+	{"echo", &blt_echo},
+	{"exit", &blt_exit},
+	{"export", &blt_export},
+	{"fg", &blt_fg},
+	{"hash", &blt_hash},
+	{"jobs", &blt_jobs},
+	{"set", &blt_set},
+	{"test", &blt_test},
+	{"type", &blt_type},
+	{"unalias", &blt_unalias},
+	{"unset", &blt_unset},
 	{NULL, NULL}
 };
 
@@ -49,7 +49,7 @@ t_builtins	g_builtins[] = {
 **	1 -> The builtin exists
 */
 
-int	is_builtin(char *name)
+int	utility_is_builtin(char *name)
 {
 	int			i;
 	t_builtins	*ptr;

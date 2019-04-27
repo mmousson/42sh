@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal_var_exists.c                              :+:      :+:    :+:   */
+/*   utility_internal_var_exists.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 05:49:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 08:24:04 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:15:56 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 **	NON_NULL -> The internal variable 'name' exists
 */
 
-char	*internal_var_exists(char *name)
+char	*utility_internal_var_exists(char *name)
 {
 	t_vars	*current;
 

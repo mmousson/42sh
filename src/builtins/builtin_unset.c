@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 01:51:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 06:44:12 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:04:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	search_in_environment(char *name, char ***env)
 
 	i = -1;
 	while ((*env)[++i] != NULL)
-		ft_rm_entry_from_environ(env, name);
+		utility_rm_entry_from_environ(env, name);
 }
 
 /*
@@ -76,7 +76,7 @@ static void	search_in_environment(char *name, char ***env)
 **
 **	Return Value: ALWAYS 0
 */
-int	unset(int argc, char **argv, char ***env)
+int			blt_unset(int argc, char **argv, char ***env)
 {
 	int		i;
 

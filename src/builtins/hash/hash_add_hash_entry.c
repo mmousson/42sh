@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_hash_entry.c                                   :+:      :+:    :+:   */
+/*   hash_add_hash_entry.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 22:24:24 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 14:56:50 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:18:42 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		hash_already_exists(int index, char *name)
 **	Return Value: NONE
 */
 
-void	add_hash_entry(int string_hash, char *util_name, char *full_path)
+void	hash_add_entry(int string_hash, char *util_name, char *full_path)
 {
 	t_hash	*target;
 	t_hash	*new_entry;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alias_init.c                                       :+:      :+:    :+:   */
+/*   utility_alias_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 05:21:50 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 08:17:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:16:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ static int	ft_fill_link(char *line)
 **	1 -> Everything went well
 */
 
-int			alias_init(void)
+int			init_alias(void)
 {
 	int		fd;
 	char	*line;
 
-	if ((line = get_aliases_file_full_path()) == NULL)
+	if ((line = utility_get_aliases_file_full_path()) == NULL)
 		return (0);
 	fd = open(line, O_CREAT | O_RDONLY, 0644);
 	ft_strdel(&line);

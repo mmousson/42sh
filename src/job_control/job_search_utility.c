@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_utility.c                                   :+:      :+:    :+:   */
+/*   job_search_utility.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:21:03 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 14:58:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:10:50 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static char	*search_directory(char *dir_name, char *utility, DIR *dir)
 **	in a newly allocated buffer
 */
 
-char		*search_utility(char *name)
+char		*utility_search(char *name)
 {
 	int		i;
 	DIR		*dir;
@@ -116,6 +116,6 @@ char		*search_utility(char *name)
 	}
 	ft_memdel((void *)(&paths));
 	if (result != NULL)
-		add_hash_entry(hash_string(name), name, result);
+		hash_add_entry(hash_string(name), name, result);
 	return (result);
 }

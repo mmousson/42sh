@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alias.c                                            :+:      :+:    :+:   */
+/*   builtin_alias.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 23:09:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 09:09:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:05:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ static int	check_key(char *key)
 **	ALIAS_ERROR (1) -> An error occured
 */
 
-int	alias(int argc, char **argv, char ***env)
+int			blt_alias(int argc, char **argv, char ***env)
 {
 	int		ret;
 
@@ -188,6 +188,6 @@ int	alias(int argc, char **argv, char ***env)
 		argv++;
 		ret = (check_key(argv[0]) || ret) ? ALIAS_ERROR : ALIAS_OK;
 	}
-	write_alias_list_to_file();
+	utility_write_alias_list_to_file();
 	return (ret);
 }

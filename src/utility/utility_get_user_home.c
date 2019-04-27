@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_user_home.c                                    :+:      :+:    :+:   */
+/*   utility_get_user_home.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 22:56:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 05:44:57 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:13:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 **	Once it has been done, translates this ID into the corresponding HOME dir
 */
 
-char	*get_user_home(void)
+char	*utility_get_user_home(void)
 {
 	struct passwd	*user_pwd;
 	uid_t			user_id;
@@ -57,12 +57,12 @@ char	*get_user_home(void)
 **		'.42sh_aliases' file. Everything went well
 */
 
-char	*get_aliases_file_full_path(void)
+char	*utility_get_aliases_file_full_path(void)
 {
 	char	*user_home;
 	char	*alias_file;
 
-	if ((user_home = get_user_home()) == NULL)
+	if ((user_home = utility_get_user_home()) == NULL)
 	{
 		ft_putendl_fd("42sh: Error: Effective USER ID invalid", STDERR_FILENO);
 		return (NULL);

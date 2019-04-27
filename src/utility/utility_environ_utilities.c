@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ_utilities.c                                :+:      :+:    :+:   */
+/*   utility_environ_utilities.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 02:45:10 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 09:10:05 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:12:11 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_expand(char ***environ)
 	if (environ == NULL || *environ == NULL)
 		return (-1);
 	i = -1;
-	count = ft_get_environ_length(*environ) + 1;
+	count = utility_get_environ_length(*environ) + 1;
 	if ((new = (char **)ft_memalloc(sizeof(char *) * (count + 2))) == NULL)
 		return (-1);
 	while (++i < count)
@@ -60,14 +60,14 @@ static int	ft_expand(char ***environ)
 **
 */
 
-void		ft_add_entry_to_environ(char ***environ, char *key, char *value)
+void		utility_add_entry_to_environ(char ***environ, char *key, char *value)
 {
 	int		where;
 	char	*tmp;
 
 	if (environ == NULL || *environ == NULL || key == NULL || value == NULL)
 		return ;
-	if (ft_get_env_var(environ, key) == NULL)
+	if (utility_get_env_var(environ, key) == NULL)
 	{
 		if ((tmp = ft_strjoin(key, "=")) != NULL
 			&& (where = ft_expand(environ)) != -1)
@@ -91,7 +91,7 @@ void		ft_add_entry_to_environ(char ***environ, char *key, char *value)
 **
 */
 
-int			ft_rm_entry_from_environ(char ***environ, char *key)
+int			utility_rm_entry_from_environ(char ***environ, char *key)
 {
 	int		i;
 	size_t	key_len;
@@ -124,14 +124,14 @@ int			ft_rm_entry_from_environ(char ***environ, char *key)
 **
 */
 
-char		**duplicate_environ(char **env)
+char		**utility_duplicate_environ(char **env)
 {
 	int		i;
 	int		length;
 	char	**res;
 
 	i = -1;
-	if ((length = ft_get_environ_length(env)) == -1)
+	if ((length = utility_get_environ_length(env)) == -1)
 		return (NULL);
 	if ((res = (char **)ft_memalloc(sizeof(char *) * (length + 1))) == NULL)
 	{

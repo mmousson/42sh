@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unalias.c                                          :+:      :+:    :+:   */
+/*   builtin_unalias.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 08:24:21 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 09:06:41 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:04:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	delete_element(char *token)
 			ft_strdel(&(current->token));
 			ft_strdel(&(current->replacement));
 			ft_memdel((void **)&(current));
-			write_alias_list_to_file();
+			utility_write_alias_list_to_file();
 			return (0);
 		}
 		prev = current;
@@ -73,7 +73,7 @@ static int	delete_element(char *token)
 static int	remove_all_aliases(void)
 {
 	free_alias_list();
-	write_alias_list_to_file();
+	utility_write_alias_list_to_file();
 	return (1);
 }
 
@@ -92,7 +92,7 @@ static int	remove_all_aliases(void)
 **	1 -> An error occured
 */
 
-int			unalias(int argc, char **argv, char ***env)
+int			blt_unalias(int argc, char **argv, char ***env)
 {
 	int		options_on;
 	int		ret;
