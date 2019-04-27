@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <sys/wait.h>
 #include "libft.h"
 #include "job_control_42.h"
 
@@ -61,7 +59,9 @@ static void				pipe_setup(t_job *job, t_process *process, int p[2])
 static void				pipe_cleanup(t_job *job, t_process *process, int p[2])
 {
 	if (process->io_channels.input != job->io_channels.input)
+	{
 		close(process->io_channels.input);
+	}
 	if (process->io_channels.output != job->io_channels.output)
 		close(process->io_channels.output);
 	if (process->next)
@@ -112,19 +112,13 @@ int					wait_job_completion(t_job *job)
 int						job_launch(t_job *job, int fg)
 {
 	int			p[2];
-	pid_t		pid;
 	t_process	*current_process;
 
 	current_process = job->first_process;
 	while (current_process)
 	{
 		pipe_setup(job, current_process, p);
-		if ((pid = fork()) == 0)
-			child_process(current_process, fg, job->pgid);
-		else if (pid > 0)
-			parent_process(job, current_process, pid);
-		else
-			ft_putendl_fd("Fork Failed", STDERR_FILENO);
+		job_command_search_and_exec(job, current_process, fg, p);
 		pipe_cleanup(job, current_process, p);
 		current_process = current_process->next;
 	}

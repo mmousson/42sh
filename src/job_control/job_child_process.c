@@ -50,16 +50,19 @@ static void	setup_redirections(int input, int output, int error)
 {
 	if (input != STDIN_FILENO)
 	{
+		ft_putendl_fd("input", 2);
 		dup2 (input, STDIN_FILENO);
 		close (input);
 	}
 	if (output != STDOUT_FILENO)
 	{
+		ft_putendl_fd("output", 2);
 		dup2 (output, STDOUT_FILENO);
 		close (output);
 	}
 	if (error != STDERR_FILENO)
 	{
+		ft_putendl_fd("error", 2);
 		dup2 (error, STDERR_FILENO);
 		close (error);
 	}
@@ -111,7 +114,7 @@ void		child_process(t_process *proc, int foreground, pid_t pgid)
 		reset_signals_actions();
 	}
 	setup_redirections(io_chan.input, io_chan.output, io_chan.error);
-	execve(proc->argv[0], proc->argv, proc->environ);
+	execve(proc->argv[0], proc->argv, *(proc->environ));
 	ft_putstr_fd("Failed to execute process: ", STDERR_FILENO);
 	ft_putendl_fd(proc->argv[0], STDERR_FILENO);
 	ft_putendl_fd("Reason: The file is marked as executable but could not "

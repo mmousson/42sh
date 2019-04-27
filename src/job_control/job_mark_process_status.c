@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 09:13:19 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 07:49:34 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 16:24:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,5 @@ int							mark_process_status(t_job *first_job, pid_t pid,
 	else if (pid == 0)
 		return (WAITPID_ERROR);
 	else
-	{
-		ft_putendl_fd("Waitpid Unknown error", STDERR_FILENO);
 		return (WAITPID_ERROR);
-	}
 }

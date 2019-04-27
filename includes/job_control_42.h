@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 03:23:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 21:14:43 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ typedef struct			s_process
 {
 	pid_t				pid;
 	char				**argv;
-	char				**environ;
+	char				***environ;
 	t_bool				completed;
 	t_bool				stopped;
 	t_io_channels		io_channels;
@@ -137,8 +137,10 @@ typedef struct			s_job
 **	==================== Job Control's main functions ====================
 **
 **	job_launch -> job_control/job_engine.c
+**	job_command_search_and_exec -> job_control/job_command_search_and_exec.c
 **	parent_process -> job_control/parent_process.c
 **	child_process -> job_control/child_process.c
+**	job_builtins_pipe_setup -> job_control/job_builtins_pipe_setup.c
 **	send_job_to_foreground -> job_control/foreground.c
 **	send_job_to_background -> job_control/background.c
 **	wait_job_completion -> job_control/job_engine.c
@@ -149,9 +151,13 @@ typedef struct			s_job
 */
 
 int						job_launch(t_job *job, int fg);
+void					job_command_search_and_exec(t_job *job,
+	t_process *proc, int fg, int*pipe);
 void					parent_process(t_job *job, t_process *proc, pid_t pid);
 void					child_process(t_process *proc, int foreground,
 	pid_t pgid);
+int						job_builtins_pipe_setup(t_process *proc, int *pipe);
+void					job_builtins_pipe_cleanup(t_process *proc, int bkp_fd1);
 int						send_job_to_foreground(t_job *job, int must_continue);
 int						send_job_to_background(t_job *job, int must_continue);
 int						wait_job_completion(t_job *job);

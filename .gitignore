@@ -8,7 +8,7 @@ tmp_errors
 files_missing
 libft/libft.a
 a.out
-test.c
+testing.c
 void
 search_utility
 testing.c

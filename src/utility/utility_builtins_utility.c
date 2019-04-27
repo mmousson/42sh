@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 11:51:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 05:47:46 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 15:23:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,17 @@ t_builtins	g_builtins[] = {
 
 int	is_builtin(char *name)
 {
+	int			i;
 	t_builtins	*ptr;
 
+	i = 0;
 	ptr = g_builtins;
 	while (ptr->name != NULL)
 	{
 		if (ft_strequ(name, ptr->name))
-			return (1);
+			return (i);
 		ptr++;
+		i++;
 	}
-	return (0);
+	return (-1);
 }

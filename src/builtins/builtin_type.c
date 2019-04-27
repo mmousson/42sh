@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 10:20:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 12:18:48 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/26 13:57:33 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static int	ft_search(char *name, char **bin_paths, int search_all)
 	ret = 0;
 	if ((alias = alias_exists(name)) != NULL)
 		ret = msg(ft_strjoin(name, ": aliased to: "), alias, 1, 1);
-	if (is_builtin(name))
+	if (is_builtin(name) != -1)
 		ret = msg(ft_strjoin(name, ": shell builtin command"), NULL, 1, 1);
 	if (bin_paths == NULL && ret == 0)
 		return (msg(ft_strjoin(name, ": not found"), NULL, STDERR_FILENO, 1));
