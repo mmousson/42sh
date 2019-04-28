@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   jump_vi_manager.c                                  :+:      :+:    :+:   */
+/*   vi_jump_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:16:46 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 13:16:48 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/27 11:27:27 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static void	ft_endrjump(void)
+static void		vi_endrjump(void)
 {
-	int	i;
+	int			i;
 
 	i = g_env.cm->pos + 1;
 	if (i >= g_env.len)
@@ -24,29 +24,29 @@ static void	ft_endrjump(void)
 	while (g_env.line[i] && g_env.line[i] != ' ' && g_env.line[i] != '\n')
 		i++;
 	if (g_env.line[i - 1])
-		ft_cursor_motion(MRIGHT, i - g_env.cm->pos - 1);
+		line_cursor_motion(MRIGHT, i - g_env.cm->pos - 1);
 }
 
-void		ft_wjump(int count)
+void			vi_wjump(int count)
 {
 	while (--count + 1)
-		ft_rjump();
+		line_rjump();
 }
 
-void		ft_ejump(int count)
+void			vi_ejump(int count)
 {
 	while (--count + 1)
-		ft_endrjump();
+		vi_endrjump();
 }
 
-void		ft_bjump(int count)
+void			vi_bjump(int count)
 {
 	while (--count + 1)
-		ft_ljump();
+		line_ljump();
 }
 
-void		ft_pipejump(int count)
+void			vi_pipejump(int count)
 {
-	ft_home(1);
-	ft_cursor_motion(MRIGHT, count - 1);
+	line_home(1);
+	line_cursor_motion(MRIGHT, count - 1);
 }

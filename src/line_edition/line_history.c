@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   line_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 23:07:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 13:14:54 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/27 14:28:52 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static int				ft_is_uhistory(int count)
+static int				line_is_uhistory(int count)
 {
 	int					lstlen;
 	t_history			*tmp;
@@ -30,21 +30,21 @@ static int				ft_is_uhistory(int count)
 	return (1);
 }
 
-static int				ft_is_dhistory(int count)
+static int				line_is_dhistory(int count)
 {
 	if (count > g_env.index)
 		return (0);
 	return (1);
 }
 
-void					ft_get_uhistory(int count)
+void					line_get_uhistory(int count)
 {
 	int					i;
 	t_history			*tmp;
 
 	i = -1;
 	tmp = g_env.ry;
-	if (!ft_is_uhistory(count))
+	if (!line_is_uhistory(count))
 		return ;
 	while (g_env.ry && ++i < g_env.index)
 		g_env.ry = g_env.ry->next;
@@ -54,39 +54,39 @@ void					ft_get_uhistory(int count)
 		return ;
 	}
 	g_env.index += count;
-	if (!(g_env.line = ft_alloc_history(0)))
-		ft_errorterm(TMALLOC);
+	if (!(g_env.line = line_alloc_history(0)))
+		sh_errorterm(TMALLOC);
 	g_env.ry = tmp;
-	ft_cursor_ry();
+	line_cursor_ry();
 }
 
-void					ft_get_dhistory(int count)
+void					line_get_dhistory(int count)
 {
 	int					i;
 	t_history			*tmp;
 
 	i = -1;
-	if (!g_env.index || !ft_is_dhistory(count))
+	if (!g_env.index || !line_is_dhistory(count))
 		return ;
 	g_env.index -= count;
 	if (!g_env.index)
-		g_env.line = ft_alloc_history(1);
+		g_env.line = line_alloc_history(1);
 	else
 	{
 		tmp = g_env.ry;
 		while (g_env.ry->next && ++i < g_env.index)
 			g_env.ry = g_env.ry->next;
 		g_env.ry = g_env.ry->prev;
-		if (!(g_env.line = ft_alloc_history(0)))
-			ft_errorterm(TMALLOC);
+		if (!(g_env.line = line_alloc_history(0)))
+			sh_errorterm(TMALLOC);
 		g_env.ry = tmp;
 	}
 	if (!g_env.line)
-		ft_errorterm(TMALLOC);
-	ft_cursor_ry();
+		sh_errorterm(TMALLOC);
+	line_cursor_ry();
 }
 
-void					ft_reset_history(void)
+void					line_reset_history(void)
 {
 	while (g_env.ry && g_env.ry->prev)
 		g_env.ry = g_env.ry->prev;

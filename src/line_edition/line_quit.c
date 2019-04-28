@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vi_history.c                                       :+:      :+:    :+:   */
+/*   line_quit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/24 15:44:45 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 11:56:55 by roliveir         ###   ########.fr       */
+/*   Created: 2019/04/28 09:29:41 by roliveir          #+#    #+#             */
+/*   Updated: 2019/04/28 11:44:57 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-int				vi_history(char *str, int ret)
+int				line_ctrld(void)
 {
-	if (g_env.mode->v_del)
-		return (0);
-	if (str[0] == 'j' && ret == 1)
-		line_get_dhistory(g_env.mode->v_count);
-	else if (str[0] == 'k' && ret == 1)
-		line_get_uhistory(g_env.mode->v_count);
-	else
-		return (0);
-	g_env.mode->v_visual = 0;
-	g_env.mode->v_yank = 0;
-	vi_reset_count(str);
-	return (1);
+	g_env.ctrld = 1;
+	return (0);
+}
+
+int				line_return(void)
+{
+	if (g_env.mode->mode[MVI])
+	{
+		ft_bzero(g_env.mode->s_buffer, sizeof(g_env.mode->s_buffer));
+		vi_free_undo(g_env.mode->undo);
+		g_env.mode->undo = NULL;
+		line_end();
+		return (vi_reset_mode(1, 0, 0));
+	}
+	return (line_end());
 }

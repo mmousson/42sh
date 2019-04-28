@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vi_history.c                                       :+:      :+:    :+:   */
+/*   line_iskeydel.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/24 15:44:45 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 11:56:55 by roliveir         ###   ########.fr       */
+/*   Created: 2019/04/28 11:53:36 by roliveir          #+#    #+#             */
+/*   Updated: 2019/04/28 12:49:00 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-int				vi_history(char *str, int ret)
+int					line_isdel(char *str, int ret)
 {
-	if (g_env.mode->v_del)
-		return (0);
-	if (str[0] == 'j' && ret == 1)
-		line_get_dhistory(g_env.mode->v_count);
-	else if (str[0] == 'k' && ret == 1)
-		line_get_uhistory(g_env.mode->v_count);
-	else
-		return (0);
-	g_env.mode->v_visual = 0;
-	g_env.mode->v_yank = 0;
-	vi_reset_count(str);
-	return (1);
+	if (g_env.mode->mode[MNORMAL]
+			&& (!ft_strcmp(g_env.tc->kd, str)
+				|| (str[0] == CTRLD && ret == 1)))
+		return (1);
+	return (0);
+}
+
+int					line_isdelrword(char *str, int ret)
+{
+	if (ret == 3 && str[0] == -30 && str[1] == -120 && str[2] == -126)
+		return (1);
+	return (0);
 }

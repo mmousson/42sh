@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   term_manager.c                                     :+:      :+:    :+:   */
+/*   line_term.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 02:00:25 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:45:54 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/27 14:13:40 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static void			ft_newline(void)
+static void			line_newline(void)
 {
 	int				i;
 
@@ -28,29 +28,29 @@ static void			ft_newline(void)
 	tputs(g_env.tc->dl, 1, ft_putchar);
 }
 
-static void			ft_setprompt(t_prompt prompt)
+static void			line_setprompt(t_prompt prompt)
 {
-	ft_newline();
-	if (!(g_env.line = ft_get_prompt(prompt)))
-		ft_errorterm(TMALLOC);
+	line_newline();
+	if (!(g_env.line = line_get_prompt(prompt)))
+		sh_errorterm(TMALLOC);
 	g_env.cm->pos = prompt;
 	g_env.p_size = prompt;
 	g_env.prompt = prompt;
 	g_env.len = prompt;
 }
 
-static char			*ft_cutline(t_prompt prompt)
+static char			*line_cut(t_prompt prompt)
 {
 	char			*tmp;
 
 	if (!(tmp = ft_strdup(g_env.line + prompt)))
-		ft_errorterm(TMALLOC);
+		sh_errorterm(TMALLOC);
 	ft_strdel(&g_env.line);
 	g_env.line = tmp;
 	return (tmp);
 }
 
-void				ft_term_manager(void)
+void				sh_term_manager(void)
 {
 	t_tc			*tc;
 	t_cm			*cm;
@@ -62,7 +62,7 @@ void				ft_term_manager(void)
 	cpy = (t_cpy*)ft_memalloc(sizeof(t_cpy));
 	mode = (t_mode*)ft_memalloc(sizeof(t_mode));
 	if (!tc || !cm || !cpy || !mode)
-		ft_errorterm(TMALLOC);
+		sh_errorterm(TMALLOC);
 	g_env.ry = NULL;
 	ft_bzero(tc, sizeof(t_tc));
 	ft_bzero(cm, sizeof(t_cm));
@@ -74,30 +74,30 @@ void				ft_term_manager(void)
 	g_env.cpy = cpy;
 	g_env.mode = mode;
 	g_env.mode->mode[0] = 1;
-	ft_configterm();
+	sh_configterm();
 }
 
-char				*ft_get_line(t_prompt prompt, char *argv)
+char				*line_get_readline(t_prompt prompt, char *argv)
 {
 	int			ret;
 
 	ret = 0;
 	if (g_env.isatty)
-		ft_switch_term(0);
+		sh_switch_term(0);
 	g_env.ctrld = 0;
 	g_env.tc->tc = 1;
-	if (!ft_check_termcaps(*g_env.tc))
+	if (!caps_check_termcaps(*g_env.tc))
 		g_env.tc->tc = 0;
 	while (!ret)
 	{
 		if (g_env.isatty)
-			ft_setprompt(prompt);
-		ret = ft_reader(argv);
+			line_setprompt(prompt);
+		ret = line_reader(argv);
 	}
 	if (g_env.isatty)
 	{
-		ft_switch_term(1);
-		return (ft_cutline(prompt));
+		sh_switch_term(1);
+		return (line_cut(prompt));
 	}
 	return (g_env.line);
 }

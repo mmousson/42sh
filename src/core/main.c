@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 12:05:58 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 14:46:57 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int					main(int argc, char **argv, char **arge_sys)
 	alias_init();
 	env = duplicate_environ(arge_sys);
 	ft_bzero(&g_env, sizeof(t_env));
-	ft_term_manager();
+	sh_term_manager();
 	while (ret)
 	{
-		line = ft_get_line(PBASIC, argv[1]);
+		line = line_get_readline(PBASIC, argv[1]);
 		ret = !ft_lex(&line, &g_env, &env);
 		if (ret && line)
 			ft_strdel(&line);
@@ -51,6 +51,6 @@ int					main(int argc, char **argv, char **arge_sys)
 			ret = 0;
 	}
 	ft_del_words_tables(&env);
-	ft_quiterm();
+	sh_quiterm();
 	return (0);
 }

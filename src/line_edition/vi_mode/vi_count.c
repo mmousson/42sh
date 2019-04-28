@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vi_edition.c                                       :+:      :+:    :+:   */
+/*   vi_count.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:17:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 13:18:25 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/28 09:05:41 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-int				ft_get_count(char *str)
+int				vi_get_count(char *str)
 {
 	int			tmp;
-
+	
+	if (g_env.mode->v_replace_one)
+		return (0);
 	tmp = ft_atoi(str);
 	if (tmp || (str[0] == '0' && g_env.mode->v_count && !g_env.mode->v_del))
 	{
@@ -27,7 +29,7 @@ int				ft_get_count(char *str)
 	return (0);
 }
 
-void			ft_reset_count(char *str)
+void			vi_reset_count(char *str)
 {
 	int			tmp;
 	int			i;
@@ -39,27 +41,4 @@ void			ft_reset_count(char *str)
 	tmp = ft_atoi(str);
 	if (!tmp && str[0] != '0' && g_env.mode->v_count)
 		g_env.mode->v_count = 0;
-}
-
-int				ft_get_prior_flag(char *str)
-{
-	int			i;
-
-	i = -1;
-	while (++i < 4)
-		if (g_env.mode->v_prior[i])
-			break ;
-	if (i == 4)
-		return (0);
-	ft_jump_occur(str[0], i, g_env.mode->v_count);
-	i = -1;
-	g_env.mode->v_lasta = str[0];
-	while (++i < 4)
-		g_env.mode->v_prior[i] = 0;
-	if (g_env.mode->v_del)
-		ft_cdel();
-	if (g_env.mode->v_yank)
-		ft_vi_cpy();
-	ft_reset_count(str);
-	return (1);
 }

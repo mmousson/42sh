@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   jump_occur.c                                       :+:      :+:    :+:   */
+/*   vi_jumpoccur.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 10:59:13 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 13:17:50 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/28 09:35:32 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static void			ft_fjump(char c, int len)
+static void			vi_fjump(char c, int len)
 {
 	int				i;
 
@@ -21,10 +21,10 @@ static void			ft_fjump(char c, int len)
 		return ;
 	while (g_env.line[i] && g_env.line[i] != c)
 		i++;
-	ft_cursor_motion(MRIGHT, i - g_env.cm->pos);
+	line_cursor_motion(MRIGHT, i - g_env.cm->pos);
 }
 
-static void			ft_bigfjump(char c)
+static void			vi_bigfjump(char c)
 {
 	int				i;
 
@@ -32,24 +32,24 @@ static void			ft_bigfjump(char c)
 	while (i && g_env.line[i] != c)
 		i--;
 	if (i || g_env.line[0] == c)
-		ft_cursor_motion(MLEFT, g_env.cm->pos - i);
+		line_cursor_motion(MLEFT, g_env.cm->pos - i);
 }
 
-static void			ft_tjump(char c, int len)
+static void			vi_tjump(char c, int len)
 {
-	ft_cursor_motion(MRIGHT, 1);
-	ft_fjump(c, len);
-	ft_cursor_motion(MLEFT, 1);
+	line_cursor_motion(MRIGHT, 1);
+	vi_fjump(c, len);
+	line_cursor_motion(MLEFT, 1);
 }
 
-static void			ft_bigtjump(char c)
+static void			vi_bigtjump(char c)
 {
-	ft_cursor_motion(MLEFT, 1);
-	ft_bigfjump(c);
-	ft_cursor_motion(MRIGHT, 1);
+	line_cursor_motion(MLEFT, 1);
+	vi_bigfjump(c);
+	line_cursor_motion(MRIGHT, 1);
 }
 
-void				ft_jump_occur(char c, int i, int count)
+void				vi_jump_occur(char c, int i, int count)
 {
 	int				len;
 
@@ -57,12 +57,12 @@ void				ft_jump_occur(char c, int i, int count)
 	while (--count + 1)
 	{
 		if (!i)
-			ft_fjump(c, len);
+			vi_fjump(c, len);
 		else if (i == 1)
-			ft_bigfjump(c);
+			vi_bigfjump(c);
 		else if (i == 2)
-			ft_tjump(c, len);
+			vi_tjump(c, len);
 		else if (i == 3)
-			ft_bigtjump(c);
+			vi_bigtjump(c);
 	}
 }

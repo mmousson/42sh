@@ -6,13 +6,13 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 11:18:36 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 10:39:31 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/27 17:55:55 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-void		ft_repeat(void)
+void		vi_repeat(void)
 {
 	if (g_env.mode->v_lastc == 'f')
 		g_env.mode->v_prior[0] = 1;
@@ -22,10 +22,10 @@ void		ft_repeat(void)
 		g_env.mode->v_prior[2] = 1;
 	else if (g_env.mode->v_lastc == 'T')
 		g_env.mode->v_prior[3] = 1;
-	ft_get_prior_flag(&(g_env.mode->v_lasta));
+	vi_get_prior_flag(&(g_env.mode->v_lasta), 1);
 }
 
-void		ft_rev_repeat(void)
+void		vi_rev_repeat(void)
 {
 	if (g_env.mode->v_lastc == 'f')
 		g_env.mode->v_prior[1] = 1;
@@ -35,5 +35,5 @@ void		ft_rev_repeat(void)
 		g_env.mode->v_prior[3] = 1;
 	else if (g_env.mode->v_lastc == 'T')
 		g_env.mode->v_prior[2] = 1;
-	ft_get_prior_flag(&(g_env.mode->v_lasta));
+	vi_get_prior_flag(&(g_env.mode->v_lasta), 1);
 }

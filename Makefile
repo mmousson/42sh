@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/25 11:24:09 by roliveir         ###   ########.fr        #
+#    Updated: 2019/04/28 08:09:44 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBS = -lft
 LIBSFOLDERS = -L./$(LIBFT)
 vpath %.c $(dir MAKEFILE_LIST)
 CFLAGS = -g3 -Wall -Wextra -Werror -I./includes -I./includes/builtins -I./libft/includes
-CPPFLAGS += -MMD -MP
+CPPFLAGS += -MMD -MP 
 OBJDIR = .o
 
 NAME = 42sh

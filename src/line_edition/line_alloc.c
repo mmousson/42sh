@@ -6,14 +6,14 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 22:52:39 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 10:18:55 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/28 11:59:01 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 #include <stdlib.h>
 
-char				*ft_get_prompt(t_prompt prompt)
+char				*line_get_prompt(t_prompt prompt)
 {
 	if (prompt == PBASIC)
 		return (ft_strdup("$> "));
@@ -32,27 +32,29 @@ char				*ft_get_prompt(t_prompt prompt)
 	return (NULL);
 }
 
-char				*ft_addstr(char *str)
+char				*line_addstr(char *str)
 {
 	char			*fresh;
 	int				len;
+	int				lenstr;
 
-	len = (int)ft_strlen(g_env.line) + (int)ft_strlen(str);
+	lenstr = (int)ft_strlen(str);
+	len = (int)ft_strlen(g_env.line) + lenstr;	
+	if (g_env.mode->v_replace && g_env.cm->pos < len - lenstr)
+		return (vi_replace_str(str, len));
 	if (len > BUFF_SIZE - 10)
 		return (g_env.line);
-	if (g_env.mode->v_replace)
-		return (ft_replace_str(str, len));
 	if (!(fresh = ft_strnew(len)))
-		ft_errorterm(TMALLOC);
+		sh_errorterm(TMALLOC);
 	ft_strncpy(fresh, g_env.line, g_env.cm->pos);
 	ft_strcpy(&(fresh[g_env.cm->pos]), str);
-	ft_strcpy(&(fresh[g_env.cm->pos + (int)ft_strlen(str)]),
+	ft_strcpy(&(fresh[g_env.cm->pos + lenstr]),
 			&(g_env.line[g_env.cm->pos]));
 	ft_strdel(&(g_env.line));
 	return (fresh);
 }
 
-char				*ft_delchar(int size)
+char				*line_delchar(int size)
 {
 	char			*fresh;
 
@@ -63,32 +65,32 @@ char				*ft_delchar(int size)
 	if (g_env.mode->saved)
 		ft_strncpy(g_env.mode->s_buffer, &(g_env.line[g_env.cm->pos]), size);
 	if (!(fresh = ft_strnew(g_env.len - size)))
-		ft_errorterm(TMALLOC);
+		sh_errorterm(TMALLOC);
 	ft_strncpy(fresh, g_env.line, g_env.cm->pos - size);
 	ft_strcpy(&(fresh[g_env.cm->pos - size]), &(g_env.line[g_env.cm->pos]));
 	ft_strdel(&(g_env.line));
 	return (fresh);
 }
 
-char				*ft_delchar_bs(int size)
+char				*line_delchar_bs(int size)
 {
 	char			*fresh;
 
-	if (g_env.cm->pos == g_env.len)
+	if (g_env.cm->pos == g_env.len - 1)
 		return (g_env.line);
 	if (size > g_env.len - g_env.cm->pos)
 		size = g_env.len - g_env.cm->pos;
 	if (g_env.mode->saved)
 		ft_strncpy(g_env.mode->s_buffer, &(g_env.line[g_env.cm->pos]), size);
 	if (!(fresh = ft_strnew(g_env.len - size)))
-		ft_errorterm(TMALLOC);
+		sh_errorterm(TMALLOC);
 	ft_strncpy(fresh, g_env.line, g_env.cm->pos);
 	ft_strcpy(&(fresh[g_env.cm->pos]), &(g_env.line[g_env.cm->pos + size]));
 	ft_strdel(&(g_env.line));
 	return (fresh);
 }
 
-char				*ft_alloc_history(int stline)
+char				*line_alloc_history(int stline)
 {
 	char			*prompt;
 
@@ -97,8 +99,8 @@ char				*ft_alloc_history(int stline)
 		ft_strdel(&(g_env.line));
 		return (ft_strdup(g_env.oldline));
 	}
-	if (!(prompt = ft_get_prompt(g_env.prompt)))
-		ft_errorterm(TMALLOC);
+	if (!(prompt = line_get_prompt(g_env.prompt)))
+		sh_errorterm(TMALLOC);
 	ft_strdel(&(g_env.line));
 	return (ft_strjoinf(prompt, g_env.ry->line));
 }

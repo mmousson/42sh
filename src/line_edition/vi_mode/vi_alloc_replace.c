@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isctrl_motion.c                                    :+:      :+:    :+:   */
+/*   vi_alloc_replace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/26 10:50:01 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 13:06:39 by roliveir         ###   ########.fr       */
+/*   Created: 2019/04/27 16:58:13 by roliveir          #+#    #+#             */
+/*   Updated: 2019/04/27 20:01:53 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-int					ft_rd_left(char *str, int ret)
+char			*vi_replace_str(char *str, int len)
 {
-	if (!ft_strcmp(g_env.tc->key[MLEFT], str)
-			|| (g_env.mode->mode[MNORMAL] && str[0] == CTRLB && ret == 1))
-		return (1);
-	return (0);
-}
+	char		*fresh;
+	int			lenstr;
 
-int					ft_rd_right(char *str, int ret)
-{
-	if (!ft_strcmp(g_env.tc->key[MRIGHT], str)
-			|| (g_env.mode->mode[MNORMAL] && str[0] == CTRLF && ret == 1))
-		return (1);
-	return (0);
+	lenstr = (int)ft_strlen(str);
+	if (!(fresh = ft_strnew(len)))
+		sh_errorterm(TMALLOC);
+	ft_strncpy(fresh, g_env.line, g_env.cm->pos);
+	ft_strcpy(&(fresh[g_env.cm->pos]), str);
+	ft_strcpy(&(fresh[g_env.cm->pos + lenstr]),
+			&(g_env.line[g_env.cm->pos + lenstr]));
+	ft_strdel(&(g_env.line));
+	return (fresh);
 }

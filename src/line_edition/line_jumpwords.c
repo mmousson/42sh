@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   jump_words.c                                       :+:      :+:    :+:   */
+/*   line_jumpwords.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:54:03 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/25 09:04:51 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/28 12:59:32 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-void				ft_home(int blank)
+void				line_home(int blank)
 {
 	int				i;
 
-	ft_cursor_motion(MLEFT, g_env.cm->pos - g_env.p_size);
+	line_cursor_motion(MLEFT, g_env.cm->pos - g_env.p_size);
 	i = g_env.cm->pos;
 	if (!blank)
 	{
 		while (g_env.line[i] && g_env.line[i] == ' ')
 			i++;
-		ft_cursor_motion(MRIGHT, i - g_env.cm->pos);
+		line_cursor_motion(MRIGHT, i - g_env.cm->pos);
 	}
 }
 
-void				ft_end(void)
+int					line_end(void)
 {
-	ft_cursor_motion(MRIGHT, g_env.len - g_env.cm->pos);
+	line_cursor_motion(MRIGHT, g_env.len - g_env.cm->pos);
+	return (0);
 }
 
-void				ft_ljump(void)
+void				line_ljump(void)
 {
 	int				i;
 
@@ -41,10 +42,10 @@ void				ft_ljump(void)
 	while (i && g_env.line[i] != ' ' && g_env.line[i] != '\n')
 		i--;
 	if (g_env.line[i + 1])
-		ft_cursor_motion(MLEFT, g_env.cm->pos - i - 1);
+		line_cursor_motion(MLEFT, g_env.cm->pos - i - 1);
 }
 
-void				ft_rjump(void)
+void				line_rjump(void)
 {
 	int				i;
 
@@ -53,5 +54,5 @@ void				ft_rjump(void)
 		i++;
 	while (g_env.line[i] && (g_env.line[i] == ' ' || g_env.line[i] == '\n'))
 		i++;
-	ft_cursor_motion(MRIGHT, i - g_env.cm->pos);
+	line_cursor_motion(MRIGHT, i - g_env.cm->pos);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setmode.c                                          :+:      :+:    :+:   */
+/*   vi_setmode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:34:56 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 11:36:57 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/27 20:22:12 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static int			ft_new_mode(t_emode mode)
+static int			vi_new_mode(t_emode mode)
 {
 	int				i;
 
@@ -31,16 +31,16 @@ static int			ft_new_mode(t_emode mode)
 	return (1);
 }
 
-int					ft_tmp(char *str)
+int					line_vi_tmp(char *str)
 {
 	if (str[0] == -62 && str[1] == -70)
-		return (ft_new_mode(MNORMAL));
+		return (vi_new_mode(MNORMAL));
 	else if (str[0] == -30 && str[1] == -128 && str[2] == -109)
-		return (ft_new_mode(MVI));
+		return (vi_new_mode(MVI));
 	return (0);
 }
 
-int					ft_reset_mode(int ins, int com, int replace)
+int					vi_reset_mode(int ins, int com, int replace)
 {
 	int				i;
 
@@ -48,13 +48,16 @@ int					ft_reset_mode(int ins, int com, int replace)
 	if (!g_env.mode->mode[MVI])
 		return (0);
 	g_env.mode->v_replace = replace;
+	g_env.mode->v_replace_one = replace == 2 ? 1 : 0;
 	g_env.mode->v_del = 0;
 	g_env.mode->v_insert = ins;
 	g_env.mode->v_command = com;
-	g_env.mode->v_count = 0;
 	g_env.mode->v_visual = 0;
 	g_env.mode->v_yank = 0;
 	while (++i < 4)
 		g_env.mode->v_prior[i] = 0;
+	if (g_env.mode->v_replace_one)
+		return (0);
+	g_env.mode->v_count = 0;
 	return (0);
 }

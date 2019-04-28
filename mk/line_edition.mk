@@ -6,19 +6,19 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/26 13:39:55 by roliveir         ###   ########.fr        #
+#    Updated: 2019/04/28 13:02:22 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LINE_EDIT_PATH = ./src/line_edition/
 VIMODE_PATH = $(LINE_EDIT_PATH)vi_mode/
 
-VIMODE =	alloc_vi.c			\
-			getvi_keys.c		\
-			setmode.c			\
+VIMODE =	vi_alloc.c			\
+			vi_getkeys.c		\
+			vi_setmode.c		\
 			vi_command.c		\
-			vi_edition.c		\
-			jump_occur.c		\
+			vi_count.c			\
+			vi_jumpoccur.c		\
 			vi_cdel.c			\
 			vi_com_motion.c		\
 			vi_delete.c			\
@@ -29,25 +29,31 @@ VIMODE =	alloc_vi.c			\
 			vi_undo.c			\
 			vi_visual.c			\
 			vi_yank.c			\
-			jump_vi_manager.c
+			vi_jump_manager.c	\
+			vi_prior_flag.c		\
+			vi_alloc_replace.c
 
-LINE_EDIT =	cpy.c				\
-			cursor_motion.c		\
-			del_env.c			\
-			get_keys.c			\
-			history.c			\
-			isalt.c				\
-			jump_words.c		\
+LINE_EDIT =	line_cpy.c			\
+			line_curmotion.c	\
+			line_delenv.c		\
+			line_getkeys.c		\
+			line_history.c		\
+			line_del.c			\
+			line_isalt.c		\
+			line_jumpwords.c	\
 			line_alloc.c		\
 			line_edition.c		\
 			line_read_notty.c	\
 			line_read.c			\
-			print_line.c		\
-			reset_cursor.c		\
-			term_manager.c		\
-			coordinates_calc.c	\
-			termcaps.c			\
-			isctrl_motion.c
+			line_print.c		\
+			line_resetcurs.c	\
+			line_term.c			\
+			line_calc.c			\
+			line_termcaps.c		\
+			line_iskeymotion.c	\
+			line_iskeydel.c		\
+			line_quit.c			\
+			line_cxjump.c
 
 LINE_EDIT_SRCS = $(addprefix $(LINE_EDIT_PATH),$(LINE_EDIT))
 VIMODE_SRCS = $(addprefix $(VIMODE_PATH),$(VIMODE))

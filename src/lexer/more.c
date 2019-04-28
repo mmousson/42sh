@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 17:56:57 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/25 10:50:37 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/27 14:43:39 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			ft_more(t_stat *stat, char **str)
 	fus = NULL;
 	while (!fus)
 	{
-		fus = ft_get_line(prompt, NULL);
+		fus = line_get_readline(prompt, NULL);
 		if (!(tmp = ft_strjoin(*str, fus)))
 			return ;
 		free(*str);
