@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_job_status.c                                :+:      :+:    :+:   */
+/*   job_update_job_status.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:34:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 05:38:10 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 21:51:43 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 **	without blocking
 */
 
-void	update_status (t_job *first_job)
+void	job_update_status(t_job *first_job)
 {
 	int			status;
 	pid_t		pid;
@@ -36,7 +36,7 @@ void	update_status (t_job *first_job)
 			continue ;
 		}
 		pid = waitpid (WAIT_ANY, &status, WUNTRACED | WNOHANG);
-		if (mark_process_status (first_job, pid, status))
+		if (job_mark_process_status (first_job, pid, status))
 			break ;
 	}
 }
@@ -55,7 +55,7 @@ void	update_status (t_job *first_job)
 **		the Job in foreground
 */
 
-void	unstop_job(t_job *job, int foreground)
+void	job_unstop(t_job *job, int foreground)
 {
 	t_process	*proc;
 
@@ -67,7 +67,7 @@ void	unstop_job(t_job *job, int foreground)
 	}
 	job->notified = false;
 	if (foreground)
-		send_job_to_foreground(job, CONTINUE_JOB);
+		job_send_to_foreground(job, CONTINUE_JOB);
 	else
-		send_job_to_background(job, CONTINUE_JOB);
+		job_send_to_background(job, CONTINUE_JOB);
 }

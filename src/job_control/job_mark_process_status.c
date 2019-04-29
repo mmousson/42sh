@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mark_process_status.c                              :+:      :+:    :+:   */
+/*   job_mark_process_status.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 09:13:19 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 16:24:52 by mmousson         ###   ########.fr       */
+/*   Created: 2019/04/29 21:45:33 by mmousson          #+#    #+#             */
+/*   Updated: 2019/04/29 21:49:37 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 **	Return Value: NONE
 */
 
-static void					print_sig_def(int signo)
+static void				print_sig_def(int signo)
 {
 	t_sig_matcher	*ptr;
 
@@ -58,7 +58,7 @@ static void					print_sig_def(int signo)
 **	Return Value: NONE
 */
 
-void						format_process_info(t_process *proc, char *cmd,
+void					format_process_info(t_process *proc, char *cmd,
 	int status)
 {
 	ft_putstr_fd("\n42sh: Process ", STDERR_FILENO);
@@ -72,7 +72,7 @@ void						format_process_info(t_process *proc, char *cmd,
 }
 
 /*
-**	Function completing the work accomplished by the 'mark_process_status'
+**	Function completing the work accomplished by the 'job_mark_process_status'
 **	function below
 **	Stop the loop once a process with a pid matching the 'pid' argument has
 **	been found, and update the 't_process' Data-Structure accordingly
@@ -95,7 +95,7 @@ void						format_process_info(t_process *proc, char *cmd,
 **	1 -> No match has been found in the currently searched job
 */
 
-static int					loop_jobs(t_job *job, pid_t pid, int status)
+static int				loop_jobs(t_job *job, pid_t pid, int status)
 {
 	t_process	*proc;
 
@@ -108,7 +108,7 @@ static int					loop_jobs(t_job *job, pid_t pid, int status)
 			if (WIFSTOPPED(status))
 			{
 				proc->stopped = true;
-				inform_user_about_job_completion(job, STOP_MSG);
+				job_inform_user_about_completion(job, STOP_MSG);
 			}
 			else
 			{
@@ -148,7 +148,7 @@ static int					loop_jobs(t_job *job, pid_t pid, int status)
 **	WAITPID_ERROR (-1) -> 'waitpid' syscall failed, an error occured
 */
 
-int							mark_process_status(t_job *first_job, pid_t pid,
+int						job_mark_process_status(t_job *first_job, pid_t pid,
 	int status)
 {
 	t_job		*job;

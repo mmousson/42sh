@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 09:32:07 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:01:15 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 21:42:30 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ int				blt_fg(int argc, char **argv, char ***env)
 	pid_t	jobspec;
 
 	(void)env;
-	first_job_set_and_get(&current, GET);
+	job_first_job_set_and_get(&current, GET);
 	jobspec = get_jobspec(argc == 1 ? NULL : argv[1]);
 	while (current)
 	{
 		if (jobspec == -1 || current->pgid == jobspec)
 		{
-			unstop_job(current, FOREGROUND_LAUNCH);
+			job_unstop(current, FOREGROUND_LAUNCH);
 			return (FG_JOB_FOUND);
 		}
 		current = current->next;

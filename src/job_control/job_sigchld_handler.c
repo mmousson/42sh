@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sigchld_handler.c                                  :+:      :+:    :+:   */
+/*   job_sigchld_handler.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 02:05:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 07:49:57 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 21:51:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 **	Return Value: NONE
 */
 
-void		first_job_set_and_get(t_job **to_set_or_get, int set_or_get)
+void		job_first_job_set_and_get(t_job **to_set_or_get, int set_or_get)
 {
 	static t_job	*first_job = NULL;
 
@@ -82,11 +82,11 @@ void		first_job_set_and_get(t_job **to_set_or_get, int set_or_get)
 static void	handle_completed_job(t_job *current, t_job **job_last,
 	t_job **job_next)
 {
-	inform_user_about_job_completion(current, COMPLETED_MSG);
+	job_inform_user_about_completion(current, COMPLETED_MSG);
 	if (*job_last)
 		(*job_last)->next = *job_next;
 	else
-		first_job_set_and_get(job_next, SET);
+		job_first_job_set_and_get(job_next, SET);
 }
 
 /*
@@ -104,7 +104,7 @@ static void	handle_completed_job(t_job *current, t_job **job_last,
 
 static void	handle_stopped_job(t_job *current, t_job **job_last)
 {
-	inform_user_about_job_completion(current, STOP_MSG);
+	job_inform_user_about_completion(current, STOP_MSG);
 	*job_last = current;
 }
 
@@ -125,8 +125,8 @@ void		sigchld_handler(int signo)
 	t_job	*job_last;
 
 	(void)signo;
-	first_job_set_and_get(&current, GET);
-	update_status(current);
+	job_first_job_set_and_get(&current, GET);
+	job_update_status(current);
 	job_last = NULL;
 	while (current)
 	{

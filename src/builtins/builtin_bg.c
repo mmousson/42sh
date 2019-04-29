@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:02:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:00:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 21:42:22 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		check_job(t_job *job, pid_t jobspec)
 {
 	if (job->pgid == jobspec)
 	{
-		unstop_job(job, BACKGROUND_LAUNCH);
+		job_unstop(job, BACKGROUND_LAUNCH);
 		return (1);
 	}
 	else
@@ -116,12 +116,12 @@ int				blt_bg(int argc, char **argv, char ***env)
 	(void)env;
 	if (!isatty(0))
 		return (BG_NO_JOB_CONTROL);
-	first_job_set_and_get(&current, GET);
+	job_first_job_set_and_get(&current, GET);
 	if (argc == 1)
 	{
 		if (current != NULL)
 		{
-			unstop_job(current, BACKGROUND_LAUNCH);
+			job_unstop(current, BACKGROUND_LAUNCH);
 			return (BG_JOB_FOUND);
 		}
 		ft_putendl_fd("42sh: bg: current: There are no suitable jobs", 2);

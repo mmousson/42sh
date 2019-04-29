@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   background.c                                       :+:      :+:    :+:   */
+/*   job_background.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:36 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/09 23:13:14 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 21:58:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 **	Return Value: Always 0
 */
 
-int	send_job_to_background(t_job *job, int must_continue)
+int	job_send_to_background(t_job *job, int must_continue)
 {
 	if (must_continue == CONTINUE_JOB)
 	{

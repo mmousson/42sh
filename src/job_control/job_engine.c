@@ -79,7 +79,7 @@ static void				pipe_cleanup(t_job *job, t_process *process, int p[2])
 **	Return Value: NONE
 */
 
-int					wait_job_completion(t_job *job)
+int					job_wait_completion(t_job *job)
 {
 	int		ret;
 	pid_t pid;
@@ -88,7 +88,7 @@ int					wait_job_completion(t_job *job)
 	while (42)
 	{
 		pid = waitpid (WAIT_ANY, &ret, WUNTRACED);
-		if (!(!mark_process_status (job, pid, ret)
+		if (!(!job_mark_process_status (job, pid, ret)
 			&& !job_is_stopped (job)
 			&& !job_is_completed (job)))
 			break ;
@@ -123,9 +123,9 @@ int						job_launch(t_job *job, int fg)
 		current_process = current_process->next;
 	}
 	if (!isatty(STDIN_FILENO))
-		return (wait_job_completion(job));
+		return (job_wait_completion(job));
 	else if (fg)
-		return (send_job_to_foreground(job, START_JOB));
+		return (job_send_to_foreground(job, START_JOB));
 	else
-		return (send_job_to_background(job, START_JOB));
+		return (job_send_to_background(job, START_JOB));
 }

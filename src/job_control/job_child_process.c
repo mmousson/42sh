@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_process.c                                    :+:      :+:    :+:   */
+/*   job_child_process.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 08:56:24 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/08 08:56:24 by mmousson         ###   ########.fr       */
+/*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
+/*   Updated: 2019/04/29 21:44:15 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	setup_redirections(int input, int output, int error)
 **	Return Value: NONE
 */
 
-void		child_process(t_process *proc, int foreground, pid_t pgid)
+void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 {
 	pid_t			child_id;
 	t_bool			interactive;

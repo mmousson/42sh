@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.c                                          :+:      :+:    :+:   */
+/*   job_utility.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 12:48:22 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/04/29 21:50:39 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		job_is_completed (t_job *j)
 **	Return Value: NONE
 */
 
-void	inform_user_about_job_completion(t_job *j, char *msg)
+void	job_inform_user_about_completion(t_job *j, char *msg)
 {
 	if (j->notified)
 		return ;

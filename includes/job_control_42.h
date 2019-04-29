@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 21:14:43 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 21:49:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,19 +153,19 @@ typedef struct			s_job
 int						job_launch(t_job *job, int fg);
 void					job_command_search_and_exec(t_job *job,
 	t_process *proc, int fg, int*pipe);
-void					parent_process(t_job *job, t_process *proc, pid_t pid);
-void					child_process(t_process *proc, int foreground,
+void					job_parent_process(t_job *job, t_process *proc, pid_t pid);
+void					job_child_process(t_process *proc, int foreground,
 	pid_t pgid);
 int						job_builtins_pipe_setup(t_process *proc, int *pipe);
 void					job_builtins_pipe_cleanup(t_process *proc, int bkp_fd1);
-int						send_job_to_foreground(t_job *job, int must_continue);
-int						send_job_to_background(t_job *job, int must_continue);
-int						wait_job_completion(t_job *job);
-int						mark_process_status(t_job *first_job, pid_t pid,
+int						job_send_to_foreground(t_job *job, int must_continue);
+int						job_send_to_background(t_job *job, int must_continue);
+int						job_wait_completion(t_job *job);
+int						job_mark_process_status(t_job *first_job, pid_t pid,
 	int status);
-void					update_status (t_job *first_job);
-void					unstop_job(t_job *job, int foreground);
-void					sigchld_handler(int signo);
+void					job_update_status (t_job *first_job);
+void					job_unstop(t_job *job, int foreground);
+void					job_sigchld_handler(int signo);
 
 /*
 **	=================== Job-objects' utility functions ===================
@@ -175,11 +175,11 @@ void					sigchld_handler(int signo);
 **	job_is_completed -> job_control/utility.c
 */
 
-t_job					*find_job (pid_t pgid, t_job *first_job);
+t_job					*job_find (pid_t pgid, t_job *first_job);
 int						job_is_stopped(t_job *job);
 int						job_is_completed(t_job *job);
-void					inform_user_about_job_completion(t_job *j, char *msg);
-void					first_job_set_and_get(t_job **to_set_or_get,
+void					job_inform_user_about_completion(t_job *j, char *msg);
+void					job_first_job_set_and_get(t_job **to_set_or_get,
 	int set_or_get);
 
 #endif

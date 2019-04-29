@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:11:20 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 21:44:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static void	launch_proc(t_job *job, t_process *proc, int fg)
 	pid_t	pid;
 
 	if ((pid = fork()) == 0)
-		child_process(proc, fg, job->pgid);
+		job_child_process(proc, fg, job->pgid);
 	else if (pid > 0)
-		parent_process(job, proc, pid);
+		job_parent_process(job, proc, pid);
 	else
 		write(STDERR_FILENO, "Fork Failed\n", 12);
 }

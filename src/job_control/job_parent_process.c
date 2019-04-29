@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parent_process.c                                   :+:      :+:    :+:   */
+/*   job_parent_process.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 08:56:30 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/09 23:22:42 by mmousson         ###   ########.fr       */
+/*   Created: 2019/04/29 21:52:44 by mmousson          #+#    #+#             */
+/*   Updated: 2019/04/29 21:52:45 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "job_control_42.h"
 
-void	parent_process(t_job *job, t_process *proc, pid_t pid)
+void	job_parent_process(t_job *job, t_process *proc, pid_t pid)
 {
 	proc->pid = pid;
 	if (isatty(STDIN_FILENO))

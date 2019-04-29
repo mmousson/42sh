@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   foreground.c                                       :+:      :+:    :+:   */
+/*   job_foreground.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 07:50:10 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 21:57:51 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 **	Return Value: The return value of the last process in the job's pipeline loop
 */
 
-int	send_job_to_foreground(t_job *job, int must_continue)
+int	job_send_to_foreground(t_job *job, int must_continue)
 {
 	int	ret;
 
@@ -52,7 +52,7 @@ int	send_job_to_foreground(t_job *job, int must_continue)
 		ft_putstr_fd(job->command, STDERR_FILENO);
 		ft_putendl_fd("' to foreground", STDERR_FILENO);
 	}
-	ret = wait_job_completion(job);
+	ret = job_wait_completion(job);
 	tcsetpgrp(STDIN_FILENO, shell_proc_group_id);
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 	return (ret);
