@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 14:45:00 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 22:14:19 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int					blt_unalias(int argc, char **argv, char ***env);
 **	search_utility -> utility/search_utility.c
 **	duplicate_environ -> utility/duplicate_environ.c
 **	get_user_home -> utility/get_user_home.c
+**	add_entry_to_environ -> utility/utility_environ_utilities.c
 **	write_alias_list_to_file -> utility/write_alias_list_to_file.c
 **	add_internal_var -> utility/add_internal_var.c
 **	internal_variable_exists -> utility/internal_variable_exists.c
