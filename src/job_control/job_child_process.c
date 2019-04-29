@@ -13,6 +13,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include "sh42.h"
 #include "libft.h"
 #include "job_control_42.h"
 
@@ -50,19 +51,16 @@ static void	setup_redirections(int input, int output, int error)
 {
 	if (input != STDIN_FILENO)
 	{
-		ft_putendl_fd("input", 2);
 		dup2 (input, STDIN_FILENO);
 		close (input);
 	}
 	if (output != STDOUT_FILENO)
 	{
-		ft_putendl_fd("output", 2);
 		dup2 (output, STDOUT_FILENO);
 		close (output);
 	}
 	if (error != STDERR_FILENO)
 	{
-		ft_putendl_fd("error", 2);
 		dup2 (error, STDERR_FILENO);
 		close (error);
 	}
@@ -97,6 +95,7 @@ static void	setup_redirections(int input, int output, int error)
 
 void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 {
+	int				blt_pos;
 	pid_t			child_id;
 	t_bool			interactive;
 	t_io_channels	io_chan;
@@ -114,10 +113,18 @@ void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 		reset_signals_actions();
 	}
 	setup_redirections(io_chan.input, io_chan.output, io_chan.error);
-	execve(proc->argv[0], proc->argv, *(proc->environ));
-	ft_putstr_fd("Failed to execute process: ", STDERR_FILENO);
-	ft_putendl_fd(proc->argv[0], STDERR_FILENO);
-	ft_putendl_fd("Reason: The file is marked as executable but could not "
-		"be run by the operating system", STDERR_FILENO);
-	exit(126);
+	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
+	{
+		execve(proc->argv[0], proc->argv, *(proc->environ));
+		ft_putstr_fd("Failed to execute process: ", STDERR_FILENO);
+		ft_putendl_fd(proc->argv[0], STDERR_FILENO);
+		ft_putendl_fd("Reason: The file is marked as executable but could not "
+			"be run by the operating system", STDERR_FILENO);
+		exit(126);
+	}
+	else
+		exit(g_builtins[blt_pos].handler(
+				job_argc(proc->argv),
+				proc->argv,
+				proc->environ));
 }

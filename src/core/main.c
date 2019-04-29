@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 14:50:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 22:46:00 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	t_process	third_process;
 	t_process	fourth_process;
 	char		*job1_command = "ls -l -a -F | cat -e";
-	char		*job1_first_proc_argv[] = {"echo", "blue", "vert", "f", NULL};
+	char		*job1_first_proc_argv[] = {"cat", NULL, "blue", "vert", "f", NULL};
 	char		*job1_second_proc_argv[] = {"cat", "-e", NULL};
 	char		*job2_command = "echo bleu vert rouge | cat -e";
 	char		*job2_first_proc_argv[] = {"ls", "bleu", "vert", "rouge", NULL};

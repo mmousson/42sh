@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 21:50:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 22:46:57 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 #include <sys/types.h>
 #include "libft.h"
 #include "job_control_42.h"
+
+/*
+**	Function computing the number of strings contained in an array (char **)
+**	Hence the name 'argc' => Arg count
+**
+**	Arguments:
+**	argv -> The array of strings to count the number of elements from
+**
+**	Return Value: The computed argc count
+*/
+
+int			job_argc(char **argv)
+{
+	int	res;
+
+	res = 0;
+	while (argv[res] != NULL)
+		res++;
+	return (res);
+}
 
 /* Find the active job with the indicated pgid.  */
 /*

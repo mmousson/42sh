@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 11:51:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:09:27 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 22:26:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ t_builtins	g_builtins[] = {
 **	name -> The builtin name to search a match for
 **
 **	Return Value:
-**	0 -> The builtin doesn't exist
-**	1 -> The builtin exists
+**	-1 -> The builtin doesn't exist
+**	>= 0 -> The builtin exists and its position in the builtin table
+**	is returned
 */
 
 int	utility_is_builtin(char *name)

@@ -59,9 +59,7 @@ static void				pipe_setup(t_job *job, t_process *process, int p[2])
 static void				pipe_cleanup(t_job *job, t_process *process, int p[2])
 {
 	if (process->io_channels.input != job->io_channels.input)
-	{
 		close(process->io_channels.input);
-	}
 	if (process->io_channels.output != job->io_channels.output)
 		close(process->io_channels.output);
 	if (process->next)
@@ -118,7 +116,7 @@ int						job_launch(t_job *job, int fg)
 	while (current_process)
 	{
 		pipe_setup(job, current_process, p);
-		job_command_search_and_exec(job, current_process, fg, p);
+		job_command_search_and_exec(job, current_process, fg);
 		pipe_cleanup(job, current_process, p);
 		current_process = current_process->next;
 	}

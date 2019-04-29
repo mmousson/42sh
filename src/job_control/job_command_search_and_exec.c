@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 21:44:41 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 22:47:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,6 @@
 #include "sh42.h"
 #include "libft.h"
 #include "job_control_42.h"
-
-/*
-**	Function computing the number of strings contained in an array (char **)
-**	Hence the name 'argc' => Arg count
-**
-**	Arguments:
-**	argv -> The array of strings to count the number of elements from
-**
-**	Return Value: The computed argc count
-*/
-
-static int	argc(char **argv)
-{
-	int	res;
-
-	res = 0;
-	while (argv[res] != NULL)
-		res++;
-	return (res);
-}
 
 /*
 **	Function launching a process if it is not a built-in utlity
@@ -75,22 +55,25 @@ static void	search_using_path(t_job *job, t_process *proc, int fg)
 	int		hash;
 	char	*to_del;
 
-	to_del = proc->argv[0];
-	hash = hash_string(proc->argv[0]);
-	if (hash_already_exists(hash, proc->argv[0]))
+	if (utility_is_builtin(proc->argv[0]) == -1)
 	{
-		g_hash[hash].hits += 1;
-		proc->argv[0] = g_hash[hash].full_path;
+		to_del = proc->argv[0];
+		hash = hash_string(proc->argv[0]);
+		if (hash_already_exists(hash, proc->argv[0]))
+		{
+			g_hash[hash].hits += 1;
+			proc->argv[0] = g_hash[hash].full_path;
+		}
+		else if ((proc->argv[0] = utility_search(proc->argv[0])) == NULL)
+		{
+			proc->argv[0] = to_del;
+			proc->status = 127;
+			ft_putstr_fd("42sh: Unknown command ", STDERR_FILENO);
+			ft_putendl_fd(to_del, STDERR_FILENO);
+			return ;
+		}
+		ft_strdel(&to_del);
 	}
-	else if ((proc->argv[0] = utility_search(proc->argv[0])) == NULL)
-	{
-		proc->argv[0] = to_del;
-		proc->status = 127;
-		ft_putstr_fd("42sh: Unknown command ", STDERR_FILENO);
-		ft_putendl_fd(to_del, STDERR_FILENO);
-		return ;
-	}
-	ft_strdel(&to_del);
 	launch_proc(job, proc, fg);
 }
 
@@ -99,7 +82,7 @@ static void	search_using_path(t_job *job, t_process *proc, int fg)
 **	If the command name contains at least one slash, then launch the process
 **	with the same name with execve after forking
 **
-**	If it does not containm any slashes, then:
+**	If it does not contain any slashes, then:
 **		If the command name is a Builtin Utility, then invoke that Utility
 **
 **		Otherwise, the command shall be searched for using the PATH env var
@@ -118,22 +101,20 @@ static void	search_using_path(t_job *job, t_process *proc, int fg)
 **	Return Value: NONE
 */
 
-void		job_command_search_and_exec(t_job *job, t_process *proc, int fg,
-	int *pipe)
+void		job_command_search_and_exec(t_job *job, t_process *proc, int fg)
 {
-	int	p;
-	int	bkp_fd1;
+	int	blt_pos;
 
 	if (ft_strchr(proc->argv[0], '/') != NULL)
 		launch_proc(job, proc, fg);
 	else
 	{
-		if ((p = utility_is_builtin(proc->argv[0])) != -1)
-		{
-			bkp_fd1 = job_builtins_pipe_setup(proc, pipe);
-			g_builtins[p].handler(argc(proc->argv), proc->argv, proc->environ);
-			job_builtins_pipe_cleanup(proc, bkp_fd1);
-		}
+		if (job->first_process->next == NULL
+			&& (blt_pos = utility_is_builtin(proc->argv[0])) != -1)
+			g_builtins[blt_pos].handler(
+				job_argc(proc->argv),
+				proc->argv,
+				proc->environ);
 		else
 			search_using_path(job, proc, fg);
 	}
