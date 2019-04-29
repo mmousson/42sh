@@ -6,7 +6,7 @@
 /*   By: tduval </var/mail/tduval>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 08:37:24 by tduval            #+#    #+#             */
-/*   Updated: 2019/04/23 16:26:14 by tduval           ###   ########.fr       */
+/*   Updated: 2019/04/29 21:46:41 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char	*get_cur(char ***environ, char *dir)
 	return (ft_strjoin("./", dir));
 }
 
-int			cd(int argc, char **argv, char ***env):wq
+int			cd(int argc, char **argv, char ***env)
 
 {
 	char	opts;
