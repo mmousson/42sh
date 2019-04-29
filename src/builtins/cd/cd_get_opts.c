@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 21:52:00 by tduval            #+#    #+#             */
-/*   Updated: 2019/04/29 23:01:35 by tduval           ###   ########.fr       */
+/*   Updated: 2019/04/29 23:58:23 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	cd_get_opts(char **argv, char **dir)
 		}
 		i++;
 	}
+	if (ft_strequ(argv[i], "--"))
+		i++;
 	if (argv[i] != NULL && argv[i + 1] != NULL)
 		return (-1);
 	*dir = ft_strdup(argv[i]);
