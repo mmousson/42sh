@@ -6,7 +6,7 @@
 /*   By: tduval </var/mail/tduval>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 08:37:24 by tduval            #+#    #+#             */
-/*   Updated: 2019/04/30 02:23:23 by tduval           ###   ########.fr       */
+/*   Updated: 2019/04/30 02:48:35 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static char	*get_cur(char ***environ, char *dir, int *f)
 			if (access(res, F_OK) == 0)
 			{
 				free_list(list);
+				ft_putendl(res);
 				return (res);
 			}
 			ft_strdel(&res);
@@ -114,6 +115,8 @@ int			cd(int argc, char **argv, char ***env)
 	if (ft_strequ(dir[0], "-"))
 	{
 		dir[1] = ft_strdup(utility_get_env_var(env, "OLDPWD"));
+		if (access(dir[1], F_OK) == 0)
+			ft_putendl(dir[1]);
 		return (changing_directory(dir, env, opts, f));
 	}
 	if (dir[0] == NULL)
