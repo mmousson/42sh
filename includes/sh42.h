@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 14:45:00 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/30 02:03:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,40 @@ typedef struct		s_vars
 }					t_vars;
 
 /*
+**
+*/
+
+# define SET 0
+# define GET 1
+typedef struct		s_special_vars
+{
+	int				id;
+	char			*value;
+}					t_special_vars;
+
+/*
+**
+*/
+
+typedef enum		e_special_var_id
+{
+	SPEC_0 = 0,
+	SPEC_1 = 1,
+	SPEC_2 = 2,
+	SPEC_3 = 3,
+	SPEC_4 = 4,
+	SPEC_5 = 5,
+	SPEC_6 = 6,
+	SPEC_7 = 7,
+	SPEC_8 = 8,
+	SPEC_9 = 9,
+	SPEC_QUESTION = 10,
+	SPEC_DOLLAR = 11,
+	SPEC_UNDERSCORE = 14,
+	SPEC_EXCLAMATION = 15
+}					t_special_var_id;
+
+/*
 **	g_builtins[] -> defined in utility/builtins_utility.c
 */
 
@@ -108,6 +142,9 @@ int					hash_already_exists(int index, char *name);
 void				hash_add_entry(int string_hash, char *utility_name,
 	char *full_path);
 void				free_alias_list(void);
+char				*core_spec_var_setget(int id, char *new_value,
+	int set_or_get);
+int					core_hash_spec_var(char var);
 
 /*
 **	==================== BUILTIN functions ====================

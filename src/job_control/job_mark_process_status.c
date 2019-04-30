@@ -6,10 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:45:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 21:49:37 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/30 02:17:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "sh42.h"
 #include "libft.h"
 #include "job_control_42.h"
 
@@ -61,6 +62,13 @@ static void				print_sig_def(int signo)
 void					format_process_info(t_process *proc, char *cmd,
 	int status)
 {
+	char	*tmp;
+
+	tmp = ft_itoa(WIFSIGNALED(status) ? 128 + WTERMSIG(status) : status % 255);
+	core_spec_var_setget(SPEC_QUESTION, tmp, SET);
+	ft_strdel(&tmp);
+	if (!WIFSIGNALED(status))
+		return ;
 	ft_putstr_fd("\n42sh: Process ", STDERR_FILENO);
 	ft_putnbr_fd(proc->pid, STDERR_FILENO);
 	ft_putstr_fd(", '", STDERR_FILENO);
@@ -80,14 +88,11 @@ void					format_process_info(t_process *proc, char *cmd,
 **	log message (print_sig_def)
 **
 **	Arguments:
-**	proc -> A pointer to the first 't_process' Data-Structure of the currently
-**		searched Job. Matching process's data will be updated
+**	job -> A pointer to the currently checked Job of the current Job List
 **	pid -> The pid of the child process that has either stopped or terminated
 **	status -> The return value caught by the 'waitpid' syscall, which will be
 **		used to search an appropriate log message in the lookup table defined
 **		in the job_control/sig_table.c file
-**	command -> The copy of the currently searched job's command line stored
-**		in its Data-Structure, used for log purposes
 **
 **	Return Value:
 **	0 -> A match has been found and the correpsonding process's data have been
@@ -113,8 +118,7 @@ static int				loop_jobs(t_job *job, pid_t pid, int status)
 			else
 			{
 				proc->completed = true;
-				if (WIFSIGNALED(status))
-					format_process_info(proc, job->command, status);
+				format_process_info(proc, job->command, status);
 			}
 			return (0);
 		}
@@ -134,7 +138,7 @@ static int				loop_jobs(t_job *job, pid_t pid, int status)
 **	The actual matching check is done in the function 'loop_jobs' defined above
 **
 **	Arguments:
-**	first_job -> A popinter to the First_job of the current Job List
+**	first_job -> A pointer to the First_job of the current Job List
 **	pid -> The pid of the child process that has either stopped or terminated
 **	status -> The return value caught by the 'waitpid' syscall, which will be
 **		used to search an appropriate log message in the lookup table defined
