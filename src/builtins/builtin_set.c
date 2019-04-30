@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 21:24:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:04:11 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/30 03:34:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ static int	set_lineedit_mode(char *mode)
 
 int			blt_set(int argc, char **argv, char ***env)
 {
+	int	i;
 	int	options;
 	int	parsed;
 
@@ -177,5 +178,11 @@ int			blt_set(int argc, char **argv, char ***env)
 	argv += parsed;
 	if (options & (1 << O_INDEX))
 		return (set_lineedit_mode(argc ? argv[0] : NULL));
+	else
+	{
+		i = 1;
+		while (++i < argc && i <= 9)
+			core_spec_var_setget(i, argv[i], SET);
+	}
 	return (0);
 }

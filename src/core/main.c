@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/30 02:22:16 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/30 03:34:10 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int					main(int argc, char **argv, char **arge_sys)
 		return (128);
 	init_alias();
 	env = utility_duplicate_environ(arge_sys);
+	core_spec_var_setget(SPEC_0, argv[0], SET);
 	core_spec_var_setget(SPEC_UNDERSCORE, argv[0], SET);
 	core_spec_var_setget(SPEC_DOLLAR, line, SET);
 	ft_term_manager();
