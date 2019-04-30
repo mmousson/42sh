@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 21:52:00 by tduval            #+#    #+#             */
-/*   Updated: 2019/04/29 23:58:23 by tduval           ###   ########.fr       */
+/*   Updated: 2019/04/30 02:16:57 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ char	cd_get_opts(char **argv, char **dir)
 		while (argv[i][j])
 		{
 			if (argv[i][j] == 'L')
-				res |= OPT_L;
+				res = OPT_L;
 			else if (argv[i][j] == 'P')
-				res |= OPT_P;
+				res = OPT_P;
 			else
 			{
 				if (argv[i + 1] != NULL)
@@ -47,7 +47,7 @@ char	cd_get_opts(char **argv, char **dir)
 		i++;
 	if (argv[i] != NULL && argv[i + 1] != NULL)
 		return (-1);
-	*dir = ft_strdup(argv[i]);
+	*dir = argv[i];
 	return (res);
 }
 
