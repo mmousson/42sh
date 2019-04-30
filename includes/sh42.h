@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/30 02:03:09 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/30 09:19:24 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,20 @@ typedef struct		s_vars
 }					t_vars;
 
 /*
-**
+**	Define flags to interact with the 'core_spec_var_setget' function defined
+**	in 'core/core_special_params.c'
+**	SET (0) -> Modify the variable
+**	GET (1) -> Return the variable's value without affecting it
 */
 
 # define SET 0
 # define GET 1
+
+/*
+**	Special Variables structure used to match an integer ID with an
+**	actual value
+*/
+
 typedef struct		s_special_vars
 {
 	int				id;
@@ -91,7 +100,8 @@ typedef struct		s_special_vars
 }					t_special_vars;
 
 /*
-**
+**	Enum type to give us an more readable way of interacting with the
+**	shell's Internal Variables
 */
 
 typedef enum		e_special_var_id

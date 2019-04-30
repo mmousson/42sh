@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 22:47:04 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/30 09:15:58 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,9 +169,11 @@ void					job_sigchld_handler(int signo);
 /*
 **	=================== Job-objects' utility functions ===================
 **
-**	find_job -> job_control/utility.c
-**	job_is_stopped -> job_control/utility.c
-**	job_is_completed -> job_control/utility.c
+**	job_find -> job_control/job_utility.c
+**	job_is_stopped -> job_control/job_utility.c
+**	job_is_completed -> job_control/job_utility.c
+**	job_inform_user_about_completion -> job_control/job_utility.c
+**	job_first_job_set_and_get -> job_control/job_sigchld_handler.c
 */
 
 t_job					*job_find (pid_t pgid, t_job *first_job);

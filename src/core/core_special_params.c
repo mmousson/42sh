@@ -6,13 +6,19 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 01:13:45 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/30 02:05:37 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/30 09:12:15 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 #include "sh42.h"
+
+/*
+**	The table holding the shell's Special Variables
+**	Since this table is not declared as global, the only way to interact
+**	with it is through the 'core_spec_var_setget' function defined below
+*/
 
 t_special_vars	g_spec_vars[16] = {
 	{0, NULL},
@@ -33,6 +39,17 @@ t_special_vars	g_spec_vars[16] = {
 	{15, NULL}
 };
 
+/*
+**	Functions that returns the index of the Special Variables table defined
+**	above, based on the character passed as argument
+**
+**	Arguments:
+**	var -> The character to search the corresponding index of
+**
+**	Return Value:
+**	0 <= x <= 15 -> The corresponding index in the Special Variables table
+*/
+
 int				core_hash_spec_var(char var)
 {
 	if (var >= 0 && var <= 9)
@@ -40,6 +57,25 @@ int				core_hash_spec_var(char var)
 	else
 		return (10 + var % 7);
 }
+
+/*
+**	This functions serves as a gate between the user and the
+**	Shell's Special Variables
+**	The 'id' argument identifies which Special Variable the user is interacting
+**	with
+**	The second argument holds the new value in case the Shell
+**	needs to update it
+**	The third argument 'set_or_get' tells the function wheter it should update
+**	a variable or simply return its value
+**
+**	Arguments:
+**	id -> Integer identifier of the Special Variable the Shell is
+**		interacting with
+**	new_value -> In case the variable is to be updated, this argument holds
+**		the new value (NOTE: the argument is duplicated in memory)
+**	set_or_get -> Flag (can be either SET ot GET) telling the function whether it
+**		should modify the Special Variable or only return its value
+*/
 
 char			*core_spec_var_setget(int id, char *new_value, int set_or_get)
 {
