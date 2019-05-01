@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 03:17:58 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 15:02:17 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 15:28:28 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void			line_dispatcher(int last_pos)
 
 static int			line_isdispatch(void)
 {
-	if (g_env.cm->pos == g_env.cpy->pos
+	if (g_env.cm->pos == g_env.cpos
 			|| g_env.cm->pos == g_env.mode->v_pos)
 		return (1);
 	if (!g_env.mode->n_select && !g_env.mode->v_visual)
@@ -46,7 +46,7 @@ static int			line_isdispatch(void)
 static int			line_get_lastpos(void)
 {
 	if (g_env.mode->n_select)
-		return (g_env.cpy->pos);
+		return (g_env.cpos);
 	if (g_env.mode->v_visual)
 		return (g_env.mode->v_pos);
 	return (0);

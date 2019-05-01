@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:34:56 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 20:22:12 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 14:48:02 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int					vi_reset_mode(int ins, int com, int replace)
 		g_env.mode->v_prior[i] = 0;
 	if (g_env.mode->v_replace_one)
 		return (0);
-	g_env.mode->v_count = 0;
+	g_env.count = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 22:52:39 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/28 11:59:01 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 14:18:48 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char				*line_delchar(int size)
 	if (size > g_env.cm->pos - g_env.p_size)
 		size = g_env.cm->pos - g_env.p_size;
 	if (g_env.mode->saved)
-		ft_strncpy(g_env.mode->s_buffer, &(g_env.line[g_env.cm->pos]), size);
+		ft_strncpy(g_env.s_buffer, &(g_env.line[g_env.cm->pos]), size);
 	if (!(fresh = ft_strnew(g_env.len - size)))
 		sh_errorterm(TMALLOC);
 	ft_strncpy(fresh, g_env.line, g_env.cm->pos - size);
@@ -81,7 +81,7 @@ char				*line_delchar_bs(int size)
 	if (size > g_env.len - g_env.cm->pos)
 		size = g_env.len - g_env.cm->pos;
 	if (g_env.mode->saved)
-		ft_strncpy(g_env.mode->s_buffer, &(g_env.line[g_env.cm->pos]), size);
+		ft_strncpy(g_env.s_buffer, &(g_env.line[g_env.cm->pos]), size);
 	if (!(fresh = ft_strnew(g_env.len - size)))
 		sh_errorterm(TMALLOC);
 	ft_strncpy(fresh, g_env.line, g_env.cm->pos);

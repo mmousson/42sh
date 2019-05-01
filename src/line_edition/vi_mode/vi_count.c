@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:17:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/28 09:05:41 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 19:47:23 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@ int				vi_get_count(char *str)
 	if (g_env.mode->v_replace_one)
 		return (0);
 	tmp = ft_atoi(str);
-	if (tmp || (str[0] == '0' && g_env.mode->v_count && !g_env.mode->v_del))
+	if (g_env.mode->v_command
+			&& (tmp || (str[0] == '0' && g_env.count && !g_env.mode->v_del)))
 	{
-		g_env.mode->v_count = g_env.mode->v_count * 10 + tmp;
+		if (g_env.count > BUFF_SIZE)
+			return (1);
+		g_env.count = g_env.count * 10 + tmp;
+		vi_alloc_count();
 		return (1);
 	}
-	else if (!g_env.mode->v_count)
-		g_env.mode->v_count = 1;
+	if (!g_env.count)
+		g_env.count = 1;
 	return (0);
 }
 
@@ -39,6 +43,6 @@ void			vi_reset_count(char *str)
 	if (g_env.mode->v_del || g_env.mode->v_yank)
 		return ;
 	tmp = ft_atoi(str);
-	if (!tmp && str[0] != '0' && g_env.mode->v_count)
-		g_env.mode->v_count = 0;
+	if (!tmp && str[0] != '0' && g_env.count)
+		g_env.count = 0;
 }

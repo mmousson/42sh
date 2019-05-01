@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:54:03 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/28 12:59:32 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 17:30:31 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,34 @@ int					line_end(void)
 void				line_ljump(void)
 {
 	int				i;
+	int				count;
 
-	i = g_env.cm->pos - 1;
-	while (i && (g_env.line[i] == ' ' || g_env.line[i] == '\n'))
-		i--;
-	while (i && g_env.line[i] != ' ' && g_env.line[i] != '\n')
-		i--;
-	if (g_env.line[i + 1])
-		line_cursor_motion(MLEFT, g_env.cm->pos - i - 1);
+	count = g_env.count + 1;
+	while (--count)
+	{
+		i = g_env.cm->pos - 1;
+		while (i && (g_env.line[i] == ' ' || g_env.line[i] == '\n'))
+			i--;
+		while (i && g_env.line[i] != ' ' && g_env.line[i] != '\n')
+			i--;
+		if (g_env.line[i + 1])
+			line_cursor_motion(MLEFT, g_env.cm->pos - i - 1);
+	}
 }
 
 void				line_rjump(void)
 {
 	int				i;
+	int				count;
 
-	i = g_env.cm->pos;
-	while (g_env.line[i] && g_env.line[i] != ' ' && g_env.line[i] != '\n')
-		i++;
-	while (g_env.line[i] && (g_env.line[i] == ' ' || g_env.line[i] == '\n'))
-		i++;
-	line_cursor_motion(MRIGHT, i - g_env.cm->pos);
+	count = g_env.count + 1;
+	while (--count)
+	{
+		i = g_env.cm->pos;
+		while (g_env.line[i] && g_env.line[i] != ' ' && g_env.line[i] != '\n')
+			i++;
+		while (g_env.line[i] && (g_env.line[i] == ' ' || g_env.line[i] == '\n'))
+			i++;
+		line_cursor_motion(MRIGHT, i - g_env.cm->pos);
+	}
 }

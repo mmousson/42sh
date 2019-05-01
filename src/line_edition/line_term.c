@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 02:00:25 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 14:13:40 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 15:26:10 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,20 @@ void				sh_term_manager(void)
 {
 	t_tc			*tc;
 	t_cm			*cm;
-	t_cpy			*cpy;
 	t_mode			*mode;
 
 	tc = (t_tc*)ft_memalloc(sizeof(t_tc));
 	cm = (t_cm*)ft_memalloc(sizeof(t_cm));
-	cpy = (t_cpy*)ft_memalloc(sizeof(t_cpy));
 	mode = (t_mode*)ft_memalloc(sizeof(t_mode));
-	if (!tc || !cm || !cpy || !mode)
+	if (!tc || !cm || !mode)
 		sh_errorterm(TMALLOC);
 	g_env.ry = NULL;
 	ft_bzero(tc, sizeof(t_tc));
 	ft_bzero(cm, sizeof(t_cm));
-	ft_bzero(cpy, sizeof(t_cpy));
 	ft_bzero(mode, sizeof(t_mode));
 	g_env.tc = tc;
 	g_env.tc->tc = 1;
 	g_env.cm = cm;
-	g_env.cpy = cpy;
 	g_env.mode = mode;
 	g_env.mode->mode[0] = 1;
 	sh_configterm();

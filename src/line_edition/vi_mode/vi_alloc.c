@@ -6,34 +6,12 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 14:59:39 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 16:58:54 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 15:14:13 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "line_edition.h"
-
-int				vi_hash_insert(void)
-{
-	char		*fresh;
-
-	if (g_env.len >= BUFF_SIZE)
-		return (0);
-	g_env.mode->v_visual = 0;
-	g_env.mode->v_yank = 0;
-	if (!(fresh = ft_strnew(g_env.len + 1)))
-		sh_errorterm(TMALLOC);
-	ft_strncpy(fresh, g_env.line, g_env.p_size);
-	fresh[g_env.p_size] = '#';
-	ft_strcpy(&(fresh[g_env.p_size + 1]), &(g_env.line[g_env.p_size]));
-	ft_strdel(&(g_env.line));
-	g_env.line = fresh;
-	line_reset_history();
-	ft_strdel(&g_env.oldline);
-	if (!(g_env.oldline = ft_strdup(g_env.line)))
-		sh_errorterm(TMALLOC);
-	return (0);
-}
 
 void			vi_init_undo(void)
 {
@@ -92,4 +70,26 @@ int				vi_delundo(void)
 		g_env.mode->undo = tmp;
 	}
 	return (1);
+}
+
+int				vi_hash_insert(void)
+{
+	char		*fresh;
+
+	if (g_env.len >= BUFF_SIZE)
+		return (0);
+	g_env.mode->v_visual = 0;
+	g_env.mode->v_yank = 0;
+	if (!(fresh = ft_strnew(g_env.len + 1)))
+		sh_errorterm(TMALLOC);
+	ft_strncpy(fresh, g_env.line, g_env.p_size);
+	fresh[g_env.p_size] = '#';
+	ft_strcpy(&(fresh[g_env.p_size + 1]), &(g_env.line[g_env.p_size]));
+	ft_strdel(&(g_env.line));
+	g_env.line = fresh;
+	line_reset_history();
+	ft_strdel(&g_env.oldline);
+	if (!(g_env.oldline = ft_strdup(g_env.line)))
+		sh_errorterm(TMALLOC);
+	return (0);
 }

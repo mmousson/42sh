@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 02:36:49 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/28 12:13:56 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 14:37:45 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,53 +15,49 @@
 void				line_init_cpy(void)
 {
 	g_env.mode->n_select = 1;
-	g_env.cpy->pos = g_env.cm->pos;
+	g_env.cpos = g_env.cm->pos;
 }
 
-static void			line_escap_cpy(int move_cursor)
+void				line_escap_cpy(int move_cursor)
 {
 	g_env.mode->n_select = 0;
-	if (!move_cursor || g_env.cm->pos == g_env.cpy->pos)
+	if (!move_cursor || g_env.cm->pos == g_env.cpos)
 		return ;
-	if (g_env.cm->pos < g_env.cpy->pos)
-		line_cursor_motion(MRIGHT, g_env.cpy->pos - g_env.cm->pos);
+	if (g_env.cm->pos < g_env.cpos)
+		line_cursor_motion(MRIGHT, g_env.cpos - g_env.cm->pos);
 	else
-		line_cursor_motion(MLEFT, g_env.cm->pos - g_env.cpy->pos);
+		line_cursor_motion(MLEFT, g_env.cm->pos - g_env.cpos);
 }
 
 static void			line_ccpy(int ctrlc)
 {
-	char			*cpy;
 	int				min;
 	int				max;
 
-	if (g_env.cm->pos == g_env.cpy->pos)
+	if (g_env.cm->pos == g_env.cpos)
 		return ;
-	min = g_env.cpy->pos > g_env.cm->pos ? g_env.cm->pos : g_env.cpy->pos;
-	max = min == g_env.cm->pos ? g_env.cpy->pos : g_env.cm->pos;
-	if (!(cpy = ft_strsub(g_env.line, min, max - min)))
-		sh_errorterm(TMALLOC);
-	ft_strdel(&(g_env.cpy->str));
-	g_env.cpy->str = cpy;
+	min = g_env.cpos > g_env.cm->pos ? g_env.cm->pos : g_env.cpos;
+	max = min == g_env.cm->pos ? g_env.cpos : g_env.cm->pos;
+	ft_strncpy(g_env.s_buffer, &(g_env.line[min]), max - min);
 	if (ctrlc)
 		line_escap_cpy(1);
 }
 
 static void			line_cut(void)
 {
-	if (g_env.cm->pos == g_env.cpy->pos)
+	if (g_env.cm->pos == g_env.cpos)
 		return ;
 	line_ccpy(0);
-	if (g_env.cpy->pos < g_env.cm->pos)
+	if (g_env.cpos < g_env.cm->pos)
 	{
-		g_env.line = line_delchar(g_env.cm->pos - g_env.cpy->pos);
-		line_cursor_motion(MLEFT, g_env.cpy->pos - g_env.cm->pos);
+		g_env.line = line_delchar(g_env.cm->pos - g_env.cpos);
+		line_cursor_motion(MLEFT, g_env.cpos - g_env.cm->pos);
 		line_escap_cpy(1);
 	}
 	else
 	{
-		g_env.line = line_delchar_bs(g_env.cpy->pos - g_env.cm->pos);
-		line_cursor_motion(MLEFT, g_env.cm->pos - g_env.cpy->pos);
+		g_env.line = line_delchar_bs(g_env.cpos - g_env.cm->pos);
+		line_cursor_motion(MLEFT, g_env.cm->pos - g_env.cpos);
 		line_escap_cpy(0);
 	}
 }

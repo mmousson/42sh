@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:20:36 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 13:47:07 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 14:51:32 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int			vi_spec_motion(char *str, int ret)
 	else if (str[0] == '0' && ret == 1)
 		line_home(1);
 	else if (str[0] == '|' && ret == 1)
-		vi_pipejump(g_env.mode->v_count);
+		vi_pipejump(g_env.count);
 	else if (str[0] == ';' && ret == 1)
 		vi_repeat();
 	else if (str[0] == ',' && ret == 1)
@@ -57,17 +57,17 @@ int					vi_motion(char *str, int ret)
 	if (vi_priorjump(str, ret))
 		return (1);
 	else if (str[0] == ' ' && ret == 1)
-		line_cursor_motion(MRIGHT, g_env.mode->v_count);
+		line_cursor_motion(MRIGHT, g_env.count);
 	else if (str[0] == 'h' && ret == 1)
-		line_cursor_motion(MLEFT, g_env.mode->v_count);
+		line_cursor_motion(MLEFT, g_env.count);
 	else if (str[0] == 'l' && ret == 1)
-		line_cursor_motion(MRIGHT, g_env.mode->v_count);
+		line_cursor_motion(MRIGHT, g_env.count);
 	else if ((str[0] == 'w' || str[0] == 'W') && ret == 1)
-		vi_wjump(g_env.mode->v_count);
+		vi_wjump(g_env.count);
 	else if ((str[0] == 'e' || str[0] == 'E') && ret == 1)
-		vi_ejump(g_env.mode->v_count);
+		vi_ejump(g_env.count);
 	else if ((str[0] == 'b' || str[0] == 'B') && ret == 1)
-		vi_bjump(g_env.mode->v_count);
+		vi_bjump(g_env.count);
 	else
 		return (vi_spec_motion(str, ret));
 	if (g_env.mode->v_del)

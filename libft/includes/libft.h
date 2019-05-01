@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 02:11:28 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 09:56:52 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/01 15:01:39 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ int					ft_max(int x, int y);
 double				ft_dmax(int count, ...);
 int					ft_clamp(int x, int low, int high);
 double				ft_fabs(double x);
+int					ft_count_n(int nbr);
 
 #endif

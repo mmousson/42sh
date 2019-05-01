@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:16:24 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/28 14:47:41 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 19:47:18 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int			vi_minsert(char *str, int ret)
 
 	i = -1;
 	if (str[0] == 27 && ret == 1)
-		return (vi_reset_mode(0, 1, 0) + 1);
+		return (line_escap());
 	if (str[0] == CTRLD && ret == 1 && g_env.len == g_env.p_size + 1)
 		return (line_ctrld());
 	else if (line_ascii(str, ret))

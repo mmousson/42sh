@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 17:04:26 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/28 08:32:31 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 14:49:16 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		vi_prior_r(char *str)
 	int			count;
 	char		*fresh;
 
-	count = g_env.mode->v_count;
+	count = g_env.count;
 	if (count > g_env.len - g_env.cm->pos)
 		count = g_env.len - g_env.cm->pos;
 	if (!(fresh = ft_strnew(1)))
@@ -29,7 +29,7 @@ static void		vi_prior_r(char *str)
 			sh_errorterm(TMALLOC);
 		}
 	g_env.mode->v_replace = 1;
-	line_paste(fresh, g_env.mode->v_count);
+	line_paste(fresh, g_env.count);
 	g_env.mode->v_replace = 0;
 	g_env.mode->v_replace_one = 0;
 	ft_strdel(&fresh);	
@@ -37,7 +37,7 @@ static void		vi_prior_r(char *str)
 
 static void		vi_fftt(char *str, int i)
 {
-	vi_jump_occur(str[0], i, g_env.mode->v_count);
+	vi_jump_occur(str[0], i, g_env.count);
 	g_env.mode->v_lasta = str[0];
 	i = -1;
 	while (++i < 4)

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 19:54:00 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/28 12:08:47 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 14:54:22 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static int		vi_delete3(char *str, int ret)
 		g_env.mode->saved = 1;
 		if (g_env.mode->v_visual)
 			vi_cdel();
-		g_env.line = line_delchar_bs(g_env.mode->v_count);
+		g_env.line = line_delchar_bs(g_env.count);
 	}
 	else if (str[0] == 'X' && ret == 1)
 	{
 		g_env.mode->saved = 1;
 		if (g_env.mode->v_visual)
 			vi_cdel();
-		g_env.line = line_delchar(g_env.mode->v_count);
-		line_cursor_motion(MLEFT, g_env.mode->v_count);
+		g_env.line = line_delchar(g_env.count);
+		line_cursor_motion(MLEFT, g_env.count);
 	}
 	else
 		return (0);

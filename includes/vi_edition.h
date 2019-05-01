@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 14:10:59 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 20:12:59 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 16:52:12 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,12 @@ typedef struct				s_mode
 	char					v_yank;
 	char					v_del;
 	char					v_replace_one;
-	int						v_count;
 	char					v_prior[4];
 	char					v_lastc;
 	char					v_lasta;
-	char					v_replace;
 	int						v_pos;
+	char					v_replace;
 	char					mode[MODE];
-	char					s_buffer[BUFF_SIZE];
 	char					saved;
 	t_undo					*undo;
 }							t_mode;
@@ -85,6 +83,8 @@ int							vi_delundo(void);
 void						vi_free_undo(t_undo *undo);
 int							vi_hash_insert(void);
 char						*vi_replace_str(char *str, int len);
+void						vi_alloc_count(void);
+int							vi_del_count(void);
 
 /*
 **	utility

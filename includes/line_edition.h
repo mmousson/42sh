@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/28 14:47:45 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 17:50:38 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,6 @@ typedef struct			s_cm
 	int					tmpy;
 }						t_cm;
 
-typedef struct			s_cpy
-{
-	char				*str;
-	int					pos;
-}						t_cpy;
-
 typedef struct			s_history
 {
 	char				*line;
@@ -117,7 +111,6 @@ typedef struct			s_env
 	struct termios		term;
 	t_tc				*tc;
 	t_cm				*cm;
-	t_cpy				*cpy;
 	int					t_fd;
 	int					isatty;
 	char				*line;
@@ -131,7 +124,10 @@ typedef struct			s_env
 	t_mode				*mode;
 	int					del;
 	int					len;
+	int					cpos;
+	char				s_buffer[BUFF_SIZE + 1];
 	t_ctrlxx			*cx;
+	int					count;
 }						t_env;
 
 struct s_env			g_env;
@@ -141,6 +137,7 @@ int						line_manager(char *str, int ret);
 int						line_update(char *str, int ret);
 void					line_update_termsize(void);
 int						line_return(void);
+int						line_escap(void);
 
 /*
 ** term_config
@@ -233,6 +230,7 @@ void					sig_setchild(int val);
 void					line_paste(char *str, int count);
 void					line_init_cpy(void);
 int						line_cpy(char *str, int ret);
+void					line_escap_cpy(int move_cursor);
 
 /*
 **	key

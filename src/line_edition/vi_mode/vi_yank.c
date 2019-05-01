@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:59:36 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 11:28:30 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/01 14:24:14 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			vi_cpy(void)
 		return ;
 	min = g_env.mode->v_pos > g_env.cm->pos ? g_env.cm->pos : g_env.mode->v_pos;
 	max = min == g_env.cm->pos ? g_env.mode->v_pos : g_env.cm->pos;
-	ft_strncpy(g_env.mode->s_buffer, &(g_env.line[min]), max - min);
+	ft_strncpy(g_env.s_buffer, &(g_env.line[min]), max - min);
 	if (g_env.cm->pos == min)
 		line_cursor_motion(MRIGHT, max - min);
 	else
@@ -37,7 +37,7 @@ int				vi_yank(char *str, int ret)
 	{
 		if (g_env.mode->v_yank)
 		{
-			ft_strcpy(g_env.mode->s_buffer, &(g_env.line[g_env.p_size]));
+			ft_strcpy(g_env.s_buffer, &(g_env.line[g_env.p_size]));
 			return (vi_reset_mode(0, 1, 0) + 1);
 		}
 		g_env.mode->v_yank = 1;
@@ -46,7 +46,7 @@ int				vi_yank(char *str, int ret)
 		g_env.mode->v_pos = g_env.cm->pos;
 	}
 	else if (str[0] == 'Y' && ret == 1)
-		ft_strcpy(g_env.mode->s_buffer, &(g_env.line[g_env.cm->pos]));
+		ft_strcpy(g_env.s_buffer, &(g_env.line[g_env.cm->pos]));
 	else
 		return (0);
 	vi_reset_count(str);

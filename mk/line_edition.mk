@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/28 13:02:22 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/01 15:35:32 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ VIMODE =	vi_alloc.c			\
 			vi_yank.c			\
 			vi_jump_manager.c	\
 			vi_prior_flag.c		\
-			vi_alloc_replace.c
+			vi_alloc_replace.c	\
+			vi_alloc_count.c
 
 LINE_EDIT =	line_cpy.c			\
 			line_curmotion.c	\
