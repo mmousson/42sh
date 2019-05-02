@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 17:50:38 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/02 14:30:44 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define CTRLU '\025'
 # define CTRLW '\027'
 # define CTRLX '\030'
+# define CTRLUND '\037'
 
 typedef enum			e_error
 {
@@ -157,6 +158,7 @@ int						line_motion(char *str, int ret);
 int						line_ascii(char *str, int ret);
 int						line_history(char *str, int ret);
 int						line_del(char *str, int ret);
+int						line_undo(char *str, int ret);
 
 /*
 **	read

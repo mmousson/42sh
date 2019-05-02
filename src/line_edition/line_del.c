@@ -6,11 +6,24 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 12:00:43 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 18:53:53 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/02 14:36:16 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
+
+static void			line_isdelete(char *str, int ret, int start)
+{
+	if ((line_isdel(str, ret) || str[0] == CTRLU || str[0] == CTRLK
+			|| str[0] == 127 || line_isdelrword(str, ret)
+			|| str[0] == CTRLW) && ret == 1)
+	{
+		if (start)
+			vi_add_undo();
+		else
+			vi_undo_update_pos();
+	}
+}
 
 static void			line_delrword(void)
 {
@@ -51,12 +64,14 @@ static int			line_delword(char *str, int ret)
 			line_dellword();
 	else
 		return (0);
+	line_isdelete(str, ret, 0);
 	vi_reset_count(str);
 	return (1);
 }
 
 int					line_del(char *str, int ret)
 {
+	line_isdelete(str, ret, 1);
 	if (line_isdel(str, ret))
 		g_env.line = line_delchar_bs(g_env.count);
 	else if (str[0] == CTRLU && ret == 1)
@@ -75,6 +90,7 @@ int					line_del(char *str, int ret)
 	}
 	else
 		return (line_delword(str, ret));
+	line_isdelete(str, ret, 0);
 	vi_reset_count(str);
 	return (1);
 }

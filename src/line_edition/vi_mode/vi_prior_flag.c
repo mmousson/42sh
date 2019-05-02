@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 17:04:26 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 14:49:16 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/02 18:04:23 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ static void		vi_prior_r(char *str)
 			sh_errorterm(TMALLOC);
 		}
 	g_env.mode->v_replace = 1;
+	vi_add_undo();
 	line_paste(fresh, g_env.count);
+	vi_undo_update_pos();
 	g_env.mode->v_replace = 0;
 	g_env.mode->v_replace_one = 0;
 	ft_strdel(&fresh);	

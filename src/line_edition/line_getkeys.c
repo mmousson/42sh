@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:46:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 19:47:21 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/02 18:04:14 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ static int			line_cpy_pst(char *str, int ret)
 	if (line_isaltc(str, ret) && !g_env.mode->n_select)
 		line_init_cpy();
 	else if (line_isaltv(str, ret) && !g_env.mode->n_select)
+	{
+		vi_add_undo();
 		line_paste(g_env.s_buffer, g_env.count);
+		//vi_undo_update_pos();
+	}
 	else
 		return (0);
 	vi_reset_count(str);
@@ -101,6 +105,8 @@ int					line_manager(char *str, int ret)
 	else if (line_cpy_pst(str, ret))
 		return (1);
 	else if (line_history(str, ret))
+		return (1);
+	else if (line_undo(str, ret))
 		return (1);
 	vi_reset_count(str);
 	if (line_vi_tmp(str))

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 17:58:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 11:45:21 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/02 15:04:49 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void				vi_undo_update_pos(void)
 	g_env.mode->undo = tmp;
 }
 
-static void			vi_reset_cursor(t_undo *tmp, int u)
+void				vi_reset_cursor(t_undo *tmp, int u)
 {
 	while (u && tmp->next)
 		tmp = tmp->next;
@@ -80,7 +80,7 @@ int					vi_undo(char *str, int ret)
 	char			*oldline;
 
 	if (!g_env.mode->undo)
-		return (1);
+		return (0);
 	if (str[0] == 'u' && ret == 1)
 	{
 		tmp = g_env.mode->undo;

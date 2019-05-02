@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/01 15:35:32 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/02 14:43:50 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ LINE_EDIT =	line_cpy.c			\
 			line_iskeymotion.c	\
 			line_iskeydel.c		\
 			line_quit.c			\
-			line_cxjump.c
+			line_cxjump.c		\
+			line_undo.c
 
 LINE_EDIT_SRCS = $(addprefix $(LINE_EDIT_PATH),$(LINE_EDIT))
 VIMODE_SRCS = $(addprefix $(VIMODE_PATH),$(VIMODE))

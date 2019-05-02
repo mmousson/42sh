@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 14:10:59 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 16:52:12 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/02 14:31:07 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ void						vi_rev_repeat(void);
 void						vi_cdel(void);
 void						vi_cpy(void);
 void						vi_undo_update_pos(void);
+void						vi_reset_cursor(t_undo *tmp, int u);
 
 #endif

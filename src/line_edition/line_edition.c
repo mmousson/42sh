@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 22:59:54 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 14:36:03 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/02 16:33:36 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int					line_update(char *str, int ret)
 	i = -1;
 	if (!str)
 		return (0);
+	vi_init_undo();
 	g_env.len = (int)ft_strlen(g_env.line) + 1;
 	cap = line_choose_mode(str, ret);
 	g_env.len = (int)ft_strlen(g_env.line);

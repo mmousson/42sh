@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 14:46:23 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 17:54:08 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/02 14:25:49 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static int		vi_nextcommand(char *str, int ret)
 
 int				vi_command(char *str, int ret)
 {
-	vi_init_undo();
 	if (str[0] == 27 && ret == 1)
 		return (vi_reset_mode(0, 1, 0) + 1);
 	if (vi_get_count(str)

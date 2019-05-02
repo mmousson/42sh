@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:17:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 19:47:23 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/02 16:33:40 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int				vi_get_count(char *str)
 	if (g_env.mode->v_command
 			&& (tmp || (str[0] == '0' && g_env.count && !g_env.mode->v_del)))
 	{
-		if (g_env.count > BUFF_SIZE)
+		if (g_env.count * 10 + tmp > BUFF_SIZE)
 			return (1);
 		g_env.count = g_env.count * 10 + tmp;
 		vi_alloc_count();
