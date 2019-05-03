@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 21:18:38 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/03 23:14:41 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/03 23:31:14 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static void	free_files(char **files)
 	int		i;
 
 	i = 0;
-	while (files[i])
+	while (files && files[i])
 	{
 		ft_strdel(&files[i]);
 		i++;
 	}
-	ft_memdel((void **)files);
+	ft_memdel((void **)&files);
 }
 
 static char	**change_files(char **files, int f)
@@ -63,7 +63,11 @@ static char	*get_res(char **files)
 	while (files && files[i])
 	{
 		if (res == 0 && ft_strcmp(files[i], ""))
-			res = ft_strdup(files[i]);
+		{
+			tmp = ft_strdup("/");
+			res = ft_strjoin(tmp, ft_strdup(files[i]));
+			ft_strdel(&tmp);
+		}
 		else if (ft_strcmp(files[i], ""))
 		{
 			tmp = ft_strjoin(res, "/");
@@ -84,10 +88,12 @@ char	*get_pwd(char *cur)
 
 	res = 0;
 	i = 0;
-	files = change_files(ft_strsplit(cur, '/'), 1);
+	files = ft_strsplit(cur, '/');
+	files = change_files(files, 1);
 	res = get_res(files);
 	free_files(files);
-	files = change_files(ft_strsplit(cur, '/'), 2);
+	files = ft_strsplit(cur, '/');
+	files = change_files(files, 2);
 	ft_strdel(&res);
 	res = get_res(files);
 	free_files(files);

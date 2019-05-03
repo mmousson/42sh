@@ -6,7 +6,7 @@
 /*   By: tduval </var/mail/tduval>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 08:37:24 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/03 21:44:43 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/03 23:24:26 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,18 @@ static char	*get_cur(char ***environ, char *dir, int *f)
 
 static int	changing_directory(char *dir[2], char ***env, char opts, int f)
 {
+	char	*pwd;
+
+	pwd = 0;
 	if (chdir(dir[1]) != -1)
 	{
-		get_pwd(dir[1]);
+		pwd = get_pwd(dir[1]);
 		if ((opts & OPT_L) == 0)
-			utility_add_entry_to_environ(env, "PWD", dir[1]);
+			utility_add_entry_to_environ(env, "PWD", pwd);
 		//else
 			//TODO
 		ft_strdel(&dir[1]);
+		ft_strdel(&pwd);
 		return (0);
 	}
 	ft_putstr_fd("cd: ", 2);
