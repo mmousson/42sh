@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 21:18:38 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 00:38:40 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 00:42:41 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	**delete_last(char **files, int i)
 		i--;
 	ft_strdel(&files[i]);
 	files[i] = ft_strdup("");
-	return(files);
+	return (files);
 }
 
 static char	**change_files(char **files, int f)
@@ -45,7 +45,6 @@ static char	**change_files(char **files, int f)
 		{
 			ft_strdel(&files[i]);
 			files[i] = ft_strdup("");
-			i = -1;
 		}
 		i++;
 	}
@@ -92,13 +91,12 @@ static char	*get_res(char **files)
 	return (res ? res : ft_strdup("/"));
 }
 
-char	*get_pwd(char *cur)
+char		*get_pwd(char *cur)
 {
 	char	**files;
 	char	*res;
 	int		i;
 
-	ft_putendl(cur);
 	i = 0;
 	files = NULL;
 	res = NULL;
