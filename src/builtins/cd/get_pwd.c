@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 21:18:38 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/03 23:31:14 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/03 23:32:21 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	*get_res(char **files)
 		if (res == 0 && ft_strcmp(files[i], ""))
 		{
 			tmp = ft_strdup("/");
-			res = ft_strjoin(tmp, ft_strdup(files[i]));
+			res = ft_strjoin(tmp, files[i]);
 			ft_strdel(&tmp);
 		}
 		else if (ft_strcmp(files[i], ""))
