@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 02:05:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 21:51:28 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/04 00:03:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,14 @@ static void	handle_completed_job(t_job *current, t_job **job_last,
 		(*job_last)->next = *job_next;
 	else
 		job_first_job_set_and_get(job_next, SET);
+	job_free(current);
 }
 
 /*
 **	Function handling Data Update and User Information when a Job has been
 **	stopped as the user has direct control of the terminal
 **	We first display a log message and then set the last job of the job_list
-**	as the first
+**	as the current one
 **
 **	Arguments:
 **	current -> The Job that have changed status
@@ -109,8 +110,8 @@ static void	handle_stopped_job(t_job *current, t_job **job_last)
 }
 
 /*
-**	This function handles the SIGCHLD signal when the user has direct of the
-**	terminal
+**	This function handles the SIGCHLD signal when the user has direct control
+**	of the terminal
 **
 **	Arguments:
 **	signo (ignored) -> SIGCHLD signal number

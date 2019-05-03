@@ -86,9 +86,9 @@ int					job_wait_completion(t_job *job)
 	while (42)
 	{
 		pid = waitpid (WAIT_ANY, &ret, WUNTRACED);
-		if (!(!job_mark_process_status (job, pid, ret)
-			&& !job_is_stopped (job)
-			&& !job_is_completed (job)))
+		if (job_mark_process_status (job, pid, ret)
+			+ job_is_stopped (job)
+			+ job_is_completed (job) != 0)
 			break ;
 	}
 	return (ret);

@@ -6,11 +6,10 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 01:13:45 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/30 09:12:15 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/04 00:34:40 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 #include "sh42.h"
 
@@ -86,7 +85,6 @@ char			*core_spec_var_setget(int id, char *new_value, int set_or_get)
 		ft_strdel(&(g_spec_vars[id].value));
 		if ((g_spec_vars[id].value = ft_strdup(new_value)) == NULL)
 			ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
-		printf("quest = %s\n", g_spec_vars[SPEC_QUESTION].value);
 		return (g_spec_vars[id].value);
 	}
 	else if (set_or_get == GET)

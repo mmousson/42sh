@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/30 09:15:58 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/03 23:58:59 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct			s_job
 /*
 **	==================== Job Control's main functions ====================
 **
+**	job_free -> job_control/job_free.c
 **	job_argc -> job_control/job_utility.c
 **	job_launch -> job_control/job_engine.c
 **	job_command_search_and_exec -> job_control/job_command_search_and_exec.c
@@ -150,6 +151,7 @@ typedef struct			s_job
 **	job_sigchld_handler -> job_control/job_sigchld_handler.c
 */
 
+void					job_free(t_job *job);
 int						job_argc(char **argv);
 int						job_launch(t_job *job, int fg);
 void					job_command_search_and_exec(t_job *job,

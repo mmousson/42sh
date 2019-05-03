@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 22:46:57 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/04 00:33:36 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,14 @@ int		job_is_completed (t_job *j)
 	while (p)
 	{
 		if (!p->completed)
+		{
 			return (0);
+		}
 		status = p->status;
 		p = p->next;
 	}
 	j->status = WTERMSIG(status);
+	job_free(j);
 	return (1);
 }
 
