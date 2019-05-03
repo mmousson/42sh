@@ -6,7 +6,7 @@
 /*   By: tduval </var/mail/tduval>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 08:37:24 by tduval            #+#    #+#             */
-/*   Updated: 2019/04/30 02:48:35 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/03 21:44:43 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	changing_directory(char *dir[2], char ***env, char opts, int f)
 {
 	if (chdir(dir[1]) != -1)
 	{
-		ft_putendl(dir[1]);
+		get_pwd(dir[1]);
 		if ((opts & OPT_L) == 0)
 			utility_add_entry_to_environ(env, "PWD", dir[1]);
 		//else
