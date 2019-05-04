@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 10:31:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 10:45:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/04 12:04:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "libft.h"
 
 char	*git_diff_args[] = {"/usr/bin/git", "diff-index", "--numstat", "HEAD", NULL};
+
+/*
+**
+*/
 
 static void	parse_output(int *plus, int *minus, int fd)
 {

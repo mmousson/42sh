@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 08:39:13 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 11:12:00 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/04 14:19:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,32 @@ static char	*get_dot_git_path(void)
 }
 
 /*
+**	Handles the line once it has been read by the
+**	'GNL' func
+*/
+
+static void	handle_line(int add, int del, char *l)
+{
+	ft_putstr(GIT_BRANCH_START);
+	ft_putstr((add + del == 0) ? GIT_UP_TO_DATE : GIT_NOT_UP_TO_DATE);
+	ft_putstr("\xEE\x82\xB0\033[0;38;2;0;0;0;48;2;");
+	ft_putstr((add + del == 0) ? GIT_UP_TO_DATE" \xEE\x82\xA0 "
+		: GIT_RED_INFOS);
+	ft_putstr(ft_strrchr(l, '/') + 1);
+	if (add + del == 0)
+		ft_putstr(GIT_END_BANNER);
+	else
+	{
+		ft_putstr(" * +");
+		ft_putnbr(add);
+		ft_putstr(" / -");
+		ft_putnbr(del);
+		ft_putstr(GIT_ERR_END_BANNER);
+	}
+	ft_strdel(&l);
+}
+
+/*
 **	This function formats informations about the current git branch
 **	Currently, only the branch name is displayed
 **
@@ -81,25 +107,7 @@ static void	print_infos(int e, char *dot_git, int add, int del)
 	if ((fd = open(tmp, O_RDONLY)) != -1)
 	{
 		if (get_next_line(fd, &l) && l != NULL)
-		{
-			ft_putstr("\033[0;38;2;50;50;50;48;2;");
-			ft_putstr((add + del == 0) ? "50;200;50m" : "209;8;28m");
-			ft_putstr("\xEE\x82\xB0\033[0;38;2;0;0;0;48;2;");
-			ft_putstr((add + del == 0) ? "50;200;50m \xEE\x82\xA0 "
-				: "209;8;28;38;2;255;255;255m \xEE\x82\xA0 ");
-			ft_putstr(ft_strrchr(l, '/') + 1);
-			if (add + del == 0)
-				ft_putstr(" \033[38;2;0;200;0;49m\xEE\x82\xB0""\033[37m");
-			else
-			{
-				ft_putstr(" * +");
-				ft_putnbr(add);
-				ft_putstr(" / -");
-				ft_putnbr(del);
-				ft_putstr(" \033[0;38;2;209;8;28m\xEE\x82\xB0""\033[37m");
-			}
-			ft_strdel(&l);
-		}
+			handle_line(add, del, l);
 		ft_strdel(&dot_git);
 		ft_strdel(&tmp);
 		close(fd);

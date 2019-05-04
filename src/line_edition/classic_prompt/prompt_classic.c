@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 06:52:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 10:48:26 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/04 12:19:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,15 @@ static int		ft_merge(char *usr, char *path, int error, char **env)
 
 	add = 0;
 	ft_putchar(' ');
-	ft_putstr("\033[33m");
+	ft_putstr(USER_FONT);
 	ft_putstr(usr);
-	ft_putstr(" ""\033[7;38;2;50;50;50m");
+	ft_putstr(BANNER_START);
 	ft_putstr("\xEE\x82\xB0 ");
-	ft_putstr((error ? "\033[0;38;2;255;100;100;48;2;50;50;50m"
-		: "\033[0;38;2;140;140;140;48;2;50;50;50m"));
-	// ft_putstr(path);
+	ft_putstr(error ? "\033[0;38;2;255;100;100;48;2;50;50;50m"
+		: "\033[0;38;2;140;140;140;48;2;50;50;50m");
 	prompt_format_path(path);
-	ft_putstr(" ");
-	// show_git_branch(error, &add);
+	ft_putchar(' ');
 	prompt_git_branch(error, env);
-	ft_putstr("\033[37m"" ");
 	return (ft_strlen(usr) + ft_strlen(path) + 15 + add);
 }
 
