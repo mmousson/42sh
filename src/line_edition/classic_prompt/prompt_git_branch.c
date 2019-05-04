@@ -6,10 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 08:39:13 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 09:33:17 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/04 11:12:00 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <fcntl.h>
 #include <dirent.h>
 #include <sys/param.h>
@@ -66,7 +67,7 @@ static char	*get_dot_git_path(void)
 **	Return Value: NONE
 */
 
-static void	print_infos(int e, int *add, char *dot_git)
+static void	print_infos(int e, char *dot_git, int add, int del)
 {
 	int		fd;
 	char	*l;
@@ -79,12 +80,24 @@ static void	print_infos(int e, int *add, char *dot_git)
 	}
 	if ((fd = open(tmp, O_RDONLY)) != -1)
 	{
-		if (get_next_line(fd, &l) && l != NULL && (*add = 1))
+		if (get_next_line(fd, &l) && l != NULL)
 		{
-			ft_putstr("\033[0;38;2;50;50;50;48;2;50;200;50m");
-			ft_putstr("\xEE\x82\xB0\033[0;38;2;0;0;0;48;2;50;200;50m \xEE\x82\xA0 ");
+			ft_putstr("\033[0;38;2;50;50;50;48;2;");
+			ft_putstr((add + del == 0) ? "50;200;50m" : "209;8;28m");
+			ft_putstr("\xEE\x82\xB0\033[0;38;2;0;0;0;48;2;");
+			ft_putstr((add + del == 0) ? "50;200;50m \xEE\x82\xA0 "
+				: "209;8;28;38;2;255;255;255m \xEE\x82\xA0 ");
 			ft_putstr(ft_strrchr(l, '/') + 1);
-			ft_putstr(" \033[38;2;0;200;0;49m\xEE\x82\xB0""\033[37m");
+			if (add + del == 0)
+				ft_putstr(" \033[38;2;0;200;0;49m\xEE\x82\xB0""\033[37m");
+			else
+			{
+				ft_putstr(" * +");
+				ft_putnbr(add);
+				ft_putstr(" / -");
+				ft_putnbr(del);
+				ft_putstr(" \033[0;38;2;209;8;28m\xEE\x82\xB0""\033[37m");
+			}
 			ft_strdel(&l);
 		}
 		ft_strdel(&dot_git);
@@ -106,8 +119,10 @@ static void	print_infos(int e, int *add, char *dot_git)
 **	Return Value: NONE
 */
 
-void		prompt_git_branch(int e, int *add)
+void		prompt_git_branch(int e, char **env)
 {
+	int		plus;
+	int		del;
 	DIR		*dir;
 	char	*dot_git;
 
@@ -115,7 +130,8 @@ void		prompt_git_branch(int e, int *add)
 		return ;
 	if ((dir = opendir(dot_git)) != NULL)
 	{
-		print_infos(e, add, dot_git);
+		get_additions_deletions(&plus, &del, env);
+		print_infos(e, dot_git, plus, del);
 		closedir(dir);
 	}
 	else

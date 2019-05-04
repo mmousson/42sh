@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 06:52:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 09:18:40 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/04 10:48:26 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 **	-> The NULL terminator
 */
 
-static int		ft_merge(char *usr, char *path, int error)
+static int		ft_merge(char *usr, char *path, int error, char **env)
 {
 	int	add;
 
@@ -37,7 +37,7 @@ static int		ft_merge(char *usr, char *path, int error)
 	prompt_format_path(path);
 	ft_putstr(" ");
 	// show_git_branch(error, &add);
-	prompt_git_branch(error, &add);
+	prompt_git_branch(error, env);
 	ft_putstr("\033[37m"" ");
 	return (ft_strlen(usr) + ft_strlen(path) + 15 + add);
 }
@@ -91,7 +91,7 @@ int				line_write_prompt(char ***environ, int error)
 		ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
 		return (-1);
 	}
-	if ((ret = ft_merge(usr, path, error)) == 0)
+	if ((ret = ft_merge(usr, path, error, *environ)) == 0)
 	{
 		ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
 		ret = -1;
