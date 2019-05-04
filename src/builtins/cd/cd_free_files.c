@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.h                                               :+:      :+:    :+:   */
+/*   cd_free_files.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/21 21:36:53 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 03:18:30 by tduval           ###   ########.fr       */
+/*   Created: 2019/05/04 03:17:08 by tduval            #+#    #+#             */
+/*   Updated: 2019/05/04 03:17:52 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CD_H
-# define CD_H
+#include "libft.h"
 
-# define OPT_L	1
-# define OPT_P	2
+void	cd_free_files(char **files)
+{
+	int		i;
 
-void	free_files(char **files);
-char	*cd_get_pwd(char *cur);
-char	cd_get_opts(char **argv, char **dir);
-
-#endif
+	i = 0;
+	while (files && files[i])
+	{
+		ft_strdel(&files[i]);
+		i++;
+	}
+	ft_memdel((void **)&files);
+}
