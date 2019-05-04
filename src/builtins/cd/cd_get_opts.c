@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 21:52:00 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 03:06:38 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 03:37:16 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char		cd_get_opts(char **argv, char **dir)
 	char	res;
 	char	cur;
 	int		i;
-	int		j;
 
 	i = 1;
 	res = 0;
