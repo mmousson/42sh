@@ -6,13 +6,13 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 03:17:08 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 03:17:52 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 03:22:29 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	cd_free_files(char **files)
+void	*cd_free_files(char **files)
 {
 	int		i;
 
@@ -23,4 +23,5 @@ void	cd_free_files(char **files)
 		i++;
 	}
 	ft_memdel((void **)&files);
+	return (NULL);
 }

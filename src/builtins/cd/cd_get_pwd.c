@@ -6,24 +6,12 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 21:18:38 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 02:52:17 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 03:22:42 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cd.h"
 #include "libft.h"
-
-static void	free_files(char **files)
-{
-	int		i;
-
-	i = 0;
-	while (files && files[i])
-	{
-		ft_strdel(&files[i]);
-		i++;
-	}
-	ft_memdel((void **)&files);
-}
 
 static char	**delete_last(char **files, int i)
 {
@@ -103,11 +91,11 @@ char		*cd_get_pwd(char *cur)
 	files = ft_strsplit(cur, '/');
 	files = change_files(files, 1);
 	res = get_res(files);
-	free_files(files);
+	cd_free_files(files);
 	files = ft_strsplit(res, '/');
 	files = change_files(files, 2);
 	ft_strdel(&res);
 	res = get_res(files);
-	free_files(files);
+	cd_free_files(files);
 	return (res);
 }

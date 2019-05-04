@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 02:51:04 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 03:13:15 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 03:23:10 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 #include "cd.h"
 #include "sh42.h"
 #include "libft.h"
-
-static void	free_list(char **list)
-{
-	int		i;
-
-	i = 0;
-	while (list && list[i])
-	{
-		ft_strdel(&list[i]);
-		i++;
-	}
-	ft_memdel((void **)&list);
-}
 
 static char	*get_cur(char ***environ, char *dir, int *f)
 {
@@ -40,8 +27,8 @@ static char	*get_cur(char ***environ, char *dir, int *f)
 	list = 0;
 	res = 0;
 	if (dir && (ft_strnequ(dir, "./", 2)
-				|| ft_strnequ(dir, "../", 3)
-				|| ft_strnequ(dir, "/", 1)))
+			|| ft_strnequ(dir, "../", 3)
+			|| ft_strnequ(dir, "/", 1)))
 	{
 		*f = 1;
 		return (ft_strdup(dir));
@@ -61,17 +48,14 @@ static char	*get_cur(char ***environ, char *dir, int *f)
 				ft_strdel(&tmp);
 			}
 			if (access(res, F_OK) == 0)
-			{
-				free_list(list);
-				return (res);
-			}
+				return ((char *)cd_free_files(list));
 			ft_strdel(&res);
 			i++;
 		}
 	}
 	*f = 1;
 	i = 0;
-	free_list(list);
+	cd_free_files(list);
 	return (ft_strjoin("./", dir));
 }
 
