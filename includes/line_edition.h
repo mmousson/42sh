@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_edition.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 14:30:44 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/04 08:25:16 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,5 +268,11 @@ int						line_isend(char *str, int ret);
 int						line_iscx(char *str, int ret);
 int						line_isdel(char *str, int ret);
 int						line_isdelrword(char *str, int ret);
+
+/*
+**	prompt_generation
+*/
+
+void					prompt_format_path(char *path);
 
 #endif
