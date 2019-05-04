@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/04 08:25:16 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/04 09:10:06 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,5 +274,6 @@ int						line_isdelrword(char *str, int ret);
 */
 
 void					prompt_format_path(char *path);
+void					prompt_git_branch(int e, int *add);
 
 #endif

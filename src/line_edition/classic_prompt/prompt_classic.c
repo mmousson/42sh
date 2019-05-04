@@ -6,43 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 06:52:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 08:25:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/04 09:18:40 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <dirent.h>
 #include "libft.h"
 #include "line_edition.h"
-
-static void		show_git_branch(int e, int *add)
-{
-	int		fd;
-	DIR		*dir;
-	char	*l;
-
-	if ((dir = opendir(".git")) != NULL)
-	{
-		if ((fd = open(".git/HEAD", O_RDONLY)) != -1)
-		{
-			if (get_next_line(fd, &l) && l != NULL && (*add = 1))
-			{
-				ft_putstr("\033[0;38;2;50;50;50;48;2;50;200;50m");
-				ft_putstr("\xEE\x82\xB0\033[0;38;2;0;0;0;48;2;50;200;50m \xEE\x82\xA0 ");
-				ft_putstr(ft_strrchr(l, '/') + 1);
-				ft_putstr(" \033[38;2;0;200;0;49m\xEE\x82\xB0""\033[37m");
-				ft_strdel(&l);
-			}
-			close(fd);
-		}
-		closedir(dir);
-	}
-	else
-	{
-		ft_putstr("\033[0;38;2;50;50;50m");
-		ft_putstr("\xEE\x82\xB0");
-	}
-}
 
 /*
 **	Merges both the 'usr' and 'path' strings, allocating enough space for
@@ -67,7 +36,8 @@ static int		ft_merge(char *usr, char *path, int error)
 	// ft_putstr(path);
 	prompt_format_path(path);
 	ft_putstr(" ");
-	show_git_branch(error, &add);
+	// show_git_branch(error, &add);
+	prompt_git_branch(error, &add);
 	ft_putstr("\033[37m"" ");
 	return (ft_strlen(usr) + ft_strlen(path) + 15 + add);
 }
