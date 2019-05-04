@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 21:36:53 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/03 21:37:46 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 02:52:51 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define OPT_P	2
 
 
-char	*get_pwd(char *cur);
+char	*cd_get_pwd(char *cur);
 char	cd_get_opts(char **argv, char **dir);
 
 #endif
