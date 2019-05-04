@@ -6,7 +6,7 @@
 /*   By: tduval </var/mail/tduval>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 08:37:24 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/03 23:24:26 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 02:07:51 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int			cd(int argc, char **argv, char ***env)
 {
 	char	opts;
 	char	*tmp;
+	char	pwd[4096];
 	char	*dir[2];
 	int		f;
 
@@ -132,9 +133,16 @@ int			cd(int argc, char **argv, char ***env)
 		return (1);
 	if (dir[1][0] != '/')
 	{
-		tmp = ft_strdup(dir[1]);
-		dir[1] = ft_strjoin(utility_get_env_var(env, "PWD"), "/");
+		tmp = ft_strdup(dir[0]);
+		if (opts == OPT_P)
+		{
+			readlink(utility_get_env_var(env, "PWD"), pwd, 4096);
+			dir[1] = ft_strjoin("/", ft_strjoin(pwd, "/"));
+		}
+		else
+			dir[1] = ft_strjoin(utility_get_env_var(env, "PWD"), "/");
 		dir[1] = ft_strjoin(dir[1], tmp);
+		ft_putendl(dir[1]);
 		ft_strdel(&tmp);
 	}
 	return (changing_directory(dir, env, opts, f));
