@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 02:51:04 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 02:51:06 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 03:13:15 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	changing_directory(char *dir[2], char ***env, char opts, int f)
 	char	buf[4096];
 	char	*pwd;
 
-	pwd = get_pwd(dir[1]);
+	pwd = cd_get_pwd(dir[1]);
 	ft_strdel(&dir[1]);
 	if (opts == OPT_P && readlink(pwd, buf, 4096) != -1)
 	{
@@ -148,25 +148,4 @@ int			blt_cd(int argc, char **argv, char ***env)
 		ft_strdel(&tmp);
 	}
 	return (changing_directory(dir, env, opts, f));
-}
-
-int		main(int ac, char **av, char **env)
-{
-	char	**cpy;
-	int		i;
-
-	i = 0;
-	cpy = utility_duplicate_environ(env);
-	cd(ac, av, &cpy);
-	ft_putendl("\n --------------------------------- \n");
-	while (cpy[i])
-	{
-		if (ft_strncmp(cpy[i], "PWD", 3) == 0
-				|| ft_strncmp(cpy[i], "OLDPWD", 6) == 0)
-			ft_putendl(cpy[i]);
-		ft_strdel(&(cpy[i]));
-		i++;
-	}
-	ft_memdel((void **)&cpy);
-	return (0);
 }
