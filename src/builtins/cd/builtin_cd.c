@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 02:51:04 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 03:23:10 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 03:38:20 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,37 @@
 #include "cd.h"
 #include "sh42.h"
 #include "libft.h"
+
+static char	*check_cdpath(char *cdpath, char *dir)
+{
+	char	*tmp;
+	char	**list;
+	char	*res;
+	int		i;
+
+	i = 0;
+	res = NULL;
+	list = ft_strsplit(cdpath, ':');
+	while (list && list[i])
+	{
+		if (list[i][ft_strlen(list[i]) - 1] == '/')
+			res = ft_strjoin(list[i], dir);
+		else
+		{
+			tmp = ft_strjoin(list[i], "/");
+			res = ft_strjoin(tmp, dir);
+			ft_strdel(&tmp);
+		}
+		if (access(res, F_OK) == 0)
+		{
+			cd_free_files(list);
+			return (res);
+		}
+		ft_strdel(&res);
+		i++;
+	}
+	return (res);
+}
 
 static char	*get_cur(char ***environ, char *dir, int *f)
 {
@@ -26,8 +57,7 @@ static char	*get_cur(char ***environ, char *dir, int *f)
 	i = 0;
 	list = 0;
 	res = 0;
-	if (dir && (ft_strnequ(dir, "./", 2)
-			|| ft_strnequ(dir, "../", 3)
+	if (dir && (ft_strnequ(dir, "./", 2) || ft_strnequ(dir, "../", 3)
 			|| ft_strnequ(dir, "/", 1)))
 	{
 		*f = 1;
@@ -35,26 +65,15 @@ static char	*get_cur(char ***environ, char *dir, int *f)
 	}
 	if ((cdpath = utility_get_env_var(environ, "CDPATH")))
 	{
-		if (!(list = ft_strsplit(cdpath, ':')))
-			return (0);
-		while (list[i])
+		if ((res = check_cdpath(cdpath, dir)) != NULL)
 		{
-			if (list[i][ft_strlen(list[i]) - 1] == '/')
-				res = ft_strjoin(list[i], dir);
-			else
-			{
-				tmp = ft_strjoin(list[i], "/");
-				res = ft_strjoin(tmp, dir);
-				ft_strdel(&tmp);
-			}
-			if (access(res, F_OK) == 0)
-				return ((char *)cd_free_files(list));
-			ft_strdel(&res);
-			i++;
+			tmp = cd_get_pwd(res);
+			ft_putendl(tmp);
+			ft_strdel(&tmp);
+			return (res);
 		}
 	}
 	*f = 1;
-	i = 0;
 	cd_free_files(list);
 	return (ft_strjoin("./", dir));
 }
@@ -73,24 +92,22 @@ static int	changing_directory(char *dir[2], char ***env, char opts, int f)
 		pwd = ft_strdup(buf);
 		pwd[ft_strlen(pwd) - 1] = '\0';
 	}
-	ft_putendl(pwd);
 	if (chdir(pwd) != -1)
 	{
 		ft_putstr("[NOT WRITTEN] CHDDIRED ON ");
 		ft_putendl(pwd);
-		utility_add_entry_to_environ(env, "OLDPWD", utility_get_env_var(env, "PWD"));
+		utility_add_entry_to_environ(env, "OLDPWD",
+				utility_get_env_var(env, "PWD"));
 		utility_add_entry_to_environ(env, "PWD", pwd);
 		ft_strdel(&pwd);
 		return (0);
 	}
-	ft_putstr_fd("cd: ", 2);
-	ft_putstr_fd("could not change directory to: ", 2);
+	ft_putstr_fd("cd: could not change directory to: ", 2);
 	ft_putendl_fd(f ? dir[0] : pwd, 2);
 	return (1);
 }
 
 int			blt_cd(int argc, char **argv, char ***env)
-
 {
 	char	opts;
 	char	*tmp;
@@ -102,6 +119,7 @@ int			blt_cd(int argc, char **argv, char ***env)
 	dir[0] = NULL;
 	dir[1] = NULL;
 	f = 0;
+	(void)argc;
 	if ((opts = cd_get_opts(argv, &dir[0])) == -1)
 	{
 		ft_putendl_fd("cd: error: too many arguments.", 2);
@@ -124,7 +142,8 @@ int			blt_cd(int argc, char **argv, char ***env)
 	if (dir[1][0] != '/')
 	{
 		tmp = ft_strdup(dir[0]);
-		if (opts == OPT_P && readlink(utility_get_env_var(env, "PWD"), pwd, 4096))
+		if (opts == OPT_P
+				&& readlink(utility_get_env_var(env, "PWD"), pwd, 4096))
 			dir[1] = ft_strjoin("/", ft_strjoin(pwd, "/"));
 		else
 			dir[1] = ft_strjoin(utility_get_env_var(env, "PWD"), "/");
