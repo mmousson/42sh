@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 21:18:38 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 02:18:23 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 02:52:17 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static char	*get_res(char **files)
 	return (res ? res : ft_strdup("/"));
 }
 
-char		*get_pwd(char *cur)
+char		*cd_get_pwd(char *cur)
 {
 	char	**files;
 	char	*res;
