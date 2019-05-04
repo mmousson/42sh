@@ -13,3 +13,4 @@ void
 search_utility
 testing.c
 42sh.dSYM
+generate_prompt
