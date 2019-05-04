@@ -6,7 +6,7 @@
 /*   By: tduval </var/mail/tduval>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 08:37:24 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 02:07:51 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 02:47:27 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static char	*get_cur(char ***environ, char *dir, int *f)
 			if (access(res, F_OK) == 0)
 			{
 				free_list(list);
-				ft_putendl(res);
 				return (res);
 			}
 			ft_strdel(&res);
@@ -78,24 +77,31 @@ static char	*get_cur(char ***environ, char *dir, int *f)
 
 static int	changing_directory(char *dir[2], char ***env, char opts, int f)
 {
+	char	buf[4096];
 	char	*pwd;
 
-	pwd = 0;
-	if (chdir(dir[1]) != -1)
+	pwd = get_pwd(dir[1]);
+	ft_strdel(&dir[1]);
+	if (opts == OPT_P && readlink(pwd, buf, 4096) != -1)
 	{
-		pwd = get_pwd(dir[1]);
-		if ((opts & OPT_L) == 0)
-			utility_add_entry_to_environ(env, "PWD", pwd);
-		//else
-			//TODO
-		ft_strdel(&dir[1]);
+		f = 0;
+		ft_strdel(&pwd);
+		pwd = ft_strdup(buf);
+		pwd[ft_strlen(pwd) - 1] = '\0';
+	}
+	ft_putendl(pwd);
+	if (chdir(pwd) != -1)
+	{
+		ft_putstr("[NOT WRITTEN] CHDDIRED ON ");
+		ft_putendl(pwd);
+		utility_add_entry_to_environ(env, "OLDPWD", utility_get_env_var(env, "PWD"));
+		utility_add_entry_to_environ(env, "PWD", pwd);
 		ft_strdel(&pwd);
 		return (0);
 	}
 	ft_putstr_fd("cd: ", 2);
-	ft_putstr_fd("no such file or directory: ", 2);
-	ft_putendl_fd(f ? dir[0] : dir[1], 2);
-	ft_strdel(&dir[1]);
+	ft_putstr_fd("could not change directory to: ", 2);
+	ft_putendl_fd(f ? dir[0] : pwd, 2);
 	return (1);
 }
 
@@ -134,15 +140,11 @@ int			cd(int argc, char **argv, char ***env)
 	if (dir[1][0] != '/')
 	{
 		tmp = ft_strdup(dir[0]);
-		if (opts == OPT_P)
-		{
-			readlink(utility_get_env_var(env, "PWD"), pwd, 4096);
+		if (opts == OPT_P && readlink(utility_get_env_var(env, "PWD"), pwd, 4096))
 			dir[1] = ft_strjoin("/", ft_strjoin(pwd, "/"));
-		}
 		else
 			dir[1] = ft_strjoin(utility_get_env_var(env, "PWD"), "/");
 		dir[1] = ft_strjoin(dir[1], tmp);
-		ft_putendl(dir[1]);
 		ft_strdel(&tmp);
 	}
 	return (changing_directory(dir, env, opts, f));
@@ -159,7 +161,9 @@ int		main(int ac, char **av, char **env)
 	ft_putendl("\n --------------------------------- \n");
 	while (cpy[i])
 	{
-		ft_putendl(cpy[i]);
+		if (ft_strncmp(cpy[i], "PWD", 3) == 0
+				|| ft_strncmp(cpy[i], "OLDPWD", 6) == 0)
+			ft_putendl(cpy[i]);
 		ft_strdel(&(cpy[i]));
 		i++;
 	}
