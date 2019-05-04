@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 02:51:04 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 03:53:58 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/04 04:02:34 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,16 @@ static int	changing_directory(char *dir[2], char ***env, char opts, int f)
 {
 	char	buf[4096];
 	char	*pwd;
+	int		i;
 
 	pwd = cd_get_pwd(dir[1]);
 	ft_strdel(&dir[1]);
-	if (opts == OPT_P && readlink(pwd, buf, 4096) != -1)
+	if (opts == OPT_P && (i = readlink(pwd, buf, 4096)) != -1)
 	{
 		f = 0;
 		ft_strdel(&pwd);
 		pwd = ft_strdup(buf);
-		pwd[ft_strlen(pwd) - 1] = '\0';
+		pwd[i - 1] = '\0';
 	}
 	if (chdir(pwd) != -1)
 	{
