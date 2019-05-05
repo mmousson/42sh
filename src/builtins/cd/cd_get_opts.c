@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 21:52:00 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 03:37:16 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/06 01:39:54 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static char	check_arg(char *arg, char *next, char **dir, char cur)
 	char	res;
 	int		i;
 
+	res = 0;
 	i = 1;
 	while (arg[i])
 	{
