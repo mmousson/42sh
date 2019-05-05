@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 21:36:53 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 03:22:07 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/06 01:49:17 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 void	*cd_free_files(char **files);
 char	*cd_get_pwd(char *cur);
 char	cd_get_opts(char **argv, char **dir);
+int		cd_changing_directory(char *dir[2], char ***env, char opts, int f);
 
 #endif
