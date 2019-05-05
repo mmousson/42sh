@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 22:52:39 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 14:18:48 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/05 11:34:57 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char				*line_addstr(char *str)
 	int				lenstr;
 
 	lenstr = (int)ft_strlen(str);
-	len = (int)ft_strlen(g_env.line) + lenstr;	
+	len = (int)ft_strlen(g_env.line) + lenstr;
 	if (g_env.mode->v_replace && g_env.cm->pos < len - lenstr)
 		return (vi_replace_str(str, len));
 	if (len > BUFF_SIZE - 10)
@@ -63,7 +63,14 @@ char				*line_delchar(int size)
 	if (size > g_env.cm->pos - g_env.p_size)
 		size = g_env.cm->pos - g_env.p_size;
 	if (g_env.mode->saved)
-		ft_strncpy(g_env.s_buffer, &(g_env.line[g_env.cm->pos]), size);
+		ft_strncpy(g_env.s_buffer, &(g_env.line[g_env.cm->pos - size]), size);
+	if (size > 1 && g_env.mode->mode[MNORMAL])
+	{
+		ft_strncpy(&(g_env.s_buffkill[g_env.k_index]),
+				&(g_env.line[g_env.cm->pos - size]), size);
+		g_env.k_index += size;
+		g_env.s_buffkill[g_env.k_index] = '\0';
+	}
 	if (!(fresh = ft_strnew(g_env.len - size)))
 		sh_errorterm(TMALLOC);
 	ft_strncpy(fresh, g_env.line, g_env.cm->pos - size);
@@ -82,6 +89,13 @@ char				*line_delchar_bs(int size)
 		size = g_env.len - g_env.cm->pos;
 	if (g_env.mode->saved)
 		ft_strncpy(g_env.s_buffer, &(g_env.line[g_env.cm->pos]), size);
+	if (size > 1 && g_env.mode->mode[MNORMAL])
+	{
+		ft_strncpy(&(g_env.s_buffkill[g_env.k_index]),
+				&(g_env.line[g_env.cm->pos]), size);
+		g_env.k_index += size;
+		g_env.s_buffkill[g_env.k_index] = '\0';
+	}
 	if (!(fresh = ft_strnew(g_env.len - size)))
 		sh_errorterm(TMALLOC);
 	ft_strncpy(fresh, g_env.line, g_env.cm->pos);

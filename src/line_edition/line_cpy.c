@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 02:36:49 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 18:11:39 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/04 16:15:24 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int					line_cpy(char *str, int ret)
 	if (str[0] == 27 && ret == 1)
 		return (line_escap());
 	else if (str[0] == '\n' && ret == 1)
-		return (line_return ());
+		return (line_return());
 	else if (line_isaltc(str, ret))
 		line_ccpy(1);
 	else if (line_isaltx(str, ret))

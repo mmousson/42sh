@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:16:46 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 11:27:27 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/03 11:52:20 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,10 @@ static void		vi_endrjump(void)
 		line_cursor_motion(MRIGHT, i - g_env.cm->pos - 1);
 }
 
-void			vi_wjump(int count)
-{
-	while (--count + 1)
-		line_rjump();
-}
-
 void			vi_ejump(int count)
 {
 	while (--count + 1)
 		vi_endrjump();
-}
-
-void			vi_bjump(int count)
-{
-	while (--count + 1)
-		line_ljump();
 }
 
 void			vi_pipejump(int count)

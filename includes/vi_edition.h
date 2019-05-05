@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 14:10:59 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 14:31:07 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/03 11:52:28 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ int							vi_undo(char *str, int ret);
 **	jump_motion
 */
 
-void						vi_wjump(int count);
 void						vi_ejump(int count);
-void						vi_bjump(int count);
 void						vi_pipejump(int count);
 void						vi_jump_occur(char c, int i, int count);
 
@@ -99,6 +97,7 @@ void						vi_rev_repeat(void);
 void						vi_cdel(void);
 void						vi_cpy(void);
 void						vi_undo_update_pos(void);
+int							vi_new_mode(t_emode mode);
 void						vi_reset_cursor(t_undo *tmp, int u);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 12:00:43 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 14:36:16 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/04 16:16:12 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void			line_dellword(void)
 		i--;
 	g_env.line = line_delchar(g_env.cm->pos - i - 1);
 	line_cursor_motion(MLEFT, g_env.cm->pos - i - 1);
-
 }
 
 static int			line_delword(char *str, int ret)

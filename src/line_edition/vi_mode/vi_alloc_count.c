@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 15:10:32 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 19:47:20 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/03 10:34:46 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ int				vi_del_count(void)
 
 	if (g_env.line[g_env.p_size] != '(')
 		return (1);
-	len = ft_count_n(g_env.count);
+	len = ft_count_n(g_env.count) + 3;
 	g_env.mode->v_command = 0;
-	if (!(fresh = ft_strnew(g_env.len - len - 3)))
+	if (!(fresh = ft_strnew(g_env.len - len)))
 		sh_errorterm(TMALLOC);
 	ft_strncpy(fresh, g_env.line, g_env.p_size);
-	ft_strcpy(&(fresh[g_env.p_size]), &(g_env.line[g_env.p_size + 3 + len]));
+	ft_strcpy(&(fresh[g_env.p_size]), &(g_env.line[g_env.p_size + len]));
 	ft_strdel(&g_env.line);
 	g_env.line = fresh;
-	line_cursor_motion(MLEFT, 3 + len);
+	line_cursor_motion(MLEFT, len);
 	return (1);
 }

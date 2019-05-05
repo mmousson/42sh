@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 22:59:54 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 16:33:36 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/05 11:29:05 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void				line_paste(char *str, int count)
 	if (!(g_env.oldline = ft_strdup(g_env.line)))
 		sh_errorterm(TMALLOC);
 	line_cursor_motion(MRIGHT, (int)ft_strlen(str) * count);
+	g_env.k_index = 0;
 }
 
 static int			line_choose_mode(char *str, int ret)
@@ -68,10 +69,8 @@ static int			line_choose_mode(char *str, int ret)
 
 int					line_update(char *str, int ret)
 {
-	int				i;
 	int				cap;
 
-	i = -1;
 	if (!str)
 		return (0);
 	vi_init_undo();

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 17:58:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 15:04:49 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/04 16:33:36 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,13 @@ void				vi_reset_cursor(t_undo *tmp, int u)
 static int			vi_lstlen(t_undo *undo)
 {
 	int				lstlen;
-	t_undo			*tmp;
 
 	lstlen = 0;
-	tmp = undo;
 	while (undo && undo->next)
 	{
 		undo = undo->next;
 		lstlen++;
 	}
-	undo = tmp;
 	return (lstlen);
 }
 

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 02:00:25 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 14:44:25 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/04 17:12:56 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ void				sh_term_manager(void)
 	if (!tc || !cm || !mode)
 		sh_errorterm(TMALLOC);
 	g_env.ry = NULL;
-	ft_bzero(tc, sizeof(t_tc));
-	ft_bzero(cm, sizeof(t_cm));
-	ft_bzero(mode, sizeof(t_mode));
 	g_env.tc = tc;
 	g_env.tc->tc = 1;
 	g_env.cm = cm;

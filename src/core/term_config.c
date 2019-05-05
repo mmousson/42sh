@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 18:09:37 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/05 11:07:10 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ void				sh_switch_term(int reset)
 	if (reset)
 	{
 		g_env.term.c_lflag |= (ECHO | ICANON);
+		g_env.term.c_cc[VDSUSP] = CTRLY;
 //		sh_reset_signal(1);
 	}
 	else
 	{
 //		sh_signal_handler(1);
 		g_env.term.c_lflag &= ~(ECHO | ICANON);
+		g_env.term.c_cc[VDSUSP] = _POSIX_VDISABLE;
 	}
 	if ((tcsetattr(g_env.t_fd, TCSANOW, &(g_env.term))) == -1)
 		sh_errorterm(TBADFD);
@@ -88,6 +90,7 @@ void				sh_configterm(void)
 		return ;
 	g_env.term.c_cc[VMIN] = 1;
 	g_env.term.c_cc[VTIME] = 0;
+	g_env.term.c_cc[VDSUSP] = _POSIX_VDISABLE;
 	g_env.term.c_lflag &= ~(ICANON | ECHO);
 	if ((tcsetattr(g_env.t_fd, TCSANOW, &(g_env.term))) == -1)
 		sh_errorterm(TBADFD);

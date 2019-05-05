@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 14:30:44 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/05 16:20:30 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@
 # define CTRLK '\013'
 # define CTRLN '\016'
 # define CTRLP '\020'
+# define CTRLT '\024'
 # define CTRLU '\025'
 # define CTRLW '\027'
 # define CTRLX '\030'
+# define CTRLY '\031'
 # define CTRLUND '\037'
 
 typedef enum			e_error
@@ -127,6 +129,8 @@ typedef struct			s_env
 	int					len;
 	int					cpos;
 	char				s_buffer[BUFF_SIZE + 1];
+	char				s_buffkill[BUFF_SIZE + 1];
+	int					k_index;
 	t_ctrlxx			*cx;
 	int					count;
 }						t_env;
@@ -159,6 +163,7 @@ int						line_ascii(char *str, int ret);
 int						line_history(char *str, int ret);
 int						line_del(char *str, int ret);
 int						line_undo(char *str, int ret);
+int						line_inverse(char *str, int ret);
 
 /*
 **	read
@@ -219,10 +224,9 @@ void					line_reset_history(void);
 
 void					sig_handler(int val);
 void					sig_manager(int sg);
-void					sig_sig_sigint(void);
+void					sig_sigint(void);
 void					sig_sigwinch(void);
 void					sig_reset(int val);
-void					sig_null(int sg);
 void					sig_setchild(int val);
 
 /*
@@ -243,6 +247,7 @@ int						line_isaltx(char *str, int ret);
 int						line_isaltv(char *str, int ret);
 int						line_isaltf(char *str, int ret);
 int						line_isaltb(char *str, int ret);
+int						line_isaltt(char *str, int ret);
 int						line_ctrld(void);
 
 /*
@@ -250,12 +255,6 @@ int						line_ctrld(void);
 */
 
 void					line_print(void);
-
-/*
-**	tmp
-*/
-
-int						line_vi_tmp(char *str);
 
 /*
 **	vi_readline

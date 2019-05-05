@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 15:34:42 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 13:49:17 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/03 10:04:08 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			vi_cdel(void)
 		line_cursor_motion(MLEFT, g_env.cm->pos - g_env.mode->v_pos);
 	}
 	else
-		g_env.line = line_delchar_bs(g_env.mode->v_pos - g_env.cm->pos);
+		g_env.line = line_delchar_bs(g_env.mode->v_pos - g_env.cm->pos - 1);
 	g_env.mode->v_del = 0;
 	g_env.mode->v_pos = 0;
 	vi_undo_update_pos();

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 14:46:23 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 14:25:49 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/03 10:31:30 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int				vi_command(char *str, int ret)
 	if (vi_get_count(str)
 		|| vi_get_prior_flag(str, ret))
 		return (1);
-	else if (vi_insert(str, ret))
+	if (vi_insert(str, ret))
 		return (1);
 	else if (vi_history(str, ret))
 		return (1);

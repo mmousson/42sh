@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:46:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 18:04:14 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/05 16:44:13 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,22 @@
 
 static int			line_cpy_pst(char *str, int ret)
 {
+
+	int				tmp;
+
 	if (line_isaltc(str, ret) && !g_env.mode->n_select)
 		line_init_cpy();
 	else if (line_isaltv(str, ret) && !g_env.mode->n_select)
 	{
 		vi_add_undo();
 		line_paste(g_env.s_buffer, g_env.count);
-		//vi_undo_update_pos();
+	}
+	else if (str[0] == CTRLY && ret == 1)
+	{
+		tmp = g_env.k_index;
+		vi_add_undo();
+		line_paste(g_env.s_buffkill, g_env.count);
+		g_env.k_index = tmp;
 	}
 	else
 		return (0);
@@ -38,13 +47,10 @@ int					line_history(char *str, int ret)
 		line_cursor_motion(MDOWN, g_env.count);
 	else
 		return (0);
+	g_env.k_index = 0;
 	vi_reset_count(str);
 	return (1);
 }
-
-/*
-**	UJUMP to check
-*/
 
 int					line_motion(char *str, int ret)
 {
@@ -108,8 +114,8 @@ int					line_manager(char *str, int ret)
 		return (1);
 	else if (line_undo(str, ret))
 		return (1);
-	vi_reset_count(str);
-	if (line_vi_tmp(str))
+	else if (line_inverse(str, ret))
 		return (1);
+	vi_reset_count(str);
 	return (1);
 }

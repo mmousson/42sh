@@ -6,13 +6,13 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:34:56 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 14:48:02 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/03 11:20:34 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static int			vi_new_mode(t_emode mode)
+int					vi_new_mode(t_emode mode)
 {
 	int				i;
 
@@ -29,15 +29,6 @@ static int			vi_new_mode(t_emode mode)
 	if (mode == MVI)
 		g_env.mode->v_insert = 1;
 	return (1);
-}
-
-int					line_vi_tmp(char *str)
-{
-	if (str[0] == -62 && str[1] == -70)
-		return (vi_new_mode(MNORMAL));
-	else if (str[0] == -30 && str[1] == -128 && str[2] == -109)
-		return (vi_new_mode(MVI));
-	return (0);
 }
 
 int					vi_reset_mode(int ins, int com, int replace)

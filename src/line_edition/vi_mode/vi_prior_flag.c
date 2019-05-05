@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 17:04:26 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 18:04:23 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/04 16:16:47 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		vi_prior_r(char *str)
 	vi_undo_update_pos();
 	g_env.mode->v_replace = 0;
 	g_env.mode->v_replace_one = 0;
-	ft_strdel(&fresh);	
+	ft_strdel(&fresh);
 }
 
 static void		vi_fftt(char *str, int i)
@@ -48,7 +48,6 @@ static void		vi_fftt(char *str, int i)
 		vi_cdel();
 	if (g_env.mode->v_yank)
 		vi_cpy();
-
 }
 
 int				vi_get_prior_flag(char *str, int ret)

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:20:36 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 14:51:32 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/03 11:56:27 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,16 @@ int					vi_motion(char *str, int ret)
 		return (1);
 	else if (str[0] == ' ' && ret == 1)
 		line_cursor_motion(MRIGHT, g_env.count);
-	else if (str[0] == 'h' && ret == 1)
+	else if ((str[0] == 'h' || str[0] == 127) && ret == 1)
 		line_cursor_motion(MLEFT, g_env.count);
 	else if (str[0] == 'l' && ret == 1)
 		line_cursor_motion(MRIGHT, g_env.count);
 	else if ((str[0] == 'w' || str[0] == 'W') && ret == 1)
-		vi_wjump(g_env.count);
+		line_rjump();
 	else if ((str[0] == 'e' || str[0] == 'E') && ret == 1)
 		vi_ejump(g_env.count);
 	else if ((str[0] == 'b' || str[0] == 'B') && ret == 1)
-		vi_bjump(g_env.count);
+		line_ljump();
 	else
 		return (vi_spec_motion(str, ret));
 	if (g_env.mode->v_del)
