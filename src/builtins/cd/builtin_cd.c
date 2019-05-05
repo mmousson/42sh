@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 02:51:04 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 04:02:34 by tduval           ###   ########.fr       */
+/*   Updated: 2019/05/06 01:28:18 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	changing_directory(char *dir[2], char ***env, char opts, int f)
 	int		i;
 
 	pwd = cd_get_pwd(dir[1]);
-	ft_strdel(&dir[1]);
+	ft_strdel(&(dir[1]));
 	if (opts == OPT_P && (i = readlink(pwd, buf, 4096)) != -1)
 	{
 		f = 0;
@@ -97,6 +97,7 @@ static int	changing_directory(char *dir[2], char ***env, char opts, int f)
 	}
 	ft_putstr_fd("cd: could not change directory to: ", 2);
 	ft_putendl_fd(f ? dir[0] : pwd, 2);
+	ft_strdel(&pwd);
 	return (1);
 }
 
@@ -124,10 +125,10 @@ static int	first_part(char **argv, char *opts, char *dir[2], char ***env)
 
 int			blt_cd(int argc, char **argv, char ***env)
 {
-	char	opts;
-	char	*tmp;
 	char	pwd[4096];
+	char	*tmp[2];
 	char	*dir[2];
+	char	opts;
 	int		f;
 
 	dir[0] = NULL;
@@ -139,14 +140,21 @@ int			blt_cd(int argc, char **argv, char ***env)
 	dir[1] = get_cur(env, dir[0], &f);
 	if (dir[1] && dir[1][0] != '/')
 	{
-		tmp = ft_strdup(dir[0]);
+		ft_strdel(&dir[1]);
+		tmp[0] = ft_strdup(dir[0]);
 		if (opts == OPT_P
 				&& readlink(utility_get_env_var(env, "PWD"), pwd, 4096) != -1)
-			dir[1] = ft_strjoin("/", ft_strjoin(pwd, "/"));
+		{
+			tmp[1] = ft_strjoin(pwd, "/");
+			dir[1] = ft_strjoin("/", tmp[1]);
+			ft_strdel(&tmp[1]);
+		}
 		else
 			dir[1] = ft_strjoin(utility_get_env_var(env, "PWD"), "/");
-		dir[1] = ft_strjoin(dir[1], tmp);
-		ft_strdel(&tmp);
+		tmp[1] = ft_strjoin(dir[1], tmp[0]);
+		ft_strdel(&dir[1]);
+		dir[1] = tmp[1];
+		ft_strdel(&tmp[0]);
 	}
 	return (dir[1] ? changing_directory(dir, env, opts, f) : 1);
 }
