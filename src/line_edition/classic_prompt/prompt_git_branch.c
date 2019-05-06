@@ -6,15 +6,16 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 08:39:13 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 14:19:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/06 19:55:03 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include <dirent.h>
 #include <sys/param.h>
-#include "line_edition.h"
+#include "libft.h"
+#include "prompt.h"
 
 /*
 **	This function recursively searches in the current directory, and the parent
@@ -54,29 +55,36 @@ static char	*get_dot_git_path(void)
 }
 
 /*
-**	Handles the line once it has been read by the
+**	Handles the line of the git branch infos once it has been read by the
 **	'GNL' func
+**
+**	Return Value: The actual size-on-screen of the printed infos
 */
 
-static void	handle_line(int add, int del, char *l)
+static int	handle_git_branch_line(int add, int del, char *l)
 {
-	ft_putstr(GIT_BRANCH_START);
-	ft_putstr((add + del == 0) ? GIT_UP_TO_DATE : GIT_NOT_UP_TO_DATE);
-	ft_putstr("\xEE\x82\xB0\033[0;38;2;0;0;0;48;2;");
-	ft_putstr((add + del == 0) ? GIT_UP_TO_DATE" \xEE\x82\xA0 "
-		: GIT_RED_INFOS);
-	ft_putstr(ft_strrchr(l, '/') + 1);
+	int	ret;
+
+	ft_putstr_fd(GIT_BRANCH_START, 1);
+	ft_putstr_fd((add + del == 0) ? GIT_UP_TO_DATE : GIT_NOT_UP_TO_DATE, 1);
+	ret = put_arrow(BANNER_ARROW);
+	ft_putstr_fd("\033[0;38;2;0;0;0;48;2;", 1);
+	ret += put_arrow((add + del) ? GIT_RED_INFOS"\xEE\x82\xA0 "
+		: GIT_UP_TO_DATE"\xEE\x82\xA0 ");
+	ret += write(1, ft_strrchr(l, '/') + 1, ft_strlen(ft_strrchr(l, '/') + 1));
 	if (add + del == 0)
-		ft_putstr(GIT_END_BANNER);
+		ret += put_arrow(GIT_END_BANNER);
 	else
 	{
-		ft_putstr(" * +");
+		ret += write(1, " * +", 4);
 		ft_putnbr(add);
-		ft_putstr(" / -");
+		ret += write(1, " / -", 4);
 		ft_putnbr(del);
-		ft_putstr(GIT_ERR_END_BANNER);
+		ret += (ft_order_of_magnitude(add) + ft_order_of_magnitude(del));
+		ret += put_arrow(GIT_ERR_END_BANNER);
 	}
 	ft_strdel(&l);
+	return (ret);
 }
 
 /*
@@ -90,28 +98,31 @@ static void	handle_line(int add, int del, char *l)
 **		line_edition/prompt_classic.c
 **	dot_git -> The path to the repository's '.git' folder
 **
-**	Return Value: NONE
+**	Return Value: The actual size-on-screen of the printed infos
 */
 
-static void	print_infos(int e, char *dot_git, int add, int del)
+static int	print_infos(char *dot_git, int add, int del)
 {
+	int		ret;
 	int		fd;
 	char	*l;
 	char	*tmp;
 
+	ret = 0;
 	if ((tmp = ft_strjoin(dot_git, "/HEAD")) == NULL)
 	{
 		ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
-		return ;
+		return (0);
 	}
 	if ((fd = open(tmp, O_RDONLY)) != -1)
 	{
 		if (get_next_line(fd, &l) && l != NULL)
-			handle_line(add, del, l);
+			ret = handle_git_branch_line(add, del, l);
 		ft_strdel(&dot_git);
 		ft_strdel(&tmp);
 		close(fd);
 	}
+	return (ret);
 }
 
 /*
@@ -127,24 +138,25 @@ static void	print_infos(int e, char *dot_git, int add, int del)
 **	Return Value: NONE
 */
 
-void		prompt_git_branch(int e, char **env)
+int			prompt_git_branch(char **env)
 {
+	int		ret;
 	int		plus;
 	int		del;
 	DIR		*dir;
 	char	*dot_git;
 
-	if ((dot_git = get_dot_git_path()) == NULL)
-		return ;
-	if ((dir = opendir(dot_git)) != NULL)
+	if ((dot_git = get_dot_git_path()) == NULL
+		|| (dir = opendir(dot_git)) == NULL)
 	{
-		get_additions_deletions(&plus, &del, env);
-		print_infos(e, dot_git, plus, del);
-		closedir(dir);
+		ft_putstr(GIT_NO_GIT);
+		return (2);
 	}
 	else
 	{
-		ft_putstr("\033[0;38;2;50;50;50m");
-		ft_putstr("\xEE\x82\xB0");
+		get_additions_deletions(&plus, &del, env);
+		ret = print_infos(dot_git, plus, del);
+		closedir(dir);
+		return (ret);
 	}
 }
