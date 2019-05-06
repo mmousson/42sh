@@ -6,14 +6,18 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:49:45 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/27 01:32:07 by mmousson         ###   ########.fr        #
+#    Updated: 2019/05/06 20:10:47 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 BUILTINS_PATH = ./src/builtins/
 BUILTINS =	builtin_alias.c									\
 			builtin_bg.c									\
-			builtin_cd.c									\
+			cd/builtin_cd.c									\
+			cd/cd_changing_directory.c						\
+			cd/cd_free_files.c								\
+			cd/cd_get_opts.c								\
+			cd/cd_get_pwd.c									\
 			builtin_echo.c									\
 			builtin_exit.c									\
 			builtin_export.c								\

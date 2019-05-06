@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   cd_free_files.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/14 12:06:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:00:55 by mmousson         ###   ########.fr       */
+/*   Created: 2019/05/04 03:17:08 by tduval            #+#    #+#             */
+/*   Updated: 2019/05/04 03:22:29 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int					blt_cd(int argc, char **argv, char ***env)
+#include "libft.h"
+
+void	*cd_free_files(char **files)
 {
-	(void)argc;
-	(void)argv;
-	(void)env;
-	return (0);
+	int		i;
+
+	i = 0;
+	while (files && files[i])
+	{
+		ft_strdel(&files[i]);
+		i++;
+	}
+	ft_memdel((void **)&files);
+	return (NULL);
 }
