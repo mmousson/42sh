@@ -1,44 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tool_pars.c                                        :+:      :+:    :+:   */
+/*   ft_exec_tool.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 20:06:34 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/30 16:56:09 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/01 08:42:08 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/01 09:00:04 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
 #include <stdlib.h>
 
-t_tok		*ft_go_status(t_tok *token, int *pos, int status, int end)
+char			**extend(char **argv, char *str)
 {
-	t_tok	*tmp;
+	char		**tabl;
+	int			size;
 
-	tmp = token;
-	while (tmp && tmp->status != status && (end == -2 || *pos < end))
-	{
-		tmp = tmp->next;
-		(*pos)++;
-	}
-	return (tmp);
-}
-
-t_tok		*ft_go_start(t_tok *token, int start)
-{
-	t_tok	*tok;
-
-	tok = token;
-	if (tok == NULL)
+	size = 0;
+	if (argv)
+		while (argv[size])
+			(size)++;
+	if (!(tabl = (char**)malloc(sizeof(char*) * (size + 2))))
 		return (NULL);
-	while (tok && start)
-	{
-		tok = tok->next;
-		start--;
-	}
-	if (start != 0)
-		return (NULL);
-	return (tok);
+	tabl[size + 1] = 0;
+	tabl[size] = str;
+	while (--size >= 0)
+		tabl[size] = argv[size];
+	return (tabl);
 }

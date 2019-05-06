@@ -6,18 +6,18 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/25 10:51:00 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/04 15:53:57 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEX_H
 # define LEX_H
 
-# define BUF 1024
-# define NB_STATE 13
-
 # include "line_edition.h"
 # include "pars.h"
+
+# define BUF 1024
+# define NB_STATE 13
 
 /*
 ** enum e_state, used relating to the lexing matrix, 2nd
@@ -35,10 +35,10 @@
 ** TI - 11: TIlde, '~'
 ** PI - 12: PIpe, '|'
 ** DS - 13: Double Silent quote, double quote witch are note store in buff
-** SS - 14: Simple Silent quote, simple quote witche are not store in buff 
+** SS - 14: Simple Silent quote, simple quote witche are not store in buff
 ** EN - 15: ENd, end of the lexing phasis
 ** VA - 16: VAlidation, Storing current buff whith char state
-** VS - 17: Validation Star, Validation, but manage current char the next turn 
+** VS - 17: Validation Star, Validation, but manage current char the next turn
 ** MO - 18: MOre, incomplete lexing, ask for more char
 ** SV - 19: Silent Validator, does not store last char
 */
@@ -77,26 +77,21 @@ typedef struct		s_stat
 	char			*load;
 }					t_stat;
 
-//--
 int					ft_echo(char **args, char ***env);
 int					ft_cd(char **args, char ***env);
 int					ft_env(char **args, char ***env);
 int					ft_setenv(char **args, char ***env);
 int					ft_unsetenv(char **args, char ***env);
-
-char				**ft_tab_dup(char **tabl);
-int					ft_tab_size(char **env);
-//--
-
-int					ft_lex(char **str, t_env *env, char ***arge);
+char				**ft_tabdup(char **tabl);
+int					ft_lex(char **str, char ***arge);
 int					ft_get_next_state(int state, int ch);
 t_stat				*ft_init_stat(void);
 int					proc(t_stat *stat, char buff[BUF], t_tok *tok);
 void				ft_add_token(char buf[BUF], char *ld, int stat, t_tok *tok);
 void				ft_add_char(char buff[BUF], char **load, char cha);
-
-void				ft_more(t_stat *stat, char **str);
-int					ft_pars(t_tok *tok, char ***arge, t_env *env);
+void				ft_free_stat(t_stat *stat);
+int					ft_more(t_stat *stat, char **str, int nl);
+int					ft_pars(t_tok *tok, char ***arge, char *str);
 
 /*
 ** fonctions affichages
@@ -104,5 +99,4 @@ int					ft_pars(t_tok *tok, char ***arge, t_env *env);
 
 void				ft_print_stat_fd(int stat, int fd);
 void				ft_print_ch_fd(int ch, int fd);
-void				ft_step_lex(t_stat *stat);
 #endif

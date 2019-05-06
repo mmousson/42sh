@@ -6,13 +6,15 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/17 04:01:12 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/04 16:33:22 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARS_H
 # define PARS_H
 # define NB_CH 17
+# define NB_PR 6
+# define NB_TY 4
 
 /*
 ** enum e_charac, used relating to the lexing matrix, 1st
@@ -33,6 +35,7 @@
 ** DAS - 14: DASh, '-'
 ** SLA - 15: SLAsh, '/'
 ** NWL - 16: NeWLine, '\n'
+** EXP - 17: to_expend
 */
 
 typedef enum		e_charac
@@ -53,9 +56,21 @@ typedef enum		e_charac
 	SMC,
 	DAS,
 	SLA,
-	NWL
+	NWL,
+	EXP
 }					t_charac;
 
+typedef enum		e_prepa
+{
+	CHAR = 0,
+	SMCL,
+	REDI,
+	PIPE,
+	SPAC,
+	ENDT,
+	EROR,
+	MORE
+}					t_prepa;
 
 typedef struct		s_tok
 {
@@ -84,6 +99,12 @@ t_tree				*ft_init_tree(void);
 int					ft_get_ch(char c);
 
 /*
+** Function pre parsing
+*/
+
+int					ft_prepars(t_tok *token);
+
+/*
 ** Function parsing
 */
 
@@ -105,9 +126,19 @@ t_tree				*ft_pars_rer_rig(t_tok *token, int start, int end);
 t_tree				*ft_pars_rer_lef(t_tok *token, int start, int end);
 
 /*
+** Expend Function
+*/
+
+t_tree				*ft_expend(t_tree *tree, char **arge);
+char				*ft_cmpct(t_tree *tree, char **arge);
+int					is_clean(int val);
+char				*ft_doll(t_tree *tree, char **arge);
+
+/*
 ** Tool Function
 */
 
+void				ft_free_token(t_tok *token);
 t_tok				*ft_go_start(t_tok *token, int start);
 t_tree				*ft_select_pars(t_tok *tok, int st, int end, char c);
 void				ft_cleans_spa(int *start, int *end, t_tok *token);
@@ -118,6 +149,7 @@ t_tok				*ft_go_status(t_tok *token, int *pos, int status, int end);
 */
 
 t_tree				*ft_end_branch(void);
+void				*ft_free_tree(t_tree *tree);
 
 /*
 ** Print Function

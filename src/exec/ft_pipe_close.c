@@ -1,44 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tool_pars.c                                        :+:      :+:    :+:   */
+/*   ft_pipe_close.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 20:06:34 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/30 16:56:09 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/04/16 20:32:25 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/04/16 21:41:53 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
+#include <unistd.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-t_tok		*ft_go_status(t_tok *token, int *pos, int status, int end)
+void		ft_pipe_close(int *fdpipe, int nbr_pipes)
 {
-	t_tok	*tmp;
+	int		k;
 
-	tmp = token;
-	while (tmp && tmp->status != status && (end == -2 || *pos < end))
+	k = 0;
+	while (k < 2 * nbr_pipes)
 	{
-		tmp = tmp->next;
-		(*pos)++;
+		close(fdpipe[k]);
+		k++;
 	}
-	return (tmp);
 }
 
-t_tok		*ft_go_start(t_tok *token, int start)
+int			ft_end_of_pipes(int *fdpipe, int nbr_pipes)
 {
-	t_tok	*tok;
+	int		end;
+	int		status;
 
-	tok = token;
-	if (tok == NULL)
-		return (NULL);
-	while (tok && start)
+	status = -2;
+	ft_pipe_close(fdpipe, nbr_pipes);
+	end = 0;
+	while (end <= nbr_pipes)
 	{
-		tok = tok->next;
-		start--;
+		wait(&status);
+		end++;
 	}
-	if (start != 0)
-		return (NULL);
-	return (tok);
+	return (nbr_pipes);
 }

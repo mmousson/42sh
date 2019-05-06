@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 14:46:57 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/06 21:47:39 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	while (ret)
 	{
 		line = line_get_readline(PBASIC, argv[1]);
-		ret = !ft_lex(&line, &g_env, &env);
+		ret = !ft_lex(&line, &env);
 		if (ret && line)
 			ft_strdel(&line);
 		if (!g_env.isatty)

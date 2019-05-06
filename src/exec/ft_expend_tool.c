@@ -1,44 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tool_pars.c                                        :+:      :+:    :+:   */
+/*   ft_expend_tool.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 20:06:34 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/30 16:56:09 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/04/29 13:56:37 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/06 22:05:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
+#include "exe.h"
+#include "libft.h"
 #include <stdlib.h>
 
-t_tok		*ft_go_status(t_tok *token, int *pos, int status, int end)
+int		is_clean(int val)
 {
-	t_tok	*tmp;
-
-	tmp = token;
-	while (tmp && tmp->status != status && (end == -2 || *pos < end))
-	{
-		tmp = tmp->next;
-		(*pos)++;
-	}
-	return (tmp);
+	if (val == CHA || val == INT || val == DQT || val == SQT || val == ESP)
+		return (1);
+	return (0);
 }
 
-t_tok		*ft_go_start(t_tok *token, int start)
+char	*ft_doll(t_tree *tree, char **arge)
 {
-	t_tok	*tok;
-
-	tok = token;
-	if (tok == NULL)
+	if (!tree || !tree->content || !tree->content[0] || !tree->content[1])
 		return (NULL);
-	while (tok && start)
-	{
-		tok = tok->next;
-		start--;
-	}
-	if (start != 0)
-		return (NULL);
-	return (tok);
+	return (ft_getenv(arge, &tree->content[1]));
 }

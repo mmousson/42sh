@@ -1,44 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tool_pars.c                                        :+:      :+:    :+:   */
+/*   free_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 20:06:34 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/30 16:56:09 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/04/30 17:57:48 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/04/30 20:04:28 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 #include <stdlib.h>
 
-t_tok		*ft_go_status(t_tok *token, int *pos, int status, int end)
+void		*ft_free_tree(t_tree *tree)
 {
-	t_tok	*tmp;
-
-	tmp = token;
-	while (tmp && tmp->status != status && (end == -2 || *pos < end))
-	{
-		tmp = tmp->next;
-		(*pos)++;
-	}
-	return (tmp);
-}
-
-t_tok		*ft_go_start(t_tok *token, int start)
-{
-	t_tok	*tok;
-
-	tok = token;
-	if (tok == NULL)
+	if (!tree)
 		return (NULL);
-	while (tok && start)
-	{
-		tok = tok->next;
-		start--;
-	}
-	if (start != 0)
-		return (NULL);
-	return (tok);
+	ft_free_tree(tree->right);
+	tree->right = NULL;
+	ft_free_tree(tree->left);
+	tree->left = NULL;
+	if (tree->content)
+		free(tree->content);
+	free(tree);
+	return (NULL);
 }

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_ch.c                                           :+:      :+:    :+:   */
+/*   ft_free_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/06 14:54:33 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/02 21:09:15 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/04/30 20:22:00 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/04/30 20:33:18 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
+#include <stdlib.h>
 
-int					ft_get_ch(char c)
+void	ft_free_token(t_tok *token)
 {
-	static char		line[13] = "<>\"'&\\$~|;-/\n";
-	int				k;
-
-	if (c == 0)
-		return (ZER);
-	else if (c >= '0' && c <= '9')
-		return (INT);
-	else if (c == ' ' || c == '\t')
-		return (SPA);
-	k = -1;
-	while (++k < 13)
-		if (c == line[k])
-			return (k + 4);
-	return (CHA);
+	if (!token)
+		return ;
+	ft_free_token(token->next);
+	if (token->content)
+	{
+		free(token->content);
+		token->content = NULL;
+	}
+	free(token);
 }
