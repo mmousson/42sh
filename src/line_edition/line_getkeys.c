@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:46:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/05 16:44:13 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/05 16:55:29 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,13 @@ int					line_manager(char *str, int ret)
 		return (line_return());
 	else if (str[0] == CTRLD && ret == 1 && g_env.len == g_env.p_size + 1)
 		return (line_ctrld());
-	else if (line_ascii(str, ret))
+	else if (line_ascii(str, ret) || line_del(str, ret))
 		return (1);
-	else if (line_del(str, ret))
+	else if (line_motion(str, ret) || line_cpy_pst(str, ret))
 		return (1);
-	else if (line_motion(str, ret))
+	else if (line_history(str, ret) || line_undo(str, ret))
 		return (1);
-	else if (line_cpy_pst(str, ret))
-		return (1);
-	else if (line_history(str, ret))
-		return (1);
-	else if (line_undo(str, ret))
-		return (1);
-	else if (line_inverse(str, ret))
+	else if (line_inverse(str, ret) || auto_completion(str, ret))
 		return (1);
 	vi_reset_count(str);
 	return (1);

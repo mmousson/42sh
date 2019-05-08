@@ -6,12 +6,13 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/05 16:20:50 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/07 10:47:13 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LINE_EDIT_PATH = ./src/line_edition/
 VIMODE_PATH = $(LINE_EDIT_PATH)vi_mode/
+AUTOCMP_PATH = $(LINE_EDIT_PATH)auto_completion/
 
 VIMODE =	vi_alloc.c			\
 			vi_getkeys.c		\
@@ -59,8 +60,17 @@ LINE_EDIT =	line_cpy.c			\
 			line_inverse.c		\
 			line_isaltinv.c
 
+AUTOCMP =	auto_main.c			\
+			auto_utils.c		\
+			auto_getype.c		\
+			auto_alloc.c		\
+			auto_print.c		\
+			auto_alloc_wordlst.c\
+
 LINE_EDIT_SRCS = $(addprefix $(LINE_EDIT_PATH),$(LINE_EDIT))
 VIMODE_SRCS = $(addprefix $(VIMODE_PATH),$(VIMODE))
+AUTOCMP_SRCS = $(addprefix $(AUTOCMP_PATH),$(AUTOCMP))
 SRCS += $(LINE_EDIT_SRCS)
 SRCS += $(VIMODE_SRCS)
+SRCS += $(AUTOCMP_SRCS)
 

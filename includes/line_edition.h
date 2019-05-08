@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/05 16:47:04 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/05 16:58:36 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <termcap.h>
 # include "libft.h"
 # include "vi_edition.h"
+# include "auto_completion.h"
 
 # define USER_FONT "\033[33m"
 # define BANNER_START " \033[7;38;2;50;50;50m"
