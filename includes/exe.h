@@ -6,13 +6,14 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 10:08:18 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/06 22:02:49 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:55:22 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXE_H
 # define EXE_H
 
+# include "job_control_42.h"
 # include "line_edition.h"
 # include "pars.h"
 # include "lex.h"
@@ -77,5 +78,7 @@ int					ft_heredoc(char *end, t_launch *cmd);
 
 char				*ft_getenv(char **env, char *name);
 int					ft_do_home(int k, char **argv, char ***arge);
+
+t_job				*exe_load_job(t_launch *cmd, char ***arge);
 
 #endif

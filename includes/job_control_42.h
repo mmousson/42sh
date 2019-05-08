@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 03:23:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/06 23:18:30 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,14 @@ typedef struct			s_io_channels
 typedef struct			s_process
 {
 	pid_t				pid;
-	char				**argv;
-	char				**environ;
+	char				**argv;//
+	char				**environ;//one more star and already in job
 	t_bool				completed;
 	t_bool				stopped;
 	t_io_channels		io_channels;
+	t_io_channels		real_channels;//
 	int					status;
-	struct s_process	*next;
+	struct s_process	*next;//piped
 }						t_process;
 
 /*
@@ -124,13 +125,14 @@ typedef struct			s_process
 typedef struct			s_job
 {
 	pid_t				pgid;
-	t_process			*first_process;
+	t_process			*first_process;//
 	char				*command;
 	t_io_channels		io_channels;
 	t_bool				notified;
 	int					status;
+	char				***env;//
 	struct termios		tmodes;
-	struct s_job		*next;
+	struct s_job		*next;//smc-> to remove for expand
 }						t_job;
 
 /*

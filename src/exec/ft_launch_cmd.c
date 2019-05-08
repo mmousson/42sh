@@ -6,10 +6,11 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/06 21:58:39 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:55:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "job_control_42.h"
 #include "exe.h"
 #include "libft.h"
 #include <stdlib.h>
@@ -69,13 +70,13 @@ void		ft_launch_exe(t_launch *cmd, char ***arge)
 
 void		ft_launch_cmd(t_launch **cmd, char ***arge)
 {
+	t_job	*job;
+
 	if ((*cmd)->argv)
 	{
-		if ((*cmd)->nbr_pipe)
-			ft_launch_pipe(*cmd, arge);
-		else
-			ft_launch_exe(*cmd, arge);
+		job = exe_load_job(*cmd, arge);
 		ft_free_cmd(*cmd);
+		job_launch(job, 0);//fg and bg to detect
 		if (!(*cmd = ft_init_cmd(NULL)))
 			exit(1);
 	}
