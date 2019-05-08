@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    parser.mk                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 20:35:29 by oboutrol          #+#    #+#              #
-#    Updated: 2019/05/08 17:37:23 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/05/08 19:54:35 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PARSER_PATH = src/parser/
+PARSER_PATH = ./src/parser/
 
 PARSER_NAME = pars.c\
 				ft_prepars.c\

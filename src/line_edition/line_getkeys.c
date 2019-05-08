@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_getkeys.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:46:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/05 16:44:13 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/08 20:03:33 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ int					line_motion(char *str, int ret)
 	return (1);
 }
 
-int					line_ascii(char *str, __unused int ret)
+int					line_ascii(char *str, int ret)
 {
+	(void)ret;
 	if (str[0] == '9')
 		exit(0);
 	if (str[0] == 27 && ret == 1)

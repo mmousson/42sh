@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 13:15:59 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/06 22:10:03 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 19:57:39 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exe.h"
-#include "libft.h"
+#ifdef __linux__
+
+# include <sys/wait.h>
+#endif
+
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include "exe.h"
+#include "libft.h"
 
 void		ft_launch_here(char *end, int fd)
 {

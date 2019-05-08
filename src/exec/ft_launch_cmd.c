@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_launch_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 17:53:01 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 20:14:37 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		ft_launch_cmd(t_launch **cmd, char ***arge)
 		job = exe_load_job(*cmd, arge);
 		ft_free_cmd(*cmd);
 		//exe_print_job(job);
-		job_launch(job, 0);//fg and bg to detect
+		job_launch(job, 1);//fg and bg to detect
 		if (!(*cmd = ft_init_cmd(NULL)))
 			exit(1);
 	}
