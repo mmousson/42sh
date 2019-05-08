@@ -6,7 +6,7 @@
 #    By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 20:38:11 by oboutrol          #+#    #+#              #
-#    Updated: 2019/05/08 10:00:42 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/05/08 18:10:04 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ EXEC_PATH = ./src/exec/
 EXEC_NAME = 	ft_exec.c\
 				ft_exec_tool.c\
 				ft_launch_cmd.c\
-				init_exe.c\
+				exe_init.c\
 				ft_split_path.c\
 				ft_free_exe.c\
 				ft_pipe_close.c\
