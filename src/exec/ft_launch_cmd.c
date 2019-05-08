@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 08:55:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:42:48 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		ft_launch_cmd(t_launch **cmd, char ***arge)
 	{
 		job = exe_load_job(*cmd, arge);
 		ft_free_cmd(*cmd);
+		exe_print_job(job);
 		job_launch(job, 0);//fg and bg to detect
 		if (!(*cmd = ft_init_cmd(NULL)))
 			exit(1);

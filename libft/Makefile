@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/07 00:53:31 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/01 15:01:52 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/08 10:03:04 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ SRC =	ft_memset.c				\
 		ft_fabs.c				\
 		get_line.c				\
 		ft_del_words_tables.c	\
+		ft_print_words_tables.c	\
 		get_next_line.c
 
 OBJ = $(subst .c,.o,$(addprefix ./$(OBJDIR)/,$(SRC)))

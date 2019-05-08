@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 10:08:18 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 08:55:22 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 10:04:48 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int					ft_heredoc(char *end, t_launch *cmd);
 char				*ft_getenv(char **env, char *name);
 int					ft_do_home(int k, char **argv, char ***arge);
 
+void				exe_print_job(t_job *job);
 t_job				*exe_load_job(t_launch *cmd, char ***arge);
 
 #endif
