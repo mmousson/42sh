@@ -6,14 +6,12 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 18:50:35 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/08 14:15:14 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/04 16:00:57 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lex.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 void			ft_print_stat_fd(int stat, int fd)
 {
@@ -53,17 +51,6 @@ void			ft_print_ch_hash(int ch)
 		ft_putnbr(ch);
 	else
 		ft_putstr(tabl[ch]);
-}
-
-void			ft_step_lex(t_stat *stat)
-{
-	ft_print_stat_fd(stat->old_status, 1);
-	ft_putchar('(');
-	ft_print_ch_fd(stat->ch, 1);
-	ft_putchar(')');
-	ft_putchar_fd('-', 1);
-	ft_print_stat_fd(stat->status, 1);
-	while (read(0, NULL, 1) == 0);
 }
 
 void			ft_print_token(t_tok *tok)

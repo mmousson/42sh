@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/07 00:53:31 by mmousson          #+#    #+#              #
-#    Updated: 2019/03/11 19:36:28 by mmousson         ###   ########.fr        #
+#    Updated: 2019/05/08 10:03:04 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC =	ft_memset.c				\
 		ft_strrchr.c			\
 		ft_strstr.c				\
 		ft_strrstr.c			\
+		ft_count_nb.c			\
 		ft_strnstr.c			\
 		ft_strcmp.c				\
 		ft_strncmp.c			\
@@ -97,6 +98,7 @@ SRC =	ft_memset.c				\
 		ft_fabs.c				\
 		get_line.c				\
 		ft_del_words_tables.c	\
+		ft_print_words_tables.c	\
 		get_next_line.c
 
 OBJ = $(subst .c,.o,$(addprefix ./$(OBJDIR)/,$(SRC)))

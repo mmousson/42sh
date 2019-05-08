@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 22:12:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/10 14:13:22 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/03 20:20:16 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int				ft_get_next_state(int state, int ch)
 		{VS, VS, VS, SP, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS},
 		{VS, VS, VS, VS, VA, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS},
 		{VS, VS, VS, VS, VS, VA, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS},
-		{MO, DQ, DQ, DQ, DQ, DQ, SV, DQ, DQ, DQ, DQ, DQ, DQ, DQ, DQ, DQ, DQ}, 
-		{MO, SQ, SQ, SQ, SQ, SQ, SQ, SV, SQ, SQ, SQ, SQ, SQ, SQ, SQ, SQ, SQ}, 
+		{MO, DQ, DQ, DQ, DQ, DQ, SV, DQ, DQ, DQ, DQ, DQ, DQ, DQ, DQ, DQ, DQ},
+		{MO, SQ, SQ, SQ, SQ, SQ, SQ, SV, SQ, SQ, SQ, SQ, SQ, SQ, SQ, SQ, SQ},
 		{VS, VS, IN, VS, VS, VA, VS, VS, VA, VS, VS, CH, VS, VS, VA, VS, VS},
-		{MO, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH}, 
-		{VS, DO, DO, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, DO, VS, VS},
+		{MO, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH},
+		{VS, DO, DO, VS, VS, VS, VS, VS, VS, VS, VA, VS, VS, VS, DO, VS, VS},
 		{VS, CH, CH, VS, VS, VS, DS, SS, VS, BS, VS, CH, VS, VS, CH, VS, VS},
 		{VS, VS, VS, VS, VS, VS, VS, VS, VS, BS, VS, VS, VA, VS, VS, VS, VS}
 	};

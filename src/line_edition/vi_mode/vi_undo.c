@@ -6,13 +6,13 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 17:58:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 12:59:45 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/04 16:33:36 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-void				ft_undo_update_pos(void)
+void				vi_undo_update_pos(void)
 {
 	t_undo			*tmp;
 
@@ -25,33 +25,30 @@ void				ft_undo_update_pos(void)
 	g_env.mode->undo = tmp;
 }
 
-static void			ft_vi_reset_cursor(t_undo *tmp, int u)
+void				vi_reset_cursor(t_undo *tmp, int u)
 {
 	while (u && tmp->next)
 		tmp = tmp->next;
 	if (tmp->pos > g_env.cm->pos)
-		ft_cursor_motion(MRIGHT, tmp->pos - g_env.cm->pos);
+		line_cursor_motion(MRIGHT, tmp->pos - g_env.cm->pos);
 	else
-		ft_cursor_motion(MLEFT, g_env.cm->pos - tmp->pos);
+		line_cursor_motion(MLEFT, g_env.cm->pos - tmp->pos);
 }
 
-static int			ft_vi_lstlen(t_undo *undo)
+static int			vi_lstlen(t_undo *undo)
 {
 	int				lstlen;
-	t_undo			*tmp;
 
 	lstlen = 0;
-	tmp = undo;
 	while (undo && undo->next)
 	{
 		undo = undo->next;
 		lstlen++;
 	}
-	undo = tmp;
 	return (lstlen);
 }
 
-static int			ft_vi_bigu(char *str, int ret)
+static int			vi_bigu(char *str, int ret)
 {
 	int				lstlen;
 	char			*oldline;
@@ -60,13 +57,13 @@ static int			ft_vi_bigu(char *str, int ret)
 		return (0);
 	if (str[0] == 'U' && ret == 1)
 	{
-		lstlen = ft_vi_lstlen(g_env.mode->undo) + 1;
+		lstlen = vi_lstlen(g_env.mode->undo) + 1;
 		oldline = g_env.line;
 		if (!(g_env.line = ft_strdup(g_env.mode->undo->next->command)))
-			ft_errorterm(TMALLOC);
-		ft_vi_reset_cursor(g_env.mode->undo, 0);
+			sh_errorterm(TMALLOC);
+		vi_reset_cursor(g_env.mode->undo, 0);
 		while (--lstlen)
-			ft_delundo();
+			vi_delundo();
 		ft_strdel(&oldline);
 	}
 	else
@@ -74,13 +71,13 @@ static int			ft_vi_bigu(char *str, int ret)
 	return (1);
 }
 
-int					ft_vi_undo(char *str, int ret)
+int					vi_undo(char *str, int ret)
 {
 	t_undo			*tmp;
 	char			*oldline;
 
 	if (!g_env.mode->undo)
-		return (1);
+		return (0);
 	if (str[0] == 'u' && ret == 1)
 	{
 		tmp = g_env.mode->undo;
@@ -88,16 +85,16 @@ int					ft_vi_undo(char *str, int ret)
 		while (g_env.mode->undo->next)
 			g_env.mode->undo = g_env.mode->undo->next;
 		if (!(g_env.line = ft_strdup(g_env.mode->undo->command)))
-			ft_errorterm(TMALLOC);
-		ft_vi_reset_cursor(tmp, 1);
+			sh_errorterm(TMALLOC);
+		vi_reset_cursor(tmp, 1);
 		g_env.mode->undo = tmp;
-		ft_delundo();
+		vi_delundo();
 		ft_strdel(&oldline);
 	}
-	else if (ft_vi_bigu(str, ret))
+	else if (vi_bigu(str, ret))
 		;
 	else
 		return (0);
-	ft_reset_count(str);
+	vi_reset_count(str);
 	return (1);
 }

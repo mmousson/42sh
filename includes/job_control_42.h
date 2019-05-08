@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/03 23:58:59 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/08 15:29:38 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct			s_process
 	t_bool				completed;
 	t_bool				stopped;
 	t_io_channels		io_channels;
+	t_io_channels		real_channels;
 	int					status;
 	struct s_process	*next;
 }						t_process;
@@ -129,6 +130,7 @@ typedef struct			s_job
 	t_io_channels		io_channels;
 	t_bool				notified;
 	int					status;
+	char				***env;
 	struct termios		tmodes;
 	struct s_job		*next;
 }						t_job;

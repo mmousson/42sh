@@ -6,14 +6,16 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/27 01:26:19 by mmousson         ###   ########.fr        #
+#    Updated: 2019/05/08 15:28:44 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include mk/builtins.mk
 include mk/core.mk
 include mk/job_control.mk
-include mk/lexer_parser.mk
+include mk/lexer.mk
+include mk/parser.mk
+include mk/exec.mk
 include mk/line_edition.mk
 include mk/utility.mk
 

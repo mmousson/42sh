@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 20:06:34 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/10 16:55:28 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/04/30 16:56:09 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_tok		*ft_go_start(t_tok *token, int start)
 	t_tok	*tok;
 
 	tok = token;
+	if (tok == NULL)
+		return (NULL);
 	while (tok && start)
 	{
 		tok = tok->next;

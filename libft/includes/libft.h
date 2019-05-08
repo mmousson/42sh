@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 02:11:28 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/16 09:56:52 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/08 10:03:48 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int					ft_order_of_magnitude(int nb);
 int					get_next_line(const int fd, char **line);
 int					ft_strendswith(char *str, const char *end);
 void				ft_strremove_at(char *str, size_t index);
+void				ft_print_words_tables(char **str);
 
 typedef	struct		s_list
 {
@@ -123,5 +124,6 @@ int					ft_max(int x, int y);
 double				ft_dmax(int count, ...);
 int					ft_clamp(int x, int low, int high);
 double				ft_fabs(double x);
+int					ft_count_n(int nbr);
 
 #endif

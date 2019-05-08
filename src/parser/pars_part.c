@@ -6,17 +6,16 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:43:04 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/13 07:36:42 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/04 16:13:06 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 #include <stdlib.h>
-#include <unistd.h>
 #include "libft.h"
 #define NB_CHAR_KIND 5
 
-int				is_charkind(int st)
+static int	is_charkind(int st)
 {
 	int			pos;
 	static int	lst_stat[NB_CHAR_KIND] = {
@@ -37,8 +36,6 @@ t_tree		*ft_pars_part(t_tok *token, int start, int end)
 	t_tok	*tok;
 	t_tree	*tree;
 
-	if (!(tree = ft_end_branch()))
-		return (NULL);
 	tok = ft_go_start(token, start);
 	if (tok == NULL || (end != -2 && start != end))
 		return (NULL);
@@ -46,6 +43,8 @@ t_tree		*ft_pars_part(t_tok *token, int start, int end)
 		return (NULL);
 	if (is_charkind(tok->status))
 	{
+		if (!(tree = ft_end_branch()))
+			return (NULL);
 		tree->type = tok->status;
 		if (tok->content)
 			tree->content = ft_strdup(tok->content);

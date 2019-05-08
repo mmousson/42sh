@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/08 14:10:21 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/08 15:34:44 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int					main(int argc, char **argv, char **arge_sys)
 	ft_bzero(&g_env, sizeof(t_env));
 	if (init_job_ctrl(&shell_term_conf) == -1)
 		return (128);
+	/*
+<<<<<<< HEAD
 	init_alias();
 	env = utility_duplicate_environ(arge_sys);
 	core_spec_var_setget(SPEC_0, argv[0], SET);
@@ -131,13 +133,24 @@ int					main(int argc, char **argv, char **arge_sys)
 	{
 		job_launch(ptr, FOREGROUND_LAUNCH);
 		ptr = ptr->next;
+=======
+	*/
+	alias_init();
+	env = duplicate_environ(arge_sys);
+	ft_bzero(&g_env, sizeof(t_env));
+	sh_term_manager();
+	while (ret)
+	{
+		line = line_get_readline(PBASIC, argv[1]);
+		ret = !ft_lex(&line, &env);
+		if (ret && line)
+			ft_strdel(&line);
+		if (!g_env.isatty)
+			ret = 0;
 	}
 
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 	ft_del_words_tables(&env);
-	ft_quiterm();
-
-	sleep(5);
-	while(1);
+	sh_quiterm();
 	return (0);
 }

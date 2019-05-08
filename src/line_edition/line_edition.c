@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 22:59:54 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/08 14:13:59 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/08 15:35:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 
-void				ft_update_termsize(void)
+void				line_update_termsize(void)
 {
 	struct winsize	w;
 
 	if (ioctl(STDIN_FILENO, TIOCGWINSZ, &w) == -1)
-		ft_errorterm(TIOCTL);
+		sh_errorterm(TIOCTL);
 	g_env.cm->term_x = w.ws_col;
 	g_env.cm->term_y = w.ws_row;
 }
 
-void				ft_clear_line(void)
+void				line_clear(void)
 {
 	int				i;
 
@@ -37,7 +37,7 @@ void				ft_clear_line(void)
 	tputs(g_env.tc->dl, 1, ft_putchar);
 }
 
-void				ft_paste(char *str, int count)
+void				line_paste(char *str, int count)
 {
 	int				tmp;
 
@@ -45,39 +45,41 @@ void				ft_paste(char *str, int count)
 	if (!str)
 		return ;
 	while (--tmp)
-		g_env.line = ft_addstr(str);
-	ft_reset_history();
+		g_env.line = line_addstr(str);
+	line_reset_history();
 	ft_strdel(&g_env.oldline);
 	if (!(g_env.oldline = ft_strdup(g_env.line)))
-		ft_errorterm(TMALLOC);
-	ft_cursor_motion(MRIGHT, (int)ft_strlen(str) * count);
+		sh_errorterm(TMALLOC);
+	line_cursor_motion(MRIGHT, (int)ft_strlen(str) * count);
+	g_env.k_index = 0;
 }
 
-static int			ft_choose_mode(char *str, int ret)
+static int			line_choose_mode(char *str, int ret)
 {
 	int				cap;
 
 	if (g_env.mode->n_select)
-		cap = ft_line_cpy(str, ret);
+		cap = line_cpy(str, ret);
 	else if (g_env.mode->mode[MVI])
-		cap = ft_line_vi(str, ret);
+		cap = line_vi(str, ret);
 	else
-		cap = ft_line_manager(str, ret);
+		cap = line_manager(str, ret);
 	return (cap);
 }
 
-int					ft_update_line(char *str, int ret)
+int					line_update(char *str, int ret)
 {
 	int				cap;
 
 	if (!str)
 		return (0);
+	vi_init_undo();
 	g_env.len = (int)ft_strlen(g_env.line) + 1;
-	cap = ft_choose_mode(str, ret);
+	cap = line_choose_mode(str, ret);
 	g_env.len = (int)ft_strlen(g_env.line);
-	ft_clear_line();
-	ft_print_line();
-	ft_reset_cursor();
-	g_env.cm->tmpy = ft_gety(g_env.cm->pos);
+	line_clear();
+	line_print();
+	line_reset_cursor();
+	g_env.cm->tmpy = line_gety(g_env.cm->pos);
 	return (cap);
 }

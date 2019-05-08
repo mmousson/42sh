@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 16:16:51 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/06 21:36:59 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/01 10:25:38 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,10 @@ int		proc(t_stat *stat, char buff[BUF], t_tok *tok)
 		ft_add_token(buff, stat->load, stat->old_status, tok);
 		stat->status = 0;
 	}
-	else if (stat->status == VA)
+	else if (stat->status == VA || stat->status == SV)
 	{
-		ft_add_char(buff, &(stat->load), stat->cha);
-		ft_add_token(buff, stat->load, stat->ch, tok);
-		stat->status = 0;
-	}
-	else if (stat->status == SV)
-	{
+		if (stat->status == VA)
+			ft_add_char(buff, &(stat->load), stat->cha);
 		ft_add_token(buff, stat->load, stat->ch, tok);
 		stat->status = 0;
 	}
