@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getvi_keys.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:16:24 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 13:34:32 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/08 14:14:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int					ft_vi(char *str)
 {
-	int				i;
-
-	i = -1;
 	if (!ft_tmp(str))
 		return (0);
 	return (1);
@@ -24,9 +21,6 @@ int					ft_vi(char *str)
 
 static int			ft_minsert(char *str, int ret)
 {
-	int			i;
-
-	i = -1;
 	if (str[0] == 27 && ret == 1)
 		return (ft_reset_mode(0, 1, 0) + 1);
 	if (ft_line_ascii(str, ret))

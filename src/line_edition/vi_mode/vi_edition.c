@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vi_edition.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:17:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/26 13:18:25 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/08 14:15:24 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int				ft_get_count(char *str)
 void			ft_reset_count(char *str)
 {
 	int			tmp;
-	int			i;
 
-	i = -1;
 	g_env.mode->saved = 0;
 	if (g_env.mode->v_del || g_env.mode->v_yank)
 		return ;

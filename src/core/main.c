@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 00:56:36 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/08 14:10:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ t_vars			*shell_var_list = NULL;
 
 int					main(int argc, char **argv, char **arge_sys)
 {
-	int				ret;
 	char			*line;
 	char			**env;
 
 	(void)argc;
-	ret = 1;
 	line = ft_itoa(getpid());
 	ft_bzero(&g_env, sizeof(t_env));
 	if (init_job_ctrl(&shell_term_conf) == -1)
