@@ -6,7 +6,7 @@
 #    By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 20:38:11 by oboutrol          #+#    #+#              #
-#    Updated: 2019/05/08 18:10:04 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/05/08 18:23:42 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ EXEC_NAME = 	ft_exec.c\
 				ft_split_path.c\
 				ft_free_exe.c\
 				ft_pipe_close.c\
-				ft_error.c\
-				ft_add_red.c\
+				exe_error.c\
+				exe_add_red.c\
 				ft_launch_red.c\
 				ft_heredoc.c\
 				ft_tabdup.c\

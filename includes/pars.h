@@ -6,15 +6,16 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/04 16:33:22 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 21:47:52 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARS_H
 # define PARS_H
 # define NB_CH 17
-# define NB_PR 6
+# define NB_PR 7
 # define NB_TY 4
+# define DBL 20
 
 /*
 ** enum e_charac, used relating to the lexing matrix, 1st
@@ -68,6 +69,7 @@ typedef enum		e_prepa
 	PIPE,
 	SPAC,
 	ENDT,
+	SEPA,
 	EROR,
 	MORE
 }					t_prepa;
@@ -102,12 +104,15 @@ int					ft_get_ch(char c);
 ** Function pre parsing
 */
 
+int					is_sepa_tok(t_tok *token);
+int					is_sep(int status);
 int					ft_prepars(t_tok *token);
 
 /*
 ** Function parsing
 */
 
+int					tok_is_stat(t_tok *token, int status);
 t_tree				*ft_pars_line(t_tok *tok, int start, int end);
 t_tree				*ft_pars_cmd(t_tok *tok, int start, int end);
 t_tree				*ft_pars_word(t_tok *tok, int start, int end);

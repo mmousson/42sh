@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 14:09:03 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/04 16:06:14 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 19:43:21 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int				ft_get_type(t_tok *token)
 {
 	int			stat;
 	static int	mat_type[NB_CH] = {
-		EROR, CHAR, CHAR, SPAC, REDI, REDI, CHAR, CHAR, CHAR, CHAR, CHAR,
-		CHAR, PIPE, SMCL, CHAR, CHAR, CHAR
+		EROR, CHAR, CHAR, SPAC, REDI, REDI, CHAR, CHAR, CHAR, CHAR,
+		CHAR, CHAR, PIPE, SMCL, CHAR, CHAR, CHAR
 	};
 
 	if (!token)
@@ -48,10 +48,10 @@ static int		pars_error(int type)
 static int		ft_mat_type(int old_type, int type)
 {
 	static int	mat[NB_TY][NB_PR] = {
-		{CHAR, SMCL, REDI, PIPE, CHAR, SMCL},
-		{CHAR, SMCL, EROR, EROR, SMCL, SMCL},
-		{CHAR, EROR, EROR, EROR, REDI, EROR},
-		{CHAR, EROR, EROR, EROR, PIPE, MORE}
+		{CHAR, SMCL, REDI, PIPE, CHAR, SMCL, SMCL},
+		{CHAR, SMCL, EROR, EROR, SMCL, SMCL, EROR},
+		{CHAR, EROR, EROR, EROR, REDI, EROR, EROR},
+		{CHAR, EROR, EROR, EROR, PIPE, MORE, EROR}
 	};
 
 	if (old_type >= NB_TY || old_type < 0 || type >= NB_PR || type < 0)
@@ -83,9 +83,11 @@ int				ft_prepars(t_tok *token)
 	{
 		tmp = tmp->next;
 		type = ft_get_type(tmp);
+		if (is_sepa_tok(tmp))
+			type = SEPA;
 		if (type == PIPE)
 			pipe = 1;
-		else if (tmp && tmp->status == SMC)
+		else if (tmp && is_sep(tmp->status))
 			pipe = 0;
 		else if (type == REDI && amb_red(pipe, tmp))
 			return (0);

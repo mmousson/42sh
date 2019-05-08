@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 08:07:28 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/04 16:32:00 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 22:42:55 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ static void		ft_add(t_tree *tree, t_launch **cmd, char ***arge)
 	if ((ret = ft_add_red(tree, ft_last(*cmd))))
 	{
 		ft_add(tree->left, cmd, arge);
-		if (tree->content)
-			ft_add_elmt(tree, cmd, &red);
 		if (tree->type == PIP)
 		{
 			(*cmd)->nbr_pipe++;
 			ft_next_pipe(ft_last(*cmd));
 		}
-		if (tree->type == SMC)
+		else if (tree->type == SMC)
 		{
 			ft_launch_cmd(cmd, arge);
 			tree->right = ft_expend(tree->right, *arge);
 		}
+		else if (tree->content && tree->type != SPA)
+			ft_add_elmt(tree, cmd, &red);
 	}
 	if (ret || ft_last(*cmd)->will_red == -1)
 		ft_add(tree->right, cmd, arge);

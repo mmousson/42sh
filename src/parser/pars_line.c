@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:55:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/30 18:15:48 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 22:07:47 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_tree		*ft_sep(t_tok *tok, int start, int end, char c)
 	tmp = ft_go_start(tok, start);
 	pos = start;
 	tmp = ft_go_status(tmp, &pos, type, end);
-	if (tmp && tmp->status == type)
+	if (tmp && tok_is_stat(tmp, type))
 	{
 		if (!(tree = ft_end_branch()))
 			return (NULL);
@@ -35,6 +35,7 @@ t_tree		*ft_sep(t_tok *tok, int start, int end, char c)
 		if (!(tree->right = ft_select_pars(tok, pos + 1, end, c)))
 			return (ft_free_tree(tree));
 		tree->type = type;
+		tree->content = ft_strdup(tmp->content);
 		return (tree);
 	}
 	return (NULL);
