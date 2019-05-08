@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/05 16:58:36 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/08 09:11:35 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,6 @@
 # include "libft.h"
 # include "vi_edition.h"
 # include "auto_completion.h"
-
-# define USER_FONT "\033[33m"
-# define BANNER_START " \033[7;38;2;50;50;50m"
-# define GIT_BRANCH_START "\033[0;38;2;50;50;50;48;2;"
-# define GIT_UP_TO_DATE "50;200;50m"
-# define GIT_NOT_UP_TO_DATE "209;8;28m"
-# define GIT_RED_INFOS "209;8;28;38;2;255;255;255m \xEE\x82\xA0 "
-# define GIT_END_BANNER " \033[38;2;0;200;0;49m\xEE\x82\xB0""\033[37m"
-# define GIT_ERR_END_BANNER " \033[0;38;2;209;8;28m\xEE\x82\xB0""\033[37m"
-# define WHITE_BOLD "\033[1;38;2;230;230;230m"
 
 # define UJUMP "\033\033[A"
 # define DJUMP "\033\033[B"
@@ -278,14 +268,5 @@ int						line_isend(char *str, int ret);
 int						line_iscx(char *str, int ret);
 int						line_isdel(char *str, int ret);
 int						line_isdelrword(char *str, int ret);
-
-/*
-**	prompt_generation
-*/
-
-void					prompt_format_path(char *path);
-void					prompt_git_branch(int e, char **env);
-void					get_additions_deletions(int *plus, int *minus,
-	char **env);
 
 #endif

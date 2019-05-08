@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/04/28 08:09:44 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/06 19:55:37 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBS = -lft
 LIBSFOLDERS = -L./$(LIBFT)
 vpath %.c $(dir MAKEFILE_LIST)
 CFLAGS = -g3 -Wall -Wextra -Werror -I./includes -I./includes/builtins -I./libft/includes
-CPPFLAGS += -MMD -MP 
+CPPFLAGS += -MMD -MP
 OBJDIR = .o
 
 NAME = 42sh
@@ -49,7 +49,7 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 	@$(shell mkdir -p $(dir $@))
-	@printf "%-42s" "Precompiling $(notdir $@)..."
+	@printf "%-48s" "Precompiling $(notdir $@)..."
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $< 2> ./tmp_log || /usr/bin/touch ./tmp_errors
 	@if [ -e tmp_errors ]; then \
 		printf "   \033[1;31m[KO]\n\033[0m" && /bin/cat 1>&2 ./tmp_log && touch files_missing; \
