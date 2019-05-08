@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/08 15:34:44 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 17:45:02 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int					main(int argc, char **argv, char **arge_sys)
 {
 	char			*line;
 	char			**env;
+	int				ret;
 
 	(void)argc;
 	line = ft_itoa(getpid());
@@ -135,10 +136,11 @@ int					main(int argc, char **argv, char **arge_sys)
 		ptr = ptr->next;
 =======
 	*/
-	alias_init();
-	env = duplicate_environ(arge_sys);
+	init_alias();
+	env = utility_duplicate_environ(arge_sys);
 	ft_bzero(&g_env, sizeof(t_env));
 	sh_term_manager();
+	ret = 1;
 	while (ret)
 	{
 		line = line_get_readline(PBASIC, argv[1]);

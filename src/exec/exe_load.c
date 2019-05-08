@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 11:42:50 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/08 17:52:45 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_io_channels		pip_red(t_process *first)//toujours utile ?
 	return (chan);
 }
 
-t_process			*load_process(t_launch *cmd, char **env)
+t_process			*load_process(t_launch *cmd, char ***env)
 {
 	t_process		*proc;
 
@@ -57,7 +57,7 @@ t_process			*load_process(t_launch *cmd, char **env)
 		return (NULL);
 	proc->next = load_process(cmd->next, env);
 	proc->argv = ft_tabdup(cmd->argv);
-	proc->environ = ft_tabdup(env);
+	proc->environ = env;
 	proc->real_channels = cmd_red(cmd);
 	return (proc);
 }
@@ -70,7 +70,7 @@ t_job				*exe_load_job(t_launch *cmd, char ***arge)
 		return (NULL);
 	job->env = arge;
 	job->next = NULL;
-	job->first_process = load_process(cmd, *arge);
+	job->first_process = load_process(cmd, arge);
 	job->io_channels = pip_red(job->first_process);
 	return (job);	
 }

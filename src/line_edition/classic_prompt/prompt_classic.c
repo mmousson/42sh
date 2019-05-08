@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 06:52:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/06 19:54:36 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/08 17:41:52 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ int				line_write_prompt(char ***environ, int error)
 	char	*path;
 	int		ret;
 
-	path = ft_trim_path(ft_get_env_var(environ, "PWD"));
-	if ((usr = ft_strdup(ft_get_env_var(environ, "USER"))) == NULL)
+	path = ft_trim_path(utility_get_env_var(environ, "PWD"));
+	if ((usr = ft_strdup(utility_get_env_var(environ, "USER"))) == NULL)
 		usr = ft_strdup("!!USER UNDEFINED!!");
 	if (usr == NULL || path == NULL)
 	{

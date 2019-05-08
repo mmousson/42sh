@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/05 16:20:50 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/08 15:52:12 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,4 +71,3 @@ PROMPT_SRCS = $(addprefix $(PROMPT_PATH),$(PROMPT))
 SRCS += $(LINE_EDIT_SRCS)
 SRCS += $(VIMODE_SRCS)
 SRCS += $(PROMPT_SRCS)
-
