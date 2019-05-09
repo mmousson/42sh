@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:55:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 14:33:59 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 15:39:37 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_tree		*ft_sep(t_tok *tok, int start, int end, char c)
 	int		pos;
 	int		type;
 
-	type = ft_get_ch(c);
+	type = lex_get_ch(c);
 	tmp = ft_go_start(tok, start);
 	pos = start;
 	tmp = ft_go_status(tmp, &pos, type, end);

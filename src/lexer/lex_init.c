@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   lex_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/06 13:41:35 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/06 18:31:26 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/09 15:03:18 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/09 15:13:55 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 #include <stdlib.h>
 
-t_tok			*ft_init_token(void)
+t_tok			*lex_init_token(void)
 {
 	t_tok		*token;
 
@@ -25,7 +25,7 @@ t_tok			*ft_init_token(void)
 	return (token);
 }
 
-t_stat			*ft_init_stat(void)
+t_stat			*lex_init_stat(void)
 {
 	t_stat		*stat;
 

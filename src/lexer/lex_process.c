@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
+/*   lex_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/06 16:16:51 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/01 10:25:38 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/09 15:03:50 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/09 15:20:14 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 
-int		proc(t_stat *stat, char buff[BUF], t_tok *tok)
+int		lex_proc(t_stat *stat, char buff[BUF], t_tok *tok)
 {
 	if (stat->status == VS)
 	{

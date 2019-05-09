@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:16:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 22:21:04 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 15:14:19 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void			hist_add(char *str)
 	g_env.ry = new;
 }
 
-int					ft_pars(t_tok *token, char ***arge, char *str)
+int					pars_tok(t_tok *token, char ***arge, char *str)
 {
 	t_tree			*tree;
 

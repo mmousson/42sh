@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_char.c                                         :+:      :+:    :+:   */
+/*   lex_add_char.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/06 17:11:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/06 21:18:21 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/09 15:02:48 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/09 15:37:13 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		ft_add_token(char buf[BUF], char *load, int stat, t_tok *tok)
 	tmp = tok;
 	while (tmp->next)
 		tmp = tmp->next;
-	if (!(new = ft_init_token()))
+	if (!(new = lex_init_token()))
 		return ;
 	tmp->next = new;
 	if (load)

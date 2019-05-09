@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 14:09:03 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 19:43:21 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 15:57:25 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int		amb_red(int pipe, t_tok *tmp)
 	return (0);
 }
 
-int				ft_prepars(t_tok *token)
+int				pars_prepars(t_tok *token)
 {
 	t_tok		*tmp;
 	int			type;

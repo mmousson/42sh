@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_token.c                                    :+:      :+:    :+:   */
+/*   lex_free_stat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/30 20:22:00 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/30 20:33:18 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/09 15:49:29 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/09 15:52:51 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 #include <stdlib.h>
 
-void	ft_free_token(t_tok *token)
+void		lex_free_stat(t_stat *stat)
 {
-	if (!token)
+	if (!stat)
 		return ;
-	ft_free_token(token->next);
-	if (token->content)
+	if (stat->load)
 	{
-		free(token->content);
-		token->content = NULL;
+		free(stat->load);
+		stat->load = NULL;
 	}
-	free(token);
+	free(stat);
 }

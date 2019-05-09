@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 14:39:29 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 15:36:17 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,9 @@ typedef struct		s_sep
 	int				end;
 }					t_sep;
 
-t_tok				*ft_init_token(void);
 void				ft_print_token(t_tok *tok);
 t_tree				*ft_init_tree(void);
-int					ft_get_ch(char c);
+int					lex_get_ch(char c);
 
 /*
 ** Function pre parsing
@@ -106,7 +105,7 @@ int					ft_get_ch(char c);
 
 int					is_sepa_tok(t_tok *token);
 int					is_sep(int status);
-int					ft_prepars(t_tok *token);
+int					pars_prepars(t_tok *token);
 
 /*
 ** Function parsing
@@ -143,7 +142,7 @@ char				*ft_doll(t_tree *tree, char **arge);
 ** Tool Function
 */
 
-void				ft_free_token(t_tok *token);
+void				lex_free_token(t_tok *token);
 t_tok				*ft_go_start(t_tok *token, int start);
 t_tree				*ft_select_pars(t_tok *tok, int st, int end, char c);
 void				ft_cleans_spa(int *start, int *end, t_tok *token);

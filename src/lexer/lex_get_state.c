@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_state.c                                        :+:      :+:    :+:   */
+/*   lex_get_state.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 22:12:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/03 20:20:16 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/09 15:03:08 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/09 15:56:16 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 
-int				ft_get_next_state(int state, int ch)
+int				lex_get_next_state(int state, int ch)
 {
 	static int	mat[NB_STATE][NB_CH] = {
 		{EN, CH, IN, SP, RL, RR, DS, SS, ES, BS, DO, TI, PI, VA, CH, CH, VA},

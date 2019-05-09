@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 14:03:36 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 15:57:24 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,20 @@ int					ft_env(char **args, char ***env);
 int					ft_setenv(char **args, char ***env);
 int					ft_unsetenv(char **args, char ***env);
 char				**ft_tabdup(char **tabl);
-int					ft_lex(char **str, char ***arge);
-int					ft_get_next_state(int state, int ch);
-t_stat				*ft_init_stat(void);
-int					proc(t_stat *stat, char buff[BUF], t_tok *tok);
 void				ft_add_token(char buf[BUF], char *ld, int stat, t_tok *tok);
 void				ft_add_char(char buff[BUF], char **load, char cha);
-void				ft_free_stat(t_stat *stat);
-int					ft_more(t_stat *stat, char **str, int nl);
-int					ft_pars(t_tok *tok, char ***arge, char *str);
 
+void				lex_free_stat(t_stat *stat);
+
+t_tok				*lex_init_token(void);
+t_stat				*lex_init_stat(void);
+
+int					lex_proc(t_stat *stat, char buff[BUF], t_tok *tok);
+int					lex_str(char **str, char ***arge);
+int					lex_more(t_stat *stat, char **str, int nl);
+int					lex_get_next_state(int state, int ch);
+
+int					pars_tok(t_tok *tok, char ***arge, char *str);
 /*
 ** fonctions affichages
 */

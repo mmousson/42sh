@@ -6,42 +6,43 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 17:46:48 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 15:57:28 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exe.h"
+#include "lex.h"
+#include "pars.h"
 #include "libft.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include "libft.h"
 
-static void		ft_step_lex(t_stat **stat, char **str)
+static void		lex_step(t_stat **stat, char **str)
 {
 	(*stat)->cha = (*str)[(*stat)->k];
-	(*stat)->ch = ft_get_ch((*stat)->cha);
+	(*stat)->ch = lex_get_ch((*stat)->cha);
 	(*stat)->old_status = (*stat)->status;
-	(*stat)->status = ft_get_next_state((*stat)->status, (*stat)->ch);
+	(*stat)->status = lex_get_next_state((*stat)->status, (*stat)->ch);
 }
 
-static void		ft_following(char **str, t_tok *tok, char ***arge)
+static void		lex_following(char **str, t_tok *tok, char ***arge)
 {
 	if ((!str || *str == NULL || *str[0] == 0) && g_env.ctrld)
 	{
-		ft_free_token(tok);
+		lex_free_token(tok);
 		ft_strdel(str);
 		ft_del_words_tables(arge);
 		sh_quiterm();
 	}
-	ft_pars(tok, arge, *str);
-	ft_free_token(tok);
+	pars_tok(tok, arge, *str);
+	lex_free_token(tok);
 }
 
 int				clean_out(t_tok **token, t_stat **stat, char **str)
 {
-	ft_free_token(*token);
+	lex_free_token(*token);
 	*token = NULL;
-	ft_free_stat(*stat);
+	lex_free_stat(*stat);
 	*stat = NULL;
 	if (str && *str)
 	{
@@ -51,22 +52,22 @@ int				clean_out(t_tok **token, t_stat **stat, char **str)
 	return (0);
 }
 
-static int		ft_last_lex(t_stat **stat, t_tok **token, char **str)
+static int		lex_last(t_stat **stat, t_tok **token, char **str)
 {
 	int			ret;
 
 	if ((*stat)->status == EN)
 	{
-		if (!(ret = ft_prepars(*token)))
+		if (!(ret = pars_prepars(*token)))
 			return (0);
 		if (ret == 2)
-			if (!(ft_more(*stat, str, 0)))
+			if (!(lex_more(*stat, str, 0)))
 				return (clean_out(token, stat, str));
 	}
 	return (1);
 }
 
-int				ft_lex(char **str, char ***arge)
+int				lex_str(char **str, char ***arge)
 {
 	t_tok		*token;
 	t_stat		*stat;
@@ -74,23 +75,23 @@ int				ft_lex(char **str, char ***arge)
 
 	if (!str || !(*str))
 		return (0);
-	if (!(token = ft_init_token()))
+	if (!(token = lex_init_token()))
 		return (1);
-	if (!(stat = ft_init_stat()))
+	if (!(stat = lex_init_stat()))
 		return (1);
 	buff[0] = '\0';
 	while (stat->status != EN)
 	{
-		ft_step_lex(&stat, str);
+		lex_step(&stat, str);
 		if (stat->status != EN)
-			if (proc(stat, buff, token) == -1)
-				if (!(ft_more(stat, str, 1)))
+			if (lex_proc(stat, buff, token) == -1)
+				if (!(lex_more(stat, str, 1)))
 					return (clean_out(&token, &stat, str));
-		if (!(ft_last_lex(&stat, &token, str)))
+		if (!(lex_last(&stat, &token, str)))
 			return (clean_out(&token, &stat, str));
 		(stat->k)++;
 	}
-	ft_free_stat(stat);
-	ft_following(str, token, arge);
+	lex_free_stat(stat);
+	lex_following(str, token, arge);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 20:29:33 by oboutrol          #+#    #+#              #
-#    Updated: 2019/05/08 17:33:50 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/05/09 15:53:47 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ LEXER_NAME =	lex_init.c			\
 			 	lex_add_char.c		\
 			 	lex_print_state.c	\
 			 	lex_process.c		\
-			 	ft_free_stat.c		\
-			 	ft_free_token.c		\
+			 	lex_free_stat.c		\
+			 	lex_free_token.c	\
 			 	lex_get_state.c
 
 LEXER_SRCS = $(addprefix $(LEXER_PATH),$(LEXER_NAME))

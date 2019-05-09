@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   more.c                                             :+:      :+:    :+:   */
+/*   lex_more.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/06 17:56:57 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/04 15:59:36 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/09 15:03:29 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/09 15:56:35 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int		ft_append_nl(char **str, int nl)
 	return (0);
 }
 
-int				ft_more(t_stat *stat, char **str, int nl)
+int				lex_more(t_stat *stat, char **str, int nl)
 {
 	char		*fus;
 	char		*tmp;
