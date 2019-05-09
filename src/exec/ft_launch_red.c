@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:02 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 08:51:06 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 14:10:35 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	make_rel(t_red *red, int *og, int *dir, t_launch *cmd)
 			return (error_open(red->end_nm));
 		*og = 0;
 	}
-	if (red->type == REL + 20 && red->end_nm)
+	if (red->type == REL + DBL && red->end_nm)
 	{
 		ft_heredoc(red->end_nm, cmd);
 		*og = -2;
@@ -51,7 +51,7 @@ static int	make_rer(t_red *red, int *og, int *dir)
 			return (error_open(red->end_nm));
 		*og = 1;
 	}
-	if (red->type == RER + 20 && red->end_nm)
+	if (red->type == RER + DBL && red->end_nm)
 	{
 		if ((*dir = open(red->end_nm, O_WRONLY | O_APPEND | O_CREAT,
 					S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR)) == -1)

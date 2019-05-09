@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 08:07:28 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 22:42:55 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 14:35:40 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ static void		ft_add(t_tree *tree, t_launch **cmd, char ***arge)
 			(*cmd)->nbr_pipe++;
 			ft_next_pipe(ft_last(*cmd));
 		}
-		else if (tree->type == SMC)
+		else if (is_sep(tree->type))
 		{
-			ft_launch_cmd(cmd, arge);
+			ft_launch_cmd(cmd, arge, tree->type);
 			tree->right = ft_expend(tree->right, *arge);
 		}
 		else if (tree->content && tree->type != SPA)
@@ -83,6 +83,6 @@ void			ft_exec(t_tree *tree, char ***arge)
 	tree = ft_expend(tree, *arge);
 	ft_add(tree, &cmd, arge);
 	ft_free_tree(tree);
-	ft_launch_cmd(&cmd, arge);
+	ft_launch_cmd(&cmd, arge, SMC);
 	ft_free_cmd(cmd);
 }

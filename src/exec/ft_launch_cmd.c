@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 22:42:54 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 14:58:41 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,21 @@ void		ft_launch_exe(t_launch *cmd, char ***arge)
 	ft_res_pile(cmd);
 }
 
-void		ft_launch_cmd(t_launch **cmd, char ***arge)
+void		ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 {
 	t_job	*job;
+	int		fg;	
 
+	//status = PIP + DBL -> ||
+	//status = ESP + DBL -> &&
+	//status = ESP -> &
 	if ((*cmd)->argv)
 	{
+		fg = status == ESP ? BACKGROUND_LAUNCH : FOREGROUND_LAUNCH;
 		job = exe_load_job(*cmd, arge);
 		ft_free_cmd(*cmd);
-		exe_print_job(job);
-		job_launch(job, 0);//fg and bg to detect
+//		exe_print_job(job);
+		job_launch(job, fg);
 		if (!(*cmd = ft_init_cmd(NULL)))
 			exit(1);
 	}

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:21:40 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 18:22:02 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 14:09:01 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int		is_red(t_tree *tree)
 {
 	if (!tree)
 		return (0);
-	if (tree->type == RER || tree->type == REL || tree->type == RER + 20
-			|| tree->type == REL + 20)
+	if (tree->type == RER || tree->type == REL || tree->type == RER + DBL
+			|| tree->type == REL + DBL)
 		return (1);
 	return (0);
 }
@@ -81,7 +81,7 @@ int				ft_add_red(t_tree *tree, t_launch *cmd)
 		red->type = tree->type;
 		if (tree->content && (!ft_strcmp(tree->content, ">>")
 					|| !ft_strcmp(tree->content, "<<")))
-			red->type += 20;
+			red->type += DBL;
 		if (tree->left && cmd->will_red != -1)
 		{
 			if (tree->left->type == INT)
