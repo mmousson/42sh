@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/08 15:30:28 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:43:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ extern t_hash		g_hash[HASH_MOD];
 
 int					init_alias(void);
 void				init_hash_table(void);
-int					init_job_ctrl(struct termios *bkp_conf);
+int					init_job_ctrl(void);
 int					hash_string(char *string);
 int					hash_already_exists(int index, char *name);
 void				hash_add_entry(int string_hash, char *utility_name,

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 02:05:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 00:03:17 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/09 18:21:44 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void		job_first_job_set_and_get(t_job **to_set_or_get, int set_or_get)
 {
 	static t_job	*first_job = NULL;
 
+	*to_set_or_get = active_job_list;
+	return ;
 	if (set_or_get == SET)
 	{
 		if (to_set_or_get == NULL || *to_set_or_get == NULL)

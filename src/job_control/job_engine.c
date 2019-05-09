@@ -113,6 +113,7 @@ int						job_launch(t_job *job, int fg)
 	int			p[2];
 	t_process	*current_process;
 
+	job_add_to_active_job_list(job);
 	current_process = job->first_process;
 	while (current_process)
 	{

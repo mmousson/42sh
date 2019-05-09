@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 17:08:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:19:36 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ t_job				*exe_load_job(t_launch *cmd, char ***arge)
 	job->next = NULL;
 	job->first_process = load_process(cmd, arge);
 	job->io_channels = pip_red(job->first_process);
+	job->command = ft_strdup("ls");
 	return (job);	
 }
