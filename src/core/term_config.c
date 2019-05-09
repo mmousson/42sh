@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/05 11:07:10 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/09 16:37:44 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,18 @@ void				sh_switch_term(int reset)
 	if (reset)
 	{
 		g_env.term.c_lflag |= (ECHO | ICANON);
+		#ifndef __linux__
 		g_env.term.c_cc[VDSUSP] = CTRLY;
+		#endif
 //		sh_reset_signal(1);
 	}
 	else
 	{
 //		sh_signal_handler(1);
 		g_env.term.c_lflag &= ~(ECHO | ICANON);
+		#ifndef __linux__
 		g_env.term.c_cc[VDSUSP] = _POSIX_VDISABLE;
+		#endif
 	}
 	if ((tcsetattr(g_env.t_fd, TCSANOW, &(g_env.term))) == -1)
 		sh_errorterm(TBADFD);
@@ -90,7 +94,9 @@ void				sh_configterm(void)
 		return ;
 	g_env.term.c_cc[VMIN] = 1;
 	g_env.term.c_cc[VTIME] = 0;
+	#ifndef __linux__
 	g_env.term.c_cc[VDSUSP] = _POSIX_VDISABLE;
+	#endif
 	g_env.term.c_lflag &= ~(ICANON | ECHO);
 	if ((tcsetattr(g_env.t_fd, TCSANOW, &(g_env.term))) == -1)
 		sh_errorterm(TBADFD);

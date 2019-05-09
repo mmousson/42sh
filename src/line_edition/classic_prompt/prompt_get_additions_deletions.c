@@ -6,9 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 10:31:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/06 19:45:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/09 16:36:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifdef __linux__
+
+# include <sys/wait.h>
+#endif
 
 #include <unistd.h>
 #include "libft.h"
