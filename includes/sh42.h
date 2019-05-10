@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/08 15:30:28 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:31:11 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ int					blt_unalias(int argc, char **argv, char ***env);
 **	write_alias_list_to_file -> utility/write_alias_list_to_file.c
 **	add_internal_var -> utility/add_internal_var.c
 **	internal_variable_exists -> utility/internal_variable_exists.c
+**	utility_get_effective_user_name -> utility/utility_get_effective_username.c
 */
 
 char				*utility_search(char *name);

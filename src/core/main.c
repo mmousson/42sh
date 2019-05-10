@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/08 20:09:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:31:52 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	core_spec_var_setget(SPEC_DOLLAR, line, SET);
 	ft_strdel(&line);
 	ft_bzero(&g_env, sizeof(t_env));
+	ft_bzero(&g_data, sizeof(t_autodata));
 	sh_term_manager();
 	while (ret)
 	{

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/06 19:46:55 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/08 22:46:49 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <termcap.h>
 # include "libft.h"
 # include "vi_edition.h"
+# include "auto_completion.h"
 
 # define UJUMP "\033\033[A"
 # define DJUMP "\033\033[B"
@@ -84,6 +85,7 @@ typedef struct			s_tc
 	char				*mr;
 	char				*me;
 	char				*cd;
+	char				*af;
 }						t_tc;
 
 typedef struct			s_cm

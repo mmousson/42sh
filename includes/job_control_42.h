@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/08 15:29:38 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:30:16 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct			s_process
 /*
 **	A 'job' is a pipeline of processes
 **	This is the structure representing it
-**	pgid -> Process Group ID
+**	pgid -> Process Group IDp
 **	command -> Backup of the 'job' command line, used for message display
 **	io_channels -> I/O file descriptors
 **	notified -> Bool value saving if job's termination/stop has been notified

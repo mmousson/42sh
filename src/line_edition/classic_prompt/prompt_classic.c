@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 06:52:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/08 19:55:44 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:32:51 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,8 @@ int				line_write_prompt(char ***environ, int error)
 	char	*path;
 	int		ret;
 
-	path = ft_trim_path(utility_get_env_var(environ, "PWD"));
-	if ((usr = ft_strdup(utility_get_env_var(environ, "USER"))) == NULL)
-		usr = ft_strdup("!!USER UNDEFINED!!");
-	if (usr == NULL || path == NULL)
+	if ((path = ft_trim_path(ft_get_env_var(environ, "PWD"))) == NULL
+		|| (usr = utility_get_effective_user_name()) == NULL)
 	{
 		ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
 		ret = -1;
@@ -143,5 +141,6 @@ int				line_write_prompt(char ***environ, int error)
 		ret = 3;
 	}
 	ft_strdel(&usr);
+	ft_strdel(&path);
 	return (ret);
 }

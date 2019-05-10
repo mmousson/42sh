@@ -2,6 +2,7 @@
 *.o
 *.d
 .o
+*.swp
 tmp_log
 tmp_errors
 .vscode
