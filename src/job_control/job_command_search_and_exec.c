@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 22:47:28 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:37:02 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static void	search_using_path(t_job *job, t_process *proc, int fg)
 		{
 			proc->argv[0] = to_del;
 			proc->status = 127;
+			proc->completed = true;
+			proc->valid_to_wait_for = false;
 			ft_putstr_fd("42sh: Unknown command ", STDERR_FILENO);
 			ft_putendl_fd(to_del, STDERR_FILENO);
 			return ;
@@ -111,10 +113,14 @@ void		job_command_search_and_exec(t_job *job, t_process *proc, int fg)
 	{
 		if (job->first_process->next == NULL
 			&& (blt_pos = utility_is_builtin(proc->argv[0])) != -1)
-			g_builtins[blt_pos].handler(
-				job_argc(proc->argv),
-				proc->argv,
-				proc->environ);
+			{
+				g_builtins[blt_pos].handler(
+					job_argc(proc->argv),
+					proc->argv,
+					proc->environ);
+				proc->completed = true;
+				proc->valid_to_wait_for = false;
+			}
 		else
 			search_using_path(job, proc, fg);
 	}

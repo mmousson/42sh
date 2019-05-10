@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 15:35:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:19:51 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int		job_is_completed (t_job *j)
 	p = j->first_process;
 	while (p)
 	{
-		if (!utility_is_builtin(p->argv[0]) && !p->completed)
+		if (!p->completed)
 			return (0);
 		status = p->status;
 		p = p->next;

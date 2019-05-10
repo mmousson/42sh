@@ -10,8 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 #include <sys/wait.h>
 #include "libft.h"
+#include "sh42.h"
 #include "job_control_42.h"
 
 /*
@@ -80,17 +83,26 @@ static void				pipe_cleanup(t_job *job, t_process *process, int p[2])
 
 int					job_wait_completion(t_job *job)
 {
-	int		ret;
-	pid_t pid;
+	t_process	*proc;
+	int			catch;
+	int			ret;
+	pid_t 		pid;
 
 	ret = 0;
-	while (42)
+	proc = job->first_process;
+	while (proc != NULL)
 	{
-		pid = waitpid (WAIT_ANY, &ret, WUNTRACED);
-		if (job_mark_process_status (job, pid, ret)
-			+ job_is_stopped (job)
-			+ job_is_completed (job) != 0)
-			break ;
+		if (proc->valid_to_wait_for == true)
+		{
+			pid = waitpid(WAIT_ANY, &ret, WUNTRACED);
+			catch = job_mark_process_status (pid, ret)
+				+ job_is_stopped (job)
+				+ job_is_completed (job);
+			printf("catch = %d\n", catch);
+			if (catch != 0)
+				break ;
+		}
+		proc = proc->next;
 	}
 	return (ret);
 }

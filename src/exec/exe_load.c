@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 14:38:59 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:34:40 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_process			*load_process(t_launch *cmd, char ***env)
 	proc->argv = ft_tabdup(cmd->argv);
 	proc->completed = false;
 	proc->stopped = false;
+	proc->valid_to_wait_for = true;
 	proc->environ = env;
 	proc->io_channels.input = 0;
 	proc->io_channels.output = 1;

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 15:34:15 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:34:27 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct			s_process
 	char				***environ;
 	t_bool				completed;
 	t_bool				stopped;
+	t_bool				valid_to_wait_for;
 	t_io_channels		io_channels;
 	t_io_channels		real_channels;
 	int					status;
@@ -172,8 +173,7 @@ void					job_child_process(t_process *proc, int foreground,
 int						job_send_to_foreground(t_job *job, int must_continue);
 int						job_send_to_background(t_job *job, int must_continue);
 int						job_wait_completion(t_job *job);
-int						job_mark_process_status(t_job *first_job, pid_t pid,
-	int status);
+int						job_mark_process_status(pid_t pid, int status);
 void					job_update_status (t_job *first_job);
 void					job_unstop(t_job *job, int foreground);
 void					job_sigchld_handler(int signo);
