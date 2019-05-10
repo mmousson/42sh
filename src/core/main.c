@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/07 06:09:00 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/09 13:21:33 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	alias_init();
 	env = duplicate_environ(arge_sys);
 	ft_bzero(&g_env, sizeof(t_env));
+	ft_bzero(&g_data, sizeof(t_autodata));
 	sh_term_manager();
 	while (ret)
 	{

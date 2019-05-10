@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   auto_main.c                                        :+:      :+:    :+:   */
+/*   auto_termcaps.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/05 16:52:20 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/10 11:19:44 by roliveir         ###   ########.fr       */
+/*   Created: 2019/05/09 21:44:36 by roliveir          #+#    #+#             */
+/*   Updated: 2019/05/09 22:11:05 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
+#include <term.h>
 
-int				auto_completion(char *str, int ret)
+void			auto_print_select(void)
 {
-	if (str[0] == '\t' && ret == 1)
-	{
-		if (auto_isblank())
-			line_paste("    ", g_env.count);
-		else if (g_data.status)
-			return (auto_choose());
-		else
-		{
-			auto_filldata();
-			return (auto_printword());
-		}
-	}
-	else
-		return (0);
-	return (1);
+	if (g_data.lw->select)
+		tputs(g_env.tc->mr, 1, ft_putchar);
+}
+
+void			auto_print_color(void)
+{
+	if (g_data.lw->type == 4 && !g_data.lw->select)
+		tputs(tparm(g_env.tc->af, 9), 1, ft_putchar);
 }

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/08 09:11:35 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/08 22:46:49 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct			s_tc
 	char				*mr;
 	char				*me;
 	char				*cd;
+	char				*af;
 }						t_tc;
 
 typedef struct			s_cm

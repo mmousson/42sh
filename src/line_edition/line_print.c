@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 03:17:58 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 15:28:28 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/10 10:16:14 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,6 @@ void				line_print(void)
 		tputs(g_env.tc->cr, 1, ft_putchar);
 		tputs(g_env.tc->doo, 1, ft_putchar);
 	}
+	if (g_data.lw)
+		auto_printaligned();
 }

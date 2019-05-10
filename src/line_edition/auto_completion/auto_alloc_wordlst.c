@@ -6,21 +6,28 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 10:07:58 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/07 10:47:06 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/10 10:17:57 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-void			auto_free_lstword(t_lstword *lstword)
+static void		auto_free_lstword(t_lstword *lw)
 {
-	if (!lstword)
+	if (!lw)
 		return ;
-	if (lstword->next)
-		auto_free_lstword(lstword->next);
-	if (lstword->name)
-		ft_strdel(&(lstword->name));
-	ft_memdel((void**)&lstword);
+	if (lw->next)
+		auto_free_lstword(lw->next);
+	if (lw->name)
+		ft_strdel(&(lw->name));
+	ft_memdel((void**)&lw);
+}
+
+void			auto_free(void)
+{
+	auto_free_lstword(g_data.lw);
+	ft_bzero(&g_data, sizeof(t_autodata));
+	g_data.lw = NULL;
 }
 
 t_lstword		*auto_new_lstword(void)
@@ -32,40 +39,48 @@ t_lstword		*auto_new_lstword(void)
 	return (lstword);
 }
 
-static void		auto_add_lstword(t_lstword *lstword, char *name, int type)
+static void		auto_add_lstword(char *name, int type)
 {
 	t_lstword	*tmp;
 
-	tmp = lstword;
-	while (lstword->next)
-		lstword = lstword->next;
-	if (!(lstword->next = (t_lstword*)ft_memalloc(sizeof(t_lstword))))
+	tmp = g_data.lw;
+	while (g_data.lw->next)
+		g_data.lw = g_data.lw->next;
+	if (!(g_data.lw->next = (t_lstword*)ft_memalloc(sizeof(t_lstword))))
 	{
-		auto_free_lstword(tmp);
+		g_data.lw = tmp;
+		auto_free_lstword(g_data.lw);
 		sh_errorterm(TMALLOC);
 	}
-	if (!(lstword->name = ft_strdup(name)))
+	if (!(g_data.lw->next->name = ft_strdup(name)))
 	{
-		auto_free_lstword(tmp);
+		g_data.lw = tmp;
+		auto_free_lstword(g_data.lw);
 		sh_errorterm(TMALLOC);
 	}
-	lstword->type = type;
-	lstword = tmp;
+	g_data.lw->next->len = (int)ft_strlen(g_data.lw->next->name);
+	g_data.lw->next->type = type;
+	if (type == 4)
+		g_data.lw->next->len++;
+	g_data.lw = tmp;
 }
 
-void			auto_lstword(t_lstword *lstword, char *name, int type)
+void			auto_lstword(char *name, int type)
 {
-	if (!lstword)
+	if (!g_data.lw)
 		return ;
-	if (!lstword->name)
+	if (!g_data.lw->name)
 	{
-		if (!(lstword->name = ft_strdup(name)))
+		if (!(g_data.lw->name = ft_strdup(name)))
 		{
-			auto_free_lstword(lstword);
+			auto_free_lstword(g_data.lw);
 			sh_errorterm(TMALLOC);
 		}
-		lstword->type = type;
+		g_data.lw->len = (int)ft_strlen(g_data.lw->name);
+		g_data.lw->type = type;
+		if (type == 4)
+			g_data.lw->len++;
 	}
 	else
-		auto_add_lstword(lstword, name, type);
+		auto_add_lstword(name, type);
 }
