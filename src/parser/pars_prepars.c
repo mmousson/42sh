@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_prepars.c                                       :+:      :+:    :+:   */
+/*   pars_prepars.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/01 14:09:03 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 15:57:25 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/10 11:04:39 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/10 12:30:04 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int				ft_get_type(t_tok *token)
 	int			stat;
 	static int	mat_type[NB_CH] = {
 		EROR, CHAR, CHAR, SPAC, REDI, REDI, CHAR, CHAR, CHAR, CHAR,
-		CHAR, CHAR, PIPE, SMCL, CHAR, CHAR, CHAR
+		CHAR, CHAR, PIPE, SMCL, CHAR, CHAR, CHAR, CHAR, CHAR
 	};
 
 	if (!token)
@@ -89,6 +89,8 @@ int				pars_prepars(t_tok *token)
 			pipe = 1;
 		else if (tmp && is_sep(tmp->status))
 			pipe = 0;
+		else if (tmp && tmp->status == PAC)
+			expand_arith(&tmp);
 		else if (type == REDI && amb_red(pipe, tmp))
 			return (0);
 		old_type = ft_mat_type(old_type, type);

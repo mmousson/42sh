@@ -6,14 +6,14 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 20:35:29 by oboutrol          #+#    #+#              #
-#    Updated: 2019/05/09 16:37:19 by mmousson         ###   ########.fr        #
+#    Updated: 2019/05/10 12:13:47 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PARSER_PATH = ./src/parser/
 
 PARSER_NAME = pars.c\
-				ft_prepars.c\
+				pars_prepars.c\
 				pars_line.c\
 				pars_select_pars.c\
 				pars_cleans_spa.c\
@@ -24,6 +24,7 @@ PARSER_NAME = pars.c\
 				pars_part.c\
 				pars_red.c\
 				pars_tool.c\
+				expand_arith.c\
 				pars_print_tree.c\
 				free_tree.c\
 				pars_work_tree.c

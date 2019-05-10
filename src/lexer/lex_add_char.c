@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:02:48 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 15:37:13 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:42:49 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "libft.h"
 
-void		ft_add_token(char buf[BUF], char *load, int stat, t_tok *tok)
+void		lex_add_tok(char buf[BUF], char *load, int stat, t_tok *tok)
 {
 	t_tok	*tmp;
 	t_tok	*new;
@@ -34,7 +34,7 @@ void		ft_add_token(char buf[BUF], char *load, int stat, t_tok *tok)
 	buf[0] = '\0';
 }
 
-void		ft_add_char(char buf[BUF], char **load, char cha)
+void		lex_add_char(char buf[BUF], char **load, char cha)
 {
 	int		size;
 

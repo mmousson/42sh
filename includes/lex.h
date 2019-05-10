@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 15:57:24 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/10 10:23:09 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "pars.h"
 
 # define BUF 1024
-# define NB_STATE 13
+# define NB_STATE 16
 
 /*
 ** enum e_state, used relating to the lexing matrix, 2nd
@@ -34,13 +34,17 @@
 ** DO - 10: Dollar, '$'
 ** TI - 11: TIlde, '~'
 ** PI - 12: PIpe, '|'
-** DS - 13: Double Silent quote, double quote witch are note store in buff
-** SS - 14: Simple Silent quote, simple quote witche are not store in buff
-** EN - 15: ENd, end of the lexing phasis
-** VA - 16: VAlidation, Storing current buff whith char state
-** VS - 17: Validation Star, Validation, but manage current char the next turn
-** MO - 18: MOre, incomplete lexing, ask for more char
-** SV - 19: Silent Validator, does not store last char
+** PS - 13: Parenthesis Simple, '$('
+** PD - 14: Parenthesis Double, "$(("
+** CP - 15: Parenthesis Close, "$(()"
+** DS - 16: Double Silent quote, double quote witch are note store in buff
+** SS - 17: Simple Silent quote, simple quote witche are not store in buff
+** EN - 18: ENd, end of the lexing phasis
+** VA - 19: VAlidation, Storing current buff whith char state
+** VS - 20: Validation Star, Validation, but manage current char the next turn
+** MO - 21: MOre, incomplete lexing, ask for more char
+** SV - 22: Silent Validator, does not store last char
+** EP - 23: Error Parenthesis
 */
 
 typedef enum		e_state
@@ -58,13 +62,17 @@ typedef enum		e_state
 	DO,
 	TI,
 	PI,
+	PS,
+	PD,
+	CP,
 	DS,
 	SS,
 	EN,
 	VA,
 	VS,
 	MO,
-	SV
+ 	SV,
+	EP
 }					t_state;
 
 typedef struct		s_stat
@@ -77,26 +85,19 @@ typedef struct		s_stat
 	char			*load;
 }					t_stat;
 
-int					ft_echo(char **args, char ***env);
-int					ft_cd(char **args, char ***env);
-int					ft_env(char **args, char ***env);
-int					ft_setenv(char **args, char ***env);
-int					ft_unsetenv(char **args, char ***env);
 char				**ft_tabdup(char **tabl);
-void				ft_add_token(char buf[BUF], char *ld, int stat, t_tok *tok);
-void				ft_add_char(char buff[BUF], char **load, char cha);
 
+void				lex_add_tok(char buf[BUF], char *ld, int stat, t_tok *tok);
+void				lex_add_char(char buff[BUF], char **load, char cha);
 void				lex_free_stat(t_stat *stat);
-
 t_tok				*lex_init_token(void);
 t_stat				*lex_init_stat(void);
-
 int					lex_proc(t_stat *stat, char buff[BUF], t_tok *tok);
 int					lex_str(char **str, char ***arge);
 int					lex_more(t_stat *stat, char **str, int nl);
 int					lex_get_next_state(int state, int ch);
-
 int					pars_tok(t_tok *tok, char ***arge, char *str);
+
 /*
 ** fonctions affichages
 */

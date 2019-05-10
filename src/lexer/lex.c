@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 15:57:28 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:30:07 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ static int		lex_last(t_stat **stat, t_tok **token, char **str)
 {
 	int			ret;
 
-	if ((*stat)->status == EN)
+	if ((*stat)->status == EP)
+	{
+		ft_putstr_fd("42sh: do not support '()'\n", 2);
+		return (clean_out(token, stat, str));
+	}
+	else if ((*stat)->status == EN)
 	{
 		if (!(ret = pars_prepars(*token)))
 			return (0);
@@ -80,10 +85,10 @@ int				lex_str(char **str, char ***arge)
 	if (!(stat = lex_init_stat()))
 		return (1);
 	buff[0] = '\0';
-	while (stat->status != EN)
+	while (stat->status != EN && stat->status != EP)
 	{
 		lex_step(&stat, str);
-		if (stat->status != EN)
+		if (stat->status != EN && stat->status != EP)
 			if (lex_proc(stat, buff, token) == -1)
 				if (!(lex_more(stat, str, 1)))
 					return (clean_out(&token, &stat, str));

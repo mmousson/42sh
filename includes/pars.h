@@ -6,15 +6,15 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 15:36:17 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:30:01 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARS_H
 # define PARS_H
-# define NB_CH 17
 # define NB_PR 7
 # define NB_TY 4
+# define NB_CH 19
 # define DBL 20
 
 /*
@@ -36,7 +36,9 @@
 ** DAS - 14: DASh, '-'
 ** SLA - 15: SLAsh, '/'
 ** NWL - 16: NeWLine, '\n'
-** EXP - 17: to_expend
+** PAO - 17: Parenthesis Open, '('
+** PAC - 18: Parenthesis Closure, ')'
+** EXP - 19: to_expend
 */
 
 typedef enum		e_charac
@@ -58,6 +60,8 @@ typedef enum		e_charac
 	DAS,
 	SLA,
 	NWL,
+	PAO,
+	PAC,
 	EXP
 }					t_charac;
 
@@ -106,6 +110,7 @@ int					lex_get_ch(char c);
 int					is_sepa_tok(t_tok *token);
 int					is_sep(int status);
 int					pars_prepars(t_tok *token);
+void				expand_arith(t_tok **token);
 
 /*
 ** Function parsing
