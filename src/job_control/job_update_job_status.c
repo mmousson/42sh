@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:34:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 16:17:43 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:01:39 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	job_update_status(t_job *first_job)
 	pid_t		pid;
 	t_process	*current;
 
-	ft_putendl_fd("GHandling", 2);
+	if (first_job == NULL)
+		return ;
 	current = first_job->first_process;
 	while (current)
 	{
@@ -41,7 +42,6 @@ void	job_update_status(t_job *first_job)
 		if (job_mark_process_status (pid, status))
 			break ;
 	}
-	ft_putendl_fd("Done", 2);
 }
 
 /*

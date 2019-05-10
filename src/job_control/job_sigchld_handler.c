@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 02:05:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 15:20:24 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:02:12 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static void	handle_stopped_job(t_job *current, t_job **job_last)
 **	Return Value: NONE
 */
 
-void		sigchld_handler(int signo)
+void		job_sigchld_handler(int signo)
 {
 	t_job	*current;
 	t_job	*job_next;

@@ -84,7 +84,6 @@ static void				pipe_cleanup(t_job *job, t_process *process, int p[2])
 int					job_wait_completion(t_job *job)
 {
 	t_process	*proc;
-	int			catch;
 	int			ret;
 	pid_t 		pid;
 
@@ -95,11 +94,9 @@ int					job_wait_completion(t_job *job)
 		if (proc->valid_to_wait_for == true)
 		{
 			pid = waitpid(WAIT_ANY, &ret, WUNTRACED);
-			catch = job_mark_process_status (pid, ret)
+			if (job_mark_process_status (pid, ret)
 				+ job_is_stopped (job)
-				+ job_is_completed (job);
-			printf("catch = %d\n", catch);
-			if (catch != 0)
+				+ job_is_completed (job) != 0)
 				break ;
 		}
 		proc = proc->next;

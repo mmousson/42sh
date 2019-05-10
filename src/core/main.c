@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/09 18:06:48 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 18:59:25 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int					main(int argc, char **argv, char **arge_sys)
 	ret = 1;
 	while (ret)
 	{
+		job_sigchld_handler(0);
 		line = line_get_readline(PBASIC, argv[1]);
 		// line = ft_strdup("ls");
+		tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 		ret = !lex_str(&line, &env);
 		if (ret && line)
 			ft_strdel(&line);

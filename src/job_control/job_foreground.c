@@ -6,13 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 15:03:38 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 18:44:16 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <unistd.h>
 #include "libft.h"
+#include "sh42.h"
 #include "line_edition.h"
 #include "job_control_42.h"
 
