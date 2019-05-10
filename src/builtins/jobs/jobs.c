@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:34:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/17 20:19:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/29 21:42:45 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ static int	list_all_jobs(t_job *head, int options)
 **	JOBS_INVALID OPTION (2) -> An invalid option was provided
 */
 
-int			jobs(int argc, char **argv, char ***env)
+int			blt_jobs(int argc, char **argv, char ***env)
 {
 	int		parsed;
 	int		options;
@@ -138,7 +138,7 @@ int			jobs(int argc, char **argv, char ***env)
 	(void)env;
 	argc--;
 	argv++;
-	first_job_set_and_get(&head, GET);
+	job_first_job_set_and_get(&head, GET);
 	if (head == NULL)
 		return (JOBS_OK);
 	if ((options = parse_options(argc, argv, &parsed)) == -1)

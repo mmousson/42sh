@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/07 06:21:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:31:11 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,50 @@ typedef struct		s_vars
 }					t_vars;
 
 /*
+**	Define flags to interact with the 'core_spec_var_setget' function defined
+**	in 'core/core_special_params.c'
+**	SET (0) -> Modify the variable
+**	GET (1) -> Return the variable's value without affecting it
+*/
+
+# define SET 0
+# define GET 1
+
+/*
+**	Special Variables structure used to match an integer ID with an
+**	actual value
+*/
+
+typedef struct		s_special_vars
+{
+	int				id;
+	char			*value;
+}					t_special_vars;
+
+/*
+**	Enum type to give us an more readable way of interacting with the
+**	shell's Internal Variables
+*/
+
+typedef enum		e_special_var_id
+{
+	SPEC_0 = 0,
+	SPEC_1 = 1,
+	SPEC_2 = 2,
+	SPEC_3 = 3,
+	SPEC_4 = 4,
+	SPEC_5 = 5,
+	SPEC_6 = 6,
+	SPEC_7 = 7,
+	SPEC_8 = 8,
+	SPEC_9 = 9,
+	SPEC_QUESTION = 10,
+	SPEC_DOLLAR = 11,
+	SPEC_UNDERSCORE = 14,
+	SPEC_EXCLAMATION = 15
+}					t_special_var_id;
+
+/*
 **	g_builtins[] -> defined in utility/builtins_utility.c
 */
 
@@ -94,22 +138,23 @@ extern t_hash		g_hash[HASH_MOD];
 **	init_hash_table -> builtins/hash.c
 **	hash_string -> utility/hash_string.c
 **	add_hash_entry -> builtins/hash/add_hash_entry.c
-**	search_utility -> utility/search_utility.c
 **	alias_init -> utility/alias_init.c
 **	free_alias_list -> utility/free_alias_list.c
 **	is_builtin -> utility/builtins_utilty.c
 **	init_job_ctrl -> job_control/initialize.c
 */
 
+int					init_alias(void);
 void				init_hash_table(void);
-int					hash_string(char *string);
-void				add_hash_entry(int string_hash, char *utility_name,
-	char *full_path);
-char				*search_utility(char *name);
-int					alias_init(void);
-void				free_alias_list(void);
-int					is_builtin(char *name);
 int					init_job_ctrl(struct termios *bkp_conf);
+int					hash_string(char *string);
+int					hash_already_exists(int index, char *name);
+void				hash_add_entry(int string_hash, char *utility_name,
+	char *full_path);
+void				free_alias_list(void);
+char				*core_spec_var_setget(int id, char *new_value,
+	int set_or_get);
+int					core_hash_spec_var(char var);
 
 /*
 **	==================== BUILTIN functions ====================
@@ -127,43 +172,46 @@ int					init_job_ctrl(struct termios *bkp_conf);
 **	unalias -> builtins/unalias.c
 */
 
-int					alias(int argc, char **argv, char ***env);
-int					bg(int argc, char **argv, char ***env);
-int					cd(int argc, char **argv, char ***env);
-int					echo(int argc, char **argv, char ***env);
-int					ft_export(int argc, char **argv, char ***env);
-int					ft_exit(int argc, char **argv, char ***env);
-int					fg(int argc, char **argv, char ***env);
-int					hash(int argc, char **argv, char ***env);
-int					jobs(int argc, char **argv, char ***env);
-int					set(int argc, char **argv, char ***env);
-int					unset(int argc, char **argv, char ***env);
-int					ft_test(int argc, char **argv, char ***env);
-int					type(int argc, char **argv, char ***env);
-int					unalias(int argc, char **argv, char ***env);
+int					blt_alias(int argc, char **argv, char ***env);
+int					blt_bg(int argc, char **argv, char ***env);
+int					blt_cd(int argc, char **argv, char ***env);
+int					blt_echo(int argc, char **argv, char ***env);
+int					blt_export(int argc, char **argv, char ***env);
+int					blt_exit(int argc, char **argv, char ***env);
+int					blt_fg(int argc, char **argv, char ***env);
+int					blt_hash(int argc, char **argv, char ***env);
+int					blt_jobs(int argc, char **argv, char ***env);
+int					blt_set(int argc, char **argv, char ***env);
+int					blt_unset(int argc, char **argv, char ***env);
+int					blt_test(int argc, char **argv, char ***env);
+int					blt_type(int argc, char **argv, char ***env);
+int					blt_unalias(int argc, char **argv, char ***env);
 
 /*
 **	==================== UTILITY functions ====================
 **
+**	search_utility -> utility/search_utility.c
 **	duplicate_environ -> utility/duplicate_environ.c
 **	get_user_home -> utility/get_user_home.c
+**	add_entry_to_environ -> utility/utility_environ_utilities.c
 **	write_alias_list_to_file -> utility/write_alias_list_to_file.c
 **	add_internal_var -> utility/add_internal_var.c
 **	internal_variable_exists -> utility/internal_variable_exists.c
 **	utility_get_effective_user_name -> utility/utility_get_effective_username.c
 */
 
-char				**duplicate_environ(char **env);
-char				*get_user_home(void);
-char				*utility_get_effective_user_name(void);
-char				*get_aliases_file_full_path(void);
-void				write_alias_list_to_file(void);
-void				ft_add_entry_to_environ(char ***environ, char *key,
+char				*utility_search(char *name);
+int					utility_is_builtin(char *name);
+char				**utility_duplicate_environ(char **env);
+char				*utility_get_user_home(void);
+char				*utility_get_aliases_file_full_path(void);
+void				utility_write_alias_list_to_file(void);
+void				utility_add_entry_to_environ(char ***environ, char *key,
 	char *value);
-int					ft_rm_entry_from_environ(char ***environ, char *key);
-char				*ft_get_env_var(char ***environ, char *key);
-int					ft_get_environ_length(char **tab);
-void				add_internal_var(char *name, char *value);
-char				*internal_var_exists(char *name);
+int					utility_rm_entry_from_environ(char ***environ, char *key);
+char				*utility_get_env_var(char ***environ, char *key);
+int					utility_get_environ_length(char **tab);
+void				utility_add_internal_var(char *name, char *value);
+char				*utility_internal_var_exists(char *name);
 
 #endif

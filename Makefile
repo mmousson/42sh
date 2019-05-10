@@ -6,14 +6,16 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/06 19:55:37 by mmousson         ###   ########.fr        #
+#    Updated: 2019/05/08 17:33:40 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include mk/builtins.mk
 include mk/core.mk
 include mk/job_control.mk
-include mk/lexer_parser.mk
+include mk/lexer.mk
+include mk/parser.mk
+include mk/exec.mk
 include mk/line_edition.mk
 include mk/utility.mk
 
@@ -49,14 +51,14 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 	@$(shell mkdir -p $(dir $@))
-	@printf "%-48s" "Precompiling $(notdir $@)..."
+	@printf "%-50s" "Precompiling $(notdir $@)..."
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $< 2> ./tmp_log || /usr/bin/touch ./tmp_errors
 	@if [ -e tmp_errors ]; then \
-		printf "   \033[1;31m[KO]\n\033[0m" && /bin/cat 1>&2 ./tmp_log && touch files_missing; \
+		printf "\033[1;31m[KO]\n\033[0m" && /bin/cat 1>&2 ./tmp_log && touch files_missing; \
 	elif test -s ./tmp_log; then \
-		printf "   \033[1;33m[WARNING]\n\033[0m" && /bin/cat ./tmp_log; \
+		printf "\033[1;33m[WARNING]\n\033[0m" && /bin/cat ./tmp_log; \
 	else \
-		printf "   \033[1;32m[OK]\n\033[0m"; \
+		printf "\033[1;32m[OK]\n\033[0m"; \
 	fi;
 	@$(RM) ./tmp_errors
 

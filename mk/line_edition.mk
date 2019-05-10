@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/09 21:54:35 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/10 11:31:21 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,4 +83,3 @@ SRCS += $(LINE_EDIT_SRCS)
 SRCS += $(VIMODE_SRCS)
 SRCS += $(AUTOCMP_SRCS)
 SRCS += $(PROMPT_SRCS)
-

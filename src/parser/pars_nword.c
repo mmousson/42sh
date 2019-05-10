@@ -6,14 +6,12 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 18:58:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/04/13 07:35:44 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/04 16:11:39 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 #include <stdlib.h>
-#include "libft.h"
-#include <unistd.h>
 
 t_tree		*ft_pars_nword(t_tok *token, int start, int end)
 {
@@ -29,10 +27,11 @@ t_tree		*ft_pars_nword(t_tok *token, int start, int end)
 	{
 		if (!(tree = ft_end_branch()))
 			return (NULL);
+		tree->type = EXP;
 		if (!(tree->left = ft_pars_part(token, start, start)))
-			return (NULL);
-		if (!(tree->right = ft_pars_nword(token, start + 1, end)))
-			return (NULL);
+			return (ft_free_tree(tree));
+		if (!(tree->right = ft_pars_word(token, start + 1, end)))
+			return (ft_free_tree(tree));
 		return (tree);
 	}
 	return (NULL);

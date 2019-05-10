@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:10:42 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/17 20:18:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:20:22 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ static int	parse_options(int *ac, char ***av)
 **	HASH_ERROR (1) -> An error occured
 */
 
-int			hash(int argc, char **argv, char ***env)
+int			blt_hash(int argc, char **argv, char ***env)
 {
 	char	*tmp;
 
@@ -183,7 +183,7 @@ int			hash(int argc, char **argv, char ***env)
 		return (HASH_NO_SUCH_OPTION);
 	while (argc > 1)
 	{
-		if ((tmp = search_utility(argv[1])) == NULL)
+		if ((tmp = utility_search(argv[1])) == NULL)
 		{
 			ft_putstr_fd("42sh: hash: ", STDERR_FILENO);
 			ft_putstr_fd(argv[1], STDERR_FILENO);

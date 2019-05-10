@@ -3,24 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:16:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 11:43:26 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:01:10 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
 
-int			ft_pars(t_tok *token, char ***arge, t_env *env)
+static void			hist_add(char *str)
 {
-	t_tree	*tree;
+	t_history		*tmp;
+	t_history		*new;
 
-	(void)env;
-	(void)arge;
-	//ft_print_token(token);
+	tmp = g_env.ry;
+	if (!(new = (t_history*)ft_memalloc(sizeof(t_history))))
+		sh_errorterm(TMALLOC);
+	new->next = tmp;
+	new->prev = NULL;
+	if (tmp)
+		tmp->prev = new;
+	if (!(new->line = ft_strdup(str)))
+		sh_errorterm(TMALLOC);
+	g_env.ry = new;
+}
+
+int					ft_pars(t_tok *token, char ***arge, char *str)
+{
+	t_tree			*tree;
+
+	if (!token || !token->next
+			|| (token->next->status == SPA && !token->next->next))
+		return (0);
+	if (str)
+		hist_add(str);
 	tree = ft_pars_line(token->next, 0, -2);
-	//ft_print_tree(tree);
-	//ft_exec(tree, arge, env);
+	ft_exec(tree, arge);
 	return (0);
 }

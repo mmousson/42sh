@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vi_getkeys.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:16:24 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/04 16:32:47 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/08 15:45:02 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 
 static int			vi_minsert(char *str, int ret)
 {
+	/*
+<<<<<<< HEAD:src/line_edition/vi_mode/getvi_keys.c
+	if (!ft_tmp(str))
+		return (0);
+	return (1);
+}
+
+static int			ft_minsert(char *str, int ret)
+{
+=======
+>>>>>>> lex_pars:src/line_edition/vi_mode/vi_getkeys.c
+*/
 	if (str[0] == 27 && ret == 1)
 		return (line_escap());
 	if (str[0] == CTRLD && ret == 1 && g_env.len == g_env.p_size + 1)

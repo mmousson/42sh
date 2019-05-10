@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 06:52:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/07 06:24:24 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:32:51 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ int				put_arrow(char *arrow)
 
 static int		ft_merge(char *usr, char *path, int error, char **env)
 {
-	int	add;
 	int	ret;
 
-	add = 0;
 	ft_putchar(' ');
 	ft_putstr(USER_FONT);
 	ret = write(1, usr, ft_strlen(usr)) + 2;
