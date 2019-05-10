@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:23 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/09 17:43:17 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 14:58:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		init_job_ctrl(void)
 	{
 		while (tcgetpgrp(STDERR_FILENO) != (shell_proc_group_id = getpgrp()))
 			kill(-shell_proc_group_id, SIGTTIN);
-		signal(SIGINT, SIG_IGN);
+		// signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGTSTP, SIG_IGN);
 		signal(SIGTTIN, SIG_IGN);

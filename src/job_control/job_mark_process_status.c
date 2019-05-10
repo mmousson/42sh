@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:45:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 00:21:24 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 15:32:20 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,5 +174,5 @@ int						job_mark_process_status(t_job *first_job, pid_t pid,
 	else if (pid == 0)
 		return (WAITPID_ERROR);
 	else
-		return (WAITPID_ERROR);
+		return (WAIT_PID_BUILTIN);
 }

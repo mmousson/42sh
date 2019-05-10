@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:34:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 21:42:45 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 14:59:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ static int	list_all_jobs(t_job *head, int options)
 	while (head)
 	{
 		format_job_info(head, options, i);
-		ft_putchar('\n');
 		head = head->next;
 		i++;
 	}

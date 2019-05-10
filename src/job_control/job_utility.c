@@ -6,12 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 00:33:36 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 15:35:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <sys/types.h>
+#include "sh42.h"
 #include "libft.h"
 #include "job_control_42.h"
 
@@ -109,15 +110,13 @@ int		job_is_completed (t_job *j)
 	p = j->first_process;
 	while (p)
 	{
-		if (!p->completed)
-		{
+		if (!utility_is_builtin(p->argv[0]) && !p->completed)
 			return (0);
-		}
 		status = p->status;
 		p = p->next;
 	}
 	j->status = WTERMSIG(status);
-	job_free(j);
+	// job_free(j);
 	return (1);
 }
 

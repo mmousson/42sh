@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/09 18:20:38 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 15:34:15 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ extern t_sig_matcher	g_sig_table[];
 # define FOREGROUND_LAUNCH 1
 # define SET 0
 # define GET 1
+# define WAIT_PID_BUILTIN 0
 # define WAITPID_ERROR -1
 # define WAITPID_NO_MATCH 1
+# ifndef WAIT_ANY
+#  define WAIT_ANY -1
+# endif
 
 # define STOP_MSG "stopped"
 # define COMPLETED_MSG "completed"

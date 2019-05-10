@@ -6,11 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:34:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 21:51:43 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 14:57:27 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/wait.h>
+#include "libft.h"
 #include "job_control_42.h"
 
 #include <errno.h>
@@ -27,6 +28,7 @@ void	job_update_status(t_job *first_job)
 	pid_t		pid;
 	t_process	*current;
 
+	ft_putendl_fd("GHandling", 2);
 	current = first_job->first_process;
 	while (current)
 	{
@@ -39,6 +41,7 @@ void	job_update_status(t_job *first_job)
 		if (job_mark_process_status (first_job, pid, status))
 			break ;
 	}
+	ft_putendl_fd("Done", 2);
 }
 
 /*
