@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 21:44:36 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/09 22:11:05 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/10 14:04:43 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void			auto_print_select(void)
 
 void			auto_print_color(void)
 {
-	if (g_data.lw->type == 4 && !g_data.lw->select)
-		tputs(tparm(g_env.tc->af, 9), 1, ft_putchar);
+	if (!g_data.lw->select)
+		tputs(tparm(g_env.tc->af, g_data.lw->type), 1, ft_putchar);
 }

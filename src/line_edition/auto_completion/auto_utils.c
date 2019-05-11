@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:54:13 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/09 22:11:18 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/11 19:42:23 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int				auto_checkroot(char *name, char *root)
 void				auto_calclen(void)
 {
 	t_lstword		*tmp;
+	int				k;
 
 	if (!g_data.lw->name)
 		return ;
@@ -51,5 +52,11 @@ void				auto_calclen(void)
 		g_data.lenlst++;
 	}
 	g_data.lw = tmp;
+	g_data.wordpline = (int)(g_env.cm->term_x / (g_data.lenmax + 2));
+	k = g_data.lenlst % g_data.wordpline;
+	k = k ? 1 : 0;
+	g_data.y = (int)(g_data.lenlst / g_data.wordpline) + k;
+	g_data.x = k ? g_data.lenlst % g_data.wordpline : g_data.wordpline;
+	g_data.x = g_data.x * (g_data.lenmax + 2);
 	return ;
 }

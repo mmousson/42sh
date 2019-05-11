@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 10:07:58 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/10 10:17:57 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/10 14:55:41 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void		auto_free_lstword(t_lstword *lw)
 void			auto_free(void)
 {
 	auto_free_lstword(g_data.lw);
+	ft_strdel(&g_data.path);
+	ft_strdel(&g_data.root);
 	ft_bzero(&g_data, sizeof(t_autodata));
 	g_data.lw = NULL;
 }
@@ -39,7 +41,7 @@ t_lstword		*auto_new_lstword(void)
 	return (lstword);
 }
 
-static void		auto_add_lstword(char *name, int type)
+static void		auto_add_lstword(char *name)
 {
 	t_lstword	*tmp;
 
@@ -59,13 +61,14 @@ static void		auto_add_lstword(char *name, int type)
 		sh_errorterm(TMALLOC);
 	}
 	g_data.lw->next->len = (int)ft_strlen(g_data.lw->next->name);
-	g_data.lw->next->type = type;
-	if (type == 4)
+	g_data.lw->next->type = auto_getstatype(g_data.lw->next->name,
+			&g_data.lw->next->carac);
+	if (g_data.lw->next->type != 7 && g_data.lw->type != 14)
 		g_data.lw->next->len++;
 	g_data.lw = tmp;
 }
 
-void			auto_lstword(char *name, int type)
+void			auto_lstword(char *name)
 {
 	if (!g_data.lw)
 		return ;
@@ -77,10 +80,10 @@ void			auto_lstword(char *name, int type)
 			sh_errorterm(TMALLOC);
 		}
 		g_data.lw->len = (int)ft_strlen(g_data.lw->name);
-		g_data.lw->type = type;
-		if (type == 4)
+		g_data.lw->type = auto_getstatype(g_data.lw->name, &g_data.lw->carac);
+		if (g_data.lw->type != 7 && g_data.lw->type != 14)
 			g_data.lw->len++;
 	}
 	else
-		auto_add_lstword(name, type);
+		auto_add_lstword(name);
 }

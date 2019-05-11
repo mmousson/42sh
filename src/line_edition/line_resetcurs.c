@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:22:35 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/09 22:11:16 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/11 19:42:21 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,31 +51,41 @@ static void			line_back_left(int pos)
 	}
 }
 
-static void			line_reset_autocomp(void)
+static void			line_reset_autocomp(int ret_p)
 {
 	int				x;
 	int				y;
-	int				wordpline;
 	int				ll;
+	int				tmp;
 
-	if (!g_data.lw)
-		return ;
-	wordpline = (int)(g_env.cm->term_x / (g_data.lenmax + 2));
-	y = g_data.lenlst * (g_data.lenmax + 2) / g_env.cm->term_x;
-	x = (g_data.lenlst - y * wordpline) * (g_data.lenmax + 2);
-	while (--x + 1)
-		tputs(g_env.tc->le, 1, ft_putchar);
-	while (--y + 2)
+	tmp = -1;
+	if (ret_p == -1)
+	{
+		while (++tmp < 18)
+			tputs(g_env.tc->le, 1, ft_putchar);
 		tputs(g_env.tc->up, 1, ft_putchar);
+	}
+	else
+	{
+		if (!g_data.lw)
+			return ;
+		x = g_data.x;
+		y = g_data.y;
+		while (--x + 1)
+			tputs(g_env.tc->le, 1, ft_putchar);
+		while (--y + 1)
+			tputs(g_env.tc->up, 1, ft_putchar);
+	}
 	ll = line_len(g_env.len);
-	while (	++x < ll)
+	x = -1;
+	while (++x < ll)
 		tputs(g_env.tc->nd, 1, ft_putchar);
-	
+
 }
 
-void				line_reset_cursor(void)
+void				line_reset_cursor(int ret_p)
 {
-	line_reset_autocomp();
+	line_reset_autocomp(ret_p);
 	line_back_left(g_env.len);
 	if (!line_getx(g_env.cm->pos)
 			&& g_env.len % g_env.cm->term_x == 0)

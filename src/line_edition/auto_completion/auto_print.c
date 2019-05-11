@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 09:53:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/10 11:19:40 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/11 18:31:06 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int			auto_printcomp(void)
 	}
 	lenroot = (int)ft_strlen(g_data.root);
 	line_paste(&(g_data.lw->name[lenroot]), 1);
-	if (g_data.lw->type == 4)
+	if (g_data.lw->type == 9 || g_data.lw->type == 14)
 		line_paste("/", 1);
 	else
 		line_paste(" ", 1);
@@ -34,7 +34,7 @@ static int			auto_printcomp(void)
 	return (1);
 }
 
-static void			auto_printprint(int tmp)
+static void			auto_printprint(void)
 {
 	int				i;
 
@@ -44,39 +44,42 @@ static void			auto_printprint(int tmp)
 	ft_putstr(g_data.lw->name);
 	tputs(g_env.tc->me, 1, ft_putchar);
 	auto_print_select();
-	if (g_data.lw->type == 4)
-		ft_putchar('/');
-	while (tmp > 1 && ++i < g_data.lenmax - g_data.lw->len)
+	if (g_data.lw->type != 7)
+		ft_putchar(g_data.lw->carac);
+	while (++i < g_data.lenmax - g_data.lw->len)
 		ft_putchar(' ');
 	tputs(g_env.tc->me, 1, ft_putchar);
-	while (tmp > 1 && ++i < g_data.lenmax + 3 - g_data.lw->len)
+	while (++i < g_data.lenmax + 3 - g_data.lw->len)
 		ft_putchar(' ');
 }
 
 int					auto_printaligned(void)
 {
-	int				wordpline;
 	int				tmp_w;
 	t_lstword		*tmp;
 
+	if (g_data.y >= g_env.cm->term_y)
+	{
+		auto_free();
+		return (-1);
+	}
 	tmp = g_data.lw;
 	g_data.status = g_data.status ? g_data.status : 1;
-	wordpline = (int)(g_env.cm->term_x / (g_data.lenmax + 2));
-	tmp_w = wordpline;
+	tmp_w = g_data.wordpline;
 	ft_putchar('\n');
 	while (g_data.lw)
 	{
-		auto_printprint(tmp_w);
+		auto_printprint();
 		tmp_w--;
 		if (tmp_w < 1 && g_data.lw->next)
 		{
-			tmp_w = wordpline;
+			tmp_w = g_data.wordpline;
 			ft_putchar('\n');
 		}
 		g_data.lw = g_data.lw->next;
 	}
 	g_data.lw = tmp;
-	return (0);
+	return (1);
 }
 
 int					auto_printword(void)
@@ -89,7 +92,7 @@ int					auto_printword(void)
 	while ((dt = readdir(dir)))
 	{
 		if (auto_checkroot(dt->d_name, g_data.root))
-			auto_lstword(dt->d_name, dt->d_type);
+			auto_lstword(dt->d_name);
 	}
 	(void)closedir(dir);
 	auto_calclen();
