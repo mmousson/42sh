@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/08 22:46:49 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/11 18:41:10 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void					line_clear(void);
 int						line_getx(int pos);
 int						line_gety(int pos);
 int						line_get_termroom(void);
-void					line_reset_cursor(void);
+void					line_reset_cursor(int ret_p);
 int						line_get_origin_pos(void);
 void					line_cxjump(void);
 
@@ -256,7 +256,7 @@ int						line_ctrld(void);
 **	print
 */
 
-void					line_print(void);
+int						line_print(void);
 
 /*
 **	vi_readline

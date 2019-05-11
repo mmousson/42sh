@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 10:31:11 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/10 11:19:42 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/11 19:15:17 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,20 @@
 static void		auto_replace(char *str, int type)
 {
 	int			size;
+	int			i;
 
-	size = g_env.cm->pos - g_data.spos;
+	i = g_data.spos;
+	while (i - g_env.p_size + 1 && !auto_newtoken(g_env.line[i])
+				&& !auto_ispathcarac(g_env.line[i]))
+		i--;
+	size = g_env.cm->pos - i - 1;
 	if (size)
 	{
 		g_env.line = line_delchar(size);
 		line_cursor_motion(MLEFT, size);
 	}
 	line_paste(str, 1);
-	if (type == 4)
+	if (type == 9 || type == 14)
 		line_paste("/", 1);
 }
 
@@ -37,8 +42,7 @@ int				auto_return(void)
 	{
 		if (g_data.lw->select)
 		{
-			auto_replace(g_data.lw->name, g_data.lw->type);
-			if (g_data.lw->type != 4)
+			if (g_data.lw->type != 9 && g_data.lw->type != 14)
 				line_paste(" ", 1);
 			g_data.lw = tmp;
 			auto_free();

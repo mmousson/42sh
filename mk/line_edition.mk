@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/10 11:31:21 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/10 13:34:25 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ AUTOCMP =	auto_main.c				\
 			auto_alloc_wordlst.c	\
 			auto_choose.c			\
 			auto_termcaps.c			\
+			auto_getstatinfo.c
 
 LINE_EDIT_SRCS = $(addprefix $(LINE_EDIT_PATH),$(LINE_EDIT))
 VIMODE_SRCS = $(addprefix $(VIMODE_PATH),$(VIMODE))
