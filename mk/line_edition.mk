@@ -6,12 +6,13 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/08 15:52:12 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/05/10 13:34:25 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LINE_EDIT_PATH = ./src/line_edition/
 VIMODE_PATH = $(LINE_EDIT_PATH)vi_mode/
+AUTOCMP_PATH = $(LINE_EDIT_PATH)auto_completion/
 PROMPT_PATH = $(LINE_EDIT_PATH)classic_prompt/
 
 VIMODE =	vi_alloc.c							\
@@ -65,9 +66,21 @@ LINE_EDIT =	line_cpy.c							\
 			line_inverse.c						\
 			line_isaltinv.c
 
+AUTOCMP =	auto_main.c				\
+			auto_utils.c			\
+			auto_getype.c			\
+			auto_alloc.c			\
+			auto_print.c			\
+			auto_alloc_wordlst.c	\
+			auto_choose.c			\
+			auto_termcaps.c			\
+			auto_getstatinfo.c
+
 LINE_EDIT_SRCS = $(addprefix $(LINE_EDIT_PATH),$(LINE_EDIT))
 VIMODE_SRCS = $(addprefix $(VIMODE_PATH),$(VIMODE))
+AUTOCMP_SRCS = $(addprefix $(AUTOCMP_PATH),$(AUTOCMP))
 PROMPT_SRCS = $(addprefix $(PROMPT_PATH),$(PROMPT))
 SRCS += $(LINE_EDIT_SRCS)
 SRCS += $(VIMODE_SRCS)
+SRCS += $(AUTOCMP_SRCS)
 SRCS += $(PROMPT_SRCS)

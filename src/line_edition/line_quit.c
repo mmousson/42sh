@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 09:29:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/03 11:20:20 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/09 22:11:06 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int				line_ctrld(void)
 
 int				line_return(void)
 {
+	if (g_data.status == 2)
+		return (auto_return());
 	if (g_env.mode->mode[MVI])
 	{
 		ft_bzero(g_env.s_buffer, sizeof(g_env.s_buffer));

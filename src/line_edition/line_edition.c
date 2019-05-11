@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 22:59:54 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/08 15:35:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/11 19:08:06 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,22 @@ static int			line_choose_mode(char *str, int ret)
 int					line_update(char *str, int ret)
 {
 	int				cap;
+	int				ret_p;
 
 	if (!str)
 		return (0);
+	if (g_data.status == 2 && str[0] != '\t' && str[0] != '\n')
+	{
+		auto_free();
+		ft_bzero(&g_data, sizeof(t_autodata));
+	}
 	vi_init_undo();
 	g_env.len = (int)ft_strlen(g_env.line) + 1;
 	cap = line_choose_mode(str, ret);
 	g_env.len = (int)ft_strlen(g_env.line);
 	line_clear();
-	line_print();
-	line_reset_cursor();
+	ret_p = line_print();
+	line_reset_cursor(ret_p);
 	g_env.cm->tmpy = line_gety(g_env.cm->pos);
 	return (cap);
 }

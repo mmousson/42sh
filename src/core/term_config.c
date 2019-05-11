@@ -6,14 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/09 16:37:44 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/11 19:51:01 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_edition.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "line_edition.h"
 
 void				sh_switch_term(int reset)
 {
