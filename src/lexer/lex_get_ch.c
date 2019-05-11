@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:04:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 09:32:49 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/10 15:51:32 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int					lex_get_ch(char c)
 {
-	static char		line[15] = "<>\"'&\\$~|;-/\n()";
+	static char		line[NB_CH - 4] = "<>\"'&\\$~|;-/\n()!";
 	int				k;
 
 	if (c == 0)
@@ -24,7 +24,7 @@ int					lex_get_ch(char c)
 	else if (c == ' ' || c == '\t')
 		return (SPA);
 	k = -1;
-	while (++k < 15)
+	while (++k < NB_CH - 4)
 		if (c == line[k])
 			return (k + 4);
 	return (CHA);

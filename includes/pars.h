@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 12:30:01 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/10 15:58:57 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARS_H
 # define NB_PR 7
 # define NB_TY 4
-# define NB_CH 19
+# define NB_CH 20
 # define DBL 20
 
 /*
@@ -38,7 +38,8 @@
 ** NWL - 16: NeWLine, '\n'
 ** PAO - 17: Parenthesis Open, '('
 ** PAC - 18: Parenthesis Closure, ')'
-** EXP - 19: to_expend
+** EXC - 19: EXClamation point, '!'
+** EXP - 20: to_expend
 */
 
 typedef enum		e_charac
@@ -62,6 +63,7 @@ typedef enum		e_charac
 	NWL,
 	PAO,
 	PAC,
+	EXC,
 	EXP
 }					t_charac;
 

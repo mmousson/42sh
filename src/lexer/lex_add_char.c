@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:02:48 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 17:42:49 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/11 18:50:15 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		lex_add_char(char buf[BUF], char **load, char cha)
 			*load = ft_strdup(buf);
 		else
 			*load = ft_strjoin(*load, buf);
+		ft_bzero(buf, BUF);
 		buf[0] = cha;
 	}
 	else

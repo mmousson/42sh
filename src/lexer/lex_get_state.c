@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 10:26:56 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/11 16:58:54 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@
 int				lex_get_other_part(int state, int ch)
 {
 	static int mat[NB_STATE][NB_CH - NB_SPLIT_MAT] = {
-		{CH, CH},
-		{CH, CH},
-		{CH, CH},
-		{VS, VS},
-		{VS, VS},
-		{VS, VS},
-		{DQ, DQ},
-		{SQ, SQ},
-		{VS, VS},
-		{CH, CH},
-		{PS, EP},
-		{CH, CH},
-		{VS, VS},
-		{PD, EP},
-		{EP, CP},
-		{EP, VA},
+		{CH, CH, ML},
+		{CH, CH, VS},
+		{CH, CH, VS},
+		{VS, VS, VS},
+		{VS, VS, VS},
+		{VS, VS, VS},
+		{DQ, DQ, DQ},
+		{SQ, SQ, SQ},
+		{VS, VS, VS},
+		{CH, CH, CH},
+		{PS, EP, VS},
+		{CH, CH, VS},
+		{VS, VS, VS},
+		{PD, EP, EP},
+		{EP, CP, EP},
+		{EP, VA, EP},
 	};
 
 	if (state >= NB_STATE || state < 0 || ch >= NB_CH - NB_SPLIT_MAT || ch < 0)
@@ -52,7 +52,7 @@ int				lex_get_next_state(int state, int ch)
 		{MO, SQ, SQ, SQ, SQ, SQ, SQ, SV, SQ, SQ, SQ, SQ, SQ, SQ, SQ, SQ, SQ},
 		{VS, VS, IN, VS, VS, VA, VS, VS, VA, VS, VS, CH, VS, VS, VA, VS, VS},
 		{MO, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH},
-		{VS, DO, DO, VS, VS, VS, VS, VS, VS, VS, VA, VS, VS, VS, DO, VS, EP},
+		{VS, DO, DO, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, DO, VS, EP},
 		{VS, CH, CH, VS, VS, VS, DS, SS, VS, BS, VS, CH, VS, VS, CH, VS, VS},
 		{VS, VS, VS, VS, VS, VS, VS, VS, VS, BS, VS, VS, VA, VS, VS, VS, VS},
 		{EP, EP, EP, EP, EP, EP, EP, EP, EP, EP, EP, EP, EP, EP, EP, EP, EP},

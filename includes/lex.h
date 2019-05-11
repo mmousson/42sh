@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 10:23:09 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/11 18:50:20 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@
 ** MO - 21: MOre, incomplete lexing, ask for more char
 ** SV - 22: Silent Validator, does not store last char
 ** EP - 23: Error Parenthesis
+** ML - 24: Mini_lexer, for !expand
 */
 
-typedef enum		e_state
+typedef enum	e_state
 {
 	ST = 0,
 	CH,
@@ -72,36 +73,38 @@ typedef enum		e_state
 	VS,
 	MO,
  	SV,
-	EP
-}					t_state;
+	EP,
+	ML
+}				t_state;
 
-typedef struct		s_stat
+typedef struct	s_stat
 {
-	int				status;
-	int				old_status;
-	int				ch;
-	char			cha;
-	int				k;
-	char			*load;
-}					t_stat;
+	int			status;
+	int			old_status;
+	int			ch;
+	char		cha;
+	int			k;
+	char		*load;
+}				t_stat;
 
-char				**ft_tabdup(char **tabl);
+char			**ft_tabdup(char **tabl);
 
-void				lex_add_tok(char buf[BUF], char *ld, int stat, t_tok *tok);
-void				lex_add_char(char buff[BUF], char **load, char cha);
-void				lex_free_stat(t_stat *stat);
-t_tok				*lex_init_token(void);
-t_stat				*lex_init_stat(void);
-int					lex_proc(t_stat *stat, char buff[BUF], t_tok *tok);
-int					lex_str(char **str, char ***arge);
-int					lex_more(t_stat *stat, char **str, int nl);
-int					lex_get_next_state(int state, int ch);
-int					pars_tok(t_tok *tok, char ***arge, char *str);
+void			lex_add_tok(char buf[BUF], char *ld, int stat, t_tok *tok);
+void			lex_add_char(char buff[BUF], char **load, char cha);
+void			lex_free_stat(t_stat *stat);
+t_tok			*lex_init_token(void);
+t_stat			*lex_init_stat(void);
+int				lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str);
+int				lex_str(char **str, char ***arge);
+int				lex_more(t_stat *stat, char **str, int nl);
+int				lex_get_next_state(int state, int ch);
+int				pars_tok(t_tok *tok, char ***arge, char *str);
+int				lex_exclam(t_stat *stat, t_tok **tok, char **str);
 
 /*
 ** fonctions affichages
 */
 
-void				ft_print_stat_fd(int stat, int fd);
-void				ft_print_ch_fd(int ch, int fd);
+void			ft_print_stat_fd(int stat, int fd);
+void			ft_print_ch_fd(int ch, int fd);
 #endif

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 12:30:07 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/11 18:50:18 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static void		lex_step(t_stat **stat, char **str)
+static int		lex_step(t_stat **stat, char **str)
 {
 	(*stat)->cha = (*str)[(*stat)->k];
 	(*stat)->ch = lex_get_ch((*stat)->cha);
 	(*stat)->old_status = (*stat)->status;
 	(*stat)->status = lex_get_next_state((*stat)->status, (*stat)->ch);
+	if ((*stat)->status != EN && (*stat)->status != EP)
+		return (1);
+	return (0);
 }
 
 static void		lex_following(char **str, t_tok *tok, char ***arge)
@@ -87,9 +90,8 @@ int				lex_str(char **str, char ***arge)
 	buff[0] = '\0';
 	while (stat->status != EN && stat->status != EP)
 	{
-		lex_step(&stat, str);
-		if (stat->status != EN && stat->status != EP)
-			if (lex_proc(stat, buff, token) == -1)
+		if (lex_step(&stat, str))
+			if (lex_proc(stat, buff, &token, str) == -1)
 				if (!(lex_more(stat, str, 1)))
 					return (clean_out(&token, &stat, str));
 		if (!(lex_last(&stat, &token, str)))
