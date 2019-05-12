@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:36 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 19:12:51 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/12 18:48:16 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ int	job_send_to_background(t_job *job, int must_continue)
 		ft_putstr_fd(job->command, STDERR_FILENO);
 		ft_putendl_fd("' to background", STDERR_FILENO);
 	}
-	tcsetpgrp(STDIN_FILENO, shell_proc_group_id);
 	return (0);
 }

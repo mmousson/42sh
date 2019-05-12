@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_term.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 02:00:25 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/04 17:12:56 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/12 19:18:38 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ char				*line_get_readline(t_prompt prompt, char *argv)
 {
 	int			ret;
 
+	(void)prompt;
+	(void)argv;
 	ret = 0;
 	if (g_env.isatty)
 		sh_switch_term(0);

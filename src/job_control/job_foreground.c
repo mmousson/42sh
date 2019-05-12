@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 18:44:16 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/12 18:48:33 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ int	job_send_to_foreground(t_job *job, int must_continue)
 	ret = job_wait_completion(job);
 	tcsetpgrp(STDIN_FILENO, shell_proc_group_id);
 	tcgetattr(STDIN_FILENO, &job->tmodes);
-	tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell_term_conf);
 	return (ret);
 }

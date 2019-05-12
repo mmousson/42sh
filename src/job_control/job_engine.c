@@ -93,10 +93,10 @@ int					job_wait_completion(t_job *job)
 	{
 		if (proc->valid_to_wait_for == true)
 		{
-			pid = waitpid(WAIT_ANY, &ret, WUNTRACED);
-			if (job_mark_process_status (pid, ret)
-				+ job_is_stopped (job)
-				+ job_is_completed (job) != 0)
+			pid = waitpid(proc->pid, &ret, WUNTRACED);
+			if (job_mark_process_status(pid, ret)
+				+ job_is_stopped(job)
+				+ job_is_completed(job) != 0)
 				break ;
 		}
 		proc = proc->next;
