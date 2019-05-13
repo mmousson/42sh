@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/08 17:33:40 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/05/13 19:46:08 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ include mk/parser.mk
 include mk/exec.mk
 include mk/line_edition.mk
 include mk/utility.mk
+include mk/history.mk
 
 CC = gcc
 LIBFT = libft

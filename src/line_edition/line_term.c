@@ -6,11 +6,12 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 02:00:25 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/04 17:12:56 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/13 20:26:01 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
+#include "history.h"
 
 static void			line_newline(void)
 {
@@ -68,6 +69,7 @@ void				sh_term_manager(void)
 	g_env.mode = mode;
 	g_env.mode->mode[0] = 1;
 	sh_configterm();
+	hist_init();
 }
 
 char				*line_get_readline(t_prompt prompt, char *argv)

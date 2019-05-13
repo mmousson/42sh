@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 16:49:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/11 19:42:16 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/13 09:20:54 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct			s_autodata
 	int					lenlst;
 	int					x;
 	int					y;
-	char				*path;
+	char				**path;
 	char				*root;
 	int					spos;
 }						t_autodata;
@@ -44,13 +44,13 @@ int						auto_completion(char *str, int ret);
 int						auto_getype(void);
 int						auto_ispathcarac(char c);
 int						auto_newtoken(char c);
-int						auto_getstatype(char *name, char *carac);
+int						auto_getstatype(char *name, char *carac, int index);
 
 /*
 **	alloc
 */
 
-void					auto_lstword(char *name);
+void					auto_lstword(char *name, int index);
 t_lstword				*auto_new_lstword(void);
 void					auto_free(void);
 void					auto_filldata(void);

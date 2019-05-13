@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:22:35 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/11 19:42:21 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/13 10:05:39 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void			line_reset_autocomp(int ret_p)
 			return ;
 		x = g_data.x;
 		y = g_data.y;
-		while (--x + 1)
+		while (--x + 2)
 			tputs(g_env.tc->le, 1, ft_putchar);
 		while (--y + 1)
 			tputs(g_env.tc->up, 1, ft_putchar);

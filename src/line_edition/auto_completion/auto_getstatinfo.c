@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 12:34:55 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/10 14:08:07 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/13 09:19:57 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static int			auto_attribute_statvalue(char c, int ret, char **path,
 	return (ret);
 }
 
-int					auto_getstatype(char *name, char *carac)
+int					auto_getstatype(char *name, char *carac, int index)
 {
 	struct stat		m_stat;
 	char			*path;
 
-	if (!(path = ft_strjoin(g_data.path, name)))
+	if (!(path = ft_strjoin(g_data.path[index], name)))
 		sh_errorterm(TMALLOC);
 	if (lstat(path, &m_stat) == -1)
 		;
