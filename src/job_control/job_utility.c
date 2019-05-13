@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/12 19:17:01 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/13 20:30:31 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int		job_is_stopped (t_job *j)
 **	1 -> The job has completed
 */
 
-int		job_is_completed (t_job *j)
+int		job_is_completed (t_job *j, int action)
 {
 	t_process	*p;
 	int			status;
@@ -117,7 +117,8 @@ int		job_is_completed (t_job *j)
 		p = p->next;
 	}
 	j->status = WTERMSIG(status);
-	job_free(j);
+	if (action == FREE_JOB)
+		job_free(j);
 	return (1);
 }
 
@@ -137,7 +138,7 @@ int		job_is_completed (t_job *j)
 
 void	job_inform_user_about_completion(t_job *j, char *msg)
 {
-	if (j->notified)
+	if (j != NULL && j->notified)
 		return ;
 	ft_putstr_fd("\nJob '", STDERR_FILENO);
 	ft_putstr_fd(j->command, STDERR_FILENO);

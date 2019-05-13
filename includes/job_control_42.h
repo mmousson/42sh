@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 16:34:27 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/13 20:32:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ extern t_sig_matcher	g_sig_table[];
 **	The two last will be used to flag waitpid's return value
 */
 
+# define DONT_FREE_JOB 0
+# define FREE_JOB 1
 # define START_JOB 0
 # define CONTINUE_JOB 1
 # define BACKGROUND_LAUNCH 0
@@ -190,7 +192,7 @@ void					job_sigchld_handler(int signo);
 
 t_job					*job_find (pid_t pgid, t_job *first_job);
 int						job_is_stopped(t_job *job);
-int						job_is_completed(t_job *job);
+int						job_is_completed(t_job *job, int action);
 void					job_inform_user_about_completion(t_job *j, char *msg);
 void					job_first_job_set_and_get(t_job **to_set_or_get,
 	int set_or_get);

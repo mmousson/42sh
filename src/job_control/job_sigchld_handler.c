@@ -6,10 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 02:05:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/12 19:19:01 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/13 20:38:32 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
 #include "libft.h"
@@ -85,7 +86,7 @@ static void	handle_completed_job(t_job *current, t_job **job_last,
 		(*job_last)->next = *job_next;
 	else
 		job_first_job_set_and_get(job_next, SET);
-	// job_free(current);
+	job_free(current);
 }
 
 /*
@@ -125,12 +126,12 @@ void		job_sigchld_handler(int signo)
 
 	(void)signo;
 	job_first_job_set_and_get(&current, GET);
-	job_update_status(current);
 	job_last = NULL;
 	while (current)
 	{
+		job_update_status(current);
 		job_next = current->next;
-		if (job_is_completed(current))
+		if (job_is_completed(current, DONT_FREE_JOB))
 			handle_completed_job(current, &job_last, &job_next);
 		else if (job_is_stopped(current))
 			handle_stopped_job(current, &job_last);
