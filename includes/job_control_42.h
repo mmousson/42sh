@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 11:30:16 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/14 00:52:24 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,22 @@ extern t_sig_matcher	g_sig_table[];
 **	The two last will be used to flag waitpid's return value
 */
 
+# define DONT_SAVE_CONF 0
+# define SAVE_CONF 1
+# define DONT_FREE_JOB 0
+# define FREE_JOB 1
 # define START_JOB 0
 # define CONTINUE_JOB 1
 # define BACKGROUND_LAUNCH 0
 # define FOREGROUND_LAUNCH 1
 # define SET 0
 # define GET 1
+# define WAIT_PID_BUILTIN 0
 # define WAITPID_ERROR -1
 # define WAITPID_NO_MATCH 1
+# ifndef WAIT_ANY
+#  define WAIT_ANY -1
+# endif
 
 # define STOP_MSG "stopped"
 # define COMPLETED_MSG "completed"
@@ -105,6 +113,7 @@ typedef struct			s_process
 	char				***environ;
 	t_bool				completed;
 	t_bool				stopped;
+	t_bool				valid_to_wait_for;
 	t_io_channels		io_channels;
 	t_io_channels		real_channels;
 	int					status;
@@ -129,15 +138,19 @@ typedef struct			s_job
 	char				*command;
 	t_io_channels		io_channels;
 	t_bool				notified;
+	t_bool				freed;
 	int					status;
 	char				***env;
 	struct termios		tmodes;
 	struct s_job		*next;
 }						t_job;
 
+extern t_job			*active_job_list;
+
 /*
 **	==================== Job Control's main functions ====================
 **
+**	job_add_to_active_job_list -> job_control/job_add_to_active_job_list.c
 **	job_free -> job_control/job_free.c
 **	job_argc -> job_control/job_utility.c
 **	job_launch -> job_control/job_engine.c
@@ -153,6 +166,7 @@ typedef struct			s_job
 **	job_sigchld_handler -> job_control/job_sigchld_handler.c
 */
 
+void					job_add_to_active_job_list(t_job *job);
 void					job_free(t_job *job);
 int						job_argc(char **argv);
 int						job_launch(t_job *job, int fg);
@@ -164,8 +178,7 @@ void					job_child_process(t_process *proc, int foreground,
 int						job_send_to_foreground(t_job *job, int must_continue);
 int						job_send_to_background(t_job *job, int must_continue);
 int						job_wait_completion(t_job *job);
-int						job_mark_process_status(t_job *first_job, pid_t pid,
-	int status);
+int						job_mark_process_status(pid_t pid, int status);
 void					job_update_status (t_job *first_job);
 void					job_unstop(t_job *job, int foreground);
 void					job_sigchld_handler(int signo);
@@ -181,8 +194,8 @@ void					job_sigchld_handler(int signo);
 */
 
 t_job					*job_find (pid_t pgid, t_job *first_job);
-int						job_is_stopped(t_job *job);
-int						job_is_completed(t_job *job);
+int						job_is_stopped(t_job *job, int action);
+int						job_is_completed(t_job *job, int action);
 void					job_inform_user_about_completion(t_job *j, char *msg);
 void					job_first_job_set_and_get(t_job **to_set_or_get,
 	int set_or_get);

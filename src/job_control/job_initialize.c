@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize.c                                       :+:      :+:    :+:   */
+/*   job_initialize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:23 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/10 07:35:58 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/13 21:15:38 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ pid_t	shell_proc_group_id;
 **	-1 -> An error occured
 */
 
-int		init_job_ctrl(struct termios *bkp_conf)
+int		init_job_ctrl(void)
 {
 	int		is_shell_intercative;
 
@@ -52,7 +52,7 @@ int		init_job_ctrl(struct termios *bkp_conf)
 			return (-1);
 		}
 		tcsetpgrp(STDIN_FILENO, shell_proc_group_id);
-		tcgetattr(STDIN_FILENO, bkp_conf);
+		tcgetattr(STDIN_FILENO, &shell_term_conf);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:36 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/30 02:20:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 00:36:26 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ int	job_send_to_background(t_job *job, int must_continue)
 
 	if (must_continue == CONTINUE_JOB)
 	{
+		ft_putstr_fd("Send Job '", STDERR_FILENO);
+		ft_putstr_fd(job->command, STDERR_FILENO);
+		ft_putendl_fd("' to background", STDERR_FILENO);
 		if (kill(-(job->pgid), SIGCONT) == -1)
 		{
 			ft_putstr_fd("Couldn't wake up the job: ", STDERR_FILENO);
@@ -49,9 +52,6 @@ int	job_send_to_background(t_job *job, int must_continue)
 		tmp = ft_itoa(job->pgid);
 		core_spec_var_setget(SPEC_EXCLAMATION, tmp, SET);
 		ft_strdel(&tmp);
-		ft_putstr_fd("\nSend Job '", STDERR_FILENO);
-		ft_putstr_fd(job->command, STDERR_FILENO);
-		ft_putendl_fd("' to background", STDERR_FILENO);
 	}
 	return (0);
 }

@@ -6,12 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 00:33:36 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/13 22:40:55 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include "sh42.h"
 #include "libft.h"
 #include "job_control_42.h"
 
@@ -73,7 +75,7 @@ t_job	*find_job (pid_t pgid, t_job *first_job)
 **	1 -> The job has stopped
 */
 
-int		job_is_stopped (t_job *j)
+int		job_is_stopped (t_job *j, int action)
 {
 	t_process	*p;
 
@@ -85,6 +87,8 @@ int		job_is_stopped (t_job *j)
 		p = p->next;
 	}
 	j->status = 18;
+	if (action == SAVE_CONF)
+		tcgetattr(STDIN_FILENO, &j->tmodes);
 	return (1);
 }
 
@@ -100,7 +104,7 @@ int		job_is_stopped (t_job *j)
 **	1 -> The job has completed
 */
 
-int		job_is_completed (t_job *j)
+int		job_is_completed (t_job *j, int action)
 {
 	t_process	*p;
 	int			status;
@@ -110,14 +114,13 @@ int		job_is_completed (t_job *j)
 	while (p)
 	{
 		if (!p->completed)
-		{
 			return (0);
-		}
 		status = p->status;
 		p = p->next;
 	}
 	j->status = WTERMSIG(status);
-	job_free(j);
+	if (action == FREE_JOB)
+		job_free(j);
 	return (1);
 }
 
@@ -137,7 +140,7 @@ int		job_is_completed (t_job *j)
 
 void	job_inform_user_about_completion(t_job *j, char *msg)
 {
-	if (j->notified)
+	if (j != NULL && j->notified)
 		return ;
 	ft_putstr_fd("\nJob '", STDERR_FILENO);
 	ft_putstr_fd(j->command, STDERR_FILENO);

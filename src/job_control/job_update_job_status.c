@@ -6,11 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:34:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 21:51:43 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:01:39 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/wait.h>
+#include "libft.h"
 #include "job_control_42.h"
 
 #include <errno.h>
@@ -27,6 +28,8 @@ void	job_update_status(t_job *first_job)
 	pid_t		pid;
 	t_process	*current;
 
+	if (first_job == NULL)
+		return ;
 	current = first_job->first_process;
 	while (current)
 	{
@@ -36,7 +39,7 @@ void	job_update_status(t_job *first_job)
 			continue ;
 		}
 		pid = waitpid (WAIT_ANY, &status, WUNTRACED | WNOHANG);
-		if (job_mark_process_status (first_job, pid, status))
+		if (job_mark_process_status (pid, status))
 			break ;
 	}
 }

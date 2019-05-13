@@ -6,16 +6,18 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/11 19:52:53 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/14 00:57:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control_42.h"
-#include "exe.h"
-#include "libft.h"
+#include <stdio.h>
+
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include "job_control_42.h"
+#include "exe.h"
+#include "libft.h"
 
 void		ft_cmd_nf(char *str)
 {
@@ -68,6 +70,36 @@ void		ft_launch_exe(t_launch *cmd, char ***arge)
 	ft_res_pile(cmd);
 }
 
+// static void print_structures(t_job *job)
+// {
+// 	t_process *current;
+
+// 	current = job->first_process;
+// 	printf("pgid = %d\n", job->pgid);
+// 	printf("command = %s\n", job->command);
+// 	printf("notified = %d\n", job->notified);
+// 	while (current)
+// 	{
+// 		printf("arguments:\n");
+// 		char **tmp = current->argv;
+// 		while (*tmp != NULL)
+// 		{
+// 			printf("%s\n", *tmp);
+// 			tmp++;
+// 		}
+// 		printf("io_channels:\n");
+// 		printf("input = %d\n", current->io_channels.input);
+// 		printf("output = %d\n", current->io_channels.output);
+// 		printf("error = %d\n", current->io_channels.error);
+// 		printf("real_channels:\n");
+// 		printf("input = %d\n", current->real_channels.input);
+// 		printf("output = %d\n", current->real_channels.output);
+// 		printf("error = %d\n", current->real_channels.error);
+// 		current = current->next;
+// 	}
+
+// }
+
 void		ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 {
 	t_job	*job;
@@ -81,7 +113,8 @@ void		ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 		fg = status == ESP ? BACKGROUND_LAUNCH : FOREGROUND_LAUNCH;
 		job = exe_load_job(*cmd, arge);
 		ft_free_cmd(*cmd);
-//		exe_print_job(job);
+		// exe_print_job(job);
+		// print_structures(job);
 		job_launch(job, fg);
 		if (!(*cmd = ft_init_cmd(NULL)))
 			exit(1);

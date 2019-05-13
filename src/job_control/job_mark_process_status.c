@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:45:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 00:21:24 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:17:02 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,14 +152,13 @@ static int				loop_jobs(t_job *job, pid_t pid, int status)
 **	WAITPID_ERROR (-1) -> 'waitpid' syscall failed, an error occured
 */
 
-int						job_mark_process_status(t_job *first_job, pid_t pid,
-	int status)
+int						job_mark_process_status(pid_t pid, int status)
 {
 	t_job		*job;
 
 	if (pid > 0)
 	{
-		job = first_job;
+		job = active_job_list;
 		while (job)
 		{
 			if (loop_jobs(job, pid, status) == 0)
@@ -174,5 +173,5 @@ int						job_mark_process_status(t_job *first_job, pid_t pid,
 	else if (pid == 0)
 		return (WAITPID_ERROR);
 	else
-		return (WAITPID_ERROR);
+		return (WAIT_PID_BUILTIN);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_string.c                                      :+:      :+:    :+:   */
+/*   utility_hash_string.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 13:18:18 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/26 14:58:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/13 21:41:39 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	hash_string(char *string)
 	current_power = 1;
 	while (string[++i] != '\0')
 	{
-		result = (result + (string[i] - 'a' + 1) * current_power) % mod;
+		if (string[i] >= 'a' && string[i] <= 'z')
+			result = (result + (string[i] - 'a' + 1) * current_power) % mod;
 		current_power = (current_power * power) % mod;
 	}
 	return (result);
