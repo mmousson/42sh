@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 09:29:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/09 22:11:06 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/13 20:31:33 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int				line_ctrld(void)
 {
-	g_env.ctrld = 1;
+/*	if (active_jobs_list != NULL)
+		ft_putstr("There are stopped jobs.\n");
+*/	g_env.ctrld = 1;
 	g_env.count = 0;
 	return (0);
 }

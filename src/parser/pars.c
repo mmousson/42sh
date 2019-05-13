@@ -6,28 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:16:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 12:01:10 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/13 10:14:17 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
-
-static void			hist_add(char *str)
-{
-	t_history		*tmp;
-	t_history		*new;
-
-	tmp = g_env.ry;
-	if (!(new = (t_history*)ft_memalloc(sizeof(t_history))))
-		sh_errorterm(TMALLOC);
-	new->next = tmp;
-	new->prev = NULL;
-	if (tmp)
-		tmp->prev = new;
-	if (!(new->line = ft_strdup(str)))
-		sh_errorterm(TMALLOC);
-	g_env.ry = new;
-}
+#include "history.h"
 
 int					ft_pars(t_tok *token, char ***arge, char *str)
 {
