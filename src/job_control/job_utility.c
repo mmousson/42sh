@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/13 20:30:31 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/13 22:40:55 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_job	*find_job (pid_t pgid, t_job *first_job)
 **	1 -> The job has stopped
 */
 
-int		job_is_stopped (t_job *j)
+int		job_is_stopped (t_job *j, int action)
 {
 	t_process	*p;
 
@@ -87,6 +87,8 @@ int		job_is_stopped (t_job *j)
 		p = p->next;
 	}
 	j->status = 18;
+	if (action == SAVE_CONF)
+		tcgetattr(STDIN_FILENO, &j->tmodes);
 	return (1);
 }
 

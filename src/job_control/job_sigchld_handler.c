@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 02:05:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/13 20:38:32 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/13 22:40:42 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void		job_sigchld_handler(int signo)
 		job_next = current->next;
 		if (job_is_completed(current, DONT_FREE_JOB))
 			handle_completed_job(current, &job_last, &job_next);
-		else if (job_is_stopped(current))
+		else if (job_is_stopped(current, DONT_SAVE_CONF))
 			handle_stopped_job(current, &job_last);
 		else
 			job_last = current;

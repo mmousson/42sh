@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 23:53:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 14:47:40 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/13 22:42:04 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,5 @@ void		job_free(t_job *job)
 		ft_memdel((void **)&(current_process));
 		current_process = next_process;
 	}
+	ft_memdel((void **)&(job));
 }

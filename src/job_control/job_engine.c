@@ -98,7 +98,7 @@ int					job_wait_completion(t_job *job)
 			is_only_builtins = false;
 			pid = waitpid(proc->pid, &ret, WUNTRACED);
 			if (job_mark_process_status(pid, ret)
-				+ job_is_stopped(job)
+				+ job_is_stopped(job, SAVE_CONF)
 				+ job_is_completed(job, FREE_JOB) != 0)
 				break ;
 		}
@@ -106,7 +106,7 @@ int					job_wait_completion(t_job *job)
 	}
 	if (is_only_builtins)
 		job_free(job);
-	return (ret);
+	return (ret % 255);
 }
 
 /*

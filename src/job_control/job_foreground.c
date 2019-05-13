@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/12 18:48:33 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 00:37:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 **	(with tcsetpgrp)
 **	If we are continuing a stopped job, send it a SIGCONT signal to wake it up
 **	Then, we must wait for said job to complete or to stop
-**	Once this is done, we give the shell back control of the terminal by
+**	Once this is done, we give back to the shell control of the terminal by
 **	putting it back in the 'foreground' process group
 **	Finally, we restore the terminal configuration saved in the extern variable
 **
@@ -44,19 +44,18 @@ int	job_send_to_foreground(t_job *job, int must_continue)
 	if (must_continue == CONTINUE_JOB)
 	{
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &job->tmodes);
+		ft_putstr_fd("Send Job '", STDERR_FILENO);
+		ft_putstr_fd(job->command, STDERR_FILENO);
+		ft_putendl_fd("' to foreground", STDERR_FILENO);
 		if (kill(-(job->pgid), SIGCONT) == -1)
 		{
 			ft_putstr_fd("Couldn't wake up the job: ", STDERR_FILENO);
 			ft_putendl_fd(job->command, STDERR_FILENO);
 			exit(126);
 		}
-		ft_putstr_fd("\nSend Job '", STDERR_FILENO);
-		ft_putstr_fd(job->command, STDERR_FILENO);
-		ft_putendl_fd("' to foreground", STDERR_FILENO);
 	}
 	ret = job_wait_completion(job);
 	tcsetpgrp(STDIN_FILENO, shell_proc_group_id);
-	tcgetattr(STDIN_FILENO, &job->tmodes);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell_term_conf);
 	return (ret);
 }
