@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:31:57 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/11 19:42:13 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/13 09:39:13 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,19 @@ char				*auto_getroot(void)
 
 void				auto_filldata(void)
 {
+	char			*path;
+
+	path = NULL;
 	g_data.type = auto_getype();
 	g_data.root = auto_getroot();
 	if (g_data.type == 1)
-	{
-		g_data.path = auto_getpath();
-		g_data.lw = auto_new_lstword();
-	}
+		path = auto_getpath();
+	else if (g_data.type == 0)
+		path = getenv("PATH");
+	if (!path || !(g_data.path = ft_strsplit(path, ':')))
+		return ;
+	if (g_data.type)
+		ft_strdel(&path);
+	g_data.lw = auto_new_lstword();
 	g_data.spos = g_env.cm->pos;
 }

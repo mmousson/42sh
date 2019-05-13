@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 09:53:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/11 18:31:06 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/13 09:39:09 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,21 @@ int					auto_printword(void)
 {
 	DIR				*dir;
 	struct dirent	*dt;
+	int				i;
 
-	if (!(dir = opendir(g_data.path)))
-		return (1);
-	while ((dt = readdir(dir)))
+	i = 0;
+	while (g_data.path[i])
 	{
-		if (auto_checkroot(dt->d_name, g_data.root))
-			auto_lstword(dt->d_name);
+		if (!(dir = opendir(g_data.path[i])))
+			break ;
+		while ((dt = readdir(dir)))
+		{
+			if (auto_checkroot(dt->d_name, g_data.root))
+				auto_lstword(dt->d_name, i);
+		}
+		(void)closedir(dir);
+		i++;
 	}
-	(void)closedir(dir);
 	auto_calclen();
 	if (g_data.lenlst < 2)
 		return (auto_printcomp());
