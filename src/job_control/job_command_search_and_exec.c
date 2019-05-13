@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 16:37:02 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/13 21:06:59 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	search_using_path(t_job *job, t_process *proc, int fg)
 		if (hash_already_exists(hash, proc->argv[0]))
 		{
 			g_hash[hash].hits += 1;
-			proc->argv[0] = g_hash[hash].full_path;
+			proc->argv[0] = ft_strdup(g_hash[hash].full_path);
 		}
 		else if ((proc->argv[0] = utility_search(proc->argv[0])) == NULL)
 		{
