@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/09 17:43:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 05:05:15 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ typedef enum		e_special_var_id
 */
 
 extern int			vi_on;
-extern t_vars		*shell_var_list;
-extern t_alias		*alias_list;
+extern t_vars		*g_shell_var_list;
+extern t_alias		*g_alias_list;
 extern t_builtins	g_builtins[];
 extern t_hash		g_hash[HASH_MOD];
 
@@ -195,7 +195,8 @@ int					blt_unalias(int argc, char **argv, char ***env);
 **	get_user_home -> utility/get_user_home.c
 **	add_entry_to_environ -> utility/utility_environ_utilities.c
 **	write_alias_list_to_file -> utility/write_alias_list_to_file.c
-**	add_internal_var -> utility/add_internal_var.c
+**	utility_get_var -> utility/utility_get_var.c
+**	utility_set_var -> utility/utility_set_var.c
 **	internal_variable_exists -> utility/internal_variable_exists.c
 */
 
@@ -210,7 +211,8 @@ void				utility_add_entry_to_environ(char ***environ, char *key,
 int					utility_rm_entry_from_environ(char ***environ, char *key);
 char				*utility_get_env_var(char ***environ, char *key);
 int					utility_get_environ_length(char **tab);
-void				utility_add_internal_var(char *name, char *value);
+char				*utility_get_var(char *name, char ***env);
+void				utility_set_var(char *name, char *value, char ***env);
 char				*utility_internal_var_exists(char *name);
 
 #endif

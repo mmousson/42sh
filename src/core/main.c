@@ -6,11 +6,9 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 00:25:40 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:54:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include <stdlib.h>
 #include "job_control_42.h"
@@ -23,8 +21,8 @@
 
 struct termios	shell_term_conf;
 int				vi_on = 0;
-t_vars			*shell_var_list = NULL;
-t_job			*active_job_list = NULL;
+t_vars			*g_shell_var_list = NULL;
+t_job			*g_active_job_list = NULL;
 
 /*
 **

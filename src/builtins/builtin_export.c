@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 05:42:31 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:01:10 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:45:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static int	export_var(char *def, char ***env)
 			return (EXPORT_ERROR);
 		}
 		utility_add_entry_to_environ(env, name, def + ft_strlen(def) + 1);
-		utility_add_internal_var(name, def + ft_strlen(def) + 1);
+		utility_set_var(name, def + ft_strlen(def) + 1, env);
 		ft_strdel(&name);
 	}
 	else if ((name = utility_internal_var_exists(def)) != NULL)

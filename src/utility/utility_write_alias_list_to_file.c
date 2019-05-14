@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 04:35:48 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:14:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:52:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		utility_write_alias_list_to_file(void)
 		ft_putendl_fd("42sh: Error: could not open alias file", STDERR_FILENO);
 		return ;
 	}
-	current = alias_list;
+	current = g_alias_list;
 	while (current)
 	{
 		ft_putendl_fd(current->token, 2);

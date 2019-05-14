@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 01:51:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:04:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:46:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static void	search_in_shell_internal_vars(char *name)
 	t_vars	*prev;
 
 	prev = NULL;
-	current = shell_var_list;
+	current = g_shell_var_list;
 	while (current)
 	{
 		if (ft_strequ(name, current->name))
 		{
 			if (prev == NULL)
-				shell_var_list = current->next;
+				g_shell_var_list = current->next;
 			else
 				prev->next = current->next;
 			ft_strdel(&current->name);

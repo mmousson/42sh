@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 23:53:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/13 22:42:04 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:55:27 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	remove_job_from_list(pid_t pgid)
 	t_job	*current;
 
 	previous = NULL;
-	current = active_job_list;
+	current = g_active_job_list;
 	while(current != NULL && current->pgid != pgid)
 	{
 		previous = current;
@@ -30,7 +30,7 @@ static void	remove_job_from_list(pid_t pgid)
 	if (previous != NULL)
 		previous->next = current->next;
 	else
-		active_job_list = current->next;
+		g_active_job_list = current->next;
 }
 
 /*

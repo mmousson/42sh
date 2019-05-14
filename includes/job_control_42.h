@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/13 22:38:26 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:54:25 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ typedef struct			s_job
 	struct s_job		*next;
 }						t_job;
 
-extern t_job			*active_job_list;
+extern t_job			*g_active_job_list;
 
 /*
 **	==================== Job Control's main functions ====================

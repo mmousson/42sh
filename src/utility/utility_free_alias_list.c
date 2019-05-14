@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_alias_list.c                                  :+:      :+:    :+:   */
+/*   utility_free_alias_list.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 06:12:09 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 08:52:44 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:51:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	free_alias_list(void)
 {
 	t_alias	*next;
 
-	while (alias_list)
+	while (g_alias_list)
 	{
-		ft_strdel(&(alias_list->token));
-		ft_strdel(&(alias_list->replacement));
-		next = alias_list->next;
-		ft_memdel((void **)&(alias_list));
-		alias_list = next;
+		ft_strdel(&(g_alias_list->token));
+		ft_strdel(&(g_alias_list->replacement));
+		next = g_alias_list->next;
+		ft_memdel((void **)&(g_alias_list));
+		g_alias_list = next;
 	}
 }
