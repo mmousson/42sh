@@ -6,10 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 06:20:40 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 06:04:10 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 08:34:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
 #include "sh42.h"
@@ -139,45 +140,36 @@ static int	set_already_existing_internal_var(char *name, char *value)
 }
 
 /*
-**	In case both of the function above return 0 (which means the variable
-**	designed by 'name' doesn't exist yet), this function is called by the
-**	'utility_set_var' wrapper function
-**	It creates a new link and fills it with the value given by the arguments
-**	'name' and 'value' and then prepends the link to the current linked list,
-**	updating its head pointer
-**	In case of memory allocation error, nothing is modified
+**	Function specifically designed to delete an internal variable definiton
+**	except its 'value' field which is saved for being returned afterwards
+**	It will then be free'd by the calling function right after usage
 **
 **	Arguments:
-**	name -> The name of the variable to create in the linked list
-**	value -> The value of the wanted variable definition
+**	name -> The name of the variable we are looking for
 **
-**	Return Value: NONE
+**	Return Value:
+**	NULL -> There are no internal variable with such name, nothing was deleted
+**	NON-NULL -> The 'value' field of the deleted internal var definition
 */
 
-static void	add_var(char *name, char *value)
+static char	*delete_internal_var_and_get_value(char *name)
 {
-	t_vars	*internal;
+	char	*ret;
+	t_vars	*holder;
+	t_vars	*holder_next;
 
-	if ((internal = (t_vars *)ft_memalloc(sizeof(t_vars))) == NULL)
-		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
-	else
+	if ((ret = utility_internal_var_exists(name, &holder)) != NULL)
 	{
-		internal->name = NULL;
-		internal->value = NULL;
-		if ((internal->name = ft_strdup(name)) == NULL
-			|| (internal->value = ft_strdup(value)) == NULL)
-		{
-			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
-			ft_strdel(&internal->name);
-			ft_strdel(&internal->value);
-			ft_memdel((void **)&(internal));
-		}
-		else
-		{
-			internal->next = g_shell_var_list;
-			g_shell_var_list = internal;
-		}
+		holder_next = holder->next;
+		if (holder_next != NULL)
+			holder_next->prev = holder->prev;
+		if (holder->prev != NULL)
+			holder->prev->next = holder_next;
+		ft_strdel(&holder->name);
+		ret = holder->value;
+		ft_memdel((void **)&(holder));
 	}
+	return (ret);
 }
 
 /*
@@ -200,14 +192,24 @@ static void	add_var(char *name, char *value)
 **	Return Value: NONE
 */
 
-void		utility_set_var(char *name, char *value, char **env)
+void		utility_set_var(char *name, char *value, char ***env, int export_var)
 {
-	if (name == NULL || value == NULL || env == NULL)
+	char	*tmp;
+
+	if (name == NULL || env == NULL)
 		return ;
-	if (set_already_existing_env_var(name, value, env) == 1)
-		return ;
-	else if (set_already_existing_internal_var(name, value) == 1)
-		return ;
-	else
-		add_var(name, value);
+	if (export_var)
+	{
+		tmp = delete_internal_var_and_get_value(name);
+		utility_add_entry_to_environ(env, name, value ? value : tmp);
+		ft_strdel(&tmp);
+	}
+	else if (value != NULL)
+	{
+		if (set_already_existing_env_var(name, value, *env) == 1
+			|| set_already_existing_internal_var(name, value) == 1)
+			return ;
+		else
+			utility_add_internal_var(name, value);
+	}
 }

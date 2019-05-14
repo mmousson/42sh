@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 02:45:10 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:12:11 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 07:56:12 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		utility_add_entry_to_environ(char ***environ, char *key, char *value)
 			&& (where = ft_expand(environ)) != -1)
 			(*environ)[where] = ft_strjoin(tmp, value);
 		else
-			ft_putendl_fd("Internal malloc error", STDERR_FILENO);
+			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 		ft_strdel(&tmp);
 	}
 	else
@@ -135,7 +135,7 @@ char		**utility_duplicate_environ(char **env)
 		return (NULL);
 	if ((res = (char **)ft_memalloc(sizeof(char *) * (length + 1))) == NULL)
 	{
-		ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
+		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 		return (NULL);
 	}
 	while (++i < length)
@@ -145,7 +145,7 @@ char		**utility_duplicate_environ(char **env)
 			while (--i >= 0)
 				ft_strdel(&(res[i]));
 			ft_memdel((void **)&(res));
-			ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
+			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 			return (NULL);
 		}
 	}

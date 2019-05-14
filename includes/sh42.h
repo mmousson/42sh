@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 06:04:50 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 08:28:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct		s_vars
 {
 	char			*name;
 	char			*value;
+	struct s_vars	*prev;
 	struct s_vars	*next;
 }					t_vars;
 
@@ -211,8 +212,11 @@ void				utility_add_entry_to_environ(char ***environ, char *key,
 int					utility_rm_entry_from_environ(char ***environ, char *key);
 char				*utility_get_env_var(char ***environ, char *key);
 int					utility_get_environ_length(char **tab);
+void				utility_add_internal_var(char *name, char *value);
 char				*utility_get_var(char *name, char **env);
-void				utility_set_var(char *name, char *value, char **env);
-char				*utility_internal_var_exists(char *name);
+void				utility_set_var(char *name, char *value, char ***env,
+	int export_var);
+void				utility_delete_var(char *name, char ***env);
+char				*utility_internal_var_exists(char *name, t_vars **holder);
 
 #endif
