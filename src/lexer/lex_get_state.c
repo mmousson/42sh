@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/11 16:58:54 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/14 16:22:09 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int				lex_get_next_state(int state, int ch)
 		{VS, VS, VS, SP, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS},
 		{VS, VS, VS, VS, VA, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS},
 		{VS, VS, VS, VS, VS, VA, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS},
-		{MO, DQ, DQ, DQ, DQ, DQ, SV, DQ, DQ, DQ, DQ, DQ, DQ, DQ, DQ, DQ, DQ},
+		{MO, DQ, DQ, DQ, DQ, DQ, SV, DQ, DQ, DB, DQ, DQ, DQ, DQ, DQ, DQ, DQ},
 		{MO, SQ, SQ, SQ, SQ, SQ, SQ, SV, SQ, SQ, SQ, SQ, SQ, SQ, SQ, SQ, SQ},
 		{VS, VS, IN, VS, VS, VA, VS, VS, VA, VS, VS, CH, VS, VS, VA, VS, VS},
 		{MO, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH, CH},
