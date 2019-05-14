@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 09:29:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/13 20:31:33 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/13 21:06:57 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int				line_ctrld(void)
 {
-/*	if (active_jobs_list != NULL)
+/*	if (!g_env.jobs && active_jobs_list && g_env.ctrld)
 		ft_putstr("There are stopped jobs.\n");
-*/	g_env.ctrld = 1;
+	if (active_jobs_list && g_env.ctrld)
+		g_env.jobs++;*/
+	g_env.ctrld = 1;
 	g_env.count = 0;
 	return (0);
 }
@@ -25,6 +27,7 @@ int				line_return(void)
 {
 	if (g_data.status == 2)
 		return (auto_return());
+	g_env.jobs = 0;
 	if (g_env.mode->mode[MVI])
 	{
 		ft_bzero(g_env.s_buffer, sizeof(g_env.s_buffer));

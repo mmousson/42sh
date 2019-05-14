@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:16:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/13 20:33:51 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/14 17:41:41 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ int					pars_tok(t_tok *token, char ***arge, char *str)
 			|| (token->next->status == SPA && !token->next->next))
 		return (0);
 	if (str)
-		hist_add(str);
-	ft_print_token(token);
+		hist_update(str);
 	tree = ft_pars_line(token->next, 0, -2);
-	(void)arge;
-	//ft_exec(tree, arge);
+	ft_exec(tree, arge);
 	return (0);
 }
