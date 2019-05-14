@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:49:45 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/08 17:14:37 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/05/14 15:57:27 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ BUILTINS =	builtin_alias.c									\
 			builtin_type.c									\
 			builtin_unalias.c								\
 			builtin_unset.c									\
+			builtin_history.c								\
 			hash/hash.c										\
 			hash/hash_add_hash_entry.c						\
 			hash/hash_init_hash_table.c						\

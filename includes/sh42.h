@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 11:31:11 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/14 15:56:01 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <termios.h>
 
 # define ALIAS_FILE "/.42sh_aliases"
+# define HIST_FILE "/.42sh_history"
 
 /*
 **	Structure representing the alias list in the current shell execution
@@ -186,6 +187,7 @@ int					blt_unset(int argc, char **argv, char ***env);
 int					blt_test(int argc, char **argv, char ***env);
 int					blt_type(int argc, char **argv, char ***env);
 int					blt_unalias(int argc, char **argv, char ***env);
+int					blt_history(int argc, char **argv, char ***env);
 
 /*
 **	==================== UTILITY functions ====================

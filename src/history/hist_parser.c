@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 13:53:33 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/13 20:24:36 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/14 16:21:32 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ char		*hist_parsline(char *line)
 		return (NULL);
 	while (line[i] && line[i] != ';')
 		i++;
+	if (!line[i])
+		return (NULL);
+	i++;
 	if (line[i] && !(newline = ft_strdup(&(line[i]))))
 		sh_errorterm(TMALLOC);
 	return (newline);

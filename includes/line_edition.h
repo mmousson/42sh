@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/11 18:41:10 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/13 20:58:53 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct			s_env
 	int					k_index;
 	t_ctrlxx			*cx;
 	int					count;
+	int					jobs;
 }						t_env;
 
 struct s_env			g_env;

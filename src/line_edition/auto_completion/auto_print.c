@@ -6,12 +6,13 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 09:53:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/13 09:39:09 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/14 15:42:40 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include "line_edition.h"
+#include "sh42.h"
 #include <term.h>
 
 static int			auto_printcomp(void)
@@ -82,6 +83,21 @@ int					auto_printaligned(void)
 	return (1);
 }
 
+/*static void			auto_printbuilt(void)
+{
+	int				i;
+
+	i = 0;
+	if (!g_data.type)
+		return ;
+	while (g_builtins[i])
+	{
+		if (auto_checkroot(g_builtins[i].name, g_data.root))
+			auto_lstword(g_builtins[i].name, 0);
+		i++;
+	}
+}*/
+
 int					auto_printword(void)
 {
 	DIR				*dir;
@@ -101,6 +117,7 @@ int					auto_printword(void)
 		(void)closedir(dir);
 		i++;
 	}
+//	auto_printbuilt();
 	auto_calclen();
 	if (g_data.lenlst < 2)
 		return (auto_printcomp());

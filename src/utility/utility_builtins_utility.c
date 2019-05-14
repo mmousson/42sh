@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 11:51:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 22:26:41 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 15:56:14 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_builtins	g_builtins[] = {
 	{"type", &blt_type},
 	{"unalias", &blt_unalias},
 	{"unset", &blt_unset},
+	{"history", &blt_history},
 	{NULL, NULL}
 };
 

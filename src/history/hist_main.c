@@ -6,11 +6,12 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 13:27:51 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/13 20:26:15 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/14 16:07:00 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
+#include "sh42.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -36,7 +37,7 @@ static char		*hist_getpath(void)
 
 	if (!(path = getenv("HOME")))
 		return (NULL);
-	if (!(path = ft_strjoin(path, "/.21sh_history")))
+	if (!(path = ft_strjoin(path, HIST_FILE)))
 		sh_errorterm(TMALLOC);
 	return (path);
 }
@@ -56,7 +57,7 @@ void			hist_init(void)
 	ft_strdel(&path);
 	if (fd == -1)
 	{
-		ft_putstr_fd("21sh: fail to access history\n", STDERR_FILENO);
+		ft_putstr_fd("42sh: fail to access history\n", STDERR_FILENO);
 		return ;
 	}
 	hist_readfile(&line, &isread, fd);
@@ -72,7 +73,7 @@ static void		hist_w_infile(int fd, t_history *ry)
 		ft_putstr_fd(": ", fd);
 		ft_putnbr_fd((int)ft_strlen(ry->line), fd);
 		ft_putstr_fd(":0;", fd);
-		ft_putstr_fd(ry->line, fd);
+		ft_putendl_fd(ry->line, fd);
 	}
 }
 
