@@ -29,17 +29,17 @@
 **	Return Value: NONE
 */
 
-static void				pipe_setup(t_job *job, t_process *process, int p[2])
+static void				pipe_setup(t_job *job, t_process *process)
 {
 	if (process->next)
 	{
-		if (pipe(p) == -1)
+		if (pipe(process->p) == -1)
 		{
 			ft_putendl_fd("Pipe Failed", STDERR_FILENO);
 			exit(126);
 		}
 		else
-			process->io_channels.output = p[1];
+			process->io_channels.output = process->p[1];
 	}
 	else
 		process->io_channels.output = job->io_channels.output;
@@ -60,14 +60,14 @@ static void				pipe_setup(t_job *job, t_process *process, int p[2])
 **	Return Value: NONE
 */
 
-static void				pipe_cleanup(t_job *job, t_process *process, int p[2])
+static void				pipe_cleanup(t_job *job, t_process *process)
 {
 	if (process->io_channels.input != job->io_channels.input)
 		close(process->io_channels.input);
 	if (process->io_channels.output != job->io_channels.output)
 		close(process->io_channels.output);
 	if (process->next)
-		process->next->io_channels.input = p[0];
+		process->next->io_channels.input = process->p[0];
 }
 
 /*
@@ -124,15 +124,14 @@ int					job_wait_completion(t_job *job)
 
 int						job_launch(t_job *job, int fg)
 {
-	int			p[2];
 	t_process	*current_process;
 
 	current_process = job->first_process;
 	while (current_process)
 	{
-		pipe_setup(job, current_process, p);
+		pipe_setup(job, current_process);
 		job_command_search_and_exec(job, current_process, fg);
-		pipe_cleanup(job, current_process, p);
+		pipe_cleanup(job, current_process);
 		current_process = current_process->next;
 	}
 	job_add_to_active_job_list(job);
