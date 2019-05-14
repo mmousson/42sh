@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/11 18:50:13 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/14 17:44:12 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str)
 		stat->status = SQ;
 	else if (stat->status == MO)
 		return (-1);
+	else if (stat->status == DB && !lex_back_slash_quote(stat, str, buff))
+		return (0);
 	else if (stat->status == ML && !lex_exclam(stat, tok, str))
 		return (0);
 	else if (stat->status != EN && stat->status != BS)
