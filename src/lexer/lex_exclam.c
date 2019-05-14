@@ -6,11 +6,12 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/11 18:50:16 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/14 17:58:39 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
+#include "history.h"
 
 static void	process_sign(char **str, t_stat *stat, char **sub, char buff[BUF])
 {
@@ -76,7 +77,7 @@ int			lex_exclam(t_stat *stat, t_tok **token, char **str)
 		lex_free_token(*token);
 		*token = lex_init_token();
 		start = ft_strsub(*str, 0, mem);
-		sub = history_expand(sub);
+		sub = hist_getexpend(&sub);
 		end = ft_strdup(*str + stat->k);
 		if (sub)
 			start = ft_strjoinf(start, sub);
