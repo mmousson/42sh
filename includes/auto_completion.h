@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 16:49:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/13 09:20:54 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/15 13:15:02 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ int						auto_printaligned(void);
 int						auto_isblank(void);
 int						auto_checkroot(char *name, char *root);
 void					auto_calclen(void);
+void					auto_sort(void);
+void					auto_swapstr(char **a, char **b);
+void					auto_swapint(int *a, int *b);
+void					auto_swapchar(char *a, char *b);
 
 /*
 **	choose

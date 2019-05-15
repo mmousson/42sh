@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 19:20:09 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/08 21:49:52 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/15 15:43:10 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int					caps_check_termcaps(t_tc tc)
 	i = -1;
 	if (!tc.cl || !tc.cr || !tc.dl || !tc.dc || !tc.cm || !tc.le || !tc.nd
 			|| !tc.sc || !tc.rc || !tc.up || !tc.doo || !tc.mr
-			|| !tc.kh || !tc.me || !tc.kd || !tc.cd || !tc.af)
+			|| !tc.kh || !tc.me || !tc.kd || !tc.cd || !tc.af
+			|| !tc.ri || !tc.lem || !tc.dom || !tc.upm)
 		return (0);
 	while (++i < 5)
 		if (!tc.key[i])
@@ -59,5 +60,9 @@ int					caps_addtermcaps(t_tc *tc)
 	tc->mr = tgetstr("mr", NULL);
 	tc->cd = tgetstr("cd", NULL);
 	tc->af = tgetstr("AF", NULL);
+	tc->ri = tgetstr("RI", NULL);
+	tc->lem = tgetstr("LE", NULL);
+	tc->dom = tgetstr("DO", NULL);
+	tc->upm = tgetstr("UP", NULL);
 	return (caps_check_termcaps(*tc));
 }

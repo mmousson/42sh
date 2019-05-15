@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/10 13:34:25 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/15 13:27:14 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ LINE_EDIT_PATH = ./src/line_edition/
 VIMODE_PATH = $(LINE_EDIT_PATH)vi_mode/
 AUTOCMP_PATH = $(LINE_EDIT_PATH)auto_completion/
 PROMPT_PATH = $(LINE_EDIT_PATH)classic_prompt/
+SIG_PATH = $(LINE_EDIT_PATH)signal/
 
 VIMODE =	vi_alloc.c							\
 			vi_getkeys.c						\
@@ -74,13 +75,19 @@ AUTOCMP =	auto_main.c				\
 			auto_alloc_wordlst.c	\
 			auto_choose.c			\
 			auto_termcaps.c			\
-			auto_getstatinfo.c
+			auto_getstatinfo.c		\
+			auto_swap.c
+
+SIGNAL = 	signal_func.c			\
+			signal_handler.c
 
 LINE_EDIT_SRCS = $(addprefix $(LINE_EDIT_PATH),$(LINE_EDIT))
 VIMODE_SRCS = $(addprefix $(VIMODE_PATH),$(VIMODE))
 AUTOCMP_SRCS = $(addprefix $(AUTOCMP_PATH),$(AUTOCMP))
 PROMPT_SRCS = $(addprefix $(PROMPT_PATH),$(PROMPT))
+SIGNAL_SRCS = $(addprefix $(SIG_PATH),$(SIGNAL))
 SRCS += $(LINE_EDIT_SRCS)
 SRCS += $(VIMODE_SRCS)
 SRCS += $(AUTOCMP_SRCS)
 SRCS += $(PROMPT_SRCS)
+SRCS += $(SIGNAL_SRCS)

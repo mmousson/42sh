@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 03:17:58 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/11 19:42:19 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:08:01 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,8 @@ static int			line_get_lastpos(void)
 	return (0);
 }
 
-int					line_print(void)
+void				line_print(void)
 {
-	int				ret;
-
-	ret = 1;
 	if (line_isdispatch())
 		ft_putstr(g_env.line);
 	else
@@ -68,8 +65,5 @@ int					line_print(void)
 		tputs(g_env.tc->doo, 1, ft_putchar);
 	}
 	if (g_data.lw)
-		ret = auto_printaligned();
-	if (ret == -1)
-		ft_putstr("\n42sh: cannot print");
-	return (ret);
+		auto_printaligned();
 }

@@ -6,11 +6,12 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:22:35 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/13 10:05:39 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:16:43 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
+#include <term.h>
 
 static int			line_len(int pos)
 {
@@ -41,8 +42,11 @@ static void			line_back_left(int pos)
 				pos -= len_line;
 			else
 			{
-				while (++i < len_line)
-					tputs(g_env.tc->nd, 1, ft_putchar);
+				if (++i < len_line)
+				{
+					tputs(tparm(g_env.tc->ri, len_line - i), 1, ft_putchar);
+					i += len_line - i;
+				}
 			}
 		}
 		else
@@ -51,41 +55,23 @@ static void			line_back_left(int pos)
 	}
 }
 
-static void			line_reset_autocomp(int ret_p)
+static void			line_reset_autocomp()
 {
-	int				x;
-	int				y;
 	int				ll;
-	int				tmp;
 
-	tmp = -1;
-	if (ret_p == -1)
-	{
-		while (++tmp < 18)
-			tputs(g_env.tc->le, 1, ft_putchar);
-		tputs(g_env.tc->up, 1, ft_putchar);
-	}
-	else
-	{
-		if (!g_data.lw)
-			return ;
-		x = g_data.x;
-		y = g_data.y;
-		while (--x + 2)
-			tputs(g_env.tc->le, 1, ft_putchar);
-		while (--y + 1)
-			tputs(g_env.tc->up, 1, ft_putchar);
-	}
+	if (!g_data.lw || g_data.y >= g_env.cm->term_y)
+		return ;
+	if (g_data.x + 2 > 0)
+		tputs(tparm(g_env.tc->lem, g_data.x + 1), 1, ft_putchar);
+	if (g_data.y > 0)
+		tputs(tparm(g_env.tc->upm, g_data.y), 1, ft_putchar);
 	ll = line_len(g_env.len);
-	x = -1;
-	while (++x < ll)
-		tputs(g_env.tc->nd, 1, ft_putchar);
-
+	tputs(tparm(g_env.tc->ri, ll), 1, ft_putchar);
 }
 
-void				line_reset_cursor(int ret_p)
+void				line_reset_cursor()
 {
-	line_reset_autocomp(ret_p);
+	line_reset_autocomp();
 	line_back_left(g_env.len);
 	if (!line_getx(g_env.cm->pos)
 			&& g_env.len % g_env.cm->term_x == 0)

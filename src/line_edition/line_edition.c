@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 22:59:54 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/11 19:08:06 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:20:54 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include <term.h>
 
 void				line_update_termsize(void)
 {
@@ -27,11 +28,8 @@ void				line_update_termsize(void)
 
 void				line_clear(void)
 {
-	int				i;
-
-	i = -1;
-	while (++i < g_env.cm->tmpy)
-		tputs(g_env.tc->up, 1, ft_putchar);
+	if (g_env.cm->tmpy > 0)
+		tputs(tparm(g_env.tc->upm, g_env.cm->tmpy), 1, ft_putchar);
 	tputs(g_env.tc->cd, 1, ft_putchar);
 	tputs(g_env.tc->cr, 1, ft_putchar);
 	tputs(g_env.tc->dl, 1, ft_putchar);
@@ -70,7 +68,6 @@ static int			line_choose_mode(char *str, int ret)
 int					line_update(char *str, int ret)
 {
 	int				cap;
-	int				ret_p;
 
 	if (!str)
 		return (0);
@@ -84,8 +81,8 @@ int					line_update(char *str, int ret)
 	cap = line_choose_mode(str, ret);
 	g_env.len = (int)ft_strlen(g_env.line);
 	line_clear();
-	ret_p = line_print();
-	line_reset_cursor(ret_p);
+	line_print();
+	line_reset_cursor();
 	g_env.cm->tmpy = line_gety(g_env.cm->pos);
 	return (cap);
 }

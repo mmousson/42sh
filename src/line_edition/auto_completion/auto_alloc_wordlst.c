@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 10:07:58 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/13 09:23:34 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/15 12:16:17 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,14 @@ static void		auto_add_lstword(char *name, int index)
 
 	tmp = g_data.lw;
 	while (g_data.lw->next)
+	{
+		if (!ft_strcmp(g_data.lw->name, name))
+		{
+			g_data.lw = tmp;
+			return ;
+		}
 		g_data.lw = g_data.lw->next;
+	}
 	if (!(g_data.lw->next = (t_lstword*)ft_memalloc(sizeof(t_lstword))))
 	{
 		g_data.lw = tmp;
@@ -86,5 +93,9 @@ void			auto_lstword(char *name, int index)
 			g_data.lw->len++;
 	}
 	else
+	{
+		if (!g_data.lw->next && !ft_strcmp(g_data.lw->name, name))
+			return ;
 		auto_add_lstword(name, index);
+	}
 }

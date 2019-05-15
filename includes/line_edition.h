@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/13 20:58:53 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:27:50 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,10 @@ typedef struct			s_tc
 	char				*me;
 	char				*cd;
 	char				*af;
+	char				*ri;
+	char				*lem;
+	char				*dom;
+	char				*upm;
 }						t_tc;
 
 typedef struct			s_cm
@@ -198,7 +202,7 @@ void					line_clear(void);
 int						line_getx(int pos);
 int						line_gety(int pos);
 int						line_get_termroom(void);
-void					line_reset_cursor(int ret_p);
+void					line_reset_cursor();
 int						line_get_origin_pos(void);
 void					line_cxjump(void);
 
@@ -257,7 +261,7 @@ int						line_ctrld(void);
 **	print
 */
 
-int						line_print(void);
+void					line_print(void);
 
 /*
 **	vi_readline
@@ -270,5 +274,13 @@ int						line_isend(char *str, int ret);
 int						line_iscx(char *str, int ret);
 int						line_isdel(char *str, int ret);
 int						line_isdelrword(char *str, int ret);
+
+/*
+**	signal
+*/
+
+void					sig_handler(int val);
+void					sig_reset(int val);
+void					sig_manager(int sg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:31:57 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/14 15:42:24 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/15 14:51:55 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char				*auto_getroot(void)
 			&& !auto_newtoken(g_env.line[i])
 			&& !auto_ispathcarac(g_env.line[i]))
 		i--;
-	if (!(root = ft_strsub(g_env.line, i + 1, g_env.cm->pos - 1)))
+	if (!(root = ft_strsub(g_env.line, i + 1, g_env.cm->pos - i - 1)))
 		sh_errorterm(TMALLOC);
 	return (root);
 }
