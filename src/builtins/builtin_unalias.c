@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 08:24:21 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:04:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:46:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	delete_element(char *token)
 	t_alias	*current;
 
 	prev = NULL;
-	current = alias_list;
+	current = g_alias_list;
 	while (current)
 	{
 		if (ft_strequ(current->token, token))
@@ -48,7 +48,7 @@ static int	delete_element(char *token)
 			if (prev)
 				prev->next = current->next;
 			else if (!prev)
-				alias_list = current->next;
+				g_alias_list = current->next;
 			ft_strdel(&(current->token));
 			ft_strdel(&(current->replacement));
 			ft_memdel((void **)&(current));

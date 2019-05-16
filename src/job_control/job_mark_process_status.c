@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:45:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 16:17:02 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:55:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int						job_mark_process_status(pid_t pid, int status)
 
 	if (pid > 0)
 	{
-		job = active_job_list;
+		job = g_active_job_list;
 		while (job)
 		{
 			if (loop_jobs(job, pid, status) == 0)

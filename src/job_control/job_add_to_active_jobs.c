@@ -14,6 +14,6 @@
 
 void	job_add_to_active_job_list(t_job *job)
 {
-	job->next = active_job_list;
-	active_job_list = job;
+	job->next = g_active_job_list;
+	g_active_job_list = job;
 }

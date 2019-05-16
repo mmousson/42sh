@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 23:09:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:05:21 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:41:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	display_all_aliases(void)
 {
 	t_alias	*local;
 
-	local = alias_list;
+	local = g_alias_list;
 	while (local)
 	{
 		ft_putstr("alias ");
@@ -55,7 +55,7 @@ static int	display_alias_definition(char *tmp)
 {
 	t_alias	*local;
 
-	local = alias_list;
+	local = g_alias_list;
 	while (local)
 	{
 		if (ft_strequ(tmp, local->token))
@@ -101,8 +101,8 @@ static int	add_alias(char *key, char *tmp)
 		ft_memdel((void **)&(new));
 		return (ALIAS_ERROR);
 	}
-	new->next = alias_list;
-	alias_list = new;
+	new->next = g_alias_list;
+	g_alias_list = new;
 	return (ALIAS_OK);
 }
 
@@ -140,7 +140,7 @@ static int	check_key(char *key)
 	ptr_dist = (ptrdiff_t)tmp - (ptrdiff_t)key;
 	if ((tmp = ft_strsub(key, 0, ptr_dist)) == NULL)
 		return (ALIAS_ERROR);
-	local = alias_list;
+	local = g_alias_list;
 	while (local)
 	{
 		if (ft_strequ(tmp, local->token))

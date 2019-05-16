@@ -93,13 +93,16 @@ static void	setup_redirections(int input, int output, int error)
 **	Return Value: NONE
 */
 
-void		job_child_process(t_process *proc, int foreground, pid_t pgid)
+void		job_child_process(t_job *job, t_process *proc, int foreground, pid_t pgid)
 {
 	int				blt_pos;
 	pid_t			child_id;
 	t_bool			interactive;
 	t_io_channels	io_chan;
+	// t_process		*current;
 
+	(void)job;
+	// current = job->first_process;
 	io_chan = proc->io_channels;
 	interactive = isatty(0);
 	if (interactive)
@@ -112,6 +115,11 @@ void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 			tcsetpgrp(STDIN_FILENO, pgid);
 		reset_signals_actions();
 	}
+	// while (current && current->next)
+	// {
+	// 	close(current->p[0]);
+	// 	current = current->next;
+	// }
 	setup_redirections(io_chan.input, io_chan.output, io_chan.error);
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
 	{

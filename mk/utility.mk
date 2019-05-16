@@ -6,13 +6,16 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 12:03:51 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/10 11:31:39 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/16 16:19:54 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 UTILITY_PATH = ./src/utility/
 
 UTILITY =	utility_add_internal_var.c			\
+			utility_set_var.c					\
+			utility_get_var.c					\
+			utility_delete_var.c				\
 			utility_alias_exists.c				\
 			utility_alias_init.c				\
 			utility_builtins_utility.c			\

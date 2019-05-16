@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_exclam.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/14 17:58:39 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/16 16:21:03 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ static char	*lex_following(char **str, t_stat *stat)
 	int		og_type;
 	char	*sub;
 	char	buff[BUF];
-	int		p;
 
 	sub = NULL;
 	ft_bzero(buff, BUF);
-	p = 0;
 	stat->k++;
 	process_sign(str, stat, &sub, buff);
 	type = lex_get_ch((*str)[stat->k]);

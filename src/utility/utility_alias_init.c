@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 05:21:50 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:16:28 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:53:42 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "sh42.h"
 
-t_alias		*alias_list = NULL;
+t_alias		*g_alias_list = NULL;
 
 /*
 **	This functions get the substring of the read line starting at index 0
@@ -56,8 +56,8 @@ static int	ft_fill_link(char *line)
 		ft_putendl_fd("42sh: Internal malloc error", STDERR_FILENO);
 		return (-1);
 	}
-	tmp->next = alias_list;
-	alias_list = tmp;
+	tmp->next = g_alias_list;
+	g_alias_list = tmp;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 02:05:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/13 22:40:42 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:56:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void		job_first_job_set_and_get(t_job **to_set_or_get, int set_or_get)
 	{
 		if (to_set_or_get == NULL || *to_set_or_get == NULL)
 			return ;
-		active_job_list = *to_set_or_get;
+		g_active_job_list = *to_set_or_get;
 	}
 	else if (set_or_get == GET)
 	{
 		if (to_set_or_get == NULL)
 			return ;
-		*to_set_or_get = active_job_list;
+		*to_set_or_get = g_active_job_list;
 	}
 }
 

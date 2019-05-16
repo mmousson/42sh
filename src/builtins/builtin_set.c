@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 21:24:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/30 03:34:18 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:45:56 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	list_shell_variables(void)
 {
 	t_vars	*current;
 
-	current = shell_var_list;
+	current = g_shell_var_list;
 	while (current)
 	{
 		ft_putstr(current->name);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alias_exists.c                                     :+:      :+:    :+:   */
+/*   utility_alias_exists.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 11:24:57 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/14 11:30:36 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/14 04:51:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*alias_exists(char *token)
 {
 	t_alias	*current;
 
-	current = alias_list;
+	current = g_alias_list;
 	while (current)
 	{
 		if (ft_strequ(current->token, token))

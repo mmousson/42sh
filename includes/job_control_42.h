@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 00:52:24 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/16 16:19:38 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct			s_process
 	t_io_channels		io_channels;
 	t_io_channels		real_channels;
 	int					status;
+	int					p[2];
 	struct s_process	*next;
 }						t_process;
 
@@ -145,7 +146,7 @@ typedef struct			s_job
 	struct s_job		*next;
 }						t_job;
 
-extern t_job			*active_job_list;
+extern t_job			*g_active_job_list;
 
 /*
 **	==================== Job Control's main functions ====================
@@ -173,7 +174,7 @@ int						job_launch(t_job *job, int fg);
 void					job_command_search_and_exec(t_job *job,
 	t_process *proc, int fg);
 void					job_parent_process(t_job *job, t_process *proc, pid_t pid);
-void					job_child_process(t_process *proc, int foreground,
+void					job_child_process(t_job *job, t_process *proc, int foreground,
 	pid_t pgid);
 int						job_send_to_foreground(t_job *job, int must_continue);
 int						job_send_to_background(t_job *job, int must_continue);

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 17:42:47 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/16 16:19:47 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct		s_vars
 {
 	char			*name;
 	char			*value;
+	struct s_vars	*prev;
 	struct s_vars	*next;
 }					t_vars;
 
@@ -128,8 +129,8 @@ typedef enum		e_special_var_id
 */
 
 extern int			vi_on;
-extern t_vars		*shell_var_list;
-extern t_alias		*alias_list;
+extern t_vars		*g_shell_var_list;
+extern t_alias		*g_alias_list;
 extern t_builtins	g_builtins[];
 extern t_hash		g_hash[HASH_MOD];
 
@@ -197,7 +198,8 @@ int					blt_history(int argc, char **argv, char ***env);
 **	get_user_home -> utility/get_user_home.c
 **	add_entry_to_environ -> utility/utility_environ_utilities.c
 **	write_alias_list_to_file -> utility/write_alias_list_to_file.c
-**	add_internal_var -> utility/add_internal_var.c
+**	utility_get_var -> utility/utility_get_var.c
+**	utility_set_var -> utility/utility_set_var.c
 **	internal_variable_exists -> utility/internal_variable_exists.c
 **	utility_get_effective_user_name -> utility/utility_get_effective_username.c
 */
@@ -214,6 +216,10 @@ int					utility_rm_entry_from_environ(char ***environ, char *key);
 char				*utility_get_env_var(char ***environ, char *key);
 int					utility_get_environ_length(char **tab);
 void				utility_add_internal_var(char *name, char *value);
-char				*utility_internal_var_exists(char *name);
+char				*utility_get_var(char *name, char **env);
+void				utility_set_var(char *name, char *value, char ***env,
+	int export_var);
+void				utility_delete_var(char *name, char ***env);
+char				*utility_internal_var_exists(char *name, t_vars **holder);
 
 #endif
