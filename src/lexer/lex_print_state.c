@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:42 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 09:30:43 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/18 21:52:00 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 void			ft_print_stat_fd(int stat, int fd)
 {
 	static char	*tabl[20] = {
-		"Start", "Char", "Int", "Space", "<", ">", "Double Quote",
-		"Simple Quote", "&", "Back Slash", "$", "~", "|", "Silent Double Quote",
-		"Silent Quote", "END", "VALIDATE", "VALIDATE STAR", "More",
-		"Silent Validator"};
+		"Start", "Char", "Space", "<", ">", "Double Quote",
+		"Simple Quote", "(", "&", "\\", "|",
+		"STACKING", "Un STACKING", "Mini LEx", "Double quote + BS", "$",
+		"VALIDATE", "VALIDATE STAR", "More", "SDollard"
+	};
 
-	if (stat >= 20 || stat < 0)
+	if (stat >= 19 || stat < 0)
 		ft_putnbr_fd(stat, fd);
 	else
 		ft_putstr_fd(tabl[stat], fd);
@@ -30,8 +31,8 @@ void			ft_print_stat_fd(int stat, int fd)
 void			ft_print_ch_fd(int ch, int fd)
 {
 	static char	*tabl[17] = {
-		"Start", "Char", "Int", "Space", "<", ">", "Double Quote",
-		"Simple Quote", "&", "Back Slash", "$", "~", "|", "Semicolomn",
+		"Start", "Char", "Space", "<", ">", "Double Quote",
+		"Simple Quote", "PAO", "&", "`Back Slash", "$", "~", "|", "Semicolomn",
 		"DASH", "SLASH", "NEW LINE"};
 
 	if (ch >= 17 || ch < 0)

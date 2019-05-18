@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/14 17:58:39 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:43:05 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	process_sign(char **str, t_stat *stat, char **sub, char buff[BUF])
 static char	*lex_following(char **str, t_stat *stat)
 {
 	int		type;
-	int		og_type;
+	int		og;
 	char	*sub;
 	char	buff[BUF];
 	int		p;
@@ -38,10 +38,10 @@ static char	*lex_following(char **str, t_stat *stat)
 	stat->k++;
 	process_sign(str, stat, &sub, buff);
 	type = lex_get_ch((*str)[stat->k]);
-	og_type = type;
-	if (type != CHA && type != INT)
+	og = !ft_isdigit((*str)[stat->k]);
+	if (type != CHA)
 		return (NULL);
-	while (type == og_type || type == INT)
+	while (type == CHAR && (ft_isdigit((*str)[stat->k]) || og))
 	{
 		lex_add_char(buff, &sub, (*str)[stat->k]);
 		(stat->k)++;

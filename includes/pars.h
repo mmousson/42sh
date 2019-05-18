@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 15:58:57 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/18 20:09:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,56 +14,48 @@
 # define PARS_H
 # define NB_PR 7
 # define NB_TY 4
-# define NB_CH 20
+# define NB_CH 16
 # define DBL 20
 
 /*
 ** enum e_charac, used relating to the lexing matrix, 1st
 ** ZER - 0 : \0
 ** CHA - 1 : is a char if not specified in another caharac
-** INT - 2 : within ASCII '0' and '9'
-** SPA - 3 : SPAce, ' '
-** REL - 4 : REdirection Left, '<'
-** RER - 5 : REdirection Right, '>'
-** DQT - 6 : Double QuoTe, '"'
-** SDQ - 7 : Simple QuoTe, '''
+** SPA - 2 : SPAce, ' '
+** REL - 3 : REdirection Left, '<'
+** RER - 4 : REdirection Right, '>'
+** DQT - 5 : Double QuoTe, '"'
+** SDQ - 6 : Simple QuoTe, '''
+** PAO - 7 : Parenthesis Open, '('
 ** ESP - 8 : ESPerluette, '&'
-** BSL - 9 : Back SLash, '\'
-** DOL - 10: DOLlar, '$'
-** TIL - 11: TILde, '~'
-** PIP - 12: PIPe, '|'
-** SMC - 13: SeMiColomn, ';'
-** DAS - 14: DASh, '-'
-** SLA - 15: SLAsh, '/'
-** NWL - 16: NeWLine, '\n'
-** PAO - 17: Parenthesis Open, '('
-** PAC - 18: Parenthesis Closure, ')'
-** EXC - 19: EXClamation point, '!'
-** EXP - 20: to_expend
+** BSL - 9: Back SLash, '\'
+** PIP - 10 : PIPe, '|'
+** SMC - 11: SeMiColomn, ';'
+** NWL - 12: NeWLine, '\n'
+** PAC - 13: Parenthesis Closure, ')'
+** EXC - 14: EXClamation point, '!'
+** DOL - 15: DOLlard, '$'
+** EXP - 16: to_expend
 */
 
 typedef enum		e_charac
 {
 	ZER = 0,
 	CHA,
-	INT,
 	SPA,
 	REL,
 	RER,
 	DQT,
 	SQT,
+	PAO,
 	ESP,
 	BSL,
-	DOL,
-	TIL,
 	PIP,
 	SMC,
-	DAS,
-	SLA,
 	NWL,
-	PAO,
 	PAC,
 	EXC,
+	DOL,
 	EXP
 }					t_charac;
 

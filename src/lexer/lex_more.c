@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/14 17:44:07 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/18 12:18:16 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ int				lex_more(t_stat *stat, char **str, int nl)
 		free(fus);
 	stat->k--;
 	stat->status = stat->old_status;
+	if (stat->stack)
+		stat->status = lex_last_pile(stat);
 	return (1);
 }

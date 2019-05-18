@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_get_ch.c                                       :+:      :+:    :+:   */
+/*   lex_store_dol.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/09 15:04:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/18 21:51:59 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/18 12:01:16 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/18 20:09:13 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
-#define F_STAT 3
 
-int					lex_get_ch(char c)
+int			lex_store_dol(t_stat *stat, char buff[BUF], char **str)
 {
-	static char		line[NB_CH - F_STAT] = "<>\"'(&\\|;\n)!$";
-	int				k;
+	char	next_char;
 
-	if (c == 0)
-		return (ZER);
-	else if (c == ' ' || c == '\t')
-		return (SPA);
-	k = -1;
-	while (++k < NB_CH - F_STAT)
-		if (c == line[k])
-			return (k + F_STAT);
-	return (CHA);
+	next_char = (*str)[stat->k + 1];
+	if (next_char == '(')
+	{
+		lex_pile_up(stat, buff);
+		lex_add_char(buff, &(stat->load), stat->cha);
+		lex_add_char(buff, &(stat->load), '(');
+		stat->k += 1;
+	}
+	stat->status = lex_last_pile(stat);
+	ft_putstr("current pile: ");
+	lex_print_stack(stat->stack);
+	ft_putchar('\n');
+	return (0);
 }

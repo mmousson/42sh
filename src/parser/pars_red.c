@@ -6,33 +6,13 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 14:59:06 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/04 16:13:46 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:59:05 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 #include <stdlib.h>
 #include "libft.h"
-
-t_tree		*ft_dash(t_tok *token, int start, int end)
-{
-	t_tok	*tok;
-	t_tree	*tree;
-
-	tok = ft_go_start(token, start);
-	if (tok && tok->status == DAS)
-	{
-		if (!(tree = ft_end_branch()))
-			return (NULL);
-		tree->right = ft_pars_pipe(token, start + 1, end);
-		tree->left = NULL;
-		tree->type = DAS;
-		if (tok->content)
-			tree->content = ft_strdup(tok->content);
-		return (tree);
-	}
-	return (ft_pars_pipe(token, start, end));
-}
 
 t_tree		*ft_red_right(t_tok *token, int start, int end, int typ)
 {
@@ -49,7 +29,7 @@ t_tree		*ft_red_right(t_tok *token, int start, int end, int typ)
 		if (!(tree = ft_end_branch()))
 			return (NULL);
 		pos2 = pos + 1;
-		if (!(tree->right = ft_dash(token, pos2, end)))
+		if (!(tree->right = ft_pars_pipe(token, pos2, end)))
 			if (pos2 <= end || (end == -2 && tok->next != NULL))
 				return (ft_free_tree(tree));
 		pos2 = pos - 1;

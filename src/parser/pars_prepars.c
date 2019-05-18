@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 11:04:39 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 12:30:04 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:34:54 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int				ft_get_type(t_tok *token)
 {
 	int			stat;
 	static int	mat_type[NB_CH] = {
-		EROR, CHAR, CHAR, SPAC, REDI, REDI, CHAR, CHAR, CHAR, CHAR,
-		CHAR, CHAR, PIPE, SMCL, CHAR, CHAR, CHAR, CHAR, CHAR
+		EROR, CHAR, SPAC, REDI, REDI, CHAR, CHAR, CHAR, PIPE,
+		SMCL, CHAR, CHAR, CHAR, CHAR, CHAR
 	};
 
 	if (!token)

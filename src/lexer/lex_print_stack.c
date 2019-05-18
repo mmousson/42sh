@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_get_ch.c                                       :+:      :+:    :+:   */
+/*   lex_print_stack.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/09 15:04:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/18 21:51:59 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/18 10:11:50 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/18 21:51:56 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
-#define F_STAT 3
 
-int					lex_get_ch(char c)
+void		lex_print_stack(t_st *stack)
 {
-	static char		line[NB_CH - F_STAT] = "<>\"'(&\\|;\n)!$";
-	int				k;
-
-	if (c == 0)
-		return (ZER);
-	else if (c == ' ' || c == '\t')
-		return (SPA);
-	k = -1;
-	while (++k < NB_CH - F_STAT)
-		if (c == line[k])
-			return (k + F_STAT);
-	return (CHA);
+	if (!stack)
+		return ;
+	ft_print_stat_fd(stack->elmt, 1);
+	if (stack->next)
+		ft_putstr(">  <");
+	lex_print_stack(stack->next);
 }

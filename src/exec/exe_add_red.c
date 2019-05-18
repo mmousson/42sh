@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:21:40 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 14:09:01 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:57:50 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static void		ft_set_red(t_red **red, t_tree *tree, t_launch *cmd)
 		cmd->will_red = 0;
 	if (tmp)
 	{
-		if (tmp->type == INT)
+		if (tmp->type == CHAR && ft_atoi(tmp->content + 1))
 			if (tmp->content && tmp->content[0] == '&')
 				(*red)->end = ft_atoi(tmp->content + 1);
-		if (tmp->type == DAS)
+		if (tmp->type == CHAR && ft_strcmp(tmp->content, "&-"))
 			(*red)->end = -2;
 		(*red)->end_nm = ft_strdup(tmp->content);
 	}
@@ -84,7 +84,7 @@ int				ft_add_red(t_tree *tree, t_launch *cmd)
 			red->type += DBL;
 		if (tree->left && cmd->will_red != -1)
 		{
-			if (tree->left->type == INT)
+			if (tree->left->type == CHAR && ft_atoi(tree->left->content))
 				red->srt = ft_atoi(tree->left->content);
 			else if (tree->left->content)
 				ft_add_argv(ft_strdup(tree->left->content), cmd);
