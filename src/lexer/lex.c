@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/19 17:15:05 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/19 18:41:34 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int		lex_last(t_stat **stat, t_tok **token, char **str)
 
 	if ((*stat)->status == EP)
 	{
-		ft_putstr_fd("42sh: do not support '()'\n", 2);
+		ft_putstr_fd("42sh: syntax error near unexpected `)'\n", 2);
 		return (clean_out(token, stat, str));
 	}
 	else if ((*stat)->status == EN)

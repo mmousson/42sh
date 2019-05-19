@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 11:51:09 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/19 15:19:57 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/19 18:40:57 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ int			lex_pile_down(t_stat *stat, char buff[BUF])
 	new_elmt = lex_get_ch(stat->cha);
 	tmp = stat->stack;
 	if (!(stat->stack))
+	{
+		stat->status = EP;
 		return (-1);
+	}
 	while (tmp && tmp->next)
 		tmp = tmp->next;
 	if ((tmp->elmt == PAO || tmp->elmt == DOL) && new_elmt == PAC)
@@ -64,7 +67,10 @@ int			lex_pile_down(t_stat *stat, char buff[BUF])
 	else if ((tmp->elmt == SQT || tmp->elmt == DQT) && new_elmt == tmp->elmt)
 		pop_last_stack(stat);
 	else
+	{
+		stat->status = EP;
 		return (-1);//error personalised avec tmp->elmt
+	}
 	stat->status = lex_last_pile(stat);
 	lex_add_char(buff, &(stat->load), stat->cha);
 	return (0);
@@ -99,11 +105,11 @@ int			lex_store(t_stat *stat, char buff[BUF])
 	if (stat->status == SK)
 	{
 		if (lex_pile_up(stat, buff))//pile up if last != current
-			return (-1);//error case if 
+			return (1);//error case if 
 	}
 	else if (stat->status == US)
 		if (lex_pile_down(stat, buff))//pile down if last != current
-			return (-1);
+			return (1);
 	stat->status = lex_last_pile(stat);// return last type enconter in pile
 	ft_putstr("current pile: ");
 	lex_print_stack(stat->stack);
