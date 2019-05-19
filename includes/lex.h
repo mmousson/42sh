@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/18 20:09:12 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/19 17:15:01 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef enum	e_state
 	RR,
 	DQ,
 	SQ,
-	DO,
 	PS,
 	ES,
 	BS,
@@ -67,6 +66,7 @@ typedef enum	e_state
 	US,
 	ML,
 	DB,
+	DO,
 	VA,
 	VS,
 	MO,
@@ -113,6 +113,7 @@ int				lex_store(t_stat *stat, char buff[BUF]);
 int				lex_last_pile(t_stat *stat);
 int				lex_store_dol(t_stat *stat, char buff[BUF], char **str);
 int				lex_pile_up(t_stat *stat, char buff[BUF]);
+int				lex_step(t_stat **stat, char **str);
 
 /*
 ** fonctions affichages

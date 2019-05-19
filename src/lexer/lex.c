@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/18 14:09:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/19 17:15:05 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static int		lex_step(t_stat **stat, char **str)
+int				lex_step(t_stat **stat, char **str)
 {
 	(*stat)->cha = (*str)[(*stat)->k];
 	(*stat)->ch = lex_get_ch((*stat)->cha);
@@ -96,7 +96,7 @@ int				lex_str(char **str, char ***arge)
 			if (lex_proc(stat, buff, &token, str) == -1)
 				if (!(lex_more(stat, str, 1)))
 					return (clean_out(&token, &stat, str));
-		if (!(lex_last(&stat, &token, str)))//regarder le case pile not empty
+		if (!(lex_last(&stat, &token, str)))
 			return (clean_out(&token, &stat, str));
 		(stat->k)++;
 	}

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 12:01:16 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/18 20:09:13 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:31:40 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@ int			lex_store_dol(t_stat *stat, char buff[BUF], char **str)
 	next_char = (*str)[stat->k + 1];
 	if (next_char == '(')
 	{
-		lex_pile_up(stat, buff);
 		lex_add_char(buff, &(stat->load), stat->cha);
-		lex_add_char(buff, &(stat->load), '(');
 		stat->k += 1;
+		lex_step(&stat, str);
+		lex_pile_up(stat, buff);
+	}
+	else
+	{
+		stat->status = CHA;
+		return (0);
 	}
 	stat->status = lex_last_pile(stat);
-	ft_putstr("current pile: ");
-	lex_print_stack(stat->stack);
-	ft_putchar('\n');
-	return (0);
+	ft_putstr("current pile: ");lex_print_stack(stat->stack);ft_putchar('\n');
+	return (1);
 }

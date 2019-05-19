@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 11:51:09 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/18 21:51:58 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:19:57 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int			lex_last_pile(t_stat *stat)
 		return (CHA);
 	while (tmp && tmp->next)
 		tmp = tmp->next;
-	if (tmp->elmt == DOL)
-		return (PAO);
 	return (tmp->elmt);
 }
 

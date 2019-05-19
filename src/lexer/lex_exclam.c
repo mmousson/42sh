@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/15 16:43:05 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/19 17:14:58 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,42 +26,26 @@ static void	process_sign(char **str, t_stat *stat, char **sub, char buff[BUF])
 
 static char	*lex_following(char **str, t_stat *stat)
 {
-	int		type;
-	int		og;
+	int		was_char;
 	char	*sub;
 	char	buff[BUF];
-	int		p;
 
 	sub = NULL;
 	ft_bzero(buff, BUF);
-	p = 0;
 	stat->k++;
 	process_sign(str, stat, &sub, buff);
-	type = lex_get_ch((*str)[stat->k]);
-	og = !ft_isdigit((*str)[stat->k]);
-	if (type != CHA)
-		return (NULL);
-	while (type == CHAR && (ft_isdigit((*str)[stat->k]) || og))
+	was_char = ft_isalpha((*str)[stat->k]);
+	while (ft_isdigit((*str)[stat->k])
+			|| (was_char && ft_isalpha((*str)[stat->k])))
 	{
 		lex_add_char(buff, &sub, (*str)[stat->k]);
 		(stat->k)++;
-		type = lex_get_ch((*str)[stat->k]);
 	}
 	if (!sub)
 		sub = ft_strdup(buff);
 	else
 		sub = ft_strjoin(sub, buff);
 	return (sub);
-}
-
-char		*history_expand(char *sub)//a remplacer par la ft history exp
-{
-	char	*expand;
-
-	expand = ft_strjoin("__", sub);
-	free(sub);
-	expand = ft_strjoinf(expand, "__");
-	return (expand);
 }
 
 int			lex_exclam(t_stat *stat, t_tok **token, char **str)

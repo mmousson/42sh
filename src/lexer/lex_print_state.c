@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:42 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/18 21:52:00 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/19 17:15:03 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void			ft_print_ch_fd(int ch, int fd)
 {
 	static char	*tabl[17] = {
 		"Start", "Char", "Space", "<", ">", "Double Quote",
-		"Simple Quote", "PAO", "&", "`Back Slash", "$", "~", "|", "Semicolomn",
-		"DASH", "SLASH", "NEW LINE"};
+		"Simple Quote", "PAO (", "&", "\\", "|", ";", "\\n", "PAC )",
+		"EXC !", "DOL $", "EXPAND"};
 
 	if (ch >= 17 || ch < 0)
 		ft_putnbr_fd(ch, fd);
@@ -44,9 +44,10 @@ void			ft_print_ch_fd(int ch, int fd)
 void			ft_print_ch_hash(int ch)
 {
 	static char	*tabl[17] = {
-		"ZER", "CHA", "INT", "SPA", "REL", "RER", "DQT",
-		"SQT", "ESP", "BSL", "DOL", "TIL", "PIP", "SMC",
-		"DAS", "SLA", "NWL"};
+		"ZER", "CHA", "SPA", "REL", "RER", "DQT", "SQT",
+		"ESP", "BSL", "PIP", "SMC", "NWL", "PAC", "EXC",
+		"DOL", "EXP"
+	};
 
 	if (ch >= 17 || ch < 0)
 		ft_putnbr(ch);
