@@ -6,11 +6,22 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 09:29:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/14 17:44:09 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/21 18:20:09 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
+#include "history.h"
+
+static void		line_newprompt(void)
+{
+	if (!g_env.search)
+		return ;
+	g_env.search = 0;
+	ft_strdel(&g_env.h_word);
+	hist_alloc_search(PBASIC);
+	g_env.h_len = 0;
+}
 
 int				line_ctrld(void)
 {
@@ -18,6 +29,7 @@ int				line_ctrld(void)
 		ft_putstr("There are stopped jobs.\n");
 	if (active_jobs_list && g_env.ctrld)
 		g_env.jobs++;*/
+	line_newprompt();
 	g_env.ctrld = 1;
 	g_env.count = 0;
 	return (0);
@@ -25,6 +37,7 @@ int				line_ctrld(void)
 
 int				line_return(void)
 {
+	line_newprompt();
 	if (g_data.status == 2)
 		return (auto_return());
 	g_env.jobs = 0;
@@ -44,6 +57,7 @@ int				line_return(void)
 
 int				line_escap(void)
 {
+	line_newprompt();
 	if (g_env.mode->mode[MVI])
 		vi_reset_mode(0, 1, 0);
 	else if (g_env.mode->n_select)

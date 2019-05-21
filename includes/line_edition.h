@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/15 16:27:50 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/21 17:40:52 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define CTRLK '\013'
 # define CTRLN '\016'
 # define CTRLP '\020'
+# define CTRLR '\022'
 # define CTRLT '\024'
 # define CTRLU '\025'
 # define CTRLW '\027'
@@ -62,7 +63,8 @@ typedef enum			e_prompt
 	PPIPE = 6,
 	PHEREDOC = 9,
 	PBACKS = 4,
-	PDEF = 2
+	PDEF = 2,
+	HIST = 23
 }						t_prompt;
 
 typedef struct			s_tc
@@ -140,6 +142,9 @@ typedef struct			s_env
 	t_ctrlxx			*cx;
 	int					count;
 	int					jobs;
+	int					search;
+	char				*h_word;
+	int					h_len;
 }						t_env;
 
 struct s_env			g_env;

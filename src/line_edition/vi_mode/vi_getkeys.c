@@ -6,30 +6,21 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:16:24 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/08 15:45:02 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/21 15:51:45 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
+#include "history.h"
 
 static int			vi_minsert(char *str, int ret)
 {
-	/*
-<<<<<<< HEAD:src/line_edition/vi_mode/getvi_keys.c
-	if (!ft_tmp(str))
-		return (0);
-	return (1);
-}
-
-static int			ft_minsert(char *str, int ret)
-{
-=======
->>>>>>> lex_pars:src/line_edition/vi_mode/vi_getkeys.c
-*/
 	if (str[0] == 27 && ret == 1)
 		return (line_escap());
 	if (str[0] == CTRLD && ret == 1 && g_env.len == g_env.p_size + 1)
 		return (line_ctrld());
+	else if (g_env.search)
+		hist_lst(str, ret);
 	else if (str[0] == 127 && ret == 1)
 	{
 		g_env.line = line_delchar(1);
