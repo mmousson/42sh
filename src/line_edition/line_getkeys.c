@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:46:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/21 15:58:12 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/22 12:38:36 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int					line_manager(char *str, int ret)
 		hist_lst(str, ret);
 	else if ((line_ascii(str, ret)) || line_del(str, ret))
 		return (1);
-	if (line_motion(str, ret) || line_cpy_pst(str, ret))
+	else if (line_motion(str, ret) || line_cpy_pst(str, ret))
 		return (1);
 	else if (line_history(str, ret) || line_undo(str, ret))
 		return (1);

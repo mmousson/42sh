@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 10:08:21 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/21 18:20:05 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/22 13:48:11 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char				*hist_getexpend(char **str);
 */
 
 int					hist_search(char *str, int ret);
+void				hist_searchline(void);
 int					hist_lst(char *str, int ret);
 
 /*
@@ -33,7 +34,14 @@ int					hist_lst(char *str, int ret);
 */
 
 void				hist_alloc_search(t_prompt prompt);
-char				*hist_addstr(char *str);
-char				*hist_delchar(void);
+void				hist_addstr(char *str);
+void				hist_delchar(void);
+void				hist_addline(char *line, int forwards);
+
+/*
+**	utils
+*/
+
+int					hist_strstr(char *haystack, char *needle);
 
 #endif
