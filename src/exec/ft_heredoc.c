@@ -3,71 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/04 13:15:59 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/11 19:51:59 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/03/31 01:06:53 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/20 20:56:36 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef __linux__
-
-# include <sys/wait.h>
-#endif
-
+#include "exe.h"
+#include "libft.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>
-#include "exe.h"
-#include "libft.h"
 
-void		ft_launch_here(char *end, int fd)
+static void	ft_launch_here(char *end, int fd)
 {
 	char	*line;
 	int		stop;
 
 	stop = 0;
 	line = NULL;
-	dup2(0, 1);
-	while (!end || !stop)
+	while ((!line || !end || ft_strcmp(line, end)) && !stop)
 	{
-		line = line_get_readline(PHEREDOC, NULL);
-		if (((!line || !line[0]) && g_env.ctrld) || !ft_strcmp(line, end))
-			stop = 1;
-		else if (end && ft_strcmp(line, end))
-			ft_putendl_fd(line, fd);
 		if (line)
 		{
 			free(line);
 			line = NULL;
 		}
+		line = line_get_readline(PHEREDOC, NULL);
+		if ((!line || !line[0]) && g_env.ctrld)
+			stop = 1;
+		else if (ft_strcmp(line, end))
+			ft_putendl_fd(line, fd);
 	}
-	ft_strdel(&end);
+	if (line)
+	{
+		free(line);
+		line = NULL;
+	}
 }
 
-int			ft_heredoc(char *end, t_launch *cmd)
+int			ft_heredoc(char *end)
 {
-	int		fdpipe[2];
-	int		success;
 	int		fd;
 
-	pipe(fdpipe);
-	if (((success = fork())) == 0)
-	{
-		//sig_setchild(1);
-		fd = dup(1);
-		dup2(fdpipe[1], fd);
-		close(fdpipe[0]);
-		close(fdpipe[1]);
-		ft_launch_here(end, fd);
-		sh_quiterm();
-	}
-	ft_add_pile(0, 0, cmd);
-	dup2(fdpipe[0], 0);
-	close(fdpipe[1]);
-	close(fdpipe[0]);
-	wait(&success);
+	if ((fd = open(".tmp_here", O_WRONLY | O_TRUNC | O_CREAT,
+					S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR)) == -1)
+		return (error_open("tmp file for heredoc"));
+	ft_launch_here(end, fd);
+	close(fd);
 	return (0);
 }
+
+int			ft_heredoc_read(int *og, int *dir)
+{
+	if ((*dir = open(".tmp_here", O_RDONLY)) == -1)
+		return (error_open("tmp file for heredoc"));
+	*og = 0;
+	return (0);
+}
+/*
+int			heredoc_store(t_red *red)
+{
+	t_red	*tmp;
+
+	tmp = red;
+	while (tmp)
+	{
+		if (tmp->type == REL + 20 && tmp->end_nm)
+			if (ft_heredoc(tmp->end_nm))
+				return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}*/

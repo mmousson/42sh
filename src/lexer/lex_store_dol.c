@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 12:01:16 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/19 15:31:40 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/22 13:53:31 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ int			lex_store_dol(t_stat *stat, char buff[BUF], char **str)
 		return (0);
 	}
 	stat->status = lex_last_pile(stat);
-	ft_putstr("current pile: ");lex_print_stack(stat->stack);ft_putchar('\n');
 	return (1);
 }

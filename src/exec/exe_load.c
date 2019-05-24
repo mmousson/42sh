@@ -6,12 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/10 16:34:40 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/24 15:58:15 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
 #include <stdlib.h>
+#include "expand.h"
 
 t_io_channels		cmd_red(t_launch *cmd)
 {
@@ -57,6 +58,7 @@ t_process			*load_process(t_launch *cmd, char ***env)
 		return (NULL);
 	proc->next = load_process(cmd->next, env);
 	proc->argv = ft_tabdup(cmd->argv);
+	expand_manager(&(proc->argv), env);
 	proc->completed = false;
 	proc->stopped = false;
 	proc->valid_to_wait_for = true;

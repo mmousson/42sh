@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_arith.c                                     :+:      :+:    :+:   */
+/*   expand_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/10 12:21:51 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/20 16:53:49 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/23 14:52:12 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/24 17:32:49 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
-#include "libft.h"
+#include "expand.h"
 
-void	expand_arith(t_tok **token)
+int		expand_manager(char ***argv, char ***arge)
 {
-	(*token)->content = ft_strdup("0");
-	(*token)->status = CHA;
+	if (!argv || !(*argv))
+		return (1);
+	//if (expand_brace)
+	//
+	//if (expand_tilde)
+	//
+	if (expand_shell_param(argv, arge))
+		return (1);
+	//if (expand_cmd_substitution)
+	//
+	//if (expand_arithmetics)
+	//
+	//if (expand_word_splitting)
+	//
+	//if (expand_filename)
+	//
+	if (expand_quote_removal(argv))
+		return (1);
+	return (0);
 }
