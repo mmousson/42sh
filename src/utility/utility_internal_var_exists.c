@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 05:49:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 07:29:45 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/24 20:46:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*utility_internal_var_exists(char *name, t_vars **holder)
 		{
 			if (holder != NULL)
 				*holder = current;
-			return (current->value);
+			return (ft_strdup(current->value));
 		}
 		current = current->next;
 	}
