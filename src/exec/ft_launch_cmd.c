@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 17:28:57 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 00:06:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,19 +103,21 @@ void		ft_launch_exe(t_launch *cmd, char ***arge)
 void		ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 {
 	t_job	*job;
-	int		fg;	
+	int		fg;
 
-	//status = PIP + DBL -> ||
-	//status = ESP + DBL -> &&
-	//status = ESP -> &
+	// status = PIP + DBL -> ||
+	// status = ESP + DBL -> &&
+	// status = ESP -> &
+	if (status == PIP + DBL && current_ret == 0)
+		return ;
+	if (status == ESP + DBL && current_ret != 0)
+		return ;
 	if ((*cmd)->argv)
 	{
 		fg = status == ESP ? BACKGROUND_LAUNCH : FOREGROUND_LAUNCH;
 		job = exe_load_job(*cmd, arge);
 		ft_free_cmd(*cmd);
-		// exe_print_job(job);
-		// print_structures(job);
-		job_launch(job, fg);
+		current_ret = job_launch(job, fg);
 		if (!(*cmd = ft_init_cmd(NULL)))
 			exit(1);
 	}

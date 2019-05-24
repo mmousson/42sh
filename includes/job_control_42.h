@@ -6,13 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/24 22:12:27 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 00:05:22 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef JOB_CONTROL_42_H
 # define JOB_CONTROL_42_H
 
+# include <stdint.h>
 # include <sys/types.h>
 # include <termios.h>
 
@@ -40,6 +41,8 @@ typedef struct			s_sig_matcher
 **	source files
 */
 
+extern uint8_t			last_ret;
+extern uint8_t			current_ret;
 extern pid_t			shell_proc_group_id;
 extern struct termios	shell_term_conf;
 extern t_sig_matcher	g_sig_table[];
@@ -140,7 +143,6 @@ typedef struct			s_job
 	t_bool				notified;
 	t_bool				freed;
 	int					status;
-	char				***env;
 	struct termios		tmodes;
 	struct s_job		*next;
 }						t_job;
