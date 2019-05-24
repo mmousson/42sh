@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_print_job.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:41:35 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 10:01:44 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/24 22:12:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,5 @@ void		exe_print_proc(t_process *proc)
 void		exe_print_job(t_job *job)
 {
 	ft_putstr("   ==== job ====\n");
-	exe_print_chan(job->io_channels);
 	exe_print_proc(job->first_process);
 }
