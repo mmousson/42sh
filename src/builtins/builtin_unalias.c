@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 08:24:21 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 04:46:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/24 21:09:54 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	delete_element(char *token)
 
 static int	remove_all_aliases(void)
 {
-	free_alias_list();
+	utility_free_alias_list();
 	utility_write_alias_list_to_file();
 	return (1);
 }

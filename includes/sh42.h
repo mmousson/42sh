@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/24 20:53:30 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/24 21:08:03 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ extern t_hash		g_hash[HASH_MOD];
 **	hash_string -> utility/hash_string.c
 **	add_hash_entry -> builtins/hash/add_hash_entry.c
 **	alias_init -> utility/alias_init.c
-**	free_alias_list -> utility/free_alias_list.c
 **	is_builtin -> utility/builtins_utilty.c
 **	init_job_ctrl -> job_control/initialize.c
 */
@@ -152,7 +151,6 @@ int					hash_string(char *string);
 int					hash_already_exists(int index, char *name);
 void				hash_add_entry(int string_hash, char *utility_name,
 	char *full_path);
-void				free_alias_list(void);
 char				*core_spec_var_setget(int id, char *new_value,
 	int set_or_get);
 int					core_hash_spec_var(char var);
@@ -191,6 +189,7 @@ int					blt_unalias(int argc, char **argv, char ***env);
 /*
 **	==================== UTILITY functions ====================
 **
+**	utility_free_alias_list -> utility/utility_free_alias_list.c
 **	search_utility -> utility/search_utility.c
 **	duplicate_environ -> utility/duplicate_environ.c
 **	get_user_home -> utility/get_user_home.c
@@ -201,6 +200,8 @@ int					blt_unalias(int argc, char **argv, char ***env);
 **	internal_variable_exists -> utility/internal_variable_exists.c
 */
 
+void				utility_free_alias_list(void);
+void				utility_free_shell_vars_list(void);
 char				*utility_search(char *name);
 int					utility_is_builtin(char *name);
 char				**utility_duplicate_environ(char **env);
