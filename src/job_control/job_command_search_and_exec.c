@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 12:23:25 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/24 21:45:22 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,35 @@
 #include "sh42.h"
 #include "libft.h"
 #include "job_control_42.h"
+
+static void	notify_bad_command(t_process *pr, const char *cmd, const char *msg)
+{
+	pr->status = 127;
+	pr->completed = true;
+	pr->valid_to_wait_for = false;
+	ft_putstr_fd("42sh: ", STDERR_FILENO);
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putendl_fd(msg, STDERR_FILENO);
+}
+
+static int	is_path_valid(t_process *pr, const char *path)
+{
+	if (utility_file_exists(path))
+	{
+		if (access(path, X_OK) == 0)
+			return (1);
+		else
+		{
+			notify_bad_command(pr, path, ": Permission denied");
+			return (0);
+		}
+	}
+	else
+	{
+		notify_bad_command(pr, path, ": No such file or directory");
+		return (0);
+	}
+}
 
 /*
 **	Function launching a process if it is not a built-in utlity
@@ -67,11 +96,7 @@ static void	search_using_path(t_job *job, t_process *proc, int fg)
 		else if ((proc->argv[0] = utility_search(proc->argv[0])) == NULL)
 		{
 			proc->argv[0] = to_del;
-			proc->status = 127;
-			proc->completed = true;
-			proc->valid_to_wait_for = false;
-			ft_putstr_fd("42sh: Unknown command ", STDERR_FILENO);
-			ft_putendl_fd(to_del, STDERR_FILENO);
+			notify_bad_command(proc, to_del, ": Command not found");
 			return ;
 		}
 		ft_strdel(&to_del);
@@ -108,7 +133,10 @@ void		job_command_search_and_exec(t_job *job, t_process *proc, int fg)
 	int	blt_pos;
 
 	if (ft_strchr(proc->argv[0], '/') != NULL)
-		launch_proc(job, proc, fg);
+	{
+		if (is_path_valid(proc, proc->argv[0]))
+			launch_proc(job, proc, fg);
+	}
 	else
 	{
 		if (job->first_process->next == NULL

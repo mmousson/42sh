@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/24 21:08:03 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/24 21:38:22 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,9 @@ int					blt_unalias(int argc, char **argv, char ***env);
 /*
 **	==================== UTILITY functions ====================
 **
-**	utility_free_alias_list -> utility/utility_free_alias_list.c
+**	utility_file_exists -> utility/utility_file_exists.c
+**	utility_free_shell_vars_list -> utility/utility_free_lists.c
+**	utility_free_alias_list -> utility/utility_free_lists.c
 **	search_utility -> utility/search_utility.c
 **	duplicate_environ -> utility/duplicate_environ.c
 **	get_user_home -> utility/get_user_home.c
@@ -200,6 +202,7 @@ int					blt_unalias(int argc, char **argv, char ***env);
 **	internal_variable_exists -> utility/internal_variable_exists.c
 */
 
+int					utility_file_exists(const char *path);
 void				utility_free_alias_list(void);
 void				utility_free_shell_vars_list(void);
 char				*utility_search(char *name);
