@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:27:00 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/24 17:32:47 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/24 22:11:44 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int		is_char_exp(char c)
 	return (0);
 }
 
-char		*expand_param(const char *str, char ***arge)
+char		*expand_param(const char *str, char ***arge, int *end)
 {
 	char	*value;
 	char	*word;
@@ -42,5 +42,6 @@ char		*expand_param(const char *str, char ***arge)
 	word = ft_strsub(str, 1, k - 1);
 	value = ft_getenv(*arge, word);
 	free(word);
+	*end += k - 1;
 	return (value);
 }

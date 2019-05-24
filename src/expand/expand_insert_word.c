@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_manager.c                                   :+:      :+:    :+:   */
+/*   expand_insert_word.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 14:52:12 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/24 22:11:49 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/24 20:56:29 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/24 22:11:51 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expand.h"
+#include "libft.h"
 
-int		expand_manager(char ***argv, char ***arge)
+int		insert_word(char **str, char *expand, int start, int len)
 {
-	if (!argv || !(*argv))
+	char *first;
+	char *end;
+
+	if (start < 0 || len < 0 || !str || !(*str) || !(expand))
+		return (0);
+	first = ft_strsub(*str, 0, start);
+	end = ft_strsub(*str, start + len + 1, ft_strlen(*str) - start - len);
+	free(*str);
+	if (!(*str = ft_strjoin(first, expand)))
 		return (1);
-	//if (expand_brace)
-	//
-	//if (expand_tilde)
-	//
-	if (expand_shell_param(argv, arge))
-		return (1);
-	//if (expand_cmd_substitution)
-	//
-	//if (expand_arithmetics)
-	//
-	//if (expand_word_splitting)
-	//
-	//if (expand_filename)
-	//
-	if (expand_quote_removal(argv))
+	if (!(*str = ft_strjoin(*str, end)))
 		return (1);
 	return (0);
 }

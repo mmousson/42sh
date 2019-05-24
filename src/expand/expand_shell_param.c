@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:51:24 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/24 17:32:48 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/24 22:11:46 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,32 @@
 static int		expand_one_param(char **str, int j, char ***arge)
 {
 	char		*expand;
+	int			end;
+
+	end = 0;
 	if (!(*str))
 		return (0);
 	if ((*str)[j + 1] == '{')
 		ft_putstr("acc\n");
 	else
 	{
-		expand = expand_param((*str) + j, arge);
+		expand = expand_param((*str) + j, arge, &end);
 		if (expand)
-			ft_putstr(expand);
-		ft_putstr("\n");
+		{
+			if (insert_word(str, expand, j, end))
+				return (1);
+		}
 	}
 	return (0);
 }
 
-static int		expand_param_word(char **str, char ***arge, int j)
+static int		expand_param_word(char **str, char ***arge)
 {
 	char		c;
 	int			state;
+	int			j;
 
+	j = 0;
 	state = 0;
 	while ((c = (*str)[j]))
 	{
@@ -64,7 +71,8 @@ int		expand_shell_param(char ***argv, char ***arge)
 	k = 0;
 	while ((str = &((*argv)[k])) && *str)
 	{
-		if (expand_param_word(str, arge, k))
+		//ft_putendl(*str);
+		if (expand_param_word(str, arge))
 			return (1);
 		k++;
 	}
