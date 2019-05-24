@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/14 17:42:25 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 00:08:58 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void				sh_switch_term(int reset)
 
 void				sh_errorterm(t_error error)
 {
-	ft_putstr_fd("21sh: error ID=", STDERR_FILENO);
+	ft_putstr_fd("42sh: error ID=", STDERR_FILENO);
 	ft_putnbr_fd(error, STDERR_FILENO);
 	ft_putstr_fd(" Exiting\n", STDERR_FILENO);
 	if (error != TBADFD)

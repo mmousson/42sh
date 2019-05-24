@@ -115,11 +115,6 @@ void		job_child_process(t_job *job, t_process *proc, int foreground, pid_t pgid)
 			tcsetpgrp(STDIN_FILENO, pgid);
 		reset_signals_actions();
 	}
-	// while (current && current->next)
-	// {
-	// 	close(current->p[0]);
-	// 	current = current->next;
-	// }
 	setup_redirections(io_chan.input, io_chan.output, io_chan.error);
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
 	{
