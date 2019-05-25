@@ -6,41 +6,12 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:31:57 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/24 10:19:43 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 14:49:56 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 #include "history.h"
-
-char				*auto_alloc_name(char **str)
-{
-	int				i;
-	char			*fresh;
-	char			*tmp;
-
-	i = -1;
-	if (!(fresh = ft_strdup(*str)))
-		sh_errorterm(TMALLOC);
-	while (fresh[++i])
-	{
-		if (fresh[i] == ' ')
-		{
-			tmp = fresh;
-			if (!(fresh = ft_strnew((int)ft_strlen(fresh) + 1)))
-			{
-				ft_strdel(&tmp);
-				sh_errorterm(TMALLOC);
-			}
-			ft_strncpy(fresh, tmp, i);
-			ft_strcpy(&(fresh[i]), "\\");
-			ft_strcpy(&(fresh[i + 1]), &(tmp[i]));
-			ft_strdel(&tmp);
-			i++;
-		}
-	}
-	return (fresh);
-}
 
 char				*auto_delbs(char **str)
 {
@@ -110,6 +81,25 @@ char				*auto_getroot(void)
 	return (auto_delbs(&root));
 }
 
+char				*auto_getvar(void)
+{
+	int				i;
+	char			*var;
+
+	var = NULL;
+	i = g_env.cm->pos - 1;
+	while (i - g_env.p_size + 1
+			&& !auto_newtoken(g_env.line[i], g_env.line[i - 1])
+			&& !auto_ispathcarac(g_env.line[i])
+			&& !auto_isvar(g_env.line[i], g_env.line[i - 1]))
+		i--;
+	if (g_env.line[i] == '{' && g_env.line[i - 1] == '$')
+		var = ft_strsub(g_env.line, i - 1, 2);
+	else if (g_env.line[i] == '$')
+		var = ft_strdup("$");
+	return (var);
+}
+
 void				auto_filldata(void)
 {
 	char			*path;
@@ -117,7 +107,7 @@ void				auto_filldata(void)
 	path = NULL;
 	g_data.type = auto_getype();
 	g_data.root = auto_getroot();
-	ft_putnbr(g_data.type);
+	g_data.var = auto_getvar();
 	if (g_data.type)
 		path = auto_getpath();
 	else if (g_data.type == 0)

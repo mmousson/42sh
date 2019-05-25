@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 16:49:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/23 17:12:37 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 14:50:35 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct			s_autodata
 	int					y;
 	char				**path;
 	char				*root;
+	char				*var;
 	int					spos;
 }						t_autodata;
 
@@ -58,6 +59,7 @@ void					auto_free_lstword(t_lstword *lw);
 void					auto_filldata(void);
 char					*auto_getpath(void);
 char					*auto_getroot(void);
+char					*auto_getvar(void);
 char					*auto_alloc_name(char **str);
 
 /*
@@ -81,6 +83,8 @@ void					auto_swapstr(char **a, char **b);
 void					auto_swapint(int *a, int *b);
 void					auto_swapchar(char *a, char *b);
 int						auto_lenrootwbs(void);
+int						auto_comproot(void);
+int						auto_compath(void);
 
 /*
 **	choose

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:12:03 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/24 10:08:23 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 15:06:39 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int				auto_ispathcarac(char c)
 
 int				auto_newtoken(char c, char prev)
 {
-	if ((c == ' ' && prev != '\\') || c == '|' || c == '&')
+	if ((c == ' ' && prev != '\\') || c == '|' || c == '&' || c == '(')
 		return (1);
 	return (0);
 }

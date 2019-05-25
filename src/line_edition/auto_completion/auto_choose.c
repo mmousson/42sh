@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 10:31:11 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/24 10:08:20 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 14:36:33 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void		auto_replace(char *str, int type)
 	line_paste(str, 1);
 	if (type == 9 || type == 14)
 		line_paste("/", 1);
+	else if (g_data.var && (int)ft_strlen(g_data.var) == 2)
+		line_paste("}", 1);
 }
 
 int				auto_return(void)
