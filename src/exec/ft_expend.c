@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:04:52 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/06 22:04:42 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/15 17:01:07 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ char			*ft_cmpct(t_tree *tree, char **arge)
 		return (ft_strdup(tree->content));
 	else if (tree->type == DOL)
 		ret = ft_doll(tree, arge);
-	else if (tree->type == TIL)
-		return (ft_strdup("~"));
 	return (ret);
 }
 
@@ -67,37 +65,12 @@ static t_tree	*ft_reduce(t_tree *tree, char **arge)
 	return (compact);
 }
 
-static t_tree	*ft_cmpct_til(t_tree *tree, char **arge)
-{
-	char		*str;
-	char		*tmp;
-
-	tree->type = CHA;
-	tree->content = ft_getenv(arge, "HOME");
-	if (tree->right)
-	{
-		str = ft_cmpct(tree->right, arge);
-		if (str)
-		{
-			tmp = tree->content;
-			tree->content = ft_strjoin(tmp, str);
-			ft_strdel(&str);
-			ft_strdel(&tmp);
-		}
-		ft_free_tree(tree->right);
-		tree->right = NULL;
-	}
-	return (tree);
-}
-
 t_tree			*ft_expend(t_tree *tree, char **arge)
 {
 	char		*tmp;
 
 	if (!tree || !arge)
 		return (NULL);
-	if (tree->type == TIL)
-		tree = ft_cmpct_til(tree, arge);
 	else if (tree->type == EXP)
 		tree = ft_reduce(tree, arge);
 	else if (tree->type == DOL)

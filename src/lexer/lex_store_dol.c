@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_arith.c                                     :+:      :+:    :+:   */
+/*   lex_store_dol.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/10 12:21:51 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/20 16:53:49 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/18 12:01:16 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/22 13:53:31 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
-#include "libft.h"
+#include "lex.h"
 
-void	expand_arith(t_tok **token)
+int			lex_store_dol(t_stat *stat, char buff[BUF], char **str)
 {
-	(*token)->content = ft_strdup("0");
-	(*token)->status = CHA;
+	char	next_char;
+
+	next_char = (*str)[stat->k + 1];
+	if (next_char == '(')
+	{
+		lex_add_char(buff, &(stat->load), stat->cha);
+		stat->k += 1;
+		lex_step(&stat, str);
+		lex_pile_up(stat, buff);
+	}
+	else
+	{
+		stat->status = CHA;
+		return (0);
+	}
+	stat->status = lex_last_pile(stat);
+	return (1);
 }

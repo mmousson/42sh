@@ -1,30 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_expend_tool.c                                   :+:      :+:    :+:   */
+/*   expand_param.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/29 13:56:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/15 17:01:12 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/24 14:27:00 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/25 10:42:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
 #include "exe.h"
+#include "expand.h"
 #include "libft.h"
 #include <stdlib.h>
 
-int		is_clean(int val)
+int			is_char_exp(char c)
 {
-	if (val == CHA || val == DQT || val == SQT || val == ESP)
+	int			k;
+
+	k = 0;
+	if (!c)
+		return (0);
+	if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_'
+			|| (c >= 'A' && c <= 'Z'))
 		return (1);
 	return (0);
 }
 
-char	*ft_doll(t_tree *tree, char **arge)
+char		*expand_param(const char *str, char ***arge, int *end)
 {
-	if (!tree || !tree->content || !tree->content[0] || !tree->content[1])
+	char	*value;
+	char	*word;
+	int		k;
+
+	if (!str)
 		return (NULL);
-	return (ft_getenv(arge, &tree->content[1]));
+	k = 0;
+	while (is_char_exp(str[k]))
+		k++;
+	word = ft_strsub(str, 1, k);
+	value = ft_getenv(*arge, word);
+	ft_strdel(&word);
+	*end = k;
+	return (value);
 }

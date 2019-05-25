@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/11 18:50:18 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/25 10:42:12 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static int		lex_step(t_stat **stat, char **str)
+int				lex_step(t_stat **stat, char **str)
 {
 	(*stat)->cha = (*str)[(*stat)->k];
 	(*stat)->ch = lex_get_ch((*stat)->cha);
 	(*stat)->old_status = (*stat)->status;
 	(*stat)->status = lex_get_next_state((*stat)->status, (*stat)->ch);
-	if ((*stat)->status != EN && (*stat)->status != EP)
-		return (1);
-	return (0);
+	if ((*stat)->status == EN || (*stat)->status == EP)
+		return (0);
+	if ((*stat)->status == -1)
+		return (0);
+	return (1);
 }
 
 static void		lex_following(char **str, t_tok *tok, char ***arge)
@@ -61,7 +63,7 @@ static int		lex_last(t_stat **stat, t_tok **token, char **str)
 
 	if ((*stat)->status == EP)
 	{
-		ft_putstr_fd("42sh: do not support '()'\n", 2);
+		ft_putstr_fd("42sh: syntax error near unexpected `)'\n", 2);
 		return (clean_out(token, stat, str));
 	}
 	else if ((*stat)->status == EN)
@@ -88,7 +90,7 @@ int				lex_str(char **str, char ***arge)
 	if (!(stat = lex_init_stat()))
 		return (1);
 	buff[0] = '\0';
-	while (stat->status != EN && stat->status != EP)
+	while (stat->status != EN && stat->status != EP && stat->status != -1)
 	{
 		if (lex_step(&stat, str))
 			if (lex_proc(stat, buff, &token, str) == -1)

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/14 17:44:08 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/19 17:15:01 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,67 +17,71 @@
 # include "pars.h"
 
 # define BUF 1024
-# define NB_STATE 16
+# define NB_STATE 11
 
 /*
 ** enum e_state, used relating to the lexing matrix, 2nd
-** ST - 0 : STart
-** CH - 1 : CHar, classical String mode
-** IN - 2 : INt, String with only ASCII within '0' and '9'
-** SP - 3 : SPace, ' '
-** RL - 4 : Redirection Left, '<'
-** RR - 5 : Redirection Right, '>'
-** DQ - 6 : Double Quote, '"'
-** SQ - 7 : Simple Quote, '''
-** ES - 8 : Esperluette, '&'
-** BS - 9 : Back Slash, '\'
-** DO - 10: Dollar, '$'
-** TI - 11: TIlde, '~'
-** PI - 12: PIpe, '|'
-** PS - 13: Parenthesis Simple, '$('
-** PD - 14: Parenthesis Double, "$(("
-** CP - 15: Parenthesis Close, "$(()"
-** DS - 16: Double Silent quote, double quote witch are note store in buff
-** SS - 17: Simple Silent quote, simple quote witche are not store in buff
-** EN - 18: ENd, end of the lexing phasis
-** VA - 19: VAlidation, Storing current buff whith char state
-** VS - 20: Validation Star, Validation, but manage current char the next turn
-** MO - 21: MOre, incomplete lexing, ask for more char
-** SV - 22: Silent Validator, does not store last char
-** EP - 23: Error Parenthesis
-** ML - 24: Mini_lexer, for !expand
-** DB - 26: Double quote, backslash
+** ST - 0 :	STart
+** CH - 1 :	CHar, classical String mode
+** SP - 2 :	SPace, ' '
+** RL - 3 :	Redirection Left, '<'
+** RR - 4 :	Redirection Right, '>'
+** DQ - 5 :	Double Quote, '"'
+** SQ - 6 :	Simple Quote, '''
+** PS - 7 :	Parenthesis Simple, '('
+** ES - 8 :	Esperluette, '&'
+** BS - 9:	Back Slash, '\'
+** PI - 10: PIpe, '|'
+** ----------------------------------------- end of matrix
+** SK - 11:	Store in StacK, used for stacking " ' $( and (
+** US - 12:	Un Stack, used for Un Stack previously stacked elmt
+**			Could result in a lexing error if not well stacked/unstacked
+** ML - 13:	Mini_lexer, for !expand
+** DB - 14:	Double quote, backslash, escape authorized elmt
+** DO - 15: Dollard store
+** VA - 16:	VAlidation, Storing current buff whith char state
+** VS - 17:	Validation Star, Validation, but manage current char the next turn
+** MO - 18:	MOre, incomplete lexing, ask for more char
+** SD - 19: Store Dollard
+** ER - -1: Error
+** EN - -2:	ENd, end of the lexing phasis
+** EP - -3: Error Patrenthesis, for stacking error
+** ED - -4: Error Dollard
 */
 
 typedef enum	e_state
 {
 	ST = 0,
 	CH,
-	IN,
 	SP,
 	RL,
 	RR,
 	DQ,
 	SQ,
+	PS,
 	ES,
 	BS,
-	DO,
-	TI,
 	PI,
-	PS,
-	PD,
-	CP,
-	DS,
-	SS,
-	EN,
+	SK,
+	US,
+	ML,
+	DB,
+	DO,
 	VA,
 	VS,
 	MO,
- 	SV,
-	EP,
-	ML,
-	DB
+	SD,
+	ER = -1,
+	EN = -2,
+	EP = -3,
+	ED = -4
 }				t_state;
+
+typedef struct	s_st
+{
+	int			elmt;
+	struct s_st	*next;
+}				t_st;
 
 typedef struct	s_stat
 {
@@ -87,10 +91,12 @@ typedef struct	s_stat
 	char		cha;
 	int			k;
 	char		*load;
+	t_st		*stack;
 }				t_stat;
 
 char			**ft_tabdup(char **tabl);
 
+t_st			*init_pile(int status);
 void			lex_add_tok(char buf[BUF], char *ld, int stat, t_tok *tok);
 void			lex_add_char(char buff[BUF], char **load, char cha);
 void			lex_free_stat(t_stat *stat);
@@ -103,6 +109,11 @@ int				lex_get_next_state(int state, int ch);
 int				pars_tok(t_tok *tok, char ***arge, char *str);
 int				lex_exclam(t_stat *stat, t_tok **tok, char **str);
 int				lex_back_slash_quote(t_stat *stat, char **str, char buff[BUF]);
+int				lex_store(t_stat *stat, char buff[BUF]);
+int				lex_last_pile(t_stat *stat);
+int				lex_store_dol(t_stat *stat, char buff[BUF], char **str);
+int				lex_pile_up(t_stat *stat, char buff[BUF]);
+int				lex_step(t_stat **stat, char **str);
 
 /*
 ** fonctions affichages
@@ -110,4 +121,5 @@ int				lex_back_slash_quote(t_stat *stat, char **str, char buff[BUF]);
 
 void			ft_print_stat_fd(int stat, int fd);
 void			ft_print_ch_fd(int ch, int fd);
+void			lex_print_stack(t_st *stack);
 #endif

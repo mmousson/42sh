@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:04:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/12 15:04:33 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/25 11:41:48 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,13 @@ int					ft_end_of_pipes(int *fdpipes, int nbr_pipres);
 void				ft_free_cmd(t_launch *cmd);
 void				ft_free_lstfd(t_lstfd *lstfd);
 void				ft_launch_exe(t_launch *cmd, char ***arge);
-void				ft_launch_cmd(t_launch **cmd, char ***arge, int status);
+int					ft_launch_cmd(t_launch **cmd, char ***arge, int status);
 void				ft_launch_last(t_launch *cmd, char ***arge);
 int					ft_launch_red(t_red *red, t_launch *cmd);
 void				ft_res_pile(t_launch *cmd);
 void				ft_add_pile(int og, int dir, t_launch *cmd);
-int					ft_heredoc(char *end, t_launch *cmd);
+int					ft_heredoc(char *end);
+int					ft_heredoc_read(int *og, int *dir);
 
 char				*ft_getenv(char **env, char *name);
 int					ft_do_home(int k, char **argv, char ***arge);
