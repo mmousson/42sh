@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:59:16 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/24 09:28:32 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 11:28:30 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ void				auto_printvar(void)
 {
 	t_vars			*tmp;
 
-	tmp = shell_var_list;
+	tmp = g_shell_var_list;
 	if (g_data.type != 2)
 		return ;
 	auto_printvarenv();
-	while (shell_var_list)
+	while (g_shell_var_list)
 	{
-		if (auto_checkroot(shell_var_list->name, g_data.root))
-			auto_lstword(shell_var_list->name, &shell_var_list->name, 0);
-		shell_var_list = shell_var_list->next;
+		if (auto_checkroot(g_shell_var_list->name, g_data.root))
+			auto_lstword(g_shell_var_list->name, &g_shell_var_list->name, 0);
+		g_shell_var_list = g_shell_var_list->next;
 	}
-	shell_var_list = tmp;
+	g_shell_var_list = tmp;
 }
