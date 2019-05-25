@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 19:53:56 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/24 20:54:55 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 07:54:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@
 
 char	*utility_get_param(char *key, char **env)
 {
-	char	*result;
+	int		id;
 
-	if ((result = utility_internal_var_exists(key, NULL)) != NULL)
-		return (result);
+	if (key == NULL)
+		return (NULL);
+	if ((key[0] != '\0' && key[1] == '\0'
+		&& (id = core_hash_spec_var(key[0])) != -1))
+		return (core_spec_var_setget(id, NULL, GET));
 	else
 		return (utility_get_var(key, env));
 }
