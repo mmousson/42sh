@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 00:08:58 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 11:23:54 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void				sh_switch_term(int reset)
 		#ifndef __linux__
 		g_env.term.c_cc[VDSUSP] = CTRLY;
 		#endif
-//		sh_reset_signal(1);
+		sig_reset(1);
 	}
 	else
 	{
-//		sh_signal_handler(1);
+		sig_handler(1);
 		g_env.term.c_lflag &= ~(ECHO | ICANON);
 		tputs(g_env.tc->key[0], 1, ft_putchar);
 		#ifndef __linux__

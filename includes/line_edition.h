@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/13 20:58:53 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/24 09:01:50 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define CTRLK '\013'
 # define CTRLN '\016'
 # define CTRLP '\020'
+# define CTRLR '\022'
 # define CTRLT '\024'
 # define CTRLU '\025'
 # define CTRLW '\027'
@@ -62,7 +63,8 @@ typedef enum			e_prompt
 	PPIPE = 6,
 	PHEREDOC = 9,
 	PBACKS = 4,
-	PDEF = 2
+	PDEF = 2,
+	HIST = 23
 }						t_prompt;
 
 typedef struct			s_tc
@@ -86,6 +88,10 @@ typedef struct			s_tc
 	char				*me;
 	char				*cd;
 	char				*af;
+	char				*ri;
+	char				*lem;
+	char				*dom;
+	char				*upm;
 }						t_tc;
 
 typedef struct			s_cm
@@ -113,6 +119,7 @@ typedef struct			s_ctrlxx
 
 typedef struct			s_env
 {
+	char				***env;
 	struct termios		term;
 	t_tc				*tc;
 	t_cm				*cm;
@@ -136,6 +143,10 @@ typedef struct			s_env
 	t_ctrlxx			*cx;
 	int					count;
 	int					jobs;
+	int					search;
+	char				*h_word;
+	int					h_len;
+	int					h_index;
 }						t_env;
 
 struct s_env			g_env;
@@ -153,7 +164,7 @@ int						line_escap(void);
 
 void					sh_configterm(void);
 void					sh_errorterm(t_error error);
-void					sh_term_manager(void);
+void					sh_term_manager(char ***env);
 int						sh_quiterm(void);
 void					sh_switch_term(int reset);
 
@@ -198,7 +209,7 @@ void					line_clear(void);
 int						line_getx(int pos);
 int						line_gety(int pos);
 int						line_get_termroom(void);
-void					line_reset_cursor(int ret_p);
+void					line_reset_cursor();
 int						line_get_origin_pos(void);
 void					line_cxjump(void);
 
@@ -257,7 +268,7 @@ int						line_ctrld(void);
 **	print
 */
 
-int						line_print(void);
+void					line_print(void);
 
 /*
 **	vi_readline
@@ -270,5 +281,13 @@ int						line_isend(char *str, int ret);
 int						line_iscx(char *str, int ret);
 int						line_isdel(char *str, int ret);
 int						line_isdelrword(char *str, int ret);
+
+/*
+**	signal
+*/
+
+void					sig_handler(int val);
+void					sig_reset(int val);
+void					sig_manager(int sg);
 
 #endif

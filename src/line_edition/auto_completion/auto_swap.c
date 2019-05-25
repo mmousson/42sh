@@ -1,18 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_isaltinv.c                                    :+:      :+:    :+:   */
+/*   auto_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/05 16:17:13 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/23 13:46:59 by roliveir         ###   ########.fr       */
+/*   Created: 2019/05/15 12:21:36 by roliveir          #+#    #+#             */
+/*   Updated: 2019/05/15 13:19:30 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int			line_isaltt(char *str, int ret)
+#include "auto_completion.h"
+
+void			auto_swapstr(char **a, char **b)
 {
-	if (ret == 3 && str[0] == -30 && str[1] == -128 && str[2] == -96)
-		return (1);
-	return (0);
+	char		*tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void			auto_swapint(int *a, int *b)
+{
+	int			tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void			auto_swapchar(char *a, char *b)
+{
+	char		tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }

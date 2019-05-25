@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 09:53:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/14 15:42:40 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/24 10:20:43 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int			auto_printcomp(void)
 		auto_free();
 		return (1);
 	}
-	lenroot = (int)ft_strlen(g_data.root);
+	lenroot = auto_lenrootwbs();
 	line_paste(&(g_data.lw->name[lenroot]), 1);
 	if (g_data.lw->type == 9 || g_data.lw->type == 14)
 		line_paste("/", 1);
@@ -83,41 +83,45 @@ int					auto_printaligned(void)
 	return (1);
 }
 
-/*static void			auto_printbuilt(void)
+static void			auto_printbuilt(void)
 {
 	int				i;
 
 	i = 0;
-	if (!g_data.type)
+	auto_printvar();
+	if (g_data.type)
 		return ;
-	while (g_builtins[i])
+	while (g_builtins[i].name)
 	{
 		if (auto_checkroot(g_builtins[i].name, g_data.root))
-			auto_lstword(g_builtins[i].name, 0);
+			auto_lstword(g_builtins[i].name, &(g_builtins[i].name), 0);
 		i++;
 	}
-}*/
+}
 
 int					auto_printword(void)
 {
 	DIR				*dir;
 	struct dirent	*dt;
 	int				i;
+	char			*name;
 
-	i = 0;
-	while (g_data.path[i])
+	i = -1;
+	while (g_data.type != 2 && g_data.path[++i])
 	{
 		if (!(dir = opendir(g_data.path[i])))
 			break ;
 		while ((dt = readdir(dir)))
 		{
+			if (!(name = ft_strdup(dt->d_name)))
+				sh_errorterm(TMALLOC);
 			if (auto_checkroot(dt->d_name, g_data.root))
-				auto_lstword(dt->d_name, i);
+				auto_lstword(dt->d_name, &name, i);
 		}
 		(void)closedir(dir);
-		i++;
 	}
-//	auto_printbuilt();
+	auto_printbuilt();
+	auto_sort();
 	auto_calclen();
 	if (g_data.lenlst < 2)
 		return (auto_printcomp());

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 22:52:39 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/12 17:37:58 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/21 18:20:06 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char				*line_get_prompt(t_prompt prompt)
 		return (ft_strdup("bs> "));
 	else if (prompt == PDEF)
 		return (ft_strdup("> "));
+	else if (prompt == HIST)
+		return (ft_strdup("(search in history)`': "));
 	return (NULL);
 }
 

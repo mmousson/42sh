@@ -6,15 +6,15 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:46:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/11 19:54:20 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/23 13:46:41 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
+#include "history.h"
 
 static int			line_cpy_pst(char *str, int ret)
 {
-
 	int				tmp;
 
 	if (line_isaltc(str, ret) && !g_env.mode->n_select)
@@ -45,6 +45,8 @@ int					line_history(char *str, int ret)
 	else if (!ft_strcmp(g_env.tc->key[MDOWN], str)
 			|| (str[0] == CTRLN && ret == 1))
 		line_cursor_motion(MDOWN, g_env.count);
+	else if (str[0] == CTRLR && ret == 1)
+		hist_search(str, ret);
 	else
 		return (0);
 	g_env.k_index = 0;
@@ -81,8 +83,6 @@ int					line_motion(char *str, int ret)
 int					line_ascii(char *str, int ret)
 {
 	(void)ret;
-	if (str[0] == '9')
-		exit(0);
 	if (str[0] == 27 && ret == 1)
 		return (line_escap());
 	if (str[0] <= 126 && str[0] >= 32)
@@ -103,7 +103,9 @@ int					line_manager(char *str, int ret)
 		return (line_return());
 	else if (str[0] == CTRLD && ret == 1 && g_env.len == g_env.p_size + 1)
 		return (line_ctrld());
-	else if (line_ascii(str, ret) || line_del(str, ret))
+	else if (g_env.search)
+		hist_lst(str, ret);
+	else if ((line_ascii(str, ret)) || line_del(str, ret))
 		return (1);
 	else if (line_motion(str, ret) || line_cpy_pst(str, ret))
 		return (1);

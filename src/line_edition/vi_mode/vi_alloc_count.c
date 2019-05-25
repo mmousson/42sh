@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 15:10:32 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/03 10:34:46 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/19 09:43:55 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int				vi_del_count(void)
 	char		*fresh;
 	int			len;
 
-	if (g_env.line[g_env.p_size] != '(')
+	if (g_env.line[g_env.p_size] != '(' || (!g_env.mode->v_command
+					&& g_env.count < 2))
 		return (1);
 	len = ft_count_n(g_env.count) + 3;
 	g_env.mode->v_command = 0;

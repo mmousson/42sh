@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 13:27:51 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/14 16:07:00 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/15 11:34:52 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void			hist_update(char *line)
 		return ;
 	fd = open(path, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	ft_strdel(&path);
+	hist_add(line);
 	if (fd == -1)
 		return ;
-	hist_add(line);
 	hist_w_infile(fd, g_env.ry);
 	close(fd);
 }

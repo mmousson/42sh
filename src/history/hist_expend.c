@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:16:07 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/14 17:58:34 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/23 13:37:44 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ static char		*hist_getnbr(int index)
 	tmp = g_env.ry;
 	if (!g_env.ry)
 		return (NULL);
-	while (--index && g_env.ry->next)
+	while (g_env.ry->next)
 		g_env.ry = g_env.ry->next;
+	while (--index && g_env.ry->prev)
+		g_env.ry = g_env.ry->prev;
 	if (!index && g_env.ry->line)
 		result = ft_strdup(g_env.ry->line);
 	g_env.ry = tmp;
@@ -56,10 +58,8 @@ static char		*hist_getnbrneg(int index)
 	tmp = g_env.ry;
 	if (!g_env.ry)
 		return (NULL);
-	while (g_env.ry->next)
+	while (--index && g_env.ry->next)
 		g_env.ry = g_env.ry->next;
-	while (--index && g_env.ry->prev)
-		g_env.ry = g_env.ry->prev;
 	if (!index && g_env.ry->line)
 		result = ft_strdup(g_env.ry->line);
 	g_env.ry = tmp;
