@@ -6,10 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 21:32:46 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 10:39:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 11:28:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <sys/stat.h>
 
 /*
