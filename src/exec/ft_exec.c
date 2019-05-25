@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 08:07:28 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/14 00:57:41 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 13:34:43 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,17 @@ static void		ft_add_elmt(t_tree *tree, t_launch **cmd, t_red **red)
 		ft_add_argv(ft_strdup(tree->content), ft_last(*cmd));
 }
 
-static void		ft_add(t_tree *tree, t_launch **cmd, char ***arge)
+static int		ft_add(t_tree *tree, t_launch **cmd, char ***arge)
 {
 	t_red		*red;
 	int			ret;
 
 	if (!tree)
-		return ;
+		return (0);
 	if ((ret = ft_add_red(tree, ft_last(*cmd))))
 	{
-		ft_add(tree->left, cmd, arge);
+		if (ft_add(tree->left, cmd, arge))
+			return (1);
 		if (tree->type == PIP)
 		{
 			(*cmd)->nbr_pipe++;
@@ -64,25 +65,30 @@ static void		ft_add(t_tree *tree, t_launch **cmd, char ***arge)
 		}
 		else if (is_sep(tree->type))
 		{
-			ft_launch_cmd(cmd, arge, tree->type);
+			if (ft_launch_cmd(cmd, arge, tree->type))
+				return (1);
 			tree->right = ft_expend(tree->right, *arge);
 		}
 		else if (tree->content && tree->type != SPA)
 			ft_add_elmt(tree, cmd, &red);
 	}
 	if (ret || ft_last(*cmd)->will_red == -1)
-		ft_add(tree->right, cmd, arge);
+		if (ft_add(tree->right, cmd, arge))
+			return (1);
+	return (0);
 }
 
 void			ft_exec(t_tree *tree, char ***arge)
 {
 	t_launch	*cmd;
+	int			ret;
 
 	if (!(cmd = ft_init_cmd(NULL)))
 		return ;
 	tree = ft_expend(tree, *arge);
-	ft_add(tree, &cmd, arge);
+	ret = ft_add(tree, &cmd, arge);
 	ft_free_tree(tree);
-	ft_launch_cmd(&cmd, arge, SMC);
+	if (!ret)
+		ft_launch_cmd(&cmd, arge, SMC);
 	ft_free_cmd(cmd);
 }

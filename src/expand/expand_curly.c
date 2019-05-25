@@ -1,47 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_param.c                                     :+:      :+:    :+:   */
+/*   expand_curly.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/24 14:27:00 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 10:42:11 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/25 09:18:57 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/25 11:27:21 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
 #include "expand.h"
 #include "libft.h"
-#include <stdlib.h>
 
-int			is_char_exp(char c)
+char		*expand_curly(const char *str, char ***arge, int *end, int *error)
 {
-	int			k;
-
-	k = 0;
-	if (!c)
-		return (0);
-	if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_'
-			|| (c >= 'A' && c <= 'Z'))
-		return (1);
-	return (0);
-}
-
-char		*expand_param(const char *str, char ***arge, int *end)
-{
-	char	*value;
-	char	*word;
 	int		k;
+	int		end_var;
+	char	*var;
+	char	*value;
 
-	if (!str)
-		return (NULL);
+	end_var = 0;
 	k = 0;
-	while (is_char_exp(str[k]))
+	while (str[k] != '}' && str[k])
+	{
+		if (!end_var && !is_char_exp(str[k]))
+			end_var = k;
 		k++;
-	word = ft_strsub(str, 1, k);
-	value = ft_getenv(*arge, word);
-	ft_strdel(&word);
-	*end = k;
+	}
+	if (!end_var)
+		end_var = k;
+	*end = k + 1;
+	if (str[k])
+		(*end)++;
+	if (end_var != k)//to adapt with :- :+ ##
+	{
+		*error = -1;
+		return (NULL);
+	}
+	var = ft_strsub(str, 0, end_var);
+	value = ft_getenv(*arge, var);
+	ft_strdel(&var);
 	return (value);
 }
