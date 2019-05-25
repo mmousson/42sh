@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 00:06:09 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 09:14:12 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "job_control_42.h"
 #include "exe.h"
 #include "libft.h"
+
+uint8_t		g_prev_status;
 
 void		ft_cmd_nf(char *str)
 {
@@ -100,25 +102,33 @@ void		ft_launch_exe(t_launch *cmd, char ***arge)
 
 // }
 
+static int	handle_logical_operators(void)
+{
+	if (g_current_ret != -1)
+	{
+		if ((g_prev_status == PIP + DBL && g_current_ret == 0)
+			|| (g_prev_status == ESP + DBL && g_current_ret != 0))
+			return (SKIP_JOB);
+	}
+	return (DONT_SKIP_JOB);
+}
+
 void		ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 {
 	t_job	*job;
 	int		fg;
 
-	// status = PIP + DBL -> ||
-	// status = ESP + DBL -> &&
-	// status = ESP -> &
-	if (status == PIP + DBL && current_ret == 0)
-		return ;
-	if (status == ESP + DBL && current_ret != 0)
-		return ;
-	if ((*cmd)->argv)
+	if (handle_logical_operators() == DONT_SKIP_JOB)
 	{
-		fg = status == ESP ? BACKGROUND_LAUNCH : FOREGROUND_LAUNCH;
-		job = exe_load_job(*cmd, arge);
-		ft_free_cmd(*cmd);
-		current_ret = job_launch(job, fg);
-		if (!(*cmd = ft_init_cmd(NULL)))
-			exit(1);
+		if ((*cmd)->argv)
+		{
+			fg = status == ESP ? BACKGROUND_LAUNCH : FOREGROUND_LAUNCH;
+			job = exe_load_job(*cmd, arge);
+			g_current_ret = job_launch(job, fg);
+		}
 	}
+	ft_free_cmd(*cmd);
+	if (!(*cmd = ft_init_cmd(NULL)))
+		exit(1);
+	g_prev_status = status;
 }

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 00:05:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 09:13:00 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct			s_sig_matcher
 **	source files
 */
 
-extern uint8_t			last_ret;
-extern uint8_t			current_ret;
+extern uint8_t			g_last_ret;
+extern int16_t			g_current_ret;
 extern pid_t			shell_proc_group_id;
 extern struct termios	shell_term_conf;
 extern t_sig_matcher	g_sig_table[];
@@ -56,6 +56,8 @@ extern t_sig_matcher	g_sig_table[];
 **	The two last will be used to flag waitpid's return value
 */
 
+# define SKIP_JOB 0
+# define DONT_SKIP_JOB 1
 # define DONT_SAVE_CONF 0
 # define SAVE_CONF 1
 # define DONT_FREE_JOB 0

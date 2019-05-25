@@ -102,7 +102,7 @@ void		job_child_process(t_job *job, t_process *proc, int foreground, pid_t pgid)
 	t_process		*current;
 
 	current = job->first_process;
-	io_chan = proc->io_channels;
+	io_chan = proc->real_channels;
 	interactive = isatty(0);
 	if (interactive)
 	{
