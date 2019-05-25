@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:16:07 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/15 11:30:28 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/23 13:37:44 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static char		*hist_getnbr(int index)
 	if (!index && g_env.ry->line)
 		result = ft_strdup(g_env.ry->line);
 	g_env.ry = tmp;
-
 	return (result);
 }
 
@@ -64,7 +63,6 @@ static char		*hist_getnbrneg(int index)
 	if (!index && g_env.ry->line)
 		result = ft_strdup(g_env.ry->line);
 	g_env.ry = tmp;
-
 	return (result);
 }
 

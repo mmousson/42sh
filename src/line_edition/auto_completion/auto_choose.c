@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 10:31:11 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/15 15:19:36 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/24 10:08:20 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ static void		auto_replace(char *str, int type)
 	int			i;
 
 	i = g_data.spos - 1;
-	while (i - g_env.p_size + 1 && !auto_newtoken(g_env.line[i])
-				&& !auto_ispathcarac(g_env.line[i]))
+	while (i - g_env.p_size + 1 && !auto_newtoken(g_env.line[i],
+				g_env.line[i - 1]) && !auto_ispathcarac(g_env.line[i])
+			&& !auto_isvar(g_env.line[i], g_env.line[i - 1]))
 		i--;
 	size = g_env.cm->pos - i - 1;
 	if (size)

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 16:49:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/15 13:15:02 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/23 17:12:37 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,22 @@ struct s_autodata		g_data;
 int						auto_completion(char *str, int ret);
 int						auto_getype(void);
 int						auto_ispathcarac(char c);
-int						auto_newtoken(char c);
+int						auto_isvar(char c, char prev);
+int						auto_newtoken(char c, char prev);
 int						auto_getstatype(char *name, char *carac, int index);
 
 /*
 **	alloc
 */
 
-void					auto_lstword(char *name, int index);
+void					auto_lstword(char *orignal, char **name, int index);
 t_lstword				*auto_new_lstword(void);
 void					auto_free(void);
+void					auto_free_lstword(t_lstword *lw);
 void					auto_filldata(void);
 char					*auto_getpath(void);
 char					*auto_getroot(void);
+char					*auto_alloc_name(char **str);
 
 /*
 **	print
@@ -63,6 +66,7 @@ char					*auto_getroot(void);
 
 int						auto_printword(void);
 int						auto_printaligned(void);
+void					auto_printvar(void);
 
 /*
 **	utils
@@ -76,6 +80,7 @@ void					auto_sort(void);
 void					auto_swapstr(char **a, char **b);
 void					auto_swapint(int *a, int *b);
 void					auto_swapchar(char *a, char *b);
+int						auto_lenrootwbs(void);
 
 /*
 **	choose

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:46:52 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/22 12:38:36 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/23 13:46:41 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int					line_ascii(char *str, int ret)
 int					line_manager(char *str, int ret)
 {
 	if (vi_get_count(str))
-		return (1);	
+		return (1);
 	g_env.mode->v_command = 0;
 	vi_del_count();
 	if (str[0] == '\n' && ret == 1)

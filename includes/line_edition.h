@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/22 13:48:14 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/24 09:01:50 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct			s_ctrlxx
 
 typedef struct			s_env
 {
+	char				***env;
 	struct termios		term;
 	t_tc				*tc;
 	t_cm				*cm;
@@ -145,6 +146,7 @@ typedef struct			s_env
 	int					search;
 	char				*h_word;
 	int					h_len;
+	int					h_index;
 }						t_env;
 
 struct s_env			g_env;
@@ -162,7 +164,7 @@ int						line_escap(void);
 
 void					sh_configterm(void);
 void					sh_errorterm(t_error error);
-void					sh_term_manager(void);
+void					sh_term_manager(char ***env);
 int						sh_quiterm(void);
 void					sh_switch_term(int reset);
 

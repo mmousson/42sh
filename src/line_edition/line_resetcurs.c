@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:22:35 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/18 14:48:17 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/23 13:50:16 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void			line_back_left(int pos)
 	}
 }
 
-static void			line_reset_autocomp()
+static void			line_reset_autocomp(void)
 {
 	int				ll;
 
@@ -69,7 +69,7 @@ static void			line_reset_autocomp()
 	tputs(tparm(g_env.tc->ri, ll), 1, ft_putchar);
 }
 
-void				line_reset_cursor()
+void				line_reset_cursor(void)
 {
 	line_reset_autocomp();
 	line_back_left(g_env.len);

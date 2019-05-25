@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 19:20:09 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/15 15:43:10 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/23 14:02:28 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ void				caps_active_termcaps(void)
 	tputs(g_env.tc->key[0], 1, ft_putchar);
 }
 
+static void			caps_addtermcaps_next(t_tc *tc)
+{
+	tc->af = tgetstr("AF", NULL);
+	tc->ri = tgetstr("RI", NULL);
+	tc->lem = tgetstr("LE", NULL);
+	tc->dom = tgetstr("DO", NULL);
+	tc->upm = tgetstr("UP", NULL);
+}
+
 int					caps_addtermcaps(t_tc *tc)
 {
 	tc->cl = tgetstr("cl", NULL);
@@ -59,10 +68,6 @@ int					caps_addtermcaps(t_tc *tc)
 	tc->me = tgetstr("me", NULL);
 	tc->mr = tgetstr("mr", NULL);
 	tc->cd = tgetstr("cd", NULL);
-	tc->af = tgetstr("AF", NULL);
-	tc->ri = tgetstr("RI", NULL);
-	tc->lem = tgetstr("LE", NULL);
-	tc->dom = tgetstr("DO", NULL);
-	tc->upm = tgetstr("UP", NULL);
+	caps_addtermcaps_next(tc);
 	return (caps_check_termcaps(*tc));
 }

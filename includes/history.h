@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 10:08:21 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/22 13:48:11 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/23 14:06:18 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char				*hist_getexpend(char **str);
 */
 
 int					hist_search(char *str, int ret);
-void				hist_searchline(void);
 int					hist_lst(char *str, int ret);
 
 /*

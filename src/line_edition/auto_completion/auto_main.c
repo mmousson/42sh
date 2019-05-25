@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 16:52:20 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/15 16:28:07 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/24 10:08:16 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int				auto_option(void)
 	{
 		if (g_data.type == 1)
 			auto_compath();
-		else if (g_data.type == 0)
+		else if (g_data.type == 0 || g_data.type == 2)
 			auto_comproot();
 	}
 	else if (g_data.status == 2)
@@ -67,8 +67,13 @@ int				auto_option(void)
 
 int				auto_completion(char *str, int ret)
 {
+	int			tmp;
+
 	if (str[0] == '\t' && ret == 1)
 	{
+		tmp = auto_getype();
+		if (g_data.status != 2 && tmp != g_data.type)
+			auto_free();
 		if (auto_isblank())
 			line_paste("    ", g_env.count);
 		else if (auto_option())

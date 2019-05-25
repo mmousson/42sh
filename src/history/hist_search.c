@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 09:45:50 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/22 13:48:10 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/23 14:16:13 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,24 @@ int				hist_search(char *str, int ret)
 	return (0);
 }
 
-void			hist_searchline(void)
+static void		hist_searchline(char c)
 {
 	t_history	*tmp;
 	int			forwards;
+	int			index;
 
 	tmp = g_env.ry;
 	forwards = 0;
+	index = c == CTRLR ? g_env.h_index + 1 : 1;
+	while (g_env.ry->next && --index)
+		g_env.ry = g_env.ry->next;
+	index = c == CTRLR ? g_env.h_index : 0;
 	while (g_env.ry->next)
 	{
+		index++;
 		if ((forwards = hist_strstr(g_env.ry->line, g_env.h_word)) > -1)
 		{
+			g_env.h_index = index;
 			hist_addline(g_env.ry->line, forwards);
 			break ;
 		}
@@ -52,6 +59,7 @@ int				hist_lst(char *str, int ret)
 		hist_addstr(str);
 	else if (str[0] == 127 && ret == 1)
 		hist_delchar();
-	hist_searchline();
+	if (g_env.h_word)
+		hist_searchline(str[0]);
 	return (1);
 }

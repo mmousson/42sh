@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:53:55 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/21 18:20:11 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/23 16:54:09 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void				sig_sigint(void)
 	g_env.sigc = 1;
 	g_env.search = 0;
 	g_env.h_len = 0;
+	auto_free();
 	ft_strdel(&g_env.h_word);
 	line_end();
 	ft_putchar('\n');

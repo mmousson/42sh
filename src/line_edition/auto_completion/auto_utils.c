@@ -6,11 +6,28 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:54:13 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/15 16:28:08 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/24 10:08:27 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
+
+int				auto_lenrootwbs(void)
+{
+	int			i;
+	int			count;
+
+	i = g_env.cm->pos - 1;
+	count = 0;
+	while (i - g_env.p_size + 1 && !auto_ispathcarac(g_env.line[i])
+			&& !auto_newtoken(g_env.line[i], g_env.line[i - 1])
+			&& !auto_isvar(g_env.line[i], g_env.line[i - 1]))
+	{
+		i--;
+		count++;
+	}
+	return (count);
+}
 
 int				auto_isblank(void)
 {
@@ -36,10 +53,10 @@ int				auto_checkroot(char *name, char *root)
 	return (1);
 }
 
-void				auto_calclen(void)
+void			auto_calclen(void)
 {
-	t_lstword		*tmp;
-	int				k;
+	t_lstword	*tmp;
+	int			k;
 
 	if (!g_data.lw->name)
 		return ;
@@ -65,9 +82,9 @@ void				auto_calclen(void)
 	return ;
 }
 
-void				auto_sort(void)
+void			auto_sort(void)
 {
-	t_lstword		*tmp;
+	t_lstword	*tmp;
 
 	tmp = g_data.lw;
 	if (!g_data.lw || !g_data.lw->next)

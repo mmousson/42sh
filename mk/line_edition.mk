@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/15 13:27:14 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/23 17:00:11 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,9 @@ AUTOCMP =	auto_main.c				\
 			auto_choose.c			\
 			auto_termcaps.c			\
 			auto_getstatinfo.c		\
-			auto_swap.c
+			auto_swap.c				\
+			auto_free.c				\
+			auto_printvar.c
 
 SIGNAL = 	signal_func.c			\
 			signal_handler.c

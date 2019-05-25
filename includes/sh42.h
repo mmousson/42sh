@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 17:42:47 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:41:48 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,8 @@ int					core_hash_spec_var(char var);
 **	set -> builtins/set.c
 **	type -> builtins/type.c
 **	unalias -> builtins/unalias.c
+**	history -> builtins/history.c
+**  fc -> builtins/fc.c
 */
 
 int					blt_alias(int argc, char **argv, char ***env);
