@@ -84,16 +84,14 @@ static void				pipe_cleanup(t_process *process)
 **	Return Value: NONE
 */
 
-int					job_wait_completion(t_job *job)
+int					job_wait_completion(t_job *job, t_process *proc)
 {
 	t_bool		is_only_builtins;
-	t_process	*proc;
 	int			ret;
 	pid_t 		pid;
 
 	ret = 0;
 	is_only_builtins = true;
-	proc = job->first_process;
 	while (proc != NULL)
 	{
 		if (proc->valid_to_wait_for == true)
@@ -105,6 +103,8 @@ int					job_wait_completion(t_job *job)
 				+ job_is_completed(job, FREE_JOB) != 0)
 				break ;
 		}
+		else
+			ret = proc->status;
 		proc = proc->next;
 	}
 	if (is_only_builtins)
@@ -139,7 +139,7 @@ int						job_launch(t_job *job, int fg)
 	}
 	job_add_to_active_job_list(job);
 	if (!isatty(STDIN_FILENO))
-		return (job_wait_completion(job));
+		return (job_wait_completion(job, job->first_process));
 	else if (fg)
 		return (job_send_to_foreground(job, START_JOB));
 	else

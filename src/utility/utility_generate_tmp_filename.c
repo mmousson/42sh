@@ -6,10 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 10:20:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 11:44:27 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 12:13:58 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <sys/syscall.h>
 #include <stdio.h>
 #include "sh42.h"
 #include "libft.h"
@@ -27,25 +29,21 @@
 **	NON-NULL -> The next permutation
 */
 
-static char	*next_permutation(const char *base, char new_suffix)
+static char	*next_permutation(const char *base)
 {
 	size_t	len;
 	char	*new;
+	char	next_suffix;
 
 	len = ft_strlen(base);
-	if ((new = ft_strnew(len + (new_suffix == '0' + 10))) == NULL)
+	if ((new = ft_strnew(len + 1)) == NULL)
 	{
 		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 		return (NULL);
 	}
 	ft_strcpy(new, base);
-	if (new_suffix == '0' + 10)
-	{
-		new[len - 1] = '_';
-		new[len] = '1';
-	}
-	else
-		new[len - 1] = new_suffix;
+	syscall(SYS_getentropy, &next_suffix, 1);
+	new[len] = (ft_abs(next_suffix) % 40) + 42;
 	return (new);
 }
 
@@ -76,14 +74,12 @@ char		*utility_generate_filename(void)
 		i = 0;
 		while (42)
 		{
-			if ((tmp = next_permutation(res, '0' + i)) == NULL)
+			if ((tmp = next_permutation(res)) == NULL)
 				return (NULL);
-			printf("Got: %s\n", tmp);
-			usleep(60000);
 			ft_strdel(&res);
 			res = tmp;
-			// if (!utility_file_exists(res))
-			// 	return (res);
+			if (!utility_file_exists(res))
+				return (res);
 			i %= 10;
 			i++;
 		}
@@ -91,9 +87,3 @@ char		*utility_generate_filename(void)
 	ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 	return (NULL);
 }
-
-// int		main(void)
-// {
-// 	utility_generate_filename();
-// 	return (0);
-// }
