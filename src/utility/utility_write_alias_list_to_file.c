@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 04:35:48 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 04:52:21 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 06:45:50 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void		utility_write_alias_list_to_file(void)
 	current = g_alias_list;
 	while (current)
 	{
-		ft_putendl_fd(current->token, 2);
-		ft_putendl_fd(current->replacement, 2);
 		ft_putstr_fd(current->token, fd);
 		ft_putchar_fd('=', fd);
 		ft_putendl_fd(current->replacement, fd);
