@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/14 17:44:07 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/19 17:15:00 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "lex.h"
 #include "libft.h"
 
-static int		ft_nomatch(int status, char *fus)
+static int		ft_nomatch(int status, char *fus, t_stat *stat)
 {
 	if (fus)
 		free(fus);
@@ -23,6 +23,8 @@ static int		ft_nomatch(int status, char *fus)
 		ft_putstr_fd("\"", 2);
 	else if (status == SQ)
 		ft_putstr_fd("'", 2);
+	else if (stat->stack)
+		ft_putstr_fd(")", 2);
 	else
 		ft_putstr_fd("|", 2);
 	ft_putstr_fd("'\n", 2);
@@ -73,7 +75,7 @@ int				lex_more(t_stat *stat, char **str, int nl)
 	{
 		fus = line_get_readline(prompt, NULL);
 		if ((fus == NULL || fus[0] == 0) && g_env.ctrld)
-			return (ft_nomatch(stat->old_status, fus));
+			return (ft_nomatch(stat->old_status, fus, stat));
 		if (ft_append_nl(str, nl))
 			return (0);
 		if (!(tmp = ft_strjoin(*str, fus)))
@@ -85,5 +87,7 @@ int				lex_more(t_stat *stat, char **str, int nl)
 		free(fus);
 	stat->k--;
 	stat->status = stat->old_status;
+	if (stat->stack)
+		stat->status = lex_last_pile(stat);
 	return (1);
 }

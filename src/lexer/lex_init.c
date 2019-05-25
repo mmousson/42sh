@@ -6,12 +6,23 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:18 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/09 15:13:55 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/18 10:11:08 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 #include <stdlib.h>
+
+t_st			*init_pile(int status)
+{
+	t_st		*new;
+
+	if (!(new = (t_st*)malloc(sizeof(t_st))))
+		return (NULL);
+	new->elmt = status;
+	new->next = NULL;
+	return (new);
+}
 
 t_tok			*lex_init_token(void)
 {
@@ -37,5 +48,6 @@ t_stat			*lex_init_stat(void)
 	stat->cha = '\0';
 	stat->k = 0;
 	stat->load = NULL;
+	stat->stack = NULL;
 	return (stat);
 }

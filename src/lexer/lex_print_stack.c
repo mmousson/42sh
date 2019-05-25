@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_arith.c                                     :+:      :+:    :+:   */
+/*   lex_print_stack.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/10 12:21:51 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/20 16:53:49 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/18 10:11:50 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/18 21:51:56 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
-#include "libft.h"
+#include "lex.h"
 
-void	expand_arith(t_tok **token)
+void		lex_print_stack(t_st *stack)
 {
-	(*token)->content = ft_strdup("0");
-	(*token)->status = CHA;
+	if (!stack)
+		return ;
+	ft_print_stat_fd(stack->elmt, 1);
+	if (stack->next)
+		ft_putstr(">  <");
+	lex_print_stack(stack->next);
 }

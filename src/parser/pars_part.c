@@ -6,20 +6,20 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:43:04 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/04 16:13:06 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:50:38 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 #include <stdlib.h>
 #include "libft.h"
-#define NB_CHAR_KIND 5
+#define NB_CHAR_KIND 4
 
 static int	is_charkind(int st)
 {
 	int			pos;
 	static int	lst_stat[NB_CHAR_KIND] = {
-		CHA, INT, DOL, DQT, SQT};
+		CHA, DOL, DQT, SQT};
 
 	pos = 0;
 	while (pos < NB_CHAR_KIND)

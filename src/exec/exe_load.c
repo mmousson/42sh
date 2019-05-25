@@ -6,12 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/24 22:23:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 13:55:51 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
 #include <stdlib.h>
+#include "expand.h"
 
 t_io_channels		cmd_red(t_launch *cmd)
 {
@@ -55,8 +56,15 @@ t_process			*load_process(t_launch *cmd, char ***env)
 		return (NULL);
 	if (!(proc = (t_process*)malloc(sizeof(t_process))))
 		return (NULL);
-	proc->next = load_process(cmd->next, env);
+	if (cmd->next)
+	{
+		if (!(proc->next = load_process(cmd->next, env)))
+			return (NULL);
+	}
+	proc->next = NULL;
 	proc->argv = ft_tabdup(cmd->argv);
+	if (expand_manager(&(proc->argv), env))
+		return (NULL);
 	proc->completed = false;
 	proc->stopped = false;
 	proc->valid_to_wait_for = true;
@@ -77,7 +85,9 @@ t_job				*exe_load_job(t_launch *cmd, char ***arge)
 	job->pgid = 0;
 	job->notified = false;
 	job->next = NULL;
-	job->first_process = load_process(cmd, arge);
+	if (!(job->first_process = load_process(cmd, arge)))
+		return (NULL);
+	//job->io_channels = pip_red(job->first_process);
 	job->command = ft_strdup(job->first_process->argv[0]);
 	return (job);	
 }

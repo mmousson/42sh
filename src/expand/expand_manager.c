@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_expend_tool.c                                   :+:      :+:    :+:   */
+/*   expand_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/29 13:56:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/15 17:01:12 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/23 14:52:12 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/25 11:27:28 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
-#include "exe.h"
-#include "libft.h"
-#include <stdlib.h>
+#include "expand.h"
 
-int		is_clean(int val)
+#include "libft.h"
+int		expand_manager(char ***argv, char ***arge)
 {
-	if (val == CHA || val == DQT || val == SQT || val == ESP)
+	int	ret;
+
+	if (!argv || !(*argv))
+		return (1);
+	//if (expand_brace)
+	//
+	//if (expand_tilde)
+	//
+	if ((ret = expand_shell_param(argv, arge)))
+		return (ret);
+	//if (expand_cmd_substitution)
+	//
+	//if (expand_arithmetics)
+	//
+	//if (expand_word_splitting)
+	//
+	//if (expand_filename)
+	//
+	if (expand_quote_removal(argv))
 		return (1);
 	return (0);
-}
-
-char	*ft_doll(t_tree *tree, char **arge)
-{
-	if (!tree || !tree->content || !tree->content[0] || !tree->content[1])
-		return (NULL);
-	return (ft_getenv(arge, &tree->content[1]));
 }

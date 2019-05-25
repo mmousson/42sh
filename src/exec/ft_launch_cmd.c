@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 09:55:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 13:59:51 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static int	handle_logical_operators(void)
 	return (DONT_SKIP_JOB);
 }
 
-void		ft_launch_cmd(t_launch **cmd, char ***arge, int status)
+int			ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 {
 	t_job	*job;
 	int		fg;
@@ -123,7 +123,8 @@ void		ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 		if ((*cmd)->argv)
 		{
 			fg = status == ESP ? BACKGROUND_LAUNCH : FOREGROUND_LAUNCH;
-			job = exe_load_job(*cmd, arge);
+			if (!(job = exe_load_job(*cmd, arge)))
+				return (1);
 			g_current_ret = job_launch(job, fg);
 		}
 	}
@@ -131,4 +132,5 @@ void		ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 	if (!(*cmd = ft_init_cmd(NULL)))
 		exit(1);
 	g_prev_status = status;
+	return (0);
 }
