@@ -29,7 +29,7 @@
 **	Return Value: NONE
 */
 
-static void				pipe_setup(t_process *process)
+static void	pipe_setup(t_process *process)
 {
 	if (process->next)
 	{
@@ -60,10 +60,13 @@ static void				pipe_setup(t_process *process)
 **	Return Value: NONE
 */
 
-static void				pipe_cleanup(t_process *process)
+static void	pipe_cleanup(t_process *process)
 {
 	if (process->io_channels.input != process->real_channels.input)
+	{
+		printf("Closing %d\n", process->io_channels.input);
 		close(process->io_channels.input);
+	}
 	if (process->io_channels.output != process->real_channels.output)
 	{
 		printf("Closing %d\n", process->io_channels.output);
@@ -84,7 +87,7 @@ static void				pipe_cleanup(t_process *process)
 **	Return Value: NONE
 */
 
-int					job_wait_completion(t_job *job, t_process *proc)
+int			job_wait_completion(t_job *job, t_process *proc)
 {
 	t_bool		is_only_builtins;
 	int			ret;
@@ -125,7 +128,7 @@ int					job_wait_completion(t_job *job, t_process *proc)
 **	Return Value: Return value of the last process in the job
 */
 
-int						job_launch(t_job *job, int fg)
+int			job_launch(t_job *job, int fg)
 {
 	t_process	*current_process;
 

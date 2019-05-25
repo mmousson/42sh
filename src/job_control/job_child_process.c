@@ -100,7 +100,7 @@ void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 	t_bool			interactive;
 	t_io_channels	io_chan;
 
-	io_chan = proc->real_channels;
+	io_chan = proc->io_channels;
 	interactive = isatty(0);
 	if (interactive)
 	{
