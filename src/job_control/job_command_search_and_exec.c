@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/24 21:45:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 09:58:26 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	launch_proc(t_job *job, t_process *proc, int fg)
 	pid_t	pid;
 
 	if ((pid = fork()) == 0)
-		job_child_process(job, proc, fg, job->pgid);
+		job_child_process(proc, fg, job->pgid);
 	else if (pid > 0)
 		job_parent_process(job, proc, pid);
 	else

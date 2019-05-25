@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 00:08:53 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 09:55:32 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 struct termios	shell_term_conf;
 int				vi_on = 0;
-uint8_t			current_ret = 0;
-uint8_t			last_ret = 0;
+int16_t			g_current_ret = -1;
+uint8_t			g_last_ret = 0;
 t_vars			*g_shell_var_list = NULL;
 t_job			*g_active_job_list = NULL;
 
@@ -56,8 +56,8 @@ int					main(int argc, char **argv, char **arge_sys)
 		line = line_get_readline(PBASIC, argv[1]);
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 		ret = !lex_str(&line, &env);
-		last_ret = current_ret;
-		current_ret = 0;
+		g_last_ret = g_current_ret;
+		g_current_ret = -1;
 		if (ret && line)
 			ft_strdel(&line);
 		if (!g_env.isatty)

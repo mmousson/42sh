@@ -93,17 +93,14 @@ static void	setup_redirections(int input, int output, int error)
 **	Return Value: NONE
 */
 
-void		job_child_process(t_job *job, t_process *proc, int foreground, pid_t pgid)
+void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 {
 	int				blt_pos;
 	pid_t			child_id;
 	t_bool			interactive;
 	t_io_channels	io_chan;
-	// t_process		*current;
 
-	(void)job;
-	// current = job->first_process;
-	io_chan = proc->io_channels;
+	io_chan = proc->real_channels;
 	interactive = isatty(0);
 	if (interactive)
 	{

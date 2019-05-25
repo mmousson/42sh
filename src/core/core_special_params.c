@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 01:13:45 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/04 00:34:40 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 07:50:58 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,22 @@ t_special_vars	g_spec_vars[16] = {
 **	var -> The character to search the corresponding index of
 **
 **	Return Value:
+**	-1 -> Invalid special var name
 **	0 <= x <= 15 -> The corresponding index in the Special Variables table
 */
 
 int				core_hash_spec_var(char var)
 {
-	if (var >= 0 && var <= 9)
-		return (var - '0');
+	if ((var >= '0' && var <= '9') || var == '?' || var == '$' || var == '_'
+		|| var == '!')
+	{
+		if (var >= 0 && var <= 9)
+			return (var - '0');
+		else
+			return (10 + var % 7);
+	}
 	else
-		return (10 + var % 7);
+		return (-1);
 }
 
 /*
