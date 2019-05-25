@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 00:08:43 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 10:47:02 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ int					blt_history(int argc, char **argv, char ***env);
 **	get_user_home -> utility/get_user_home.c
 **	add_entry_to_environ -> utility/utility_environ_utilities.c
 **	write_alias_list_to_file -> utility/write_alias_list_to_file.c
+**	utility_generate_tmp_filename -> utility/utility_generate_tmp_filename.c
 **	utility_get_var -> utility/utility_get_var.c
 **	utility_set_var -> utility/utility_set_var.c
 **	internal_variable_exists -> utility/internal_variable_exists.c
@@ -217,6 +218,7 @@ void				utility_write_alias_list_to_file(void);
 void				utility_add_entry_to_environ(char ***environ, char *key,
 	char *value);
 int					utility_rm_entry_from_environ(char ***environ, char *key);
+char				*utility_generate_tmp_filename(void);
 char				*utility_get_env_var(char ***environ, char *key);
 int					utility_get_environ_length(char **tab);
 void				utility_add_internal_var(char *name, char *value);

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 21:32:46 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/24 21:37:05 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/25 10:39:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int	utility_file_exists(const char *path)
 {
 	struct stat	buffer;
 
+	if (path == NULL)
+		return (0);
 	return (stat(path, &buffer) == 0);
 }

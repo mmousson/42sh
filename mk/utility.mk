@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 12:03:51 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/25 00:08:48 by mmousson         ###   ########.fr        #
+#    Updated: 2019/05/25 10:46:12 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ UTILITY =	utility_add_internal_var.c			\
 			utility_environ_utilities.c			\
 			utility_file_exists.c				\
 			utility_free_lists.c				\
+			utility_generate_tmp_filename.c		\
 			utility_get_user_home.c				\
 			utility_hash_string.c				\
 			utility_internal_var_exists.c		\
