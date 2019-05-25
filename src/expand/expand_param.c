@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:27:00 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 10:42:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/25 14:36:39 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ char		*expand_param(const char *str, char ***arge, int *end)
 	char	*word;
 	int		k;
 
-	if (!str)
+	if (!str || str[0] != '$')
 		return (NULL);
-	k = 0;
+	k = 1;
 	while (is_char_exp(str[k]))
 		k++;
-	word = ft_strsub(str, 1, k);
+	word = ft_strsub(str, 1, k -1);
 	value = ft_getenv(*arge, word);
 	ft_strdel(&word);
-	*end = k;
+	*end = k - 1;
 	return (value);
 }

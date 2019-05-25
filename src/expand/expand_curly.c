@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 09:18:57 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 11:27:21 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/25 14:36:38 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char		*expand_curly(const char *str, char ***arge, int *end, int *error)
 	*end = k + 1;
 	if (str[k])
 		(*end)++;
-	if (end_var != k)//to adapt with :- :+ ##
+	if (end_var != k)//to adapt with :- :+ ## %%
 	{
 		*error = -1;
 		return (NULL);

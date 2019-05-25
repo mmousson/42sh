@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 13:55:51 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/25 14:53:01 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ t_process			*load_process(t_launch *cmd, char ***env)
 		if (!(proc->next = load_process(cmd->next, env)))
 			return (NULL);
 	}
-	proc->next = NULL;
+	else
+		proc->next = NULL;
 	proc->argv = ft_tabdup(cmd->argv);
 	if (expand_manager(&(proc->argv), env))
 		return (NULL);
@@ -87,7 +88,6 @@ t_job				*exe_load_job(t_launch *cmd, char ***arge)
 	job->next = NULL;
 	if (!(job->first_process = load_process(cmd, arge)))
 		return (NULL);
-	//job->io_channels = pip_red(job->first_process);
 	job->command = ft_strdup(job->first_process->argv[0]);
 	return (job);	
 }

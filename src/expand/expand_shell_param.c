@@ -6,12 +6,21 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:51:24 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 11:27:24 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/25 14:36:36 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "libft.h"
+
+static int		is_doll_exp(char c)
+{
+	if (is_char_exp(c))
+		return (1);
+	if (c == '{')
+		return (1);
+	return (0);
+}
 
 static int		error_substitute(char *str, int j, int end)
 {
@@ -38,7 +47,7 @@ static int		expand_one_param(char **str, int *j, char ***arge)
 	if ((*str)[*j + 1] == '{')
 		expand = expand_curly((*str) + *j + 2, arge, &end, &error);
 	else
-		expand = expand_param((*str) + *j + 1, arge, &end);
+		expand = expand_param((*str) + *j, arge, &end);
 	if (error)
 		return (error_substitute(*str, *j, end));
 	if (insert_word(str, expand, *j, end))
@@ -66,7 +75,7 @@ static int		expand_param_word(char **str, char ***arge)
 			state--;
 		else if (c == '\\')
 			state ++;
-		else if (c == '$' && !state)
+		else if (c == '$' && !state && is_doll_exp((*str)[j + 1]))
 		{
 			if ((ret = expand_one_param(str, &j, arge)))
 				return (ret);
