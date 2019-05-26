@@ -17,9 +17,6 @@
 
 int			is_char_exp(char c)
 {
-	int			k;
-
-	k = 0;
 	if (!c)
 		return (0);
 	if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_'

@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifdef __linux__
+
+# include <sys/random.h>
+#endif
+
 #include <unistd.h>
 #include <sys/syscall.h>
 #include <stdio.h>
@@ -42,7 +47,11 @@ static char	*next_permutation(const char *base)
 		return (NULL);
 	}
 	ft_strcpy(new, base);
+	#ifdef __linux__
+	getentropy(&next_suffix, 1);
+	#else
 	syscall(SYS_getentropy, &next_suffix, 1);
+	#endif
 	new[len] = (ft_abs(next_suffix) % 40) + 42;
 	return (new);
 }

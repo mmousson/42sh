@@ -29,6 +29,13 @@ vpath %.c $(dir MAKEFILE_LIST)
 CFLAGS = -g3 -Wall -Wextra -Werror -I./includes -I./includes/builtins -I./libft/includes -Wno-deprecated
 CPPFLAGS += -MMD -MP
 OBJDIR = .o
+UNAME = $(shell uname)
+ifeq ($(UNAME), Linux)
+	DECODE64_FLAG = -d
+else
+	DECODE64_FLAG = -d
+endif
+ALIAS_LIST = "bHM9bHMgLUcKbD1scyAtbGFoCmxsPWxzIC1saApncmVwICAtLWNvbG9yPWF1dG8gLS1leGNsdWRlLWRpcj17LmJ6cixDVlMsLmdpdCwuaGcsLnN2bn0KLT1jZCAtCi4uLj0uLi8uLgouLi4uPS4uLy4uLy4uCi4uLi4uPS4uLy4uLy4uLy4uCi4uLi4uLj0uLi8uLi8uLi8uLi8uLgoxPWNkIC0KMj1jZCAtMgozPWNkIC0zCjQ9Y2QgLTQKNT1jZCAtNQo2PWNkIC02Cjc9Y2QgLTcKOD1jZCAtOAo5PWNkIC05CmdjYj1naXQgY2hlY2tvdXQgLWIKZ2NkPWdpdCBjaGVja291dCBkZXZlbG9wCmdjZj1nY2MgLVdhbGwgLVdleHRyYSAtV2Vycm9yCmdjbD1naXQgY2xvbmUgLS1yZWN1cnNlLXN1Ym1vZHVsZXMKZ2NsZWFuPWdpdCBjbGVhbiAtZmQKZ2NtPWdpdCBjaGVja291dCBtYXN0ZXIKZ2Ntc2c9Z2l0IGNvbW1pdCAtbQo="
 
 NAME = 42sh
 
@@ -46,6 +53,7 @@ $(NAME): $(OBJS)
 		$(CC) $(OBJS) -o $(NAME) $(LIBSFOLDERS) $(LIBS) -ltermcap; \
 		printf "\033[1;36m\n[42SH COMPILATION SUCCESSFUL]\033[0m\n"; \
 	fi;
+	@echo $(ALIAS_LIST) | base64 $(DECODE64_FLAG) > ~/.42sh_aliases
 	@$(RM) files_missing
 
 $(OBJDIR):
