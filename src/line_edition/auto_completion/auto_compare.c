@@ -12,7 +12,7 @@
 
 #include "line_edition.h"
 
-int				auto_comproot(void)
+int				auto_comproot(int back)
 {
 	char		*tmp_root;
 	char		*tmp_var;
@@ -29,10 +29,10 @@ int				auto_comproot(void)
 	}
 	ft_strdel(&tmp_var);
 	ft_strdel(&tmp_root);
-	return (auto_choose());
+	return (auto_choose(back));
 }
 
-int				auto_compath(void)
+int				auto_compath(int back)
 {
 	char		*tmp_root;
 	char		*tmp_path;
@@ -50,5 +50,21 @@ int				auto_compath(void)
 	}
 	ft_strdel(&tmp_root);
 	ft_strdel(&tmp_path);
-	return (auto_choose());
+	return (auto_choose(back));
+}
+
+int				auto_compoption(int back)
+{
+	char			*tmp_root;
+
+	tmp_root = auto_getroot();
+	if (ft_strcmp(tmp_root, g_data.root))
+	{
+		auto_free();
+		auto_filldata();
+		ft_strdel(&tmp_root);
+		return (auto_printword());
+	}
+	ft_strdel(&tmp_root);
+	return (auto_choose(back));
 }

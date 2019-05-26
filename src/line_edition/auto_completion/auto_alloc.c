@@ -69,15 +69,23 @@ char				*auto_getroot(void)
 {
 	int				i;
 	char			*root;
+	int				si;
 
 	i = g_env.cm->pos - 1;
-	while (i - g_env.p_size + 1
-			&& !auto_newtoken(g_env.line[i], g_env.line[i - 1])
-			&& !auto_ispathcarac(g_env.line[i])
-			&& !auto_isvar(g_env.line[i], g_env.line[i - 1]))
+	while (i - g_env.p_size + 1 && auto_ischar(g_env.line[i], g_env.line[i - 1]))
 		i--;
 	if (!(root = ft_strsub(g_env.line, i + 1, g_env.cm->pos - i - 1)))
 		sh_errorterm(TMALLOC);
+	if (auto_isoption(g_env.line[i], g_env.line[i - 1]))
+	{
+		i -= 2;
+		si = i;
+		while (i - g_env.p_size + 1 && !auto_newtoken(g_env.line[i], g_env.line[i - 1]))
+			i--;
+		if (!(g_data.com_option = ft_strsub(g_env.line, i, si - i)))
+			sh_errorterm(TMALLOC);
+		g_data.com_option = auto_delbs(&g_data.com_option);
+	}
 	return (auto_delbs(&root));
 }
 
@@ -88,10 +96,7 @@ char				*auto_getvar(void)
 
 	var = NULL;
 	i = g_env.cm->pos - 1;
-	while (i - g_env.p_size + 1
-			&& !auto_newtoken(g_env.line[i], g_env.line[i - 1])
-			&& !auto_ispathcarac(g_env.line[i])
-			&& !auto_isvar(g_env.line[i], g_env.line[i - 1]))
+	while (i - g_env.p_size + 1 && auto_ischar(g_env.line[i], g_env.line[i - 1]))
 		i--;
 	if (g_env.line[i] == '{' && g_env.line[i - 1] == '$')
 		var = ft_strsub(g_env.line, i - 1, 2);

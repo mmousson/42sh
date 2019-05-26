@@ -52,6 +52,7 @@ void				sh_errorterm(t_error error)
 		sh_switch_term(1);
 		close(g_env.t_fd);
 	}
+	auto_free();
 	line_delenv();
 	exit(error);
 }

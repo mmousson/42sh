@@ -12,42 +12,69 @@
 
 #include "line_edition.h"
 
-int				auto_option(void)
+int				auto_return(void)
+{
+	t_lstword	*tmp;
+
+	g_data.status = 0;
+	tmp = g_data.lw;
+	while (g_data.lw)
+	{
+		if (g_data.lw->select)
+		{
+			if (g_data.lw->type != 9 && g_data.lw->type != 14)
+				line_paste(" ", 1);
+			g_data.lw = tmp;
+			auto_free();
+			return (1);
+		}
+		g_data.lw = g_data.lw->next;
+	}
+	g_data.lw = tmp;
+	auto_free();
+	return (1);
+}
+
+static int			auto_option(int back)
 {
 	if (g_data.status == 1)
 	{
 		if (g_data.type == 1)
-			auto_compath();
+			auto_compath(back);
 		else if (g_data.type == 0 || g_data.type == 2)
-			auto_comproot();
+			auto_comproot(back);
 	}
 	else if (g_data.status == 2)
-		return (auto_choose());
+		return (auto_choose(back));
 	else
 		return (0);
 	return (1);
 }
 
-int				auto_completion(char *str, int ret)
+static int			auto_manager(int back)
 {
 	int			tmp;
 
-	if (str[0] == '\t' && ret == 1)
-	{
-		tmp = auto_getype();
-		if (g_data.status != 2 && tmp != g_data.type)
-			auto_free();
-		if (auto_isblank())
-			line_paste("    ", g_env.count);
-		else if (auto_option())
-			return (1);
-		else
-		{
-			auto_filldata();
-			return (auto_printword());
-		}
-	}
+	tmp = auto_getype();
+	if (g_data.status != 2 && tmp != g_data.type)
+		auto_free();
+	if (auto_isblank())
+		line_paste("    ", g_env.count);
+	else if (auto_option(back))
+		return (1);
 	else
-		return (0);
+	{
+		auto_filldata();
+		return (auto_printword());
+	}
 	return (1);
+}
+
+int				auto_completion(char *str, int ret)
+{
+	if (str[0] == '\t' && ret == 1)
+		return (auto_manager(0));
+	else if (auto_istabshift(str, ret))
+		return (auto_manager(1));
+	return (0);
 }

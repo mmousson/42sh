@@ -21,21 +21,11 @@ t_lstword		*auto_new_lstword(void)
 	return (lstword);
 }
 
-static int		auto_check_double(char *name)
+static void		auto_lstword_quit(t_lstword **tmp, char **name)
 {
-	t_lstword	*tmp;
-
-	tmp = g_data.lw;
-	while (g_data.lw->next)
-	{
-		if (!(ft_strcmp(g_data.lw->name, name)))
-		{
-			g_data.lw = tmp;
-			return (1);
-		}
-		g_data.lw = g_data.lw->next;
-	}
-	return (0);
+	g_data.lw = *tmp;
+	ft_strdel(name);
+	sh_errorterm(TMALLOC);
 }
 
 static void		auto_add_lstword(char *orignal, char **name, int index)
@@ -46,18 +36,11 @@ static void		auto_add_lstword(char *orignal, char **name, int index)
 	if (auto_check_double(*name))
 		return ;
 	if (!(g_data.lw->next = (t_lstword*)ft_memalloc(sizeof(t_lstword))))
-	{
-		g_data.lw = tmp;
-		auto_free_lstword(g_data.lw);
-		sh_errorterm(TMALLOC);
-	}
-	if (!(g_data.lw->next->name = auto_alloc_name(name)))
-	{
-		g_data.lw = tmp;
-		auto_free_lstword(g_data.lw);
-		sh_errorterm(TMALLOC);
-	}
-	g_data.lw->next->len = (int)ft_strlen(g_data.lw->next->name);
+		auto_lstword_quit(&tmp, name);
+	if (!(g_data.lw->next->name = (t_name*)ft_memalloc(sizeof(t_name))))
+		auto_lstword_quit(&tmp, name);
+	g_data.lw->next->name->name = auto_alloc_name(name);
+	g_data.lw->next->len = (int)ft_strlen(g_data.lw->next->name->name);
 	g_data.lw->next->type = auto_getstatype(orignal,
 			&g_data.lw->next->carac, index);
 	if (g_data.lw->next->type != 7 && g_data.lw->type != 14)
@@ -65,18 +48,16 @@ static void		auto_add_lstword(char *orignal, char **name, int index)
 	g_data.lw = tmp;
 }
 
-void			auto_lstword(char *orignal, char **name, int index)
+void		auto_lstword(char *orignal, char **name, int index)
 {
 	if (!g_data.lw)
 		return ;
 	if (!g_data.lw->name)
 	{
-		if (!(g_data.lw->name = auto_alloc_name(name)))
-		{
-			auto_free_lstword(g_data.lw);
-			sh_errorterm(TMALLOC);
-		}
-		g_data.lw->len = (int)ft_strlen(g_data.lw->name);
+		if (!(g_data.lw->name = (t_name*)ft_memalloc(sizeof(t_name))))
+			auto_lstword_quit(&g_data.lw, name);
+		g_data.lw->name->name = auto_alloc_name(name);
+		g_data.lw->len = (int)ft_strlen(g_data.lw->name->name);
 		g_data.lw->type = auto_getstatype(orignal,
 				&g_data.lw->carac, 0);
 		if (g_data.lw->type != 7 && g_data.lw->type != 14)
@@ -84,8 +65,19 @@ void			auto_lstword(char *orignal, char **name, int index)
 	}
 	else
 	{
-		if (!g_data.lw->next && !ft_strcmp(g_data.lw->name, *name))
+		if (!g_data.lw->next && !ft_strcmp(g_data.lw->name->name, *name))
 			return ;
 		auto_add_lstword(orignal, name, index);
 	}
+}
+
+void			auto_lstmanager(struct dirent *dt, int i)
+{
+	char		*name;
+
+	if (!(name = ft_strdup(dt->d_name)))
+		sh_errorterm(TMALLOC);
+	if (auto_checkroot(dt->d_name, g_data.root))
+		auto_lstword(dt->d_name, &name, i);
+	ft_strdel(&name);
 }

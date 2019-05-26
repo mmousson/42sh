@@ -19,7 +19,11 @@ void						auto_free_lstword(t_lstword *lw)
 	if (lw->next)
 		auto_free_lstword(lw->next);
 	if (lw->name)
-		ft_strdel(&(lw->name));
+	{
+		ft_strdel(&(lw->name->name));
+		ft_strdel(&(lw->name->desc));
+		ft_memdel((void**)&lw->name);
+	}
 	ft_memdel((void**)&lw);
 }
 
@@ -29,6 +33,7 @@ void						auto_free(void)
 	ft_del_words_tables(&g_data.path);
 	ft_strdel(&g_data.root);
 	ft_strdel(&g_data.var);
+	ft_strdel(&g_data.com_option);
 	ft_bzero(&g_data, sizeof(t_autodata));
 	g_data.lw = NULL;
 }

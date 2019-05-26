@@ -73,6 +73,7 @@ AUTOCMP =	auto_main.c				\
 			auto_alloc.c			\
 			auto_alloc_space.c		\
 			auto_alloc_wordlst.c	\
+			auto_alloc_option.c		\
 			auto_print.c			\
 			auto_choose.c			\
 			auto_termcaps.c			\
@@ -80,7 +81,12 @@ AUTOCMP =	auto_main.c				\
 			auto_swap.c				\
 			auto_free.c				\
 			auto_printvar.c			\
-			auto_compare.c
+			auto_printoption.c		\
+			auto_compare.c			\
+			auto_istype.c			\
+			auto_calclen.c			\
+			auto_sort.c			\
+			option_text/ls.c
 
 SIGNAL = 	signal_func.c			\
 			signal_handler.c

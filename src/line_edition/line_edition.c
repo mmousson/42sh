@@ -71,11 +71,7 @@ int					line_update(char *str, int ret)
 
 	if (!str)
 		return (0);
-	if (g_data.status == 2 && str[0] != '\t' && str[0] != '\n')
-	{
-		auto_free();
-		ft_bzero(&g_data, sizeof(t_autodata));
-	}
+	auto_keep_comp(str, ret);
 	vi_init_undo();
 	g_env.len = (int)ft_strlen(g_env.line) + 1;
 	cap = line_choose_mode(str, ret);
