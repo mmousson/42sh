@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 11:04:39 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/15 16:34:54 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:29:48 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		pars_error(int type)
 {
 	static char	*error[NB_PR] = {"arg", "`;'", "red", "`|'", "space", "`\\n'"};
 
-	ft_putstr_fd("21sh: parse error near ", 2);
+	ft_putstr_fd("42sh: parse error near ", 2);
 	if (type > 0 || type < NB_PR)
 		ft_putstr_fd(error[type], 2);
 	else

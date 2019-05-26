@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:22:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/08 18:23:00 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:27:49 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		error_open(char *str)
 {
-	ft_putstr_fd("21sh: cannot open file: ", 2);
+	ft_putstr_fd("42sh: cannot open file: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
 	return (1);

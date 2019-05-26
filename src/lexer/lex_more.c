@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/19 17:15:00 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/26 19:16:29 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		ft_nomatch(int status, char *fus, t_stat *stat)
 {
 	if (fus)
 		free(fus);
-	ft_putstr_fd("21sh: unexpected EOF while looking for matching `", 2);
+	ft_putstr_fd("42sh: unexpected EOF while looking for matching `", 2);
 	if (status == DQ)
 		ft_putstr_fd("\"", 2);
 	else if (status == SQ)
@@ -63,6 +63,25 @@ static int		ft_append_nl(char **str, int nl)
 	return (0);
 }
 
+static void		in_back_slash_case(t_stat *stat, char **str, int *nl)
+{
+	int			k;
+
+	k = 0;
+	if (stat->old_status == BS)
+	{
+		*nl = 0;
+		if (str && *str)
+		{
+			while ((*str)[k] && (*str)[k + 1])
+				k++;
+			(*str)[k] = 0;
+			stat->k --;
+			stat->old_status = stat->older_status;
+		}
+	}
+}
+
 int				lex_more(t_stat *stat, char **str, int nl)
 {
 	char		*fus;
@@ -71,10 +90,12 @@ int				lex_more(t_stat *stat, char **str, int nl)
 
 	prompt = get_prompt(stat->old_status);
 	fus = NULL;
+	in_back_slash_case(stat, str, &nl);
 	while (!fus)
 	{
-		fus = line_get_readline(prompt, NULL);
-		if ((fus == NULL || fus[0] == 0) && g_env.ctrld)
+		if (g_env.isatty)
+			fus = line_get_readline(prompt, NULL);
+		if (((fus == NULL || fus[0] == 0) && g_env.ctrld) || !g_env.isatty)
 			return (ft_nomatch(stat->old_status, fus, stat));
 		if (ft_append_nl(str, nl))
 			return (0);

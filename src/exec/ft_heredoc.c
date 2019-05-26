@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 01:06:53 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/20 20:56:36 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/26 17:26:50 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_launch_here(char *end, int fd)
 
 	stop = 0;
 	line = NULL;
-	while ((!line || !end || ft_strcmp(line, end)) && !stop)
+	while ((!line || !end || ft_strcmp(line, end)) && !stop && g_env.isatty)
 	{
 		if (line)
 		{
