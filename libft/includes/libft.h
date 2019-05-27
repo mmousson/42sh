@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 02:11:28 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/08 10:03:48 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/27 20:24:19 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <string.h>
 
 # define BUFF_SIZE 1664
+# define FT_ARG1 0x01
+# define FT_ARG2 0x02
+# define FT_ARG3 0x04
+# define FT_ARG4 0x08
 
 char				*ft_strapp(char *str, char c);
 int					ft_putchar(wchar_t ch);
@@ -125,5 +129,23 @@ double				ft_dmax(int count, ...);
 int					ft_clamp(int x, int low, int high);
 double				ft_fabs(double x);
 int					ft_count_n(int nbr);
+
+/* 
+** Libft hben-yah
+*/
+
+char				*ft_strimplodef(char **tab, char delim);
+void				ft_tabdel(void ***tab);
+void				ft_strtabdel(char ***tab);
+int					ft_strtabadd(char ***tab, char *new);
+char				*ft_strjoinfs(char *s1, char *s2, char flag);
+char				*ft_strrmvfirst(char *s);
+size_t				ft_tabstrlen(char **tab, size_t *i);
+size_t				ft_strlcpy(char *dst, const char *src, size_t size);
+char				*ft_strmove(char *dst, const char *src);
+size_t				ft_tablen(void **tab);
+void				**ft_tabrealloc(void **tab, size_t len);
+void				**ft_taballoc(size_t len);
+size_t				ft_tablcpy(void **dst, void **src, size_t size);
 
 #endif

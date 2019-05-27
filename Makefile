@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
+#    By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/25 13:54:15 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/05/27 19:38:14 by hben-yah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ UNAME = $(shell uname)
 ifeq ($(UNAME), Linux)
 	DECODE64_FLAG = -d
 else
-	DECODE64_FLAG = -d
+	DECODE64_FLAG = -D
 endif
 ALIAS_LIST = "bHM9bHMgLUcKbD1scyAtbGFoCmxsPWxzIC1saApncmVwICAtLWNvbG9yPWF1dG8gLS1leGNsdWRlLWRpcj17LmJ6cixDVlMsLmdpdCwuaGcsLnN2bn0KLT1jZCAtCi4uLj0uLi8uLgouLi4uPS4uLy4uLy4uCi4uLi4uPS4uLy4uLy4uLy4uCi4uLi4uLj0uLi8uLi8uLi8uLi8uLgoxPWNkIC0KMj1jZCAtMgozPWNkIC0zCjQ9Y2QgLTQKNT1jZCAtNQo2PWNkIC02Cjc9Y2QgLTcKOD1jZCAtOAo5PWNkIC05CmdjYj1naXQgY2hlY2tvdXQgLWIKZ2NkPWdpdCBjaGVja291dCBkZXZlbG9wCmdjZj1nY2MgLVdhbGwgLVdleHRyYSAtV2Vycm9yCmdjbD1naXQgY2xvbmUgLS1yZWN1cnNlLXN1Ym1vZHVsZXMKZ2NsZWFuPWdpdCBjbGVhbiAtZmQKZ2NtPWdpdCBjaGVja291dCBtYXN0ZXIKZ2Ntc2c9Z2l0IGNvbW1pdCAtbQo="
 

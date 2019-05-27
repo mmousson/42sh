@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
+#    By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/07 00:53:31 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/08 10:03:04 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/05/27 20:24:47 by hben-yah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,18 @@ SRC =	ft_memset.c				\
 		get_line.c				\
 		ft_del_words_tables.c	\
 		ft_print_words_tables.c	\
-		get_next_line.c
+		get_next_line.c			\
+		ft_strimplode.c			\
+		ft_strjoinfs.c			\
+		ft_strrmvfirst.c		\
+		ft_tabadd.c				\
+		ft_tabdel.c				\
+		ft_tablen.c				\
+		ft_strlcpy.c			\
+		ft_strmove.c			\
+		ft_tabrealloc.c			\
+		ft_taballoc.c			\
+		ft_tablcpy.c
 
 OBJ = $(subst .c,.o,$(addprefix ./$(OBJDIR)/,$(SRC)))
 DEPS = $(subst .c,.d,$(addprefix ./$(OBJDIR)/,$(SRC)))

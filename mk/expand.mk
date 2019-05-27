@@ -16,7 +16,8 @@ EXPAND_NAME =	expand_manager.c			\
 				expand_param.c				\
 				expand_curly.c				\
 				expand_insert_word.c		\
-				expand_quote_removal.c
+				expand_quote_removal.c		\
+				expand_filename.c
 
 EXPAND_SRCS = $(addprefix $(EXPAND_PATH),$(EXPAND_NAME))
 SRCS += $(EXPAND_SRCS)

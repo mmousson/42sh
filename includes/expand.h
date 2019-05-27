@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 12:03:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 11:27:23 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/27 19:11:25 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPAND_H
 # define EXPAND_H
 
+int		expand_filename(char **path);
 int		expand_manager(char ***argv, char ***arge);
 int		expand_quote_removal(char ***argv);
 int		expand_shell_param(char ***argv, char ***arge);
