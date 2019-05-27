@@ -1,0 +1,1 @@
+echo ok${PWD:+IN${TERM:+tepp${HOME}--}${HOME}}ls

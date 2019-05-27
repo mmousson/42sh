@@ -6,18 +6,18 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:51:24 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 14:36:36 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/27 20:03:51 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "libft.h"
 
-static int		is_doll_exp(char c)
+int				is_doll_exp(char c)
 {
 	if (is_char_exp(c))
 		return (1);
-	if (c == '{')
+	if (c == '{' || c == '$' || c == '!' || c == '?')
 		return (1);
 	return (0);
 }
@@ -60,7 +60,7 @@ static int		expand_one_param(char **str, int *j, char ***arge)
 	return (0);
 }
 
-static int		expand_param_word(char **str, char ***arge)
+int				expand_param_word(char **str, char ***arge)
 {
 	char		c;
 	int			state;
