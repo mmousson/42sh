@@ -56,15 +56,19 @@ int				auto_compath(int back)
 int				auto_compoption(int back)
 {
 	char			*tmp_root;
+	char			*tmp_comoption;
 
 	tmp_root = auto_getroot();
-	if (ft_strcmp(tmp_root, g_data.root))
+	tmp_comoption = auto_getcomoption();
+	if (ft_strcmp(tmp_root, g_data.root) || ft_strcmp(tmp_comoption, g_data.com_option))
 	{
 		auto_free();
 		auto_filldata();
 		ft_strdel(&tmp_root);
+		ft_strdel(&tmp_comoption);
 		return (auto_printword());
 	}
 	ft_strdel(&tmp_root);
+	ft_strdel(&tmp_comoption);
 	return (auto_choose(back));
 }

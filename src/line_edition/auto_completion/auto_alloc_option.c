@@ -16,7 +16,7 @@ static void		auto_add_lstoption(char **name, char **desc)
 		sh_errorterm(TMALLOC);
 	g_data.lw->next->name->name = *name;
 	g_data.lw->next->name->desc = *desc;
-	g_data.lw->next->len = (int)ft_strlen(g_data.lw->name->name);
+	g_data.lw->next->len = (int)ft_strlen(*name) + (int)ft_strlen(*desc);
 	g_data.lw->next->type = 7;
 	g_data.lw = tmp;
 }
@@ -31,7 +31,7 @@ void			auto_lstoption(char **name, char **desc)
 			sh_errorterm(TMALLOC);
 		g_data.lw->name->name = *name;
 		g_data.lw->name->desc = *desc;
-		g_data.lw->len = (int)ft_strlen(g_data.lw->name->name);
+		g_data.lw->len = (int)ft_strlen(*name) + (int)ft_strlen(*desc);
 		g_data.lw->type = 7;
 	}
 	else

@@ -86,7 +86,8 @@ AUTOCMP =	auto_main.c				\
 			auto_istype.c			\
 			auto_calclen.c			\
 			auto_sort.c			\
-			option_text/ls.c
+			auto_fill_struct.c		\
+			auto_replace.c
 
 SIGNAL = 	signal_func.c			\
 			signal_handler.c

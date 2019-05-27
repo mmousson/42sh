@@ -1,4 +1,3 @@
-
 #include "line_edition.h"
 
 static void		auto_calclstlen(void)
@@ -25,8 +24,6 @@ static void		auto_calc_cor(void)
 	g_data.y = (int)(g_data.lenlst / g_data.wordpline) + k;
 	g_data.x = k ? g_data.lenlst % g_data.wordpline : g_data.wordpline;
 	g_data.x = g_data.x * (g_data.lenmax + 2);
-
-	
 }
 
 void			auto_calclen(void)

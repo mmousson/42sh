@@ -18,7 +18,7 @@ int				auto_return(void)
 
 	g_data.status = 0;
 	tmp = g_data.lw;
-	while (g_data.lw)
+	while (g_data.lw && g_data.type != 3)
 	{
 		if (g_data.lw->select)
 		{
@@ -43,6 +43,8 @@ static int			auto_option(int back)
 			auto_compath(back);
 		else if (g_data.type == 0 || g_data.type == 2)
 			auto_comproot(back);
+		else if (g_data.type == 3)
+			auto_compoption(back);
 	}
 	else if (g_data.status == 2)
 		return (auto_choose(back));

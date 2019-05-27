@@ -20,7 +20,7 @@ void				auto_sort(void)
 	t_lstword		*min;
 
 	tmp = g_data.lw;
-	if (!g_data.lw || !g_data.lw->next)
+	if (!g_data.lw || !g_data.lw->next || g_data.type == 3)
 		return ;
 	while (g_data.lw->next)
 	{

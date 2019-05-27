@@ -42,6 +42,8 @@ static void			auto_printprint(void)
 	auto_print_select();
 	auto_print_color();
 	ft_putstr(g_data.lw->name->name);
+	if (g_data.lw->name->desc)
+		ft_putstr(g_data.lw->name->desc);
 	tputs(g_env.tc->me, 1, ft_putchar);
 	auto_print_select();
 	if (g_data.lw->type != 7)

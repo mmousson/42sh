@@ -12,27 +12,6 @@
 
 #include "line_edition.h"
 
-static void		auto_replace(char *str, int type)
-{
-	int			size;
-	int			i;
-
-	i = g_data.spos - 1;
-	while (i - g_env.p_size + 1 && auto_ischar(g_env.line[i], g_env.line[i - 1]))
-		i--;
-	size = g_env.cm->pos - i - 1;
-	if (size)
-	{
-		g_env.line = line_delchar(size);
-		line_cursor_motion(MLEFT, size);
-	}
-	line_paste(str, 1);
-	if (type == 9 || type == 14)
-		line_paste("/", 1);
-	else if (g_data.var && (int)ft_strlen(g_data.var) == 2)
-		line_paste("}", 1);
-}
-
 static void			auto_choose_select(int back)
 {
 	g_data.lw->select = back;
@@ -40,9 +19,7 @@ static void			auto_choose_select(int back)
 	if (!back)
 		auto_replace(g_data.lw->next->name->name, g_data.lw->next->type);
 	else
-	{
 		auto_replace(g_data.lw->name->name, g_data.lw->type);
-	}
 }
 
 static void			auto_choose_back(int back)

@@ -17,6 +17,8 @@ int				auto_lenrootwbs(void)
 	int			i;
 	int			count;
 
+	if (g_data.type == 3)
+		return (1);
 	i = g_env.cm->pos - 1;
 	count = 0;
 	while (i - g_env.p_size + 1 && auto_ischar(g_env.line[i], g_env.line[i + 1]))

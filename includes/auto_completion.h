@@ -15,7 +15,7 @@
 
 # include <dirent.h>
 
-# define COMWOPT 2
+# define COMWOPT 24 + 1
 
 
 typedef struct			s_name
@@ -82,6 +82,7 @@ void					auto_filldata(void);
 char					*auto_getpath(void);
 char					*auto_getroot(void);
 char					*auto_getvar(void);
+char					*auto_getcomoption(void);
 char					*auto_alloc_name(char **str);
 void					auto_lstoption(char **name, char **desc);
 
@@ -123,6 +124,7 @@ int						auto_compoption(int back);
 
 int						auto_choose(int back);
 int						auto_return(void);
+void						auto_replace(char *str, int type);
 
 /*
 **	termcaps
@@ -135,5 +137,29 @@ void					auto_print_color(void);
 **	option_text
 */
 
-void					auto_ls(int index, char **name, char **desc, int *loop);
+int					auto_ls(int index, char **name, char **desc);
+int					auto_cat(int index, char **name, char **desc);
+int					auto_date(int index, char **name, char **desc);
+int					auto_chmod(int index, char **name, char **desc);
+int					auto_cp(int index, char **name, char **desc);
+int					auto_df(int index, char **name, char **desc);
+int					auto_echo(int index, char **name, char **desc);
+int					auto_kill(int index, char **name, char **desc);
+int					auto_ln(int index, char **name, char **desc);
+int					auto_mkdir(int index, char **name, char **desc);
+int					auto_pax(int index, char **name, char **desc);
+int					auto_ps(int index, char **name, char **desc);
+int					auto_rm(int index, char **name, char **desc);
+int					auto_stty(int index, char **name, char **desc);
+int					auto_cd(int index, char **name, char **desc);
+int					auto_type(int index, char **name, char **desc);
+int					auto_export(int index, char **name, char **desc);
+int					auto_set(int index, char **name, char **desc);
+int					auto_unset(int index, char **name, char **desc);
+int					auto_jobs(int index, char **name, char **desc);
+int					auto_history(int index, char **name, char **desc);
+int					auto_unalias(int index, char **name, char **desc);
+int					auto_test(int index, char **name, char **desc);
+int					auto_hash(int index, char **name, char **desc);
+
 #endif

@@ -19,6 +19,7 @@ include mk/exec.mk
 include mk/line_edition.mk
 include mk/utility.mk
 include mk/history.mk
+include mk/option.mk
 
 CC = gcc
 LIBFT = libft

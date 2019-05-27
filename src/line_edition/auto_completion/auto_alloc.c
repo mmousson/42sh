@@ -69,24 +69,35 @@ char				*auto_getroot(void)
 {
 	int				i;
 	char			*root;
-	int				si;
 
 	i = g_env.cm->pos - 1;
 	while (i - g_env.p_size + 1 && auto_ischar(g_env.line[i], g_env.line[i - 1]))
 		i--;
 	if (!(root = ft_strsub(g_env.line, i + 1, g_env.cm->pos - i - 1)))
 		sh_errorterm(TMALLOC);
-	if (auto_isoption(g_env.line[i], g_env.line[i - 1]))
-	{
-		i -= 2;
-		si = i;
-		while (i - g_env.p_size + 1 && !auto_newtoken(g_env.line[i], g_env.line[i - 1]))
-			i--;
-		if (!(g_data.com_option = ft_strsub(g_env.line, i, si - i)))
-			sh_errorterm(TMALLOC);
-		g_data.com_option = auto_delbs(&g_data.com_option);
-	}
 	return (auto_delbs(&root));
+}
+
+char				*auto_getcomoption(void)
+{
+	int			i;
+	int			si;
+	char			*com;
+
+	i = g_env.cm->pos - 1;
+	while (i - g_env.p_size + 1 && !auto_isoption(g_env.line[i], g_env.line[i - 1]))
+		i--;
+	if (g_env.line[i] != '-')
+		return (NULL);
+	i--;
+	while (i - g_env.p_size + 1 && g_env.line[i] == ' ')
+		i--;
+	si = i;
+	while (i - g_env.p_size + 1 && !auto_newtoken(g_env.line[i], g_env.line[i - 1]))
+		i--;
+	if (!(com = ft_strsub(g_env.line, i + 1, si - i)))
+		sh_errorterm(TMALLOC);
+	return (auto_delbs(&com));
 }
 
 char				*auto_getvar(void)
@@ -103,24 +114,4 @@ char				*auto_getvar(void)
 	else if (g_env.line[i] == '$')
 		var = ft_strdup("$");
 	return (var);
-}
-
-void				auto_filldata(void)
-{
-	char			*path;
-
-	path = NULL;
-	g_data.type = auto_getype();
-	g_data.root = auto_getroot();
-	g_data.var = auto_getvar();
-	if (g_data.type)
-		path = auto_getpath();
-	else if (g_data.type == 0)
-		path = getenv("PATH");
-	if (!path || !(g_data.path = ft_strsplit(path, ':')))
-		return ;
-	if (g_data.type)
-		ft_strdel(&path);
-	g_data.lw = auto_new_lstword();
-	g_data.spos = g_env.cm->pos;
 }

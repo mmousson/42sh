@@ -38,7 +38,8 @@ int				auto_getype(void)
 	while (i - g_env.p_size + 1 && g_env.line[i] == ' ')
 		i--;
 	if (i - g_env.p_size + 1 && (ft_isalpha(g_env.line[i])
-			|| (auto_ispathcarac(g_env.line[i]))))
+			|| auto_ispathcarac(g_env.line[i])
+			|| auto_isoption(g_env.line[i], g_env.line[i + 1])))
 		return (1);
 	return (0);
 }
