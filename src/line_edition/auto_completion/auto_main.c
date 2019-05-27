@@ -6,85 +6,77 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 16:52:20 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/24 10:08:16 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 18:30:35 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static int		auto_comproot(void)
+int				auto_return(void)
 {
-	char		*tmp_root;
+	t_lstword	*tmp;
 
-	tmp_root = auto_getroot();
-	if (ft_strcmp(tmp_root, g_data.root))
+	g_data.status = 0;
+	tmp = g_data.lw;
+	while (g_data.lw && g_data.type != 3)
 	{
-		auto_free();
-		auto_filldata();
-		ft_strdel(&tmp_root);
-		return (auto_printword());
+		if (g_data.lw->select)
+		{
+			if (g_data.lw->type != 9 && g_data.lw->type != 14)
+				line_paste(" ", 1);
+			g_data.lw = tmp;
+			auto_free();
+			return (1);
+		}
+		g_data.lw = g_data.lw->next;
 	}
-	ft_strdel(&tmp_root);
-	return (auto_choose());
+	g_data.lw = tmp;
+	auto_free();
+	return (1);
 }
 
-static int		auto_compath(void)
-{
-	char		*tmp_root;
-	char		*tmp_path;
-
-	tmp_root = auto_getroot();
-	tmp_path = auto_getpath();
-	if (ft_strcmp(tmp_root, g_data.root)
-			|| ft_strcmp(tmp_path, g_data.path[0]))
-	{
-		auto_free();
-		auto_filldata();
-		ft_strdel(&tmp_root);
-		ft_strdel(&tmp_path);
-		return (auto_printword());
-	}
-	ft_strdel(&tmp_root);
-	ft_strdel(&tmp_path);
-	return (auto_choose());
-}
-
-int				auto_option(void)
+static int			auto_option(int back)
 {
 	if (g_data.status == 1)
 	{
 		if (g_data.type == 1)
-			auto_compath();
+			auto_compath(back);
 		else if (g_data.type == 0 || g_data.type == 2)
-			auto_comproot();
+			auto_comproot(back);
+		else if (g_data.type == 3)
+			auto_compoption(back);
 	}
 	else if (g_data.status == 2)
-		return (auto_choose());
+		return (auto_choose(back));
 	else
 		return (0);
+	return (1);
+}
+
+static int			auto_manager(int back)
+{
+	int			tmp;
+
+	tmp = auto_getype();
+	if (g_data.status != 2 && tmp != g_data.type)
+		auto_free();
+	if (auto_isblank())
+		line_paste("    ", g_env.count);
+	else if (auto_option(back))
+		return (1);
+	else
+	{
+		auto_filldata();
+		return (auto_printword());
+	}
 	return (1);
 }
 
 int				auto_completion(char *str, int ret)
 {
-	int			tmp;
-
 	if (str[0] == '\t' && ret == 1)
-	{
-		tmp = auto_getype();
-		if (g_data.status != 2 && tmp != g_data.type)
-			auto_free();
-		if (auto_isblank())
-			line_paste("    ", g_env.count);
-		else if (auto_option())
-			return (1);
-		else
-		{
-			auto_filldata();
-			return (auto_printword());
-		}
-	}
-	else
-		return (0);
-	return (1);
+		return (auto_manager(0));
+	else if (auto_istabshift(str, ret))
+		return (auto_manager(1));
+	return (0);
 }

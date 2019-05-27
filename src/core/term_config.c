@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 11:23:54 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 14:57:18 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void				sh_errorterm(t_error error)
 		sh_switch_term(1);
 		close(g_env.t_fd);
 	}
+	auto_free();
 	line_delenv();
 	exit(error);
 }

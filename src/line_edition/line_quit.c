@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 09:29:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/22 20:21:55 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 14:21:31 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,16 @@ int				line_return(void)
 	if (g_env.mode->n_select)
 		line_escap_cpy(1);
 	auto_free();
+	g_env.search = 0;
+	g_env.h_index = 0;
 	return (line_end());
 }
 
 int				line_escap(void)
 {
 	line_newprompt();
+	g_env.h_index = 0;
+	g_env.search = 0;
 	if (g_env.mode->mode[MVI])
 		vi_reset_mode(0, 1, 0);
 	else if (g_env.mode->n_select)

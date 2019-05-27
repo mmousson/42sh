@@ -6,11 +6,10 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 09:53:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/24 10:20:43 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 18:57:22 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <dirent.h>
 #include "line_edition.h"
 #include "sh42.h"
 #include <term.h>
@@ -26,7 +25,7 @@ static int			auto_printcomp(void)
 		return (1);
 	}
 	lenroot = auto_lenrootwbs();
-	line_paste(&(g_data.lw->name[lenroot]), 1);
+	line_paste(&(g_data.lw->name->name[lenroot]), 1);
 	if (g_data.lw->type == 9 || g_data.lw->type == 14)
 		line_paste("/", 1);
 	else
@@ -42,7 +41,9 @@ static void			auto_printprint(void)
 	i = -1;
 	auto_print_select();
 	auto_print_color();
-	ft_putstr(g_data.lw->name);
+	ft_putstr(g_data.lw->name->name);
+	if (g_data.lw->name->desc)
+		ft_putstr(g_data.lw->name->desc);
 	tputs(g_env.tc->me, 1, ft_putchar);
 	auto_print_select();
 	if (g_data.lw->type != 7)
@@ -88,7 +89,6 @@ static void			auto_printbuilt(void)
 	int				i;
 
 	i = 0;
-	auto_printvar();
 	if (g_data.type)
 		return ;
 	while (g_builtins[i].name)
@@ -104,23 +104,19 @@ int					auto_printword(void)
 	DIR				*dir;
 	struct dirent	*dt;
 	int				i;
-	char			*name;
 
 	i = -1;
-	while (g_data.type != 2 && g_data.path[++i])
+	while (g_data.type < 2 && g_data.path[++i])
 	{
 		if (!(dir = opendir(g_data.path[i])))
 			break ;
 		while ((dt = readdir(dir)))
-		{
-			if (!(name = ft_strdup(dt->d_name)))
-				sh_errorterm(TMALLOC);
-			if (auto_checkroot(dt->d_name, g_data.root))
-				auto_lstword(dt->d_name, &name, i);
-		}
+			auto_lstmanager(dt, i);
 		(void)closedir(dir);
 	}
+	auto_printvar();
 	auto_printbuilt();
+	auto_printoption();
 	auto_sort();
 	auto_calclen();
 	if (g_data.lenlst < 2)

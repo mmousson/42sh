@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/23 17:00:11 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/25 14:44:50 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,14 +71,23 @@ AUTOCMP =	auto_main.c				\
 			auto_utils.c			\
 			auto_getype.c			\
 			auto_alloc.c			\
-			auto_print.c			\
+			auto_alloc_space.c		\
 			auto_alloc_wordlst.c	\
+			auto_alloc_option.c		\
+			auto_print.c			\
 			auto_choose.c			\
 			auto_termcaps.c			\
 			auto_getstatinfo.c		\
 			auto_swap.c				\
 			auto_free.c				\
-			auto_printvar.c
+			auto_printvar.c			\
+			auto_printoption.c		\
+			auto_compare.c			\
+			auto_istype.c			\
+			auto_calclen.c			\
+			auto_sort.c			\
+			auto_fill_struct.c		\
+			auto_replace.c
 
 SIGNAL = 	signal_func.c			\
 			signal_handler.c

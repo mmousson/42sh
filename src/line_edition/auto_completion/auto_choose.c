@@ -6,78 +6,71 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 10:31:11 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/24 10:08:20 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/25 14:36:33 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static void		auto_replace(char *str, int type)
+static void			auto_choose_select(int back)
 {
-	int			size;
-	int			i;
-
-	i = g_data.spos - 1;
-	while (i - g_env.p_size + 1 && !auto_newtoken(g_env.line[i],
-				g_env.line[i - 1]) && !auto_ispathcarac(g_env.line[i])
-			&& !auto_isvar(g_env.line[i], g_env.line[i - 1]))
-		i--;
-	size = g_env.cm->pos - i - 1;
-	if (size)
-	{
-		g_env.line = line_delchar(size);
-		line_cursor_motion(MLEFT, size);
-	}
-	line_paste(str, 1);
-	if (type == 9 || type == 14)
-		line_paste("/", 1);
+	g_data.lw->select = back;
+	g_data.lw->next->select = back ? 0 : 1;
+	if (!back)
+		auto_replace(g_data.lw->next->name->name, g_data.lw->next->type);
+	else
+		auto_replace(g_data.lw->name->name, g_data.lw->type);
 }
 
-int				auto_return(void)
+static void			auto_choose_back(int back)
 {
-	t_lstword	*tmp;
+	t_lstword		*tmp;
 
-	g_data.status = 0;
 	tmp = g_data.lw;
-	while (g_data.lw)
+	while (g_data.lw->next)
 	{
-		if (g_data.lw->select)
+		if (g_data.lw->next->select)
 		{
-			if (g_data.lw->type != 9 && g_data.lw->type != 14)
-				line_paste(" ", 1);
+			auto_choose_select(back);
 			g_data.lw = tmp;
-			auto_free();
-			return (1);
+			return ;
 		}
 		g_data.lw = g_data.lw->next;
 	}
+	tmp->select = 0;
+	g_data.lw->select = 1;
+	auto_replace(g_data.lw->name->name, g_data.lw->type);
 	g_data.lw = tmp;
-	auto_free();
-	return (1);
 }
 
-int				auto_choose(void)
+static void			auto_choose_front(int back)
 {
-	t_lstword	*tmp;
+	t_lstword		*tmp;
 
 	tmp = g_data.lw;
-	g_data.status = 2;
 	while (g_data.lw->next)
 	{
 		if (g_data.lw->select)
 		{
-			g_data.lw->select = 0;
-			g_data.lw->next->select = 1;
-			auto_replace(g_data.lw->next->name, g_data.lw->next->type);
+			auto_choose_select(back);
 			g_data.lw = tmp;
-			return (1);
+			return ;
 		}
 		g_data.lw = g_data.lw->next;
 	}
-	if (g_data.lw->select)
-		g_data.lw->select = 0;
+	g_data.lw->select = 0;
 	g_data.lw = tmp;
 	g_data.lw->select = 1;
-	auto_replace(g_data.lw->name, g_data.lw->type);
+	auto_replace(g_data.lw->name->name, g_data.lw->type);
+
+}
+
+int				auto_choose(int back)
+{
+	g_data.status = 2;
+	if (back)
+		auto_choose_back(back);
+	else
+		auto_choose_front(back);
 	return (1);
 }
