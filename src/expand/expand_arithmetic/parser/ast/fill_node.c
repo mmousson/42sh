@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   fill_node.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 16:41:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 16:07:36 by hben-yah         ###   ########.fr       */
+/*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
+/*   Updated: 2019/05/28 14:36:41 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "arithmetic.h"
 #include "libft.h"
 
-void	ft_putendl_fd(char const *s, int fd)
+int
+	arith_fill_node(t_arithast **ast, t_arithtok **chosen)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
-}
-
-void	ft_putendl2_fd(char const *s1, char const *s2, int fd)
-{
-	ft_putstr2_fd(s1, s2, fd);
-	ft_putchar_fd('\n', fd);
-}
-
-void	ft_putendl3_fd(char const *s1, char const *s2, char const *s3, int fd)
-{
-	ft_putstr3_fd(s1, s2, s3, fd);
-	ft_putchar_fd('\n', fd);
+	if (!(*ast = (t_arithast *)ft_memalloc(sizeof(t_arithast))))
+		return (1);
+	(*ast)->token = token_dup(*chosen);
+	token_del(chosen);
+	return (0);
 }

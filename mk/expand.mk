@@ -18,7 +18,29 @@ EXPAND_NAME =	expand_manager.c			\
 				expand_insert_word.c		\
 				expand_filename.c			\
 				expand_spec_param.c			\
-				expand_quote_removal.c
+				expand_quote_removal.c		\
+				expand_arithmetic/expand_arithmetic.c 	\
+				expand_arithmetic/computor/calcul.c \
+				expand_arithmetic/computor/compute.c \
+				expand_arithmetic/computor/crementation.c \
+				expand_arithmetic/computor/logical.c \
+				expand_arithmetic/parser/ast/build_ast.c \
+				expand_arithmetic/parser/ast/fill_node.c \
+				expand_arithmetic/parser/ast/precedence.c \
+				expand_arithmetic/parser/ast/tools.c \
+				expand_arithmetic/parser/checker/checker.c \
+				expand_arithmetic/parser/checker/grammar/check_expression.c \
+				expand_arithmetic/parser/checker/grammar/check_number.c \
+				expand_arithmetic/parser/checker/grammar/check_operande.c \
+				expand_arithmetic/parser/checker/grammar/check_operator.c \
+				expand_arithmetic/parser/checker/grammar/check_sub_expression.c \
+				expand_arithmetic/parser/checker/grammar/check_variable.c \
+				expand_arithmetic/parser/checker/grammar/check_token.c \
+				expand_arithmetic/parser/lexer/delimitor.c \
+				expand_arithmetic/parser/lexer/lexer.c \
+				expand_arithmetic/tools/skip_spaces.c \
+				expand_arithmetic/tools/ast.c \
+				expand_arithmetic/tools/token.c
 
 EXPAND_SRCS = $(addprefix $(EXPAND_PATH),$(EXPAND_NAME))
 SRCS += $(EXPAND_SRCS)

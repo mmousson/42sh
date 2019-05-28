@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 02:11:28 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/27 20:24:19 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:08:06 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void				ft_tabdel(void ***tab);
 void				ft_strtabdel(char ***tab);
 int					ft_strtabadd(char ***tab, char *new);
 char				*ft_strjoinfs(char *s1, char *s2, char flag);
+char				*ft_strjoin3fs(char *s1, char *s2, char *s3, char flag);
 char				*ft_strrmvfirst(char *s);
 size_t				ft_tabstrlen(char **tab, size_t *i);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
@@ -147,5 +148,14 @@ size_t				ft_tablen(void **tab);
 void				**ft_tabrealloc(void **tab, size_t len);
 void				**ft_taballoc(size_t len);
 size_t				ft_tablcpy(void **dst, void **src, size_t size);
+char				*ft_ltoa(long n);
+long				ft_atol_base(char *str, char base_len);
+int					ft_indexof(char c, char *str);
+int					ft_is_base(char base, char *s);
+void				ft_putstr2_fd(char const *s1, char const *s2, int fd);
+void				ft_putstr3_fd(char const *s1, char const *s2, char const *s3, int fd);
+void				ft_putendl2_fd(char const *s1, char const *s2, int fd);
+void				ft_putendl3_fd(char const *s1, char const *s2, char const *s3, int fd);
+
 
 #endif

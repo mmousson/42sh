@@ -6,7 +6,7 @@
 #    By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/07 00:53:31 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/27 20:24:47 by hben-yah         ###   ########.fr        #
+#    Updated: 2019/05/28 16:00:30 by hben-yah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,7 +110,11 @@ SRC =	ft_memset.c				\
 		ft_strmove.c			\
 		ft_tabrealloc.c			\
 		ft_taballoc.c			\
-		ft_tablcpy.c
+		ft_tablcpy.c			\
+		ft_ltoa.c				\
+		ft_atol_base.c			\
+		ft_indexof.c			\
+		ft_is_base.c
 
 OBJ = $(subst .c,.o,$(addprefix ./$(OBJDIR)/,$(SRC)))
 DEPS = $(subst .c,.d,$(addprefix ./$(OBJDIR)/,$(SRC)))

@@ -1,39 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_manager.c                                   :+:      :+:    :+:   */
+/*   check_number.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 14:52:12 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 17:50:21 by hben-yah         ###   ########.fr       */
+/*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
+/*   Updated: 2019/05/28 14:36:11 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expand.h"
-
+#include "arithmetic.h"
 #include "libft.h"
-int		expand_manager(char ***argv, char ***arge)
-{
-	int	ret;
 
-	if (!argv || !(*argv))
+int		check_is_number(t_arithtok **tok)
+{
+	t_arithtok *b;
+
+	if (!*tok)
+		return (0);
+	b = *tok;
+	if (check_token(tok, NUMBER))
+	{
+		if (!check_number_base(b->val))
+			b->valid = INVALID;
 		return (1);
-	//if (expand_brace)
-	//
-	//if (expand_tilde)
-	//
-	if ((ret = expand_shell_param(argv, arge)))
-		return (ret);
-	//if (expand_cmd_substitution)
-	//
-	if ((ret = expand_arithmetic(argv, arge))) // En cas d'erreur CANCEL LA COMMANDE
-		return (ret);
-	//if (expand_word_splitting)
-	//
-	//if (expand_filename)
-	//
-	if (expand_quote_removal(argv))
-		return (1);
+	}
+	*tok = b;
 	return (0);
+}
+
+int		check_number_base(char *s)
+{
+	if (*s == '0')
+	{
+		++s;
+		if (*s == 'x' || *s == 'X')
+			return (ft_is_base(16, ++s));
+		else if (*s)
+			return (ft_is_base(8, s));
+		return (1);
+	}
+	return (ft_is_base(10, s));
 }
