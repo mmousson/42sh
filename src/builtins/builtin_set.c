@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 21:24:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 04:45:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:13:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,9 +180,9 @@ int			blt_set(int argc, char **argv, char ***env)
 		return (set_lineedit_mode(argc ? argv[0] : NULL));
 	else
 	{
-		i = 1;
+		i = -1;
 		while (++i < argc && i <= 9)
-			core_spec_var_setget(i, argv[i], SET);
+			core_spec_var_setget(i + 1, argv[i], SET);
 	}
 	return (0);
 }

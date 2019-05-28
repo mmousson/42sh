@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 09:14:48 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:22:11 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	core_spec_var_setget(SPEC_0, argv[0], SET);
 	core_spec_var_setget(SPEC_UNDERSCORE, argv[0], SET);
 	core_spec_var_setget(SPEC_DOLLAR, line, SET);
+	core_spec_var_setget(SPEC_QUESTION, "0", SET);
 	ft_strdel(&line);
 	ft_bzero(&g_env, sizeof(t_env));
 	ft_bzero(&g_data, sizeof(t_autodata));
@@ -55,7 +56,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	{
 		job_sigchld_handler(0);
 		line = line_get_readline(PBASIC, argv[1]);
-		// line = ft_strdup("ls | ls > file");
+		// line = ft_strdup("echo $_");
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 		ret = !lex_str(&line, &env);
 		g_last_ret = g_current_ret;

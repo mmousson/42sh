@@ -6,14 +6,15 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:56:59 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/09 18:21:05 by mmousson         ###   ########.fr        #
+#    Updated: 2019/05/28 16:59:30 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 JOB_CTRL_PATH = ./src/job_control/
 
 JOB_CTRL =	job_initialize.c					\
-			job_add_to_active_jobs.c		\
+			job_add_to_active_jobs.c			\
+			job_builtin_redirect.c				\
 			job_child_process.c					\
 			job_free.c							\
 			job_parent_process.c				\
