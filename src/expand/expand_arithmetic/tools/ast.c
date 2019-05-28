@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 16:41:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 16:07:36 by hben-yah         ###   ########.fr       */
+/*   Created: 2019/05/28 16:03:42 by hben-yah          #+#    #+#             */
+/*   Updated: 2019/05/28 17:45:52 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "arithmetic.h"
 #include "libft.h"
 
-void	ft_putendl_fd(char const *s, int fd)
+void	astlist_del(t_arithast **ast)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
-}
-
-void	ft_putendl2_fd(char const *s1, char const *s2, int fd)
-{
-	ft_putstr2_fd(s1, s2, fd);
-	ft_putchar_fd('\n', fd);
-}
-
-void	ft_putendl3_fd(char const *s1, char const *s2, char const *s3, int fd)
-{
-	ft_putstr3_fd(s1, s2, s3, fd);
-	ft_putchar_fd('\n', fd);
+	if (ast && *ast)
+	{
+		if ((*ast)->right)
+			astlist_del(&(*ast)->right);
+		if ((*ast)->right_arg)
+			tokenlist_del(&(*ast)->right_arg);
+		if ((*ast)->token)
+			tokenlist_del(&(*ast)->token);
+		if ((*ast)->left_arg)
+			tokenlist_del(&(*ast)->left_arg);
+		if ((*ast)->left)
+			astlist_del(&(*ast)->left);
+		ft_memdel((void **)ast);
+	}
 }

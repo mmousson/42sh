@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   check_sub_expression.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 16:41:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 16:07:36 by hben-yah         ###   ########.fr       */
+/*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
+/*   Updated: 2019/05/28 14:35:29 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "arithmetic.h"
 
-void	ft_putendl_fd(char const *s, int fd)
+int		check_is_sub_expression(t_arithtok **tok)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
-}
+	t_arithtok *b;
 
-void	ft_putendl2_fd(char const *s1, char const *s2, int fd)
-{
-	ft_putstr2_fd(s1, s2, fd);
-	ft_putchar_fd('\n', fd);
-}
-
-void	ft_putendl3_fd(char const *s1, char const *s2, char const *s3, int fd)
-{
-	ft_putstr3_fd(s1, s2, s3, fd);
-	ft_putchar_fd('\n', fd);
+	if (!*tok)
+		return (0);
+	b = *tok;
+	if (check_token(tok, OP_PAR)
+		&& !check_is_expression(tok)
+		&& check_token(tok, CL_PAR))
+		return (1);
+	*tok = b;
+	return (0);
 }

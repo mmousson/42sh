@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   check_variable.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 16:41:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 16:07:36 by hben-yah         ###   ########.fr       */
+/*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
+/*   Updated: 2019/05/28 17:47:26 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "arithmetic.h"
 
-void	ft_putendl_fd(char const *s, int fd)
+int		check_is_variable(t_arithtok **tok)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
-}
+	t_arithtok	*b;
+	int			i;
 
-void	ft_putendl2_fd(char const *s1, char const *s2, int fd)
-{
-	ft_putstr2_fd(s1, s2, fd);
-	ft_putchar_fd('\n', fd);
-}
-
-void	ft_putendl3_fd(char const *s1, char const *s2, char const *s3, int fd)
-{
-	ft_putstr3_fd(s1, s2, s3, fd);
-	ft_putchar_fd('\n', fd);
+	if (!*tok)
+		return (0);
+	b = *tok;
+	i = (check_token(tok, DOUBLEPLUS) || check_token(tok, DOUBLEMINUS));
+	if (check_token(tok, VARIABLE))
+	{
+		if (i == 0)
+			check_token(tok, DOUBLEPLUS) || check_token(tok, DOUBLEMINUS);
+		return (1);
+	}
+	*tok = b;
+	return (0);
 }

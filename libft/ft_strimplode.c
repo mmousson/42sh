@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 18:52:44 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/27 19:16:44 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/05/28 17:28:24 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char		*ft_strimplode(char **tab, char delim)
 	len = ft_tabstrlen(tab, &i) + i - 1;
 	if (!(ret = (char *)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
+	ret[len] = 0;
 	i = 0;
 	while (*tab)
 	{
