@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 11:24:05 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 09:38:05 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include "line_edition.h"
 
 struct termios	shell_term_conf;
-int				vi_on = 0;
 int16_t			g_current_ret = -1;
 uint8_t			g_last_ret = 0;
 t_vars			*g_shell_var_list = NULL;

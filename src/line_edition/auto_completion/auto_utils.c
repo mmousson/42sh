@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:54:13 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/24 10:08:27 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 18:36:59 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int				auto_lenrootwbs(void)
 		return (1);
 	i = g_env.cm->pos - 1;
 	count = 0;
-	while (i - g_env.p_size + 1 && auto_ischar(g_env.line[i], g_env.line[i + 1]))
+	while (i - g_env.p_size + 1
+			&& auto_ischar(g_env.line[i], g_env.line[i - 1]))
 	{
 		i--;
 		count++;

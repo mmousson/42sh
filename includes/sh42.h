@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 11:45:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/28 09:35:16 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ typedef enum		e_special_var_id
 **	g_builtins[] -> defined in utility/builtins_utility.c
 */
 
-extern int			vi_on;
 extern t_vars		*g_shell_var_list;
 extern t_alias		*g_alias_list;
 extern t_builtins	g_builtins[];

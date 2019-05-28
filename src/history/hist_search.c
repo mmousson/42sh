@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 09:45:50 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 14:22:13 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 18:20:51 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,46 @@ int				hist_search(char *str, int ret)
 	return (0);
 }
 
+static int		hist_checksearch(t_history **tmp)
+{
+	if (!g_env.ry->next)
+	{
+		g_env.ry = *tmp;
+		return (0);
+	}
+	return (1);
+}
+
+static int		hist_initsearch(char c)
+{
+	int			index;
+	t_history	*tmp;
+
+	tmp = g_env.ry;
+	index = c == CTRLR ? g_env.h_index + 1 : 1;
+	while (g_env.ry->next && --index)
+		g_env.ry = g_env.ry->next;
+	if (!g_env.ry->next && index)
+	{
+		g_env.ry = tmp;
+		return (-1);
+	}
+	index = c == CTRLR ? g_env.h_index : 0;
+	return (index);
+}
+
 static void		hist_searchline(char c)
 {
 	t_history	*tmp;
 	int			forwards;
 	int			index;
+	char		buff[BUFF_SIZE + 1];
 
+	ft_strcpy(buff, g_env.line);
 	tmp = g_env.ry;
 	forwards = 0;
-	index = c == CTRLR ? g_env.h_index + 1 : 1;
-	while (g_env.ry->next && --index)
-		g_env.ry = g_env.ry->next;
-	index = c == CTRLR ? g_env.h_index : 0;
+	if ((index = hist_initsearch(c)) == -1)
+		return ;
 	while (g_env.ry->next)
 	{
 		index++;
@@ -48,7 +76,11 @@ static void		hist_searchline(char c)
 		}
 		g_env.ry = g_env.ry->next;
 	}
+	if (!hist_checksearch(&tmp))
+		return ;
 	g_env.ry = tmp;
+	if (!ft_strcmp(buff, g_env.line))
+		hist_searchline(CTRLR);
 }
 
 int				hist_lst(char *str, int ret)
@@ -59,6 +91,8 @@ int				hist_lst(char *str, int ret)
 		hist_addstr(str);
 	else if (str[0] == 127 && ret == 1)
 		hist_delchar();
+	else if (ret != 1 || str[0] != CTRLR)
+		return (1);
 	if (g_env.h_word)
 		hist_searchline(str[0]);
 	return (1);

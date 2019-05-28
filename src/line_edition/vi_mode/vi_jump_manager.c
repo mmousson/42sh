@@ -6,13 +6,13 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:16:46 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/03 11:52:20 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:02:40 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-static void		vi_endrjump(void)
+static void		vi_endrbjump(void)
 {
 	int			i;
 
@@ -27,10 +27,34 @@ static void		vi_endrjump(void)
 		line_cursor_motion(MRIGHT, i - g_env.cm->pos - 1);
 }
 
-void			vi_ejump(int count)
+static void		vi_endrjump(void)
+{
+	int			i;
+
+	i = g_env.cm->pos + 1;
+	if (i >= g_env.len)
+		return ;
+	while (g_env.line[i] && ft_strchr(" \n", g_env.line[i]))
+		i++;
+	if (g_env.line[i] && !line_isword(g_env.line[i]))
+		while (g_env.line[i] && !line_isword(g_env.line[i]))
+			i++;
+	else
+		while (g_env.line[i] && line_isword(g_env.line[i]))
+			i++;
+	if (g_env.line[i - 1])
+		line_cursor_motion(MRIGHT, i - g_env.cm->pos - 1);
+}
+
+void			vi_ejump(int count, char c)
 {
 	while (--count + 1)
-		vi_endrjump();
+	{
+		if (c == 'e')
+			vi_endrjump();
+		else
+			vi_endrbjump();
+	}
 }
 
 void			vi_pipejump(int count)

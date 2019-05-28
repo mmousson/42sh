@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:53:55 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/23 16:54:09 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 20:01:37 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void				sig_sigint(void)
 void				sig_sigwinch(void)
 {
 	line_update_termsize();
-	auto_calclen();
+	auto_free();
 	line_clear();
 	line_print();
 	line_reset_cursor();

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 10:31:11 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 14:36:33 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 08:39:37 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,9 @@ static void			auto_choose_front(int back)
 	g_data.lw = tmp;
 	g_data.lw->select = 1;
 	auto_replace(g_data.lw->name->name, g_data.lw->type);
-
 }
 
-int				auto_choose(int back)
+int					auto_choose(int back)
 {
 	g_data.status = 2;
 	if (back)

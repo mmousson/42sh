@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   auto_replace.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 08:44:15 by roliveir          #+#    #+#             */
+/*   Updated: 2019/05/28 08:44:18 by roliveir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "line_edition.h"
 
 static int			auto_replace_option(char *str)
@@ -23,7 +35,8 @@ void				auto_replace(char *str, int type)
 	if (g_data.type == 3 && auto_replace_option(str))
 		return ;
 	i = g_data.spos - 1;
-	while (i - g_env.p_size + 1 && auto_ischar(g_env.line[i], g_env.line[i - 1]))
+	while (i - g_env.p_size + 1
+			&& auto_ischar(g_env.line[i], g_env.line[i - 1]))
 		i--;
 	size = g_env.cm->pos - i - 1;
 	if (size)

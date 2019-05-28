@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   auto_printoption.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 08:43:54 by roliveir          #+#    #+#             */
+/*   Updated: 2019/05/28 18:55:52 by roliveir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "line_edition.h"
 
 static int		auto_getfunc(int index, int i, char **name, char **desc)
@@ -7,8 +19,7 @@ static int		auto_getfunc(int index, int i, char **name, char **desc)
 		auto_df, auto_echo, auto_kill, auto_ln, auto_mkdir,
 		auto_pax, auto_ps, auto_rm, auto_stty, auto_cd,
 		auto_type, auto_export, auto_set, auto_unset,
-		auto_jobs, auto_history, auto_unalias,
-		auto_test, auto_hash};
+		auto_jobs, auto_unalias, auto_test, auto_hash, auto_fc};
 
 	return (lst_command[index](i, name, desc));
 }
@@ -17,9 +28,9 @@ static void		auto_fill_option(int index)
 {
 	char		*name;
 	char		*desc;
-	int		loop;
-	int		i;
-	
+	int			loop;
+	int			i;
+
 	i = -1;
 	loop = 1;
 	name = NULL;
@@ -41,13 +52,12 @@ static void		auto_fill_option(int index)
 
 void			auto_printoption(void)
 {
-	int		i;
+	int			i;
 	static char	*command[COMWOPT] = {
 		"ls", "cat", "date", "chmod", "cp", "df", "echo",
 		"kill", "ln", "mkdir", "pax", "ps", "rm", "stty",
 		"cd", "type", "export", "set", "unset",
-		"jobs", "history", "unalias",
-		"test", "hash", NULL};
+		"jobs", "unalias", "test", "hash", "fc", NULL};
 
 	i = -1;
 	if (g_data.type != 3 || !g_data.com_option)

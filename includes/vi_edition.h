@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 14:10:59 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/19 09:44:09 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 10:59:55 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int							vi_undo(char *str, int ret);
 **	jump_motion
 */
 
-void						vi_ejump(int count);
+void						vi_ejump(int count, char c);
 void						vi_pipejump(int count);
 void						vi_jump_occur(char c, int i, int count);
 

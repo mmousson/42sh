@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 10:07:58 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/23 16:31:46 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 08:38:10 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void		auto_add_lstword(char *orignal, char **name, int index)
 	g_data.lw = tmp;
 }
 
-void		auto_lstword(char *orignal, char **name, int index)
+void			auto_lstword(char *orignal, char **name, int index)
 {
 	if (!g_data.lw)
 		return ;

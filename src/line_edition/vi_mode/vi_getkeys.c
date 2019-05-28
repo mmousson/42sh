@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:16:24 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/21 15:51:45 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:23:31 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static int			vi_minsert(char *str, int ret)
 {
+	g_env.count = 1;
 	if (str[0] == 27 && ret == 1)
 		return (line_escap());
 	if (str[0] == CTRLD && ret == 1 && g_env.len == g_env.p_size + 1)
@@ -33,6 +34,8 @@ static int			vi_minsert(char *str, int ret)
 	else if (line_motion(str, ret))
 		return (1);
 	else if (line_history(str, ret))
+		return (1);
+	else if (auto_completion(str, ret))
 		return (1);
 	return (1);
 }
