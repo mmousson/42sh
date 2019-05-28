@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 16:49:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 14:50:35 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 19:14:42 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 
 typedef struct			s_name
 {
-	char			*name;
-	char			*desc;
-}				t_name;
+	char				*name;
+	char				*desc;
+}						t_name;
 
 typedef struct			s_lstword
 {
-	t_name			*name;
+	t_name				*name;
 	int					type;
 	char				carac;
 	int					len;
@@ -55,7 +55,7 @@ struct s_autodata		g_data;
 
 int						auto_completion(char *str, int ret);
 int						auto_getype(void);
-void						auto_keep_comp(char *str, int ret);
+void					auto_keep_comp(char *str, int ret);
 int						auto_getstatype(char *name, char *carac, int index);
 
 /*
@@ -124,7 +124,7 @@ int						auto_compoption(int back);
 
 int						auto_choose(int back);
 int						auto_return(void);
-void						auto_replace(char *str, int type);
+void					auto_replace(char *str, int type);
 
 /*
 **	termcaps
@@ -137,29 +137,29 @@ void					auto_print_color(void);
 **	option_text
 */
 
-int					auto_ls(int index, char **name, char **desc);
-int					auto_cat(int index, char **name, char **desc);
-int					auto_date(int index, char **name, char **desc);
-int					auto_chmod(int index, char **name, char **desc);
-int					auto_cp(int index, char **name, char **desc);
-int					auto_df(int index, char **name, char **desc);
-int					auto_echo(int index, char **name, char **desc);
-int					auto_kill(int index, char **name, char **desc);
-int					auto_ln(int index, char **name, char **desc);
-int					auto_mkdir(int index, char **name, char **desc);
-int					auto_pax(int index, char **name, char **desc);
-int					auto_ps(int index, char **name, char **desc);
-int					auto_rm(int index, char **name, char **desc);
-int					auto_stty(int index, char **name, char **desc);
-int					auto_cd(int index, char **name, char **desc);
-int					auto_type(int index, char **name, char **desc);
-int					auto_export(int index, char **name, char **desc);
-int					auto_set(int index, char **name, char **desc);
-int					auto_unset(int index, char **name, char **desc);
-int					auto_jobs(int index, char **name, char **desc);
-int					auto_history(int index, char **name, char **desc);
-int					auto_unalias(int index, char **name, char **desc);
-int					auto_test(int index, char **name, char **desc);
-int					auto_hash(int index, char **name, char **desc);
+int						auto_ls(int index, char **name, char **desc);
+int						auto_cat(int index, char **name, char **desc);
+int						auto_date(int index, char **name, char **desc);
+int						auto_chmod(int index, char **name, char **desc);
+int						auto_cp(int index, char **name, char **desc);
+int						auto_df(int index, char **name, char **desc);
+int						auto_echo(int index, char **name, char **desc);
+int						auto_kill(int index, char **name, char **desc);
+int						auto_ln(int index, char **name, char **desc);
+int						auto_mkdir(int index, char **name, char **desc);
+int						auto_pax(int index, char **name, char **desc);
+int						auto_ps(int index, char **name, char **desc);
+int						auto_rm(int index, char **name, char **desc);
+int						auto_stty(int index, char **name, char **desc);
+int						auto_cd(int index, char **name, char **desc);
+int						auto_type(int index, char **name, char **desc);
+int						auto_export(int index, char **name, char **desc);
+int						auto_set(int index, char **name, char **desc);
+int						auto_unset(int index, char **name, char **desc);
+int						auto_jobs(int index, char **name, char **desc);
+int						auto_unalias(int index, char **name, char **desc);
+int						auto_test(int index, char **name, char **desc);
+int						auto_hash(int index, char **name, char **desc);
+int						auto_fc(int index, char **name, char **desc);
 
 #endif

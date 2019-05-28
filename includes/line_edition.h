@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/24 09:01:50 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 10:30:44 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,9 @@ int						caps_check_termcaps(t_tc tc);
 void					line_cursor_motion(t_move move, int len);
 void					line_cursor_ry(void);
 void					line_ljump(void);
+void					line_lbjump(void);
 void					line_rjump(void);
+void					line_rbjump(void);
 void					line_home(int blank);
 int						line_end(void);
 void					line_clear(void);
@@ -281,6 +283,7 @@ int						line_isend(char *str, int ret);
 int						line_iscx(char *str, int ret);
 int						line_isdel(char *str, int ret);
 int						line_isdelrword(char *str, int ret);
+int						line_isword(char c);
 
 /*
 **	signal

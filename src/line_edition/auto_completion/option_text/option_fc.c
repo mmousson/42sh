@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   option_cat.c                                       :+:      :+:    :+:   */
+/*   option_fc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 08:46:11 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 08:46:12 by roliveir         ###   ########.fr       */
+/*   Created: 2019/05/28 18:46:56 by roliveir          #+#    #+#             */
+/*   Updated: 2019/05/28 18:53:17 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-int			auto_cat(int index, char **name, char **desc)
+int					auto_fc(int index, char **name, char **desc)
 {
-	static char	*flag_tab[7] = {
-		"-b", "-e", "-n", "-s", "-t", "u", "v"};
-	static char	*desc_tab[7] = {
-		"  -- number non-blank output lines",
-		"  -- display $ at the end of each line (implies -v)",
-		"  -- number all output lines",
-		"  -- squeeze multiple blank lines into one",
-		"  -- display tab as ^I (implies -v)",
-		"  -- do not_buffer output",
-		"  -- display non-printing chars as ^X or M-a"};
+	static char		*flag_tab[5] = {"-e", "-l", "-n", "-r", "-s"};
+	static char		*desc_tab[5] = {
+		"  -- use the editor named to edit the commands",
+		"  -- list the commands rather than invoking an editor on them",
+		"  -- suppress command numbers when listing with -l",
+		"  -- reverse the order of the commands listed or edited",
+		"  -- re-execute the command without invoking an editor"};
 
 	*name = ft_strdup(flag_tab[index]);
 	*desc = ft_strdup(desc_tab[index]);
-	return (7);
+	return (5);
 }

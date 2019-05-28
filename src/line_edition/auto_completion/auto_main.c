@@ -6,15 +6,15 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 16:52:20 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 18:30:35 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 08:43:23 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-int				auto_return(void)
+int					auto_return(void)
 {
-	t_lstword	*tmp;
+	t_lstword		*tmp;
 
 	g_data.status = 0;
 	tmp = g_data.lw;
@@ -33,6 +33,16 @@ int				auto_return(void)
 	g_data.lw = tmp;
 	auto_free();
 	return (1);
+}
+
+void				auto_keep_comp(char *str, int ret)
+{
+	if (g_data.status == 2 && str[0] != '\t' && str[0] != '\n'
+			&& !auto_istabshift(str, ret))
+	{
+		auto_free();
+		ft_bzero(&g_data, sizeof(t_autodata));
+	}
 }
 
 static int			auto_option(int back)
@@ -72,7 +82,7 @@ static int			auto_manager(int back)
 	return (1);
 }
 
-int				auto_completion(char *str, int ret)
+int					auto_completion(char *str, int ret)
 {
 	if (str[0] == '\t' && ret == 1)
 		return (auto_manager(0));

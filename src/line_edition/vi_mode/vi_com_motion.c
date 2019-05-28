@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:20:36 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/03 11:56:27 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:00:42 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,23 @@ static int			vi_spec_motion(char *str, int ret)
 	return (1);
 }
 
+static int			vi_bigword(char *str, int ret)
+{
+	if (str[0] == 'w' && ret == 1)
+		line_rjump();
+	else if (str[0] == 'W' && ret == 1)
+		line_rbjump();
+	else if ((str[0] == 'e' || str[0] == 'E') && ret == 1)
+		vi_ejump(g_env.count, str[0]);
+	else if (str[0] == 'b' && ret == 1)
+		line_ljump();
+	else if (str[0] == 'B' && ret == 1)
+		line_lbjump();
+	else
+		return (0);
+	return (1);
+}
+
 int					vi_motion(char *str, int ret)
 {
 	if (vi_priorjump(str, ret))
@@ -62,12 +79,8 @@ int					vi_motion(char *str, int ret)
 		line_cursor_motion(MLEFT, g_env.count);
 	else if (str[0] == 'l' && ret == 1)
 		line_cursor_motion(MRIGHT, g_env.count);
-	else if ((str[0] == 'w' || str[0] == 'W') && ret == 1)
-		line_rjump();
-	else if ((str[0] == 'e' || str[0] == 'E') && ret == 1)
-		vi_ejump(g_env.count);
-	else if ((str[0] == 'b' || str[0] == 'B') && ret == 1)
-		line_ljump();
+	else if (vi_bigword(str, ret))
+		;
 	else
 		return (vi_spec_motion(str, ret));
 	if (g_env.mode->v_del)
