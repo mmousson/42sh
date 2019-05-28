@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_manager.c                                   :+:      :+:    :+:   */
+/*   expand_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 14:52:12 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 18:35:44 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/28 10:19:28 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/28 18:35:39 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "pars.h"
 #include "expand.h"
+#include <stdlib.h>
 
-int		expand_manager(char **str, char ***arge, t_tok *token)
+#include "libft.h"
+int		expand_token(t_tok *token, char ***arge)
 {
 	int	ret;
 
-	if (!str || !(*str))
+	if (!token || pars_is_delimiter(token->status))
 		return (0);
-	//if (expand_brace)
-	//
-	//if (expand_tilde)
-	//
-	if ((ret = expand_shell_param(str, arge)))
-		return (ret);
-	//if (expand_cmd_substitution)
-	//
-	//if (expand_arithmetics)
-	//
-	//if (expand_word_splitting)
-	//
-	if (expand_filename(str, token))
-		return (1);
-	if (expand_quote_removal(str))
+	if (is_charkind(token->status))
+	{
+		if ((ret = expand_manager(&token->content, arge, token)))
+		{
+			if (ret == -1)
+			{
+				lex_free_token(token->next);
+				token->next = NULL;
+				return (1);
+			}
+			return (1);
+		}
+	}
+	if (expand_token(token->next, arge))
 		return (1);
 	return (0);
 }

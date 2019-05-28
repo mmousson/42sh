@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 13:33:13 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/26 16:11:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:02:05 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,11 @@ static int	remove_quote(char *str)
 	return (0);
 }
 
-int			expand_quote_removal(char ***argv)
+int			expand_quote_removal(char **str)
 {
-	char	*str;
-	int		k;
-
-	if (!argv || !*argv)
+	if (!str || !*str)
 		return (1);
-	k = 0;
-	while ((str = ((*argv)[k])))
-	{
-		if (remove_quote(str))
-			return (1);
-		k++;
-	}
+	if (remove_quote(*str))
+		return (1);
 	return (0);
 }

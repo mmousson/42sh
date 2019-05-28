@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:43:04 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/15 16:50:38 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:05:59 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #define NB_CHAR_KIND 4
 
-static int	is_charkind(int st)
+int			is_charkind(int st)
 {
 	int			pos;
 	static int	lst_stat[NB_CHAR_KIND] = {

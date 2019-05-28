@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/26 15:01:10 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/28 18:21:51 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int					is_sepa_tok(t_tok *token);
 int					is_sep(int status);
 int					pars_prepars(t_tok *token);
 void				expand_arith(t_tok **token);
+int					is_charkind(int status);
 
 /*
 ** Function parsing
@@ -116,6 +117,7 @@ t_tree				*ft_pars_nword(t_tok *tok, int start, int end);
 t_tree				*ft_pars_pipe(t_tok *tok, int start, int end);
 t_tree				*ft_pars_part(t_tok *tok, int start, int end);
 t_tree				*ft_pars_red(t_tok *tok, int start, int end);
+int					pars_is_delimiter(int status);
 
 /*
 ** Function parsing son
@@ -134,6 +136,7 @@ t_tree				*ft_expend(t_tree *tree, char **arge);
 char				*ft_cmpct(t_tree *tree, char **arge);
 int					is_clean(int val);
 char				*ft_doll(t_tree *tree, char **arge);
+int					expand_token(t_tok *token, char ***arge);
 
 /*
 ** Tool Function
