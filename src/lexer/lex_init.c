@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:18 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/26 19:10:36 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/28 17:35:05 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,26 @@ t_stat			*lex_init_stat(void)
 	stat->load = NULL;
 	stat->stack = NULL;
 	return (stat);
+}
+
+t_tok			*new_token_char(char *str)
+{
+	t_tok		*new;
+
+	if (!(new = lex_init_token()))
+		return (NULL);
+	new->content = str;
+	new->status = CHA;
+	return (new);
+}
+
+t_tok			*new_token_space(void)
+{
+	t_tok		*new;
+
+	if (!(new = lex_init_token()))
+		return (NULL);
+	new->content = ft_strdup(" ");
+	new->status = SPA;
+	return (new);
 }

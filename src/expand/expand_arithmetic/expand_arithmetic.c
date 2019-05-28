@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/28 17:44:45 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/05/28 18:54:05 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int
 	long		res;
 
 	while ((beg = ft_strstr(*str, "$(("))
-		&& *(end = walkparenthese(beg + 2)))
+			&& *(end = walkparenthese(beg + 2)))
 	{
 		ft_memset((void *)beg, 0, 3);
 		ft_memset((void *)(end - 1), 0, 2);
@@ -66,17 +66,9 @@ static int
 	return (0);
 }
 
-int
-	expand_arithmetic(char ***str, char ***env)
+int	expand_arithmetic(char **str, char ***env)
 {
-	int i;
-
-	i = 0;
-	while ((*str)[i])
-	{
-		if (expand_arithmetic_one(*str + i, env))
+		if (expand_arithmetic_one(str, env))
 			return (1);
-		++i;
-	}
 	return (0);
 }

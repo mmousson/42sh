@@ -6,7 +6,7 @@
 #    By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/22 12:16:40 by oboutrol          #+#    #+#              #
-#    Updated: 2019/05/28 09:14:18 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/05/28 18:51:58 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ EXPAND_NAME =	expand_manager.c			\
 				expand_insert_word.c		\
 				expand_filename.c			\
 				expand_spec_param.c			\
-				expand_quote_removal.c		\
 				expand_arithmetic/expand_arithmetic.c 	\
 				expand_arithmetic/computor/calcul.c \
 				expand_arithmetic/computor/compute.c \
@@ -33,14 +32,16 @@ EXPAND_NAME =	expand_manager.c			\
 				expand_arithmetic/parser/checker/grammar/check_number.c \
 				expand_arithmetic/parser/checker/grammar/check_operande.c \
 				expand_arithmetic/parser/checker/grammar/check_operator.c \
-				expand_arithmetic/parser/checker/grammar/check_sub_expression.c \
+				expand_arithmetic/parser/checker/grammar/check_sub_expression.c\
 				expand_arithmetic/parser/checker/grammar/check_variable.c \
 				expand_arithmetic/parser/checker/grammar/check_token.c \
 				expand_arithmetic/parser/lexer/delimitor.c \
 				expand_arithmetic/parser/lexer/lexer.c \
 				expand_arithmetic/tools/skip_spaces.c \
 				expand_arithmetic/tools/ast.c \
-				expand_arithmetic/tools/token.c
+				expand_arithmetic/tools/token.c\
+				expand_token.c				\
+				expand_quote_removal.c
 
 EXPAND_SRCS = $(addprefix $(EXPAND_PATH),$(EXPAND_NAME))
 SRCS += $(EXPAND_SRCS)
