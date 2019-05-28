@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 13:56:11 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:58:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct			s_process
 	t_bool				completed;
 	t_bool				stopped;
 	t_bool				valid_to_wait_for;
+	t_io_channels		builtin_bkp;
 	t_io_channels		io_channels;
 	t_io_channels		real_channels;
 	int					status;
@@ -190,6 +191,8 @@ void					job_sigchld_handler(int signo);
 /*
 **	=================== Job-objects' utility functions ===================
 **
+**	job_builtin_redirect -> job_control/job_builtin_redirect.c
+**	job_builtin_restore -> job_control/job_builtin_redirect.c
 **	job_find -> job_control/job_utility.c
 **	job_is_stopped -> job_control/job_utility.c
 **	job_is_completed -> job_control/job_utility.c
@@ -197,6 +200,8 @@ void					job_sigchld_handler(int signo);
 **	job_first_job_set_and_get -> job_control/job_sigchld_handler.c
 */
 
+void					job_builtin_redirect(t_process *proc);
+void					job_builtin_restore(t_process *proc);
 t_job					*job_find (pid_t pgid, t_job *first_job);
 int						job_is_stopped(t_job *job, int action);
 int						job_is_completed(t_job *job, int action);

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 09:15:09 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:54:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ t_process			*load_process(t_launch *cmd, char ***env)
 	proc->io_channels.input = 0;
 	proc->io_channels.output = 1;
 	proc->io_channels.error = 2;
+	proc->builtin_bkp.input = -1;
+	proc->builtin_bkp.output = -1;
+	proc->builtin_bkp.error = -1;
 	proc->real_channels = cmd_red(cmd);
 	return (proc);
 }
