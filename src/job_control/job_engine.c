@@ -62,12 +62,12 @@ static void	pipe_setup(t_process *process)
 
 static void	pipe_cleanup(t_process *process)
 {
-	if (process->io_channels.input != process->real_channels.input)
+	if (process->io_channels.input != STDIN_FILENO)
 	{
 		printf("Closing %d\n", process->io_channels.input);
 		close(process->io_channels.input);
 	}
-	if (process->io_channels.output != process->real_channels.output)
+	if (process->io_channels.output != STDOUT_FILENO)
 	{
 		printf("Closing %d\n", process->io_channels.output);
 		close(process->io_channels.output);
@@ -132,6 +132,7 @@ int			job_launch(t_job *job, int fg)
 {
 	t_process	*current_process;
 
+	job_drop_unnecessary_processes(job);
 	current_process = job->first_process;
 	while (current_process)
 	{
