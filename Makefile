@@ -6,7 +6,7 @@
 #    By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/27 19:38:14 by hben-yah         ###   ########.fr        #
+#    Updated: 2019/05/28 09:24:48 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ include mk/expand.mk
 include mk/line_edition.mk
 include mk/utility.mk
 include mk/history.mk
+include mk/option.mk
 
 CC = gcc
 LIBFT = libft
