@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 15:00:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/28 09:14:48 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_job			*g_active_job_list = NULL;
 **
 */
 
+#include "libft.h"
 int					main(int argc, char **argv, char **arge_sys)
 {
 	char			*line;

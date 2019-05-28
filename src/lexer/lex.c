@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 10:42:12 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/26 19:10:34 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int				lex_step(t_stat **stat, char **str)
 {
 	(*stat)->cha = (*str)[(*stat)->k];
 	(*stat)->ch = lex_get_ch((*stat)->cha);
+	(*stat)->older_status = (*stat)->old_status;
 	(*stat)->old_status = (*stat)->status;
 	(*stat)->status = lex_get_next_state((*stat)->status, (*stat)->ch);
 	if ((*stat)->status == EN || (*stat)->status == EP)

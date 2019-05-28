@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/19 17:15:01 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/26 19:10:33 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct	s_stat
 {
 	int			status;
 	int			old_status;
+	int			older_status;
 	int			ch;
 	char		cha;
 	int			k;

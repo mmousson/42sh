@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:02 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/20 17:31:27 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:29:01 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	make_rer(t_red *red, int *og, int *dir)
 /*
 static int	bad_fd(int dir)
 {
-	ft_putstr_fd("21sh: ", 2);
+	ft_putstr_fd("42sh: ", 2);
 	ft_putnbr_fd(dir, 2);
 	ft_putstr_fd(": bad file descriptor\n", 2);
 	return (1);

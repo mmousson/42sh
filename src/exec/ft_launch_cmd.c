@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 13:59:51 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:28:41 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ uint8_t		g_prev_status;
 
 void		ft_cmd_nf(char *str)
 {
-	ft_putstr_fd("21sh: command not found: ", 2);
+	ft_putstr_fd("42sh: command not found: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
 }

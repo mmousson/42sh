@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 13:33:13 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/23 15:24:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/26 16:11:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ static void	process_back_slash(int *mod, int *forward, int *over, char *str)
 		str[*over] = esc;
 		(*over)++;
 		(*forward)++;
+	}
+	else if (esc == '\n')
+	{
+		*forward += 2;
 	}
 	else
 		(*forward)++;
