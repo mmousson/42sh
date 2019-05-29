@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/28 17:49:09 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:05:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int
 {
 	t_arithtok	*chosen_prev;
 	t_arithtok	*chosen;
-	int			type;
 
 	if (!ast || !beginlist)
 		return (0);
@@ -25,7 +24,6 @@ static int
 	chosen_prev = NULL;
 	if (!(chosen = arith_get_primary_prev_token(&chosen_prev, beginlist)))
 		return (0);
-	type = chosen->type;
 	if (chosen_prev)
 		chosen_prev->next = NULL;
 	else

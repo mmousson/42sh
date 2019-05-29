@@ -1,0 +1,1 @@
+test ${a} && echo ok || echo wrong

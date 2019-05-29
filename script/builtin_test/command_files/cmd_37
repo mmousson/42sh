@@ -1,0 +1,1 @@
+test -z ${b} && echo ok || echo wrong

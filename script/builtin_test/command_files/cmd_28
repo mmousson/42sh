@@ -1,0 +1,1 @@
+test -x noexec && echo ok || echo wrong
