@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:04:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 11:41:48 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:08:04 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct		s_launch
 t_red				*ft_init_red(void);
 t_launch			*ft_init_cmd(char **argv);
 char				**extend(char **argv, char *str);
-void				ft_exec(t_tree *tree, char ***arge);
+void				ft_exec(t_tree *tree, char ***arge, int sep);
 int					ft_path(char *name, char **path, char **arge);
 int					ft_get_home_cmd(char *name);
 int					ft_fct(char *name, char **path, char **arge);

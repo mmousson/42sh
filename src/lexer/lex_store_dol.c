@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 12:01:16 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/22 13:53:31 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 10:18:53 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			lex_store_dol(t_stat *stat, char buff[BUF], char **str)
 	char	next_char;
 
 	next_char = (*str)[stat->k + 1];
-	if (next_char == '(')
+	if (ft_strchr("({", next_char))
 	{
 		lex_add_char(buff, &(stat->load), stat->cha);
 		stat->k += 1;

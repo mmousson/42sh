@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 14:00:14 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:08:20 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ static char	*lex_following(char **str, t_stat *stat)
 	int		was_char;
 	char	*sub;
 	char	buff[BUF];
+	int		memory;
 
 	sub = NULL;
 	ft_bzero(buff, BUF);
 	stat->k++;
+	memory = stat->k;
 	process_sign(str, stat, &sub, buff);
 	was_char = ft_isalpha((*str)[stat->k]);
 	while (ft_isdigit((*str)[stat->k])
@@ -41,10 +43,13 @@ static char	*lex_following(char **str, t_stat *stat)
 		lex_add_char(buff, &sub, (*str)[stat->k]);
 		(stat->k)++;
 	}
-	if (!sub)
-		sub = ft_strdup(buff);
-	else
-		sub = ft_strjoin(sub, buff);
+	if (memory != stat->k)
+	{
+		if (!sub)
+			sub = ft_strdup(buff);
+		else
+			sub = ft_strjoin(sub, buff);
+	}
 	return (sub);
 }
 

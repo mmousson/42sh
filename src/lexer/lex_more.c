@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/26 19:16:29 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:59:43 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int				lex_more(t_stat *stat, char **str, int nl)
 	prompt = get_prompt(stat->old_status);
 	fus = NULL;
 	in_back_slash_case(stat, str, &nl);
+	if (stat->old_status == PS)
+		nl = 0;
 	while (!fus)
 	{
 		if (g_env.isatty)
