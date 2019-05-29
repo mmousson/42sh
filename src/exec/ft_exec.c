@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 08:07:28 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/25 13:34:43 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:08:21 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int		ft_add(t_tree *tree, t_launch **cmd, char ***arge)
 	return (0);
 }
 
-void			ft_exec(t_tree *tree, char ***arge)
+void			ft_exec(t_tree *tree, char ***arge, int sep)
 {
 	t_launch	*cmd;
 	int			ret;
@@ -89,6 +89,6 @@ void			ft_exec(t_tree *tree, char ***arge)
 	ret = ft_add(tree, &cmd, arge);
 	ft_free_tree(tree);
 	if (!ret)
-		ft_launch_cmd(&cmd, arge, SMC);
+		ft_launch_cmd(&cmd, arge, sep);
 	ft_free_cmd(cmd);
 }

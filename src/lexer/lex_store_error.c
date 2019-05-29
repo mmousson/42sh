@@ -1,40 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_free_stat.c                                    :+:      :+:    :+:   */
+/*   lex_store_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/09 15:49:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 09:26:06 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/29 09:35:49 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/29 09:38:26 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
-#include <stdlib.h>
 
-static void	lex_free_stack(t_st *stack)
+int		error_ep_or_ec(char close, t_stat *stat)
 {
-	if (!stack)
-		return ;
-	lex_free_stack(stack->next);
-	stack->next = NULL;
-	free(stack);
-}
-
-void		lex_free_stat(t_stat *stat)
-{
-	if (!stat)
-		return ;
-	if (stat->load)
-	{
-		free(stat->load);
-		stat->load = NULL;
-	}
-	if (stat->stack)
-	{
-		lex_free_stack(stat->stack);
-		stat->stack = NULL;
-	}
-	free(stat);
+	if (close == '}')
+		stat->status = EC;
+	else
+		stat->status = EP;
+	return (-1);
 }

@@ -1,0 +1,6 @@
+echo $((3+3+4*4-(3*3)))
+echo $((3*(3*(4+1)+1)+1))
+echo $((      3 +       3     *      2))
+echo $((  potate + 4 - 3* (5 -3)))
+echo $((potate + 4))    et    $((pasteque))
+echo "$((potate + 4))    et    $((pasteque))"

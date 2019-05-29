@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_free_stat.c                                    :+:      :+:    :+:   */
+/*   expand_tild.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/09 15:49:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 09:26:06 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/05/29 19:07:52 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/29 19:33:05 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lex.h"
-#include <stdlib.h>
+#include "expand.h"
 
-static void	lex_free_stack(t_st *stack)
+int			expand_tilde(char **str)
 {
-	if (!stack)
-		return ;
-	lex_free_stack(stack->next);
-	stack->next = NULL;
-	free(stack);
-}
+	int		state;
+	int		j;
+	char	c;
 
-void		lex_free_stat(t_stat *stat)
-{
-	if (!stat)
-		return ;
-	if (stat->load)
+	j = 0;
+	state = 0;
+	while (str && *str && (c = (*str)[j]))
 	{
-		free(stat->load);
-		stat->load = NULL;
+		if (state % 2 == 1)
+			state--;
+		else if (c == '\\')
+			state++;
+		else if (c == '~' && !state)
+		{
+			//if (expand_tild_unit(str, &j))
+			;//	return (1);
+		}
+		else if (c == '\'')
+			state = -state + 2;
+		j++;
 	}
-	if (stat->stack)
-	{
-		lex_free_stack(stat->stack);
-		stat->stack = NULL;
-	}
-	free(stat);
+	return (0);
 }

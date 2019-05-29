@@ -6,11 +6,12 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 20:56:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/27 20:47:16 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:59:40 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 int			insert_word(char **str, char *expand, int start, int len)
 {
@@ -30,9 +31,19 @@ int			insert_word(char **str, char *expand, int start, int len)
 			return (1);
 		ft_strdel(&tmp);
 	}
-	if (!(*str = ft_strjoin(first, end)))
-		return (1);
-	ft_strdel(&first);
-	ft_strdel(&end);
+	if (first)
+	{
+		if (end)
+		{
+			if (!(*str = ft_strjoin(first, end)))
+				return (1);
+			ft_strdel(&first);
+			ft_strdel(&end);
+		}
+		else
+			*str = first;
+	}
+	else
+		*str = end;
 	return (0);
 }
