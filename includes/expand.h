@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 12:03:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 18:44:42 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 19:33:08 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ int		is_doll_exp(char c);
 int		expand_param_word(char **str, char ***arge);
 int		expand_arithmetic(char **str, char ***env);
 int		expand_filename(char **path, t_tok *token);
+int		expand_tilde(char **str);
+int		expand_tild_unit(char **str, int *k);
 #endif

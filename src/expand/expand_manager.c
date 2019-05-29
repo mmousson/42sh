@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:52:12 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 15:08:28 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 19:33:03 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int		expand_manager(char **str, char ***arge, t_tok *token)
 		return (0);
 	//if (expand_brace)
 	//
-	//if (expand_tilde)
-	//
+	if (expand_tilde(str))
+		return (1);
 	if ((ret = expand_shell_param(str, arge)))
 		return (ret);
 	//if (expand_cmd_substitution)
