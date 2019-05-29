@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:51:24 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/27 20:03:51 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/28 17:35:09 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int				is_doll_exp(char c)
 {
 	if (is_char_exp(c))
 		return (1);
-	if (c == '{' || c == '$' || c == '!' || c == '?')
+	if (ft_strchr("{$!?", c))
 		return (1);
 	return (0);
 }
@@ -87,20 +87,13 @@ int				expand_param_word(char **str, char ***arge)
 	return (0);
 }
 
-int		expand_shell_param(char ***argv, char ***arge)
+int		expand_shell_param(char **str, char ***arge)
 {
-	char		**str;
-	int			k;
-	int			ret;
+	int	ret;
 
-	if (!argv || !(*argv))
+	if (!str || !(*str))
 		return (1);
-	k = 0;
-	while ((str = &((*argv)[k])) && *str)
-	{
-		if ((ret = expand_param_word(str, arge)))
-			return (ret);
-		k++;
-	}
+	if ((ret = expand_param_word(str, arge)))
+		return (ret);
 	return (0);
 }

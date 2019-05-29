@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 16:58:34 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/28 17:37:55 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ void					job_sigchld_handler(int signo);
 /*
 **	=================== Job-objects' utility functions ===================
 **
+**	job_drop_unnecessary_processes -> JC/job_drop_unnecessary_processes.c
 **	job_builtin_redirect -> job_control/job_builtin_redirect.c
 **	job_builtin_restore -> job_control/job_builtin_redirect.c
 **	job_find -> job_control/job_utility.c
@@ -200,6 +201,7 @@ void					job_sigchld_handler(int signo);
 **	job_first_job_set_and_get -> job_control/job_sigchld_handler.c
 */
 
+void					job_drop_unnecessary_processes(t_job *job);
 void					job_builtin_redirect(t_process *proc);
 void					job_builtin_restore(t_process *proc);
 t_job					*job_find (pid_t pgid, t_job *first_job);

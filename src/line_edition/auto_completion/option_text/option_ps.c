@@ -1,12 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   option_ps.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 08:56:00 by roliveir          #+#    #+#             */
+/*   Updated: 2019/05/28 09:17:41 by roliveir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "line_edition.h"
 
-int			auto_ps(int index, char **name, char **desc)
+static char			*auto_get_psdesc(int index)
 {
-	static char	*flag_tab[27] = {
-		"-A", "-C", "-G", "-H", "-L", "-M", "-N", "-O", "-S",
-		"-T", "-U", "-Z", "-a", "-c", "-e", "-h", "-j", "-l",
-		"-m", "-o", "-p", "-r", "-t", "-u", "-v", "-w", "-x"};
-	static char	*desc_tab[27] = {
+	static char		*desc_tab[27] = {
 		"  -- select every process",
 		"  -- ignore resident time for CPU percentage",
 		"  -- select processes by real group",
@@ -30,7 +38,17 @@ int			auto_ps(int index, char **name, char **desc)
 		"  -- output in virtual memory format", "  -- wide output",
 		"  -- include processes with no controlling terminal"};
 
+	return (ft_strdup(desc_tab[index]));
+}
+
+int					auto_ps(int index, char **name, char **desc)
+{
+	static char		*flag_tab[27] = {
+		"-A", "-C", "-G", "-H", "-L", "-M", "-N", "-O", "-S",
+		"-T", "-U", "-Z", "-a", "-c", "-e", "-h", "-j", "-l",
+		"-m", "-o", "-p", "-r", "-t", "-u", "-v", "-w", "-x"};
+
 	*name = ft_strdup(flag_tab[index]);
-	*desc = ft_strdup(desc_tab[index]);
+	*desc = auto_get_psdesc(index);
 	return (27);
 }

@@ -1,13 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   option_pax.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 08:55:55 by roliveir          #+#    #+#             */
+/*   Updated: 2019/05/28 09:17:24 by roliveir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "line_edition.h"
 
-int			auto_pax(int index, char **name, char **desc)
+static char			*auto_get_paxdesc(int index)
 {
-	static char	*flag_tab[31] = {
-		"-D", "-H", "-L", "-P", "-X", "-Y", "-Z", "-a", "-c",
-		"-d", "-i", "-j", "-k", "-l", "-n", "-r", "-t", "-u",
-		"-v", "-w", "-B", "-E", "-G", "-T", "-U", "-b", "-f",
-		"-o", "-p", "-s", "-x"};
-	static char	*desc_tab[20] = {
+	static char		*desc_tab[20] = {
 		"  -- ignore older files by ctime",
 		"  -- follow only command-line symlinks",
 		"  -- follow all symlinks",
@@ -23,9 +30,20 @@ int			auto_pax(int index, char **name, char **desc)
 		"  -- reset access times of files after access",
 		"  -- ignore older files", "  -- verbose", "  -- write"};
 
+	return (ft_strdup(desc_tab[index]));
+}
+
+int					auto_pax(int index, char **name, char **desc)
+{
+	static char		*flag_tab[31] = {
+		"-D", "-H", "-L", "-P", "-X", "-Y", "-Z", "-a", "-c",
+		"-d", "-i", "-j", "-k", "-l", "-n", "-r", "-t", "-u",
+		"-v", "-w", "-B", "-E", "-G", "-T", "-U", "-b", "-f",
+		"-o", "-p", "-s", "-x"};
+
 	*name = ft_strdup(flag_tab[index]);
 	if (index < 20)
-		*desc = ft_strdup(desc_tab[index]);
+		*desc = auto_get_paxdesc(index);
 	else
 		*desc = ft_strdup(" ");
 	return (31);

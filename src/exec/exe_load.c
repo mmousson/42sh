@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 16:54:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/28 18:40:37 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ t_process			*load_process(t_launch *cmd, char ***env)
 	else
 		proc->next = NULL;
 	proc->argv = ft_tabdup(cmd->argv);
-	if (expand_manager(&(proc->argv), env))
-		return (NULL);
+	//if (expand_manager(&(proc->argv), env))
+	//	return (NULL);
 	proc->completed = false;
 	proc->stopped = false;
 	proc->valid_to_wait_for = true;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   auto_calclen.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 08:38:20 by roliveir          #+#    #+#             */
+/*   Updated: 2019/05/28 21:50:33 by roliveir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "line_edition.h"
 
 static void		auto_calclstlen(void)
@@ -30,8 +42,9 @@ void			auto_calclen(void)
 {
 	if (!g_data.lw || !g_data.lw->name)
 		return ;
-	auto_calclstlen();	
-	if (!(g_data.wordpline = (int)(g_env.cm->term_x / (g_data.lenmax + 2))))
+	auto_calclstlen();
+	if (!(g_data.wordpline = (int)((g_env.cm->term_x - 1)
+					/ (g_data.lenmax + 2))))
 	{
 		g_data.y = g_env.cm->term_y;
 		return ;

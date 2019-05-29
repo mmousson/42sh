@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   option_set.c                                       :+:      :+:    :+:   */
+/*   line_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 08:59:13 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 08:59:14 by roliveir         ###   ########.fr       */
+/*   Created: 2019/05/28 10:24:50 by roliveir          #+#    #+#             */
+/*   Updated: 2019/05/28 10:59:48 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 
-int			auto_set(int index, char **name, char **desc)
+int				line_isword(char c)
 {
-	static char	*flag_tab[1] = {"-o"};
-	static char	*desc_tab[1] = {
-		"  -- set specified option"};
-
-	*name = ft_strdup(flag_tab[index]);
-	*desc = ft_strdup(desc_tab[index]);
-	return (1);
+	if (ft_isalnum(c) || c == '_')
+		return (1);
+	return (0);
 }

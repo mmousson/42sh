@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/25 14:44:50 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/28 19:14:47 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ LINE_EDIT =	line_cpy.c							\
 			line_cxjump.c						\
 			line_undo.c							\
 			line_inverse.c						\
-			line_isaltinv.c
+			line_isaltinv.c						\
+			line_utils.c
 
 AUTOCMP =	auto_main.c				\
 			auto_utils.c			\
@@ -85,7 +86,7 @@ AUTOCMP =	auto_main.c				\
 			auto_compare.c			\
 			auto_istype.c			\
 			auto_calclen.c			\
-			auto_sort.c			\
+			auto_sort.c				\
 			auto_fill_struct.c		\
 			auto_replace.c
 

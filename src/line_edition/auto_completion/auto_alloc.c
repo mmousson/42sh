@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:31:57 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 14:49:56 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 08:37:42 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ char				*auto_getroot(void)
 	char			*root;
 
 	i = g_env.cm->pos - 1;
-	while (i - g_env.p_size + 1 && auto_ischar(g_env.line[i], g_env.line[i - 1]))
+	while (i - g_env.p_size + 1
+			&& auto_ischar(g_env.line[i], g_env.line[i - 1]))
 		i--;
 	if (!(root = ft_strsub(g_env.line, i + 1, g_env.cm->pos - i - 1)))
 		sh_errorterm(TMALLOC);
@@ -80,12 +81,13 @@ char				*auto_getroot(void)
 
 char				*auto_getcomoption(void)
 {
-	int			i;
-	int			si;
+	int				i;
+	int				si;
 	char			*com;
 
 	i = g_env.cm->pos - 1;
-	while (i - g_env.p_size + 1 && !auto_isoption(g_env.line[i], g_env.line[i - 1]))
+	while (i - g_env.p_size + 1
+			&& !auto_isoption(g_env.line[i], g_env.line[i - 1]))
 		i--;
 	if (g_env.line[i] != '-')
 		return (NULL);
@@ -93,7 +95,8 @@ char				*auto_getcomoption(void)
 	while (i - g_env.p_size + 1 && g_env.line[i] == ' ')
 		i--;
 	si = i;
-	while (i - g_env.p_size + 1 && !auto_newtoken(g_env.line[i], g_env.line[i - 1]))
+	while (i - g_env.p_size + 1
+			&& !auto_newtoken(g_env.line[i], g_env.line[i - 1]))
 		i--;
 	if (!(com = ft_strsub(g_env.line, i + 1, si - i)))
 		sh_errorterm(TMALLOC);
@@ -107,7 +110,8 @@ char				*auto_getvar(void)
 
 	var = NULL;
 	i = g_env.cm->pos - 1;
-	while (i - g_env.p_size + 1 && auto_ischar(g_env.line[i], g_env.line[i - 1]))
+	while (i - g_env.p_size + 1
+			&& auto_ischar(g_env.line[i], g_env.line[i - 1]))
 		i--;
 	if (g_env.line[i] == '{' && g_env.line[i - 1] == '$')
 		var = ft_strsub(g_env.line, i - 1, 2);

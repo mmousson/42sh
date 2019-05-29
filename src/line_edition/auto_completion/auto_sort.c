@@ -1,23 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   auto_sort.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 08:44:58 by roliveir          #+#    #+#             */
+/*   Updated: 2019/05/28 09:01:11 by roliveir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "line_edition.h"
 
 static t_lstword		*auto_findmin(t_lstword *lw)
 {
-	t_lstword		*min;
+	t_lstword			*min;
 
 	min = lw;
 	while (lw && lw->next)
 	{
 		if (ft_strcmp(lw->name->name, min->name->name) < 0)
-			min = lw;;
+			min = lw;
 		lw = lw->next;
 	}
 	return (min);
 }
 
-void				auto_sort(void)
+void					auto_sort(void)
 {
-	t_lstword		*tmp;
-	t_lstword		*min;
+	t_lstword			*tmp;
+	t_lstword			*min;
 
 	tmp = g_data.lw;
 	if (!g_data.lw || !g_data.lw->next || g_data.type == 3)
@@ -33,5 +45,4 @@ void				auto_sort(void)
 		g_data.lw = g_data.lw->next;
 	}
 	g_data.lw = tmp;
-	
 }

@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 14:41:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 18:51:49 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 08:39:53 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int				auto_compoption(int back)
 
 	tmp_root = auto_getroot();
 	tmp_comoption = auto_getcomoption();
-	if (ft_strcmp(tmp_root, g_data.root) || ft_strcmp(tmp_comoption, g_data.com_option))
+	if (ft_strcmp(tmp_root, g_data.root)
+			|| ft_strcmp(tmp_comoption, g_data.com_option))
 	{
 		auto_free();
 		auto_filldata();

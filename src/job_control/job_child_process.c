@@ -100,7 +100,6 @@ void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 	t_bool			interactive;
 	t_io_channels	io_chan;
 
-	io_chan = proc->io_channels;
 	interactive = isatty(0);
 	if (interactive)
 	{
@@ -111,7 +110,10 @@ void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 		if (foreground)
 			tcsetpgrp(STDIN_FILENO, pgid);
 		reset_signals_actions();
-	}
+	
+	io_chan = proc->io_channels;
+	setup_redirections(io_chan.input, io_chan.output, io_chan.error);}
+	io_chan = proc->real_channels;
 	setup_redirections(io_chan.input, io_chan.output, io_chan.error);
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
 	{

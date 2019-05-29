@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:12:03 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 15:06:39 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 08:40:22 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static int			auto_checkchar(int i, char c, char prev)
 	return (-1);
 }
 
-int				auto_getype(void)
+int					auto_getype(void)
 {
-	int			i;
-	int			ret;
+	int				i;
+	int				ret;
 
 	i = g_env.cm->pos - 1;
 	while ((ret = auto_checkchar(i, g_env.line[i], g_env.line[i - 1])) == -1)

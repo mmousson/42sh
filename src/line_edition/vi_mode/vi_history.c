@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 15:44:45 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/01 14:49:26 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:13:52 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ int				vi_history(char *str, int ret)
 {
 	if (g_env.mode->v_del)
 		return (0);
-	if (str[0] == 'j' && ret == 1)
+	if ((str[0] == 'j' && ret == 1) || !ft_strcmp(g_env.tc->key[MDOWN], str))
 		line_get_dhistory(g_env.count);
-	else if (str[0] == 'k' && ret == 1)
+	else if ((str[0] == 'k' && ret == 1)
+			|| !ft_strcmp(g_env.tc->key[MUP], str))
 		line_get_uhistory(g_env.count);
 	else
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/26 19:10:33 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/28 17:35:06 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void			lex_add_tok(char buf[BUF], char *ld, int stat, t_tok *tok);
 void			lex_add_char(char buff[BUF], char **load, char cha);
 void			lex_free_stat(t_stat *stat);
 t_tok			*lex_init_token(void);
+t_tok			*new_token_char(char *str);
+t_tok			*new_token_space(void);
 t_stat			*lex_init_stat(void);
 int				lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str);
 int				lex_str(char **str, char ***arge);
