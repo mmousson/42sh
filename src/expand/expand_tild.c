@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:07:52 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 19:33:05 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 19:50:53 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int			expand_tilde(char **str)
 			state++;
 		else if (c == '~' && !state)
 		{
-			//if (expand_tild_unit(str, &j))
-			;//	return (1);
+			if (expand_tild_unit(str, &j))
+				return (1);
 		}
 		else if (c == '\'')
 			state = -state + 2;
