@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabdel.c                                        :+:      :+:    :+:   */
+/*   ft_strtabdup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 19:24:44 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/29 14:10:29 by hben-yah         ###   ########.fr       */
+/*   Created: 2018/09/19 11:15:30 by hben-yah          #+#    #+#             */
+/*   Updated: 2019/05/28 18:55:59 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_tabdel(void ***tab)
+char	**ft_strtabdup(char **tab)
 {
-	void **t;
+	char	**dup;
+	char	**ddup;
 
-	if (tab && *tab)
-	{
-		t = *tab;
-		while (*t)
-			ft_memdel(t++);
-		free(*tab);
-		*tab = NULL;
-	}
-}
-
-void	ft_strtabdel(char ***tab)
-{
-	ft_tabdel((void ***)tab);
-}
-
-void	ft_strtabdel2(char ***tab1, char ***tab2)
-{
-	ft_tabdel((void ***)tab1);
-	ft_tabdel((void ***)tab2);
+	if (!tab || !(dup = ft_strtaballoc(ft_strtablen(tab))))
+		return (NULL);
+	ddup = dup;
+	while (*tab)
+		if (!(*(ddup++) = ft_strdup(*(tab++))))
+		{
+			*(ddup) = NULL;
+			ft_strtabdel(&dup);
+			return (NULL);
+		}
+	*ddup = NULL;
+	return (dup);
 }

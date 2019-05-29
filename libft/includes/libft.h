@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 02:11:28 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 16:08:06 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:10:40 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,13 +134,16 @@ int					ft_count_n(int nbr);
 ** Libft hben-yah
 */
 
+char				*ft_strimplode(char **tab, char delim);
 char				*ft_strimplodef(char **tab, char delim);
 void				ft_tabdel(void ***tab);
 void				ft_strtabdel(char ***tab);
+void				ft_strtabdel2(char ***tab1, char ***tab2);
 int					ft_strtabadd(char ***tab, char *new);
 char				*ft_strjoinfs(char *s1, char *s2, char flag);
 char				*ft_strjoin3fs(char *s1, char *s2, char *s3, char flag);
 char				*ft_strrmvfirst(char *s);
+size_t				ft_strtablen(char **tab);
 size_t				ft_tabstrlen(char **tab, size_t *i);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 char				*ft_strmove(char *dst, const char *src);
@@ -156,6 +159,7 @@ void				ft_putstr2_fd(char const *s1, char const *s2, int fd);
 void				ft_putstr3_fd(char const *s1, char const *s2, char const *s3, int fd);
 void				ft_putendl2_fd(char const *s1, char const *s2, int fd);
 void				ft_putendl3_fd(char const *s1, char const *s2, char const *s3, int fd);
-
+char				**ft_strtabdup(char **tab);
+char				**ft_strtaballoc(size_t len);
 
 #endif
