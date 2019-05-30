@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 16:58:58 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/29 16:35:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void		job_command_search_and_exec(t_job *job, t_process *proc, int fg)
 			&& (blt_pos = utility_is_builtin(proc->argv[0])) != -1)
 			{
 				job_builtin_redirect(proc);
-				g_builtins[blt_pos].handler(
+				proc->status = g_builtins[blt_pos].handler(
 					job_argc(proc->argv),
 					proc->argv,
 					proc->environ);
