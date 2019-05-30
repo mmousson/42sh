@@ -6,12 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:27:00 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/30 17:49:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/30 20:45:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh42.h"
 #include "exe.h"
+#include "sh42.h"
 #include "expand.h"
 #include "libft.h"
 #include <stdlib.h>
