@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/30 17:18:06 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/30 22:10:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ extern t_sig_matcher	g_sig_table[];
 **	The two last will be used to flag waitpid's return value
 */
 
+# define VAR_ADD 0
+# define VAR_PUSH_INTERNAL 1
+# define VAR_PUSH_TMP 2
 # define DROP_PROCESS 0
 # define CONTINUE_PROCESS 1
 # define SKIP_JOB 0

@@ -18,14 +18,49 @@
 **
 */
 
-static void	update_variables(char *name, char *value, t_process *proc)
+static void	list_manager(int flag, t_vars *element)
 {
-	utility_add_internal_var(name, value);
-	ft_strdel(&name);
-	ft_strdel(&value);
+	static t_vars	*local_ref = NULL;
+	t_vars			*next;
+
+	if (flag == VAR_ADD && element != NULL)
+	{
+		element->next = local_ref;
+		local_ref = element;
+	}
+	else
+	{
+		while (local_ref != NULL)
+		{
+			next = local_ref->next;
+			if (flag == VAR_PUSH_INTERNAL)
+				utility_add_internal_var(local_ref->name, local_ref->value);
+			// else if (flag == VAR_PUSH_TMP)
+			// 	utility_add_tmp_var(local_ref->name, local_ref->value);
+			ft_strdel(&local_ref->name);
+			ft_strdel(&local_ref->value);
+			ft_memdel((void **)&(local_ref));
+			local_ref = next;
+		}
+	}
+}
+
+/*
+**
+*/
+
+static t_vars	*new_var(char *name, char *value, t_process *proc)
+{
+	t_vars	*result;
+
 	ft_strdel(&(proc->name));
 	proc->name = ft_strdup(proc->argv[1]);
 	utility_array_shift(proc->argv);
+	if ((result = ft_memalloc(sizeof(t_vars))) == NULL)
+		return (NULL);
+	result->name = name;
+	result->value = value;
+	return (result);
 }
 
 /*
@@ -34,6 +69,7 @@ static void	update_variables(char *name, char *value, t_process *proc)
 
 static int	update_dropped_process_informations(t_process *proc)
 {
+	list_manager(VAR_PUSH_INTERNAL, NULL);
 	proc->valid_to_wait_for = false;
 	proc->status = 0;
 	proc->completed = true;
@@ -65,7 +101,6 @@ int			job_check_variable_declaration(t_process *proc)
 	char	*catch;
 	char	*name;
 	char	*value;
-	size_t	name_len;
 	size_t	val_len;
 
 	while ((catch = ft_strchr(proc->argv[0], '=')) != NULL)
@@ -75,16 +110,16 @@ int			job_check_variable_declaration(t_process *proc)
 			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 			return (DROP_PROCESS);
 		}
-		name_len = ft_strlen(name) + 1;
-		val_len = ft_strlen(proc->argv[0]) - name_len;
-		if ((value = ft_strsub(proc->argv[0], name_len, val_len)) == NULL)
+		val_len = ft_strlen(proc->argv[0]) - ft_strlen(name) - 1;
+		if (!(value = ft_strsub(proc->argv[0], ft_strlen(name) + 1, val_len)))
 		{
 			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 			return (DROP_PROCESS);
 		}
-		update_variables(name, value, proc);
+		list_manager(VAR_ADD, new_var(name, value, proc));
 		if (proc->argv[0] == NULL)
 			return (update_dropped_process_informations(proc));
 	}
+	list_manager(VAR_PUSH_TMP, NULL);
 	return (CONTINUE_PROCESS);
 }
