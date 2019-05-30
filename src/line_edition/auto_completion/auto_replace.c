@@ -6,11 +6,12 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 08:44:15 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 08:44:18 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 14:26:19 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
+#include "expand.h"
 
 static int			auto_replace_option(char *str)
 {
@@ -49,4 +50,21 @@ void				auto_replace(char *str, int type)
 		line_paste("/", 1);
 	else if (g_data.var && (int)ft_strlen(g_data.var) == 2)
 		line_paste("}", 1);
+}
+
+char				*auto_expand(char **str)
+{
+	int				i;
+	char			*expand_str;
+
+	i = 0;
+	expand_str = ft_strdup(*str);
+	if (g_data.type != 1)
+		return (expand_str);
+	while ((*str)[i] && (*str)[i] != '~')
+		i++;
+	if ((*str)[i] == '~')
+		expand_tild_unit(&expand_str, &i);
+	expand_shell_param(&expand_str, g_env.env);
+	return (expand_str);
 }

@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 18:05:57 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/27 20:23:37 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/05/28 18:57:10 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,9 @@ void	**ft_taballoc(size_t len)
 		return (NULL);
 	ret[len] = 0;
 	return (ret);
+}
+
+char	**ft_strtaballoc(size_t len)
+{
+	return ((char **)ft_taballoc(len));
 }

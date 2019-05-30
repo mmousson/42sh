@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:16:07 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/29 15:02:43 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 11:22:17 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 
 static char		*hist_getlast(void)
 {
-	t_history	*tmp;
 	char		*result;
 
-	result = NULL;
-	tmp = g_env.ry;
-	if (!g_env.ry)
+	if (!g_env.ry || !g_env.ry->line)
 		return (NULL);
-	while (g_env.ry->next)
-		g_env.ry = g_env.ry->next;
-	if (g_env.ry->line)
-		result = ft_strdup(g_env.ry->line);
-	g_env.ry = tmp;
+	result = ft_strdup(g_env.ry->line);
 	return (result);
 }
 

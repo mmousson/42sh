@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_free_files.c                                    :+:      :+:    :+:   */
+/*   lex_store_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/04 03:17:08 by tduval            #+#    #+#             */
-/*   Updated: 2019/05/04 03:22:29 by tduval           ###   ########.fr       */
+/*   Created: 2019/05/29 09:35:49 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/05/29 09:38:26 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lex.h"
 
-void	*cd_free_files(char **files)
+int		error_ep_or_ec(char close, t_stat *stat)
 {
-	int		i;
-
-	i = 0;
-	while (files && files[i])
-	{
-		ft_strdel(&files[i]);
-		i++;
-	}
-	ft_memdel((void **)&files);
-	return (NULL);
+	if (close == '}')
+		stat->status = EC;
+	else
+		stat->status = EP;
+	return (-1);
 }

@@ -1,0 +1,1 @@
+test -p fifo && echo ok || echo wrong

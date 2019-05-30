@@ -1,0 +1,1 @@
+test -x exec && echo ok || echo wrong

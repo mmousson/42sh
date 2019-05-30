@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:55:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 18:21:57 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:08:19 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_tree		*ft_pars_line(t_tok *token, int start, int end)
 	tok = ft_go_start(token, start);
 	if (tok == NULL || (end != -2 && end < start))
 		return (tree = ft_end_branch());
-	else if ((tree = ft_sep(token, start, end, ';')))//tree right to exec, left as token
+	else if ((tree = ft_sep(token, start, end, ';')))
 		return (tree);
 	else if ((tree = ft_pars_cmd(token, start, end)))
 		return (tree);

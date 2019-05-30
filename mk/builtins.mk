@@ -13,11 +13,12 @@
 BUILTINS_PATH = ./src/builtins/
 BUILTINS =	builtin_alias.c									\
 			builtin_bg.c									\
+			cd/build_pwd_tab.c								\
 			cd/builtin_cd.c									\
-			cd/cd_changing_directory.c						\
-			cd/cd_free_files.c								\
-			cd/cd_get_opts.c								\
-			cd/cd_get_pwd.c									\
+			cd/flags.c										\
+			cd/get_final_path.c								\
+			cd/get_pwd_for_cd.c								\
+			cd/utils_cd.c									\
 			builtin_echo.c									\
 			builtin_exit.c									\
 			builtin_export.c								\

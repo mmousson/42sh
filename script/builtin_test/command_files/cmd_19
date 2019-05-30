@@ -1,0 +1,1 @@
+test -p notfifo && echo ok || echo wrong

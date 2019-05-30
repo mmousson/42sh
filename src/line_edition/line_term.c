@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 02:00:25 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/24 09:02:12 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:58:12 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char			*line_cut(t_prompt prompt)
 	return (tmp);
 }
 
-void				sh_term_manager(char ***env)
+void				sh_term_manager(char ***env, int argc)
 {
 	t_tc			*tc;
 	t_cm			*cm;
@@ -69,7 +69,7 @@ void				sh_term_manager(char ***env)
 	g_env.mode = mode;
 	g_env.env = env;
 	g_env.mode->mode[0] = 1;
-	sh_configterm();
+	sh_configterm(argc);
 	hist_init();
 }
 

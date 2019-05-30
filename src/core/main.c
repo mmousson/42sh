@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 21:58:09 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 19:02:43 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	ft_strdel(&line);
 	ft_bzero(&g_env, sizeof(t_env));
 	ft_bzero(&g_data, sizeof(t_autodata));
-	sh_term_manager(&env);
+	sh_term_manager(&env, argc);
 	while (ret)
 	{
 		job_sigchld_handler(0);

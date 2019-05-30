@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility_set_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 06:20:40 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 08:34:18 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/29 12:47:22 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static char	*generate_env_definition(char *name, char *value)
 	else
 		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 	ft_strdel(&tmp);
-	ft_strdel(&res);
 	return (res);
 }
 
