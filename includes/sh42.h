@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/30 17:17:43 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/30 22:33:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef enum		e_special_var_id
 */
 
 extern t_vars		*g_shell_var_list;
+extern t_vars		*g_shell_tmp_vars;
 extern t_alias		*g_alias_list;
 extern t_builtins	g_builtins[];
 extern t_hash		g_hash[HASH_MOD];
@@ -227,6 +228,8 @@ char				*utility_generate_filename(void);
 char				*utility_get_env_var(char ***environ, char *key);
 int					utility_get_environ_length(char **tab);
 void				utility_add_internal_var(char *name, char *value);
+void				utility_add_tmp_var(char *name, char *value);
+void				utility_flush_tmp_vars(void);
 char				*utility_get_param(char *key, char **env);
 char				*utility_get_var(char *name, char **env);
 void				utility_set_var(char *name, char *value, char ***env,

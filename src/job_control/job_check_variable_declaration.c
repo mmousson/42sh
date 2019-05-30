@@ -35,8 +35,8 @@ static void	list_manager(int flag, t_vars *element)
 			next = local_ref->next;
 			if (flag == VAR_PUSH_INTERNAL)
 				utility_add_internal_var(local_ref->name, local_ref->value);
-			// else if (flag == VAR_PUSH_TMP)
-			// 	utility_add_tmp_var(local_ref->name, local_ref->value);
+			else if (flag == VAR_PUSH_TMP)
+				utility_add_tmp_var(local_ref->name, local_ref->value);
 			ft_strdel(&local_ref->name);
 			ft_strdel(&local_ref->value);
 			ft_memdel((void **)&(local_ref));

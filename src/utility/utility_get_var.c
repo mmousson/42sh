@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 04:57:56 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 06:16:12 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/30 22:39:57 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,34 @@
 #include "sh42.h"
 
 /*
-**	We first look for the variable 'name' in the shell's environment
+**	We first look for the variable name in the TMP table
+**
+**	Arguments:
+**	name -> The name of the variable we are looking for
+**	env -> The shell's current temporary variables array
+**
+**	Return Value:
+**	NULL -> The variable doesn't exist
+**	NON-NULL -> The value of the variable designated by 'name'
+*/
+
+static char	*get_var_from_temporary_table(char *name)
+{
+	t_vars	*current;
+
+	current = g_shell_tmp_vars;
+	while (current != NULL)
+	{
+		if (ft_strequ(name, current->name))
+			return (ft_strdup(current->value));
+		current = current->next;
+	}
+	return (NULL);
+}
+
+/*
+**	If the variable doesn't exist in the shell's tempoarary table
+**	then we try to retrieve it from the linked list 'g_shell_var_list'
 **
 **	Arguments:
 **	name -> The name of the variable we are looking for
@@ -86,7 +113,8 @@ char		*utility_get_var(char *name, char **env)
 {
 	char	*res;
 
-	if ((res = get_var_from_environment(name, env)) != NULL
+	if ((res = get_var_from_temporary_table(name)) != NULL
+		||(res = get_var_from_environment(name, env)) != NULL
 		|| (res = get_var_from_internal_definitions(name)) != NULL)
 		return (res);
 	else

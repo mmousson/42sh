@@ -100,9 +100,7 @@ int			job_wait_completion(t_job *job, t_process *proc)
 		if (proc->valid_to_wait_for == true)
 		{
 			is_only_builtins = false;
-			ft_putendl_fd("Waiting", 2);
 			pid = waitpid(proc->pid, &ret, WUNTRACED);
-			ft_putendl_fd("done",2);
 			if (job_mark_process_status(pid, ret)
 				+ job_is_stopped(job, SAVE_CONF)
 				+ job_is_completed(job, FREE_JOB) != 0)

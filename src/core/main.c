@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/30 21:06:00 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 22:33:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ struct termios	shell_term_conf;
 int16_t			g_current_ret = -1;
 uint8_t			g_last_ret = 0;
 t_vars			*g_shell_var_list = NULL;
+t_vars			*g_shell_tmp_vars = NULL;
 t_job			*g_active_job_list = NULL;
 
 /*
@@ -55,6 +56,7 @@ int					main(int argc, char **argv, char **arge_sys)
 	while (ret)
 	{
 		job_sigchld_handler(0);
+		utility_flush_tmp_vars();
 		line = line_get_readline(PBASIC, argv[1]);
 		// line = ft_strdup("name=value");
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
