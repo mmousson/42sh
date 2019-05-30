@@ -6,12 +6,13 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 09:29:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 14:21:31 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 22:37:56 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
 #include "history.h"
+#include "job_control_42.h"
 
 static void		line_newprompt(void)
 {
@@ -25,10 +26,8 @@ static void		line_newprompt(void)
 
 int				line_ctrld(void)
 {
-/*	if (!g_env.jobs && active_jobs_list && g_env.ctrld)
-		ft_putstr("There are stopped jobs.\n");
-	if (active_jobs_list && g_env.ctrld)
-		g_env.jobs++;*/
+	if (g_active_job_list)
+		g_env.jobs++;
 	line_newprompt();
 	g_env.ctrld = 1;
 	g_env.count = 0;

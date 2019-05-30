@@ -6,10 +6,11 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 11:12:33 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/30 22:37:59 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "job_control_42.h"
 #include "lex.h"
 #include "pars.h"
 #include "libft.h"
@@ -33,7 +34,10 @@ int				lex_step(t_stat **stat, char **str)
 
 static void		lex_following(char **str, t_tok *tok, char ***arge)
 {
-	if ((!str || *str == NULL || *str[0] == 0) && g_env.ctrld)
+	if (g_env.ctrld && g_env.jobs == 1)// && g_active_job_list)
+		ft_putstr_fd("There are stopped jobs.\n", 2);
+	if ((!str || !(*str[0])) && g_env.ctrld 
+			&& (!g_active_job_list || g_env.jobs > 1))
 	{
 		lex_free_token(tok);
 		ft_strdel(str);

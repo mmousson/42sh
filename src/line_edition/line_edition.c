@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 22:59:54 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/19 09:23:24 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 22:38:00 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void				line_update_termsize(void)
 
 void				line_clear(void)
 {
+	if (g_env.ctrld && g_env.jobs == 1)
+		g_env.cm->tmpy = 1;
 	if (g_env.cm->tmpy > 0)
 		tputs(tparm(g_env.tc->upm, g_env.cm->tmpy), 1, ft_putchar);
 	tputs(g_env.tc->cd, 1, ft_putchar);
