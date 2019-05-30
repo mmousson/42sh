@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 21:27:30 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/27 14:21:44 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:49:04 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int					line_read_isarg(char *argv)
 	char			buf[BUFF_SIZE + 1];
 	char			*tmp;
 
-	g_env.isatty = 0;
 	if (!(g_env.line = ft_strnew(1)))
 		sh_errorterm(TMALLOC);
 	if ((fd = open(argv, O_RDONLY)) < 1)

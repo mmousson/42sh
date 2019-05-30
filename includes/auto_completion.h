@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 16:49:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 19:14:42 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 11:51:20 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int						auto_completion(char *str, int ret);
 int						auto_getype(void);
 void					auto_keep_comp(char *str, int ret);
 int						auto_getstatype(char *name, char *carac, int index);
+char					*auto_expand(char **str);
 
 /*
 **	iscarac

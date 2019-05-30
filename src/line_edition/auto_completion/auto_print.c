@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 09:53:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 21:50:26 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:29:59 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,18 +104,20 @@ int					auto_printword(void)
 	DIR				*dir;
 	struct dirent	*dt;
 	int				i;
-	char			buff[BUFF_SIZE + 1];
+	char			*expand_path;
 
 	i = -1;
+	expand_path = NULL;
 	while (g_data.type < 2 && g_data.path[++i])
 	{
-		ft_strcpy(buff, g_data.path[i]);
-		if (!(dir = opendir(buff)))
+		expand_path = auto_expand(&(g_data.path[i]));
+		if (!(dir = opendir(expand_path)))
 			break ;
 		while ((dt = readdir(dir)))
 			auto_lstmanager(dt, i);
 		(void)closedir(dir);
 	}
+	ft_strdel(&expand_path);
 	auto_printvar();
 	auto_printbuilt();
 	auto_printoption();

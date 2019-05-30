@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 19:20:09 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/23 14:02:28 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:25:21 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int					caps_check_termcaps(t_tc tc)
 
 void				caps_active_termcaps(void)
 {
-	if (!g_env.tc->tc)
+	if (!g_env.tc->tc || !g_env.isatty)
 		return ;
 	tputs(g_env.tc->key[0], 1, ft_putchar);
 }

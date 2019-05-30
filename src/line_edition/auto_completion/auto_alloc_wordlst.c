@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 10:07:58 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 08:38:10 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:05:32 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		auto_add_lstword(char *orignal, char **name, int index)
 	g_data.lw->next->len = (int)ft_strlen(g_data.lw->next->name->name);
 	g_data.lw->next->type = auto_getstatype(orignal,
 			&g_data.lw->next->carac, index);
-	if (g_data.lw->next->type != 7 && g_data.lw->type != 14)
+	if (g_data.lw->next->type != 7)
 		g_data.lw->next->len++;
 	g_data.lw = tmp;
 }
@@ -60,7 +60,7 @@ void			auto_lstword(char *orignal, char **name, int index)
 		g_data.lw->len = (int)ft_strlen(g_data.lw->name->name);
 		g_data.lw->type = auto_getstatype(orignal,
 				&g_data.lw->carac, 0);
-		if (g_data.lw->type != 7 && g_data.lw->type != 14)
+		if (g_data.lw->type != 7)
 			g_data.lw->len++;
 	}
 	else

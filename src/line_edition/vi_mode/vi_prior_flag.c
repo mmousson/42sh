@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 17:04:26 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/04 16:16:47 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 11:02:18 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		vi_prior_r(char *str)
 		count = g_env.len - g_env.cm->pos;
 	if (!(fresh = ft_strnew(1)))
 		sh_errorterm(TMALLOC);
-	while (--count)
+	while (--count + 1)
 		if (!(fresh = ft_strjoinf(fresh, str)))
 		{
 			ft_strdel(&fresh);
@@ -30,7 +30,7 @@ static void		vi_prior_r(char *str)
 		}
 	g_env.mode->v_replace = 1;
 	vi_add_undo();
-	line_paste(fresh, g_env.count);
+	line_paste(fresh, 1);
 	vi_undo_update_pos();
 	g_env.mode->v_replace = 0;
 	g_env.mode->v_replace_one = 0;

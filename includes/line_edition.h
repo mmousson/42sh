@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 10:30:44 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 19:02:41 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,9 @@ int						line_escap(void);
 ** term_config
 */
 
-void					sh_configterm(void);
+void					sh_configterm(int argc);
 void					sh_errorterm(t_error error);
-void					sh_term_manager(char ***env);
+void					sh_term_manager(char ***env, int argc);
 int						sh_quiterm(void);
 void					sh_switch_term(int reset);
 

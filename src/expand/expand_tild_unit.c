@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 20:03:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/29 19:50:55 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/30 14:27:17 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int			expand_tild_buff(char **str, int *index, char *exp, int del)
 	ft_strncpy(fresh, *str, *index);
 	ft_strcpy(&(fresh[*index]), exp);
 	ft_strcpy(&(fresh[*index + len_exp]), &(*str)[*index + del]);
-	*index += (int)ft_strlen(exp);
+	*index += len_exp - 1;
 	ft_strdel(&(*str));
 	*str = fresh;
 	return (0);
