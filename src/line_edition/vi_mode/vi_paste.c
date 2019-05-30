@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 15:40:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/02 15:04:47 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:21:35 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int					vi_paste(char *str, int ret)
 	if (str[0] == 'p' && ret == 1)
 	{
 		line_cursor_motion(MRIGHT, 1);
-		vi_paste(g_env.s_buffer, g_env.count);
+		line_paste(g_env.s_buffer, g_env.count);
 	}
 	else if (str[0] == 'P' && ret == 1)
-		vi_paste(g_env.s_buffer, g_env.count);
+		line_paste(g_env.s_buffer, g_env.count);
 	else
 		return (0);
 	if (vi_ispaste(str, ret))
