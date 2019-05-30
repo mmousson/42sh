@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand_param.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:27:00 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 18:35:43 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:49:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "sh42.h"
 #include "exe.h"
 #include "expand.h"
 #include "libft.h"
@@ -37,7 +38,7 @@ char		*expand_param(const char *str, char ***arge, int *end)
 		k++;
 	word = ft_strsub(str, 1, k - 1);
 	if (!(value = get_spec_param(&(str[1]))))
-		value = ft_getenv(*arge, word);
+		value = utility_get_param(word, *arge);
 	ft_strdel(&word);
 	*end = k - 1;
 	if (str[1] == '?' || str[1] == '$' || str[1] == '!')

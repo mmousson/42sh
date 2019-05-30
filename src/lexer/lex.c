@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 10:59:55 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 11:12:33 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ static int		lex_last(t_stat **stat, t_tok **token, char **str)
 {
 	int			ret;
 
-	if ((*stat)->status == EP)
+	if ((*stat)->status == EP || (*stat)->status == EC)
 	{
-		ft_putstr_fd("42sh: syntax error near unexpected `)'\n", 2);
+		ft_putstr_fd("42sh: syntax error near unexpected `", 2);
+		(*stat)->status == EP ? ft_putchar_fd(')', 2) : ft_putchar_fd('}', 2);
+		ft_putstr_fd("'\n", 2);
 		return (clean_out(token, stat, str));
 	}
 	else if ((*stat)->status == EN)

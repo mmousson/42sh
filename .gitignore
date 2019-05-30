@@ -18,3 +18,5 @@ test
 to_do
 generate_prompt
 bleu
+expected_outputs
+outputs

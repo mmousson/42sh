@@ -6,9 +6,11 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 20:03:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 21:49:14 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/29 19:50:55 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 static int			expand_tild_check(int index, char *str)
 {
@@ -83,9 +85,9 @@ int					expand_tild_unit(char **str, int *index)
 	int				ret;
 
 	if (!expand_tild_check(*index, *str))
-		return (1);
+		return (0);
 	if (!(root = expand_tild_getroot(&(*str)[*index + 1])))
-		return (1);
+		return (0);
 	ret = expand_tild_compare(root, str, index);
 	ft_strdel(&root);
 	return (ret);

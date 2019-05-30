@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 11:51:09 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/22 13:52:56 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/29 09:46:21 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int			lex_last_pile(t_stat *stat)
 		return (CHA);
 	while (tmp && tmp->next)
 		tmp = tmp->next;
+	if (tmp->elmt == CBO)
+		return (PAO);
 	return (tmp->elmt);
 }
 
@@ -54,23 +56,21 @@ int			lex_pile_down(t_stat *stat, char buff[BUF])
 	int		new_elmt;
 
 	new_elmt = lex_get_ch(stat->cha);
+	if (stat->cha == '}')
+		new_elmt = CBC;
 	tmp = stat->stack;
 	if (!(stat->stack))
-	{
-		stat->status = EP;
-		return (-1);
-	}
+		return (error_ep_or_ec(stat->cha, stat));
 	while (tmp && tmp->next)
 		tmp = tmp->next;
 	if ((tmp->elmt == PAO || tmp->elmt == DOL) && new_elmt == PAC)
 		pop_last_stack(stat);
+	else if (tmp->elmt == CBO && new_elmt == CBC)
+		pop_last_stack(stat);
 	else if ((tmp->elmt == SQT || tmp->elmt == DQT) && new_elmt == tmp->elmt)
 		pop_last_stack(stat);
 	else
-	{
-		stat->status = EP;
-		return (-1);//error personalised avec tmp->elmt
-	}
+		return (error_ep_or_ec(stat->cha, stat));
 	stat->status = lex_last_pile(stat);
 	lex_add_char(buff, &(stat->load), stat->cha);
 	return (0);
@@ -82,6 +82,8 @@ int			lex_pile_up(t_stat *stat, char buff[BUF])
 	int		new_stat;
 
 	new_stat = lex_get_ch(stat->cha);
+	if (stat->cha == '{')
+		new_stat = CBO;
 	tmp = stat->stack;
 	if (!(stat->stack))
 		stat->stack = init_pile(new_stat);

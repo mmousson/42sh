@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/29 16:35:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:18:40 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,18 @@ static void	search_using_path(t_job *job, t_process *proc, int fg)
 	int		hash;
 	char	*to_del;
 
-	if (utility_is_builtin(proc->argv[0]) == -1)
+	if (utility_is_builtin(proc->name) == -1)
 	{
-		to_del = proc->argv[0];
-		hash = hash_string(proc->argv[0]);
-		if (hash_already_exists(hash, proc->argv[0]))
+		to_del = proc->name;
+		hash = hash_string(proc->name);
+		if (hash_already_exists(hash, proc->name))
 		{
 			g_hash[hash].hits += 1;
-			proc->argv[0] = ft_strdup(g_hash[hash].full_path);
+			proc->name = ft_strdup(g_hash[hash].full_path);
 		}
-		else if ((proc->argv[0] = utility_search(proc->argv[0])) == NULL)
+		else if ((proc->name = utility_search(proc->name)) == NULL)
 		{
-			proc->argv[0] = to_del;
+			proc->name = to_del;
 			notify_bad_command(proc, to_del, ": Command not found");
 			return ;
 		}
@@ -150,11 +150,10 @@ void		job_command_search_and_exec(t_job *job, t_process *proc, int fg)
 {
 	int	blt_pos;
 
-	if (ft_strchr(proc->argv[0], '/') != NULL)
-	{
-		if (is_path_valid(proc, proc->argv[0]))
-			launch_proc(job, proc, fg);
-	}
+	if (job_check_variable_declaration(proc) == DROP_PROCESS)
+		return ;
+	if (ft_strchr(proc->argv[0], '/') && is_path_valid(proc, proc->argv[0]))
+		launch_proc(job, proc, fg);
 	else
 	{
 		if (job->first_process->next == NULL

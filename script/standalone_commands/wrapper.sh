@@ -27,7 +27,7 @@ printf "\033[1;31m%d failed test(s)\033[0m\n" $ko
 printf "\033[1;32m%d successful test(s)\033[0m\n" $ok
 if [ $ko = 0 ]
 then
-	printf "\033[1;32m[ALL UNIT TESTS PASSED]\0330m\n"
+	printf "\033[1;36m[ALL UNIT TESTS PASSED]\033[0m\n"
 else
 	printf "\033[1;31m[UNIT TESTS FAILURE]\033[0m\n"
 fi

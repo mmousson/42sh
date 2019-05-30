@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 23:53:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 18:03:24 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/30 16:25:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void		job_free(t_job *job)
 	{
 		i = -1;
 		next_process = current_process->next;
+		ft_strdel(&current_process->name);
 		while(current_process->argv[++i] != NULL)
 			ft_strdel(&current_process->argv[i]);
 		if (current_process->io_channels.input != STDIN_FILENO)

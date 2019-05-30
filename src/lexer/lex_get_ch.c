@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:04:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/26 15:02:09 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/28 21:51:39 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ int					lex_get_ch(char c)
 	while (++k < NB_CH - F_STAT)
 		if (c == line[k])
 			return (k + F_STAT);
+	if (c == '{')
+		return (PAO);
+	else if (c == '}')
+		return (PAC);
 	return (CHA);
 }
