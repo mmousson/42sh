@@ -63,15 +63,9 @@ static void	pipe_setup(t_process *process)
 static void	pipe_cleanup(t_process *process)
 {
 	if (process->io_channels.input != STDIN_FILENO)
-	{
-		printf("Closing %d\n", process->io_channels.input);
 		close(process->io_channels.input);
-	}
 	if (process->io_channels.output != STDOUT_FILENO)
-	{
-		printf("Closing %d\n", process->io_channels.output);
 		close(process->io_channels.output);
-	}
 	if (process->next)
 		process->next->io_channels.input = process->p[0];
 }

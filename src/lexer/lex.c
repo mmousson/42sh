@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lex.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/30 22:37:59 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/31 00:04:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
+#include "sh42.h"
 #include "job_control_42.h"
 #include "lex.h"
 #include "pars.h"
-#include "libft.h"
-#include <unistd.h>
-#include <stdlib.h>
 #include "libft.h"
 
 int				lex_step(t_stat **stat, char **str)
@@ -35,7 +35,11 @@ int				lex_step(t_stat **stat, char **str)
 static void		lex_following(char **str, t_tok *tok, char ***arge)
 {
 	if (g_env.ctrld && g_env.jobs == 1)// && g_active_job_list)
-		ft_putstr_fd("There are stopped jobs.\n", 2);
+	{
+		ft_putendl_fd("There are still jobs active:\n", 2);
+		blt_jobs(1, NULL, NULL);
+		ft_putendl_fd("\nA second attempt to exit will terminate them.", 2);
+	}
 	if ((!str || !(*str[0])) && g_env.ctrld 
 			&& (!g_active_job_list || g_env.jobs > 1))
 	{
