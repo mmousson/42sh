@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 08:24:16 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/30 22:34:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/31 18:02:27 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static void	add_var(char *name, char *value, t_vars **target)
 {
 	t_vars	*internal;
+	t_vars	*slider;
 
 	if ((internal = (t_vars *)ft_memalloc(sizeof(t_vars))) == NULL)
 		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
@@ -33,11 +34,18 @@ static void	add_var(char *name, char *value, t_vars **target)
 		}
 		else
 		{
+			slider = *target;
 			internal->prev = NULL;
-			internal->next = *target;
-			if (*target != NULL)
-				(*target)->prev = internal;
-			*target = internal;
+			internal->next = NULL;
+			while (slider != NULL && slider->next != NULL)
+				slider = slider->next;
+			if (slider == NULL)
+				*target = internal;
+			else
+			{
+				slider->next = internal;
+				internal->prev = slider;
+			}
 		}
 	}
 }

@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:49:45 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/22 14:42:06 by roliveir         ###   ########.fr        #
+#    Updated: 2019/05/31 17:52:02 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ BUILTINS =	builtin_alias.c									\
 			builtin_echo.c									\
 			builtin_exit.c									\
 			builtin_export.c								\
+			builtin_fc.c									\
 			builtin_fg.c									\
 			builtin_set.c									\
 			builtin_type.c									\

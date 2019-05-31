@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:46:01 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 08:37:07 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/31 18:12:43 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	utility_delete_var(char *name, char ***env)
 
 	if ((ret = utility_internal_var_exists(name, &holder)) != NULL)
 	{
+		if (holder == g_shell_var_list)
+			g_shell_var_list = g_shell_var_list->next;
 		holder_next = holder->next;
 		if (holder_next != NULL)
 			holder_next->prev = holder->prev;

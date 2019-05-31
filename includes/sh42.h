@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 15:32:38 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:48:56 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ int					core_hash_spec_var(char var);
 **	cd -> builtins/cd.c
 **	echo -> builtins/echo.c
 **	ft_exit -> builtins/ft_exit.c
+**	fc -> builtins/builtins_fc.c
 **	fg -> builtins/fg.c
 **	hash -> builtins/hash.c
 **	jobs -> builtins/jobs.c
@@ -183,6 +184,7 @@ int					blt_cd(int argc, char **argv, char ***env);
 int					blt_echo(int argc, char **argv, char ***env);
 int					blt_export(int argc, char **argv, char ***env);
 int					blt_exit(int argc, char **argv, char ***env);
+int					blt_fc(int argc, char **argv, char ***env);
 int					blt_fg(int argc, char **argv, char ***env);
 int					blt_hash(int argc, char **argv, char ***env);
 int					blt_jobs(int argc, char **argv, char ***env);
