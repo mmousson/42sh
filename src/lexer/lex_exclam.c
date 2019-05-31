@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 19:33:00 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/31 16:12:12 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int			lex_exclam(t_stat *stat, t_tok **token, char **str)
 		return (0);
 	}
 	stat->k = mem;
-	stat->status = CHA;
+	stat->status = lex_last_pile(stat);
 	return (1);
 }
