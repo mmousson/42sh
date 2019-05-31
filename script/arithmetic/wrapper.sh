@@ -1,5 +1,5 @@
 #!/bin/bash
-printf "=== TESTING BUILTIN-TEST COMMANDS =========================================================\n"
+printf "=== TESTING ARITHMETIC EXPANSION =========================================================\n"
 mkdir -p outputs
 mkdir -p expected_outputs
 i=0
@@ -36,4 +36,3 @@ else
 	printf "\033[1;31m[UNIT TESTS FAILURE]\033[0m\n"
 fi
 printf "\n=== END OF REPORT =========================================================================\n\n"
-rm emptyfile exec noexec noread notempty notfifo nowrite read write

@@ -20,3 +20,4 @@ generate_prompt
 bleu
 expected_outputs
 outputs
+error_logs

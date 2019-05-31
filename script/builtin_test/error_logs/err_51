@@ -1,4 +1,0 @@
-1c1
-< bash: line 1: test: zzz: integer expression expected
----
-> bash: test: zzz: integer expression expected

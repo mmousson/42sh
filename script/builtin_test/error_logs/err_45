@@ -1,5 +1,0 @@
-1c1,2
-< ok
----
-> bash: test: -1: integer expression expected
-> wrong
