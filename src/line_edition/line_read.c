@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 21:28:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/13 20:59:40 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 19:02:42 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void			line_endofread(void)
 
 int					line_reader(char *argv)
 {
-	if (line_read_isnotatty())
+	if ((!argv || !argv[1]) && line_read_isnotatty())
 		return (1);
 	if (argv && line_read_isarg(argv))
 		return (1);

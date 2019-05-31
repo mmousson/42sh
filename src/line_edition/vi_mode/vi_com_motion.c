@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:20:36 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 16:00:42 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:20:06 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,10 @@ int					vi_motion(char *str, int ret)
 {
 	if (vi_priorjump(str, ret))
 		return (1);
-	else if (str[0] == ' ' && ret == 1)
+	else if (line_isright(str, ret))
 		line_cursor_motion(MRIGHT, g_env.count);
-	else if ((str[0] == 'h' || str[0] == 127) && ret == 1)
+	else if (line_isleft(str, ret))
 		line_cursor_motion(MLEFT, g_env.count);
-	else if (str[0] == 'l' && ret == 1)
-		line_cursor_motion(MRIGHT, g_env.count);
 	else if (vi_bigword(str, ret))
 		;
 	else

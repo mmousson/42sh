@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 17:35:06 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:33:07 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ typedef enum	e_state
 	ER = -1,
 	EN = -2,
 	EP = -3,
-	ED = -4
+	EC = -4,
+	ED = -5
 }				t_state;
 
 typedef struct	s_st
@@ -117,6 +118,8 @@ int				lex_last_pile(t_stat *stat);
 int				lex_store_dol(t_stat *stat, char buff[BUF], char **str);
 int				lex_pile_up(t_stat *stat, char buff[BUF]);
 int				lex_step(t_stat **stat, char **str);
+int				lex_welding(t_stat *stat);
+int				error_ep_or_ec(char close, t_stat *stat);
 
 /*
 ** fonctions affichages

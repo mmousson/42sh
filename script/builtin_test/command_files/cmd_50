@@ -1,0 +1,1 @@
+rm -rf tempdir; test ! -d tempdir && echo "tempdir removed"

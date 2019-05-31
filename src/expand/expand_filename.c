@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 07:36:36 by akarasso          #+#    #+#             */
-/*   Updated: 2019/05/29 18:57:55 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/05/31 12:24:47 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int			expand_filename(char **path, t_tok *token)
 		token->next = new_token_char(files[k]);
 		token = token->next;
 	}
+	free(files);
 	token->next = end;
 	return (0);
 }

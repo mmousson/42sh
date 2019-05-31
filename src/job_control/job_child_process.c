@@ -117,7 +117,7 @@ void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 	setup_redirections(io_chan.input, io_chan.output, io_chan.error);
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
 	{
-		execve(proc->argv[0], proc->argv, *(proc->environ));
+		execve(proc->name, proc->argv, *(proc->environ));
 		ft_putstr_fd("Failed to execute process: ", STDERR_FILENO);
 		ft_putendl_fd(proc->argv[0], STDERR_FILENO);
 		ft_putendl_fd("Reason: The file is marked as executable but could not "

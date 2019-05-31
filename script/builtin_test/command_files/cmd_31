@@ -1,0 +1,1 @@
+test -s emptyfile && echo ok || echo wrong

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/25 14:57:18 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:54:49 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ static void			sh_initerm(void)
 	line_update_termsize();
 }
 
-void				sh_configterm(void)
+void				sh_configterm(int argc)
 {
-	if (isatty(STDIN_FILENO))
+	if (isatty(STDIN_FILENO) && argc < 2)
 		g_env.isatty = 1;
 	else
 		return ;

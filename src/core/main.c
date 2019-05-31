@@ -6,10 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 21:58:09 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/30 23:34:54 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "job_control_42.h"
 
@@ -23,6 +24,7 @@ struct termios	shell_term_conf;
 int16_t			g_current_ret = -1;
 uint8_t			g_last_ret = 0;
 t_vars			*g_shell_var_list = NULL;
+t_vars			*g_shell_tmp_vars = NULL;
 t_job			*g_active_job_list = NULL;
 
 /*
@@ -50,12 +52,13 @@ int					main(int argc, char **argv, char **arge_sys)
 	ft_strdel(&line);
 	ft_bzero(&g_env, sizeof(t_env));
 	ft_bzero(&g_data, sizeof(t_autodata));
-	sh_term_manager(&env);
+	sh_term_manager(&env, argc);
 	while (ret)
 	{
 		job_sigchld_handler(0);
+		utility_flush_tmp_vars();
 		line = line_get_readline(PBASIC, argv[1]);
-		// line = ft_strdup("wc < auteur");
+		// line = ft_strdup("name=value");
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 		ret = !lex_str(&line, &env);
 		g_last_ret = g_current_ret;

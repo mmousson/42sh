@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/26 16:28:41 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/30 16:17:58 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include "sh42.h"
 #include "job_control_42.h"
 #include "exe.h"
 #include "libft.h"
@@ -117,6 +118,7 @@ int			ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 {
 	t_job	*job;
 	int		fg;
+	char	*tmp;
 
 	if (handle_logical_operators() == DONT_SKIP_JOB)
 	{
@@ -126,6 +128,9 @@ int			ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 			if (!(job = exe_load_job(*cmd, arge)))
 				return (1);
 			g_current_ret = job_launch(job, fg);
+			tmp = ft_itoa(g_current_ret);
+			core_spec_var_setget(SPEC_QUESTION, tmp, SET);
+			ft_strdel(&tmp);
 		}
 	}
 	ft_free_cmd(*cmd);

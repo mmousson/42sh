@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:24:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:00:59 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/29 16:36:32 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ int				blt_echo(int argc, char **args, char ***env)
 	}
 	if (!n)
 		ft_putchar('\n');
-	return (1);
+	return (0);
 }

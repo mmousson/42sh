@@ -1,0 +1,1 @@
+test -r read && echo ok || echo wrong

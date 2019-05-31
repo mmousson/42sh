@@ -6,28 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 08:24:16 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 08:25:15 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/30 22:34:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "sh42.h"
 
-/*
-**	This function is called by the 'utility_set_var' wrapper function
-**	It creates a new link and fills it with the value given by the arguments
-**	'name' and 'value' and then prepends the link to the current linked list,
-**	updating its head pointer
-**	In case of memory allocation error, nothing is modified
-**
-**	Arguments:
-**	name -> The name of the variable to create in the linked list
-**	value -> The value of the wanted variable definition
-**
-**	Return Value: NONE
-*/
-
-void	utility_add_internal_var(char *name, char *value)
+static void	add_var(char *name, char *value, t_vars **target)
 {
 	t_vars	*internal;
 
@@ -48,10 +34,59 @@ void	utility_add_internal_var(char *name, char *value)
 		else
 		{
 			internal->prev = NULL;
-			internal->next = g_shell_var_list;
-			if (g_shell_var_list != NULL)
-				g_shell_var_list->prev = internal;
-			g_shell_var_list = internal;
+			internal->next = *target;
+			if (*target != NULL)
+				(*target)->prev = internal;
+			*target = internal;
 		}
 	}
+}
+
+/*
+**	This function is called by the 'utility_set_var' wrapper function
+**	It creates a new link and fills it with the value given by the arguments
+**	'name' and 'value' and then prepends the link to the current linked list,
+**	updating its head pointer
+**	In case of memory allocation error, nothing is modified
+**
+**	Arguments:
+**	name -> The name of the variable to create in the linked list
+**	value -> The value of the wanted variable definition
+**
+**	Return Value: NONE
+*/
+
+void		utility_add_internal_var(char *name, char *value)
+{
+	add_var(name, value, &g_shell_var_list);
+}
+
+/*
+**
+*/
+
+void		utility_add_tmp_var(char *name, char *value)
+{
+	add_var(name, value, &g_shell_tmp_vars);
+}
+
+/*
+**
+*/
+
+void		utility_flush_tmp_vars(void)
+{
+	t_vars	*current;
+	t_vars	*next;
+
+	current = g_shell_tmp_vars;
+	while (current != NULL)
+	{
+		next = current->next;
+		ft_strdel(&(current->name));
+		ft_strdel(&(current->value));
+		ft_memdel((void **)&(current));
+		current = next;
+	}
+	g_shell_tmp_vars = NULL;
 }
