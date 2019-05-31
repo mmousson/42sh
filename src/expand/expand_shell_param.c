@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:51:24 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 19:32:59 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/31 15:33:12 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ static int		expand_one_param(char **str, int *j, char ***arge)
 			return (1);
 	if (expand)
 	{
-		*j += ft_strlen(expand) - 2;
+	//	if ((*str)[*j + 1] == '{')
+	//		(*j)++;
+		*j += ft_strlen(expand) - 1;
 		ft_strdel(&expand);
 	}
 	else

@@ -6,13 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:52:12 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/30 21:26:46 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/31 15:33:20 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include <unistd.h>
 
+#include "libft.h"
 int		expand_manager(char **str, char ***arge, t_tok *token)
 {
 	int	ret;

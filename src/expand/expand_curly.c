@@ -6,11 +6,12 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 09:18:57 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/27 21:24:47 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/31 15:33:08 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
+#include "sh42.h"
 #include "expand.h"
 #include "libft.h"
 
@@ -93,7 +94,7 @@ char		*expand_curly(const char *str, char ***arge, int *end, int *error)
 	}
 	var = ft_strsub(str, 0, end_var);
 	if (!(value = get_spec_param(str)))
-		value = ft_getenv(*arge, var);
+		value = utility_get_param(var, *arge);
 	compute_word(&value, arge, str, end_var);
 	ft_strdel(&var);
 	return (value);
