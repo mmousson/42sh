@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:04:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 15:08:04 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/01 02:22:28 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int					ft_launch_red(t_red *red, t_launch *cmd);
 void				ft_res_pile(t_launch *cmd);
 void				ft_add_pile(int og, int dir, t_launch *cmd);
 int					ft_heredoc(char *end);
+int					end_agg(char *str);
 int					ft_heredoc_read(int *og, int *dir);
 
 char				*ft_getenv(char **env, char *name);

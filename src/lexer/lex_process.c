@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/31 15:45:23 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/31 22:39:04 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ int			lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str)
 		lex_add_tok(buff, stat->load, stat->old_status, *tok);
 		stat->status = 0;
 	}
-	else if (stat->status == VA)
+	else if (stat->status == VA || stat->status == VO)
 	{
 		lex_add_char(buff, &(stat->load), stat->cha);
+		if (stat->status == VO)
+			stat->ch = stat->old_status;
 		lex_add_tok(buff, stat->load, stat->ch, *tok);
 		stat->status = 0;
 	}
