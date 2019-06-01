@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:16:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/31 23:21:38 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/01 03:23:46 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int					pars_tok(t_tok *token, char ***arge, char *str)
 		}
 		else
 			sep = SMC;
-		ft_print_tree(tree);
 		ft_exec(tree, arge, sep);
 	}
 	return (0);
