@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:52:12 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/30 21:26:46 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/31 12:36:25 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int		expand_manager(char **str, char ***arge, t_tok *token)
 		return (ret);
 	//if (expand_word_splitting)
 	//
-	(void)token;
-	//if (expand_filename(str, token))
-	//	return (1);
+	//(void)token;
+	if (expand_filename(str, token))
+		return (1);
 	if (expand_quote_removal(str))
 		return (1);
 	return (0);

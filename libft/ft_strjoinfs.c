@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:13:16 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/28 17:27:02 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/05/31 13:35:06 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char		*ft_strjoinfs(char *s1, char *s2, char flag)
 
 	len1 = s1 ? ft_strlen(s1) : 0;
 	if ((res = (char *)malloc(sizeof(char)
-		* (len1 + (s2 ? ft_strlen(s2) : 0)))))
+		* (len1 + (s2 ? ft_strlen(s2) : 0) + 1))))
 	{
 		*res = 0;
 		if (s1)
@@ -51,7 +51,7 @@ char		*ft_strjoin3fs(char *s1, char *s2, char *s3, char flag)
 	len1 = s1 ? ft_strlen(s1) : 0;
 	len2 = len1 + (s2 ? ft_strlen(s2) : 0);
 	if ((res = (char *)malloc(sizeof(char)
-		* (len2 + (s3 ? ft_strlen(s3) : 0)))))
+		* (len2 + (s3 ? ft_strlen(s3) : 0) + 1))))
 	{
 		*res = 0;
 		if (s1)
