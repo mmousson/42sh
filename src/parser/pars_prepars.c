@@ -6,12 +6,30 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 11:04:39 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 11:12:43 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/31 23:20:59 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 #include "libft.h"
+
+static int		pars_error(int type)
+{
+	static char	*error[NB_PR] = {
+		"arg", "`;'", "red", "`|'", "space", "`\\n'", "sepa"
+	};
+
+	ft_putstr_fd("42sh: parse error near ", 2);
+	if (type > 0 || type < NB_PR)
+		ft_putstr_fd(error[type], 2);
+	else
+	{
+		ft_putstr_fd("type ", 2);
+		ft_putnbr_fd(type, 2);
+	}
+	ft_putstr_fd("\n", 2);
+	return (0);
+}
 
 int				ft_get_type(t_tok *token)
 {
@@ -31,22 +49,6 @@ int				ft_get_type(t_tok *token)
 	return (mat_type[stat]);
 }
 
-static int		pars_error(int type)
-{
-	static char	*error[NB_PR] = {"arg", "`;'", "red", "`|'", "space", "`\\n'"};
-
-	ft_putstr_fd("42sh: parse error near ", 2);
-	if (type > 0 || type < NB_PR)
-		ft_putstr_fd(error[type], 2);
-	else
-	{
-		ft_putstr_fd("type ", 2);
-		ft_putnbr_fd(type, 2);
-	}
-	ft_putstr_fd("\n", 2);
-	return (0);
-}
-
 static int		ft_mat_type(int old_type, int type)
 {
 	static int	mat[NB_TY][NB_PR] = {
@@ -61,14 +63,33 @@ static int		ft_mat_type(int old_type, int type)
 	return (mat[old_type][type]);
 }
 
-static int		amb_red(int pipe, t_tok *tmp)
+static int		red_valid(t_tok *token)
 {
-	if (pipe && tmp && tmp->content && !ft_strcmp(tmp->content, "<<"))
-	{
-		ft_putstr_fd("Ambiguous input redirect.\n", 2);
+	int			i;
+	int			esp;
+	char		red;
+	char		*tmp;
+
+	i = 0;
+	esp = 0;
+	if (!token || !(token->content))
 		return (1);
+	tmp = token->content;
+	if (tmp[i] == '&')
+	{
+		i++;
+		esp = 1;
 	}
-	return (0);
+	if (!(red = tmp[i]))
+		return (1);
+	if (tmp[++i] == red)
+		i++;
+	if ((tmp[i] == '&' && !esp) || !tmp[i])
+		return (0);
+	ft_putstr_fd("42sh: syntax error near unexpected token `", 2);
+	ft_putchar_fd(red, 2);
+	ft_putstr_fd("'\n", 2);
+	return (1);
 }
 
 int				pars_prepars(t_tok *token)
@@ -76,9 +97,7 @@ int				pars_prepars(t_tok *token)
 	t_tok		*tmp;
 	int			type;
 	int			old_type;
-	int			pipe;
 
-	pipe = 0;
 	old_type = SMCL;
 	tmp = token;
 	while (tmp)
@@ -87,13 +106,9 @@ int				pars_prepars(t_tok *token)
 		type = ft_get_type(tmp);
 		if (is_sepa_tok(tmp))
 			type = SEPA;
-		if (type == PIPE)
-			pipe = 1;
-		else if (tmp && is_sep(tmp->status))
-			pipe = 0;
-		else if (tmp && tmp->status == PAC)
+		if (tmp && tmp->status == PAC)
 			expand_arith(&tmp);
-		else if (type == REDI && amb_red(pipe, tmp))
+		else if (type == REDI && red_valid(tmp))
 			return (0);
 		old_type = ft_mat_type(old_type, type);
 		if (old_type == EROR)

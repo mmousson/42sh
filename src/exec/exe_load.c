@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/30 16:24:54 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/01 02:22:33 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 #include <stdlib.h>
 #include "expand.h"
 
+int					is_to_load(int fd)
+{
+	if (fd > 0 || fd == -3)
+		return (1);
+	return (0);
+}
+
 t_io_channels		cmd_red(t_launch *cmd)
 {
 	t_io_channels	chan;
 
 	ft_launch_red(cmd->red, cmd);
-	chan.input = cmd->in < 0 ? 0 : cmd->in;
-	chan.output = cmd->out < 0 ? 1 : cmd->out;
-	chan.error = cmd->err < 0 ? 2 : cmd->err;
+	chan.input = !is_to_load(cmd->in) ? 0 : cmd->in;
+	chan.output = !is_to_load(cmd->out) ? 1 : cmd->out;
+	chan.error = !is_to_load(cmd->err) ? 2 : cmd->err;
 	return (chan);
 }
 
