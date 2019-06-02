@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:02 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/01 02:22:29 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/01 19:38:07 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ static int	make_one_red(t_red *red, t_launch *cmd)
 		og = red->srt;
 	if (dir != -2 && og != -2)
 	{
+		if (red->end == -3)
+			dir = -3;
 		ft_add_pile(og, dir, cmd);
-		if (red->end == -2)
-			close(og);
 	}
 	return (0);
 }
