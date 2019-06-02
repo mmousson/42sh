@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 08:13:04 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/17 20:23:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/31 16:19:01 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define TEST_FALSE 1
 # define TEST_ERROR 2
 # define IGNORE_TYPE 1
-# define CHECK_SIZE 2
+# define CHECK_SIZE 12
 
 /*
 **	Set the length of the two dispatchers used by 'test' utility

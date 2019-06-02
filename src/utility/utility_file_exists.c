@@ -6,12 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 21:32:46 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 11:28:05 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/31 15:34:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <sys/stat.h>
+#include "sh42.h"
 
 /*
 **	Utility function to check whether a file pointed by 'path' exists
@@ -21,7 +22,8 @@
 **
 **	Return Value:
 **	0 -> The file doesn;t exist
-**	1 -> The file exists
+**	!= 0 -> The file exists and a Macro corresponding to the file type has
+**		been returned
 */
 
 int	utility_file_exists(const char *path)
@@ -30,5 +32,13 @@ int	utility_file_exists(const char *path)
 
 	if (path == NULL)
 		return (0);
-	return (stat(path, &buffer) == 0);
+	if (stat(path, &buffer) != 0)
+		return (0);
+	else
+	{
+		if (S_ISDIR(buffer.st_mode))
+			return (FILETYPE_DIRECTORY);
+		else
+			return (FILETYPE_REGULAR);
+	}
 }

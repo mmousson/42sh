@@ -18,18 +18,19 @@
 **
 */
 
-static void	list_manager(int flag, t_vars *element)
+static int	list_manager(int flag, t_vars *element)
 {
 	static t_vars	*local_ref = NULL;
 	t_vars			*next;
 
-	if (flag == VAR_ADD && element != NULL)
+	if (flag == VAR_ADD)
 	{
+		if (element == NULL)
+			return (-1);
 		element->next = local_ref;
 		local_ref = element;
 	}
 	else
-	{
 		while (local_ref != NULL)
 		{
 			next = local_ref->next;
@@ -42,7 +43,7 @@ static void	list_manager(int flag, t_vars *element)
 			ft_memdel((void **)&(local_ref));
 			local_ref = next;
 		}
-	}
+	return (1);
 }
 
 /*
@@ -51,13 +52,23 @@ static void	list_manager(int flag, t_vars *element)
 
 static t_vars	*new_var(char *name, char *value, t_process *proc)
 {
+	int		i;
 	t_vars	*result;
 
+	if (name == NULL || value == NULL || *name == '\0')
+		return (NULL);
+	i = -1;
+	while (name[++i] != '\0')
+		if (!(ft_isalpha(name[i]) || name[i] == '_'))
+			return (NULL);
 	ft_strdel(&(proc->name));
 	proc->name = ft_strdup(proc->argv[1]);
 	utility_array_shift(proc->argv);
 	if ((result = ft_memalloc(sizeof(t_vars))) == NULL)
+	{
+		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 		return (NULL);
+	}
 	result->name = name;
 	result->value = value;
 	return (result);
@@ -116,7 +127,8 @@ int			job_check_variable_declaration(t_process *proc)
 			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 			return (DROP_PROCESS);
 		}
-		list_manager(VAR_ADD, new_var(name, value, proc));
+		if (list_manager(VAR_ADD, new_var(name, value, proc)) == -1)
+			break ;
 		if (proc->argv[0] == NULL)
 			return (update_dropped_process_informations(proc));
 	}

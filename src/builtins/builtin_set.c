@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 21:24:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 21:58:37 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:57:22 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,14 @@ static int	usage(char caught_invalid_option)
  **	Return Value: ALWAYS SET_OK (0)
  */
 
-static int	list_shell_variables(void)
+static int	list_shell_variables(char **env)
 {
+	int		i;
 	t_vars	*current;
 
+	i = -1;
+	while (env[++i] != NULL)
+		ft_putendl(env[i]);
 	current = g_shell_var_list;
 	while (current)
 	{
@@ -159,10 +163,9 @@ int			blt_set(int argc, char **argv, char ***env)
 	int	options;
 	int	parsed;
 
-	(void)env;
 	parsed = 0;
 	if (argc == 1)
-		return (list_shell_variables());
+		return (list_shell_variables(*env));
 	if ((options = parse_options(argc, argv, &parsed)) == -1)
 		return (SET_UNAVAILABLE_OPTION);
 	argc -= parsed;

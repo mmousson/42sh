@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 11:51:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/22 14:41:52 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:51:07 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_builtins	g_builtins[] = {
 	{"echo", &blt_echo},
 	{"exit", &blt_exit},
 	{"export", &blt_export},
+	{"fc", &blt_fc},
 	{"fg", &blt_fg},
 	{"hash", &blt_hash},
 	{"jobs", &blt_jobs},

@@ -6,11 +6,10 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/30 17:18:40 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/31 15:40:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 #include "sh42.h"
 #include "libft.h"
@@ -19,20 +18,12 @@
 static void	notify_bad_command(t_process *pr, const char *cmd, const char *msg)
 {
 	if (pr->io_channels.input != STDIN_FILENO)
-	{
-		printf("Closing input after bad command: %d\n", pr->io_channels.input);
 		close(pr->io_channels.input);
-	}
 	if (pr->io_channels.output != STDOUT_FILENO)
-	{
-		printf("Closing output after bad command: %d\n", pr->io_channels.output);
 		close(pr->io_channels.output);
-	}
 	if (pr->next != NULL)
 	{
-		printf("Closing pipe reading end after bad command: %d\n", pr->p[0]);
 		close(pr->p[0]);
-		printf("Closing pipe writing end after bad command: %d\n", pr->p[1]);
 		close(pr->p[1]);
 	}
 	pr->status = 127;
@@ -45,9 +36,16 @@ static void	notify_bad_command(t_process *pr, const char *cmd, const char *msg)
 
 static int	is_path_valid(t_process *pr, const char *path)
 {
-	if (utility_file_exists(path))
+	int	file_type;
+
+	if ((file_type = utility_file_exists(path)) != 0)
 	{
-		if (access(path, X_OK) == 0)
+		if (file_type == FILETYPE_DIRECTORY)
+		{
+			notify_bad_command(pr, path, ": Is a directory");
+			return (0);
+		}
+		else if (access(path, X_OK) == 0)
 			return (1);
 		else
 		{
@@ -152,8 +150,11 @@ void		job_command_search_and_exec(t_job *job, t_process *proc, int fg)
 
 	if (job_check_variable_declaration(proc) == DROP_PROCESS)
 		return ;
-	if (ft_strchr(proc->argv[0], '/') && is_path_valid(proc, proc->argv[0]))
-		launch_proc(job, proc, fg);
+	if (ft_strchr(proc->argv[0], '/') != NULL)
+	{
+		if (is_path_valid(proc, proc->argv[0]))
+			launch_proc(job, proc, fg);
+	}
 	else
 	{
 		if (job->first_process->next == NULL
