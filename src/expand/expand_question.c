@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_spec_param.c                                :+:      :+:    :+:   */
+/*   expand_question.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 16:06:51 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/03 00:56:22 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/06/02 23:09:50 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/06/02 23:16:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh42.h"
 #include "expand.h"
-#include <stdlib.h>
-#define OFFSET 10
-
 #include "libft.h"
-char			*get_spec_param(const char *word)
-{
-	static char	*table = "?$_!";
-	char		spec;
-	int			k;
 
-	if (!word || !word[0])
-		return (NULL);
-	spec = word[0];
-	if (spec >= '0' && spec <= '9')
-		return (core_spec_var_setget(spec - '0', NULL, GET));
-	k = -1;
-	while (table[++k])
-		if (spec == table[k])
-			return (core_spec_var_setget(k + OFFSET, NULL, GET));
-	return (NULL);
+int			expand_question(char *var, const char *str, char ***arge)
+{
+	char	*res;
+
+	if ((res = take_word_expand(str + 2, arge)) && res[0])
+	{
+		ft_putstr_fd("42sh: ",2 );
+		ft_putstr_fd(var, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(res, 2);
+		ft_putstr_fd("\n", 2);
+		free(res);
+	}
+	else
+	{
+		ft_putstr_fd("42sh: ", 2);
+		ft_putstr_fd(var, 2);
+		ft_putstr_fd(": parameter null or not set\n", 2);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:21:40 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/15 16:57:50 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/01 02:22:35 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		is_red(t_tree *tree)
 	return (0);
 }
 
-static void		ft_set_red(t_red **red, t_tree *tree, t_launch *cmd)
+static void		ft_set_red(t_red **red, t_tree *tree, t_launch *cmd, char *set)
 {
 	t_tree		*tmp;
 
@@ -37,11 +37,13 @@ static void		ft_set_red(t_red **red, t_tree *tree, t_launch *cmd)
 		cmd->will_red = 0;
 	if (tmp)
 	{
-		if (tmp->type == CHAR && ft_atoi(tmp->content + 1))
-			if (tmp->content && tmp->content[0] == '&')
-				(*red)->end = ft_atoi(tmp->content + 1);
-		if (tmp->type == CHAR && ft_strcmp(tmp->content, "&-"))
-			(*red)->end = -2;
+		if (tmp->type == CHA && end_agg(set))
+		{
+			if (tmp->content && ft_atoi(tmp->content))
+				(*red)->end = ft_atoi(tmp->content);
+			if (tmp->content[0] == '-')
+				(*red)->end = -3;
+		}
 		(*red)->end_nm = ft_strdup(tmp->content);
 	}
 }
@@ -79,18 +81,18 @@ int				ft_add_red(t_tree *tree, t_launch *cmd)
 	{
 		red = ft_target_red(cmd);
 		red->type = tree->type;
-		if (tree->content && (!ft_strcmp(tree->content, ">>")
-					|| !ft_strcmp(tree->content, "<<")))
+		if (tree->content && (ft_strstr(tree->content, ">>")
+					|| ft_strstr(tree->content, "<<")))
 			red->type += DBL;
 		if (tree->left && cmd->will_red != -1)
 		{
-			if (tree->left->type == CHAR && ft_atoi(tree->left->content))
+			if (tree->left->type == CHA && ft_atoi(tree->left->content))
 				red->srt = ft_atoi(tree->left->content);
 			else if (tree->left->content)
 				ft_add_argv(ft_strdup(tree->left->content), cmd);
 		}
 		if (tree->right)
-			ft_set_red(&red, tree->right, cmd);
+			ft_set_red(&red, tree->right, cmd, tree->content);
 		else
 			cmd->will_red = 1;
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 09:18:57 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/31 15:33:08 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/03 00:56:24 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,36 @@
 #include "expand.h"
 #include "libft.h"
 
-static char	*take_word_expand(const char *str, char ***arge)
+static void two_point(char **value, char ***arge, const char *str, char *var)
 {
-	int		k;
-	char	*word;
-	int		pile;
+	char	*res;
 
-	pile = 1;
-	k = 0;
-	while (str[k] && pile)
+	if (str[1] == '-' && !*value)
+		*value = take_word_expand(str + 2, arge);
+	if (str[1] == '+' && *value)
 	{
-		if (str[k] == '$' && str[k + 1] == '{')
-			pile++;
-		else if (str[k] == '}')
-			pile--;
-		k++;
+			free(*value);
+			*value = take_word_expand(str + 2, arge);
 	}
-	word = ft_strsub(str, 0, k - 1);
-	expand_param_word(&word, arge);
-	return (word);
+	if (str[1] == '=' && !*value)
+	{
+		res = take_word_expand(str + 2, arge);
+		utility_set_var(var, res, arge, 1);
+		*value = res;
+	}
+	else if (str[1] == '?' && !*value)
+		expand_question(var, str, arge);
 }
 
-static void	compute_word(char **value, char ***arge, const char *str, int end)
+static void	compute_word(char **value, char ***arge, const char *str, char *var)
 {
-	if (str[end] != ':')
-		return ;
-	if (str[end + 1] == '-')
-		if (!(*value))
-			*value = take_word_expand(str + end + 2, arge);
-	if (str[end + 1] == '+')
-		if (*value)
-		{
-			free(*value);
-			*value = take_word_expand(str + end + 2, arge);
-		}
-}
+	if (str[0] == ':')
+		two_point(value, arge, str, var);
+	else if (str[0] == '#')
+		expand_hash(value, str, var, arge);
+	else if (str[0] == '%')
+		expand_perc(value, str, var, arge);
+	}
 
 static int	is_valid_line(const char *str)
 {
@@ -87,7 +82,7 @@ char		*expand_curly(const char *str, char ***arge, int *end, int *error)
 	*end = k + 1;
 	if (str[k])
 		(*end)++;
-	if (end_var != k && str[end_var] != ':')//to adapt with :- :+ ## %%
+	if (end_var != k && ft_strchr(":#%", str[end_var] != ':'))
 	{
 		*error = -1;
 		return (NULL);
@@ -95,7 +90,7 @@ char		*expand_curly(const char *str, char ***arge, int *end, int *error)
 	var = ft_strsub(str, 0, end_var);
 	if (!(value = get_spec_param(str)))
 		value = utility_get_param(var, *arge);
-	compute_word(&value, arge, str, end_var);
+	compute_word(&value, arge, str + end_var, var);
 	ft_strdel(&var);
 	return (value);
 }

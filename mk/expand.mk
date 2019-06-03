@@ -6,7 +6,7 @@
 #    By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/22 12:16:40 by oboutrol          #+#    #+#              #
-#    Updated: 2019/05/29 19:44:13 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/06/03 00:54:03 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,11 @@ EXPAND_NAME =	expand_manager.c			\
 				expand_arithmetic/tools/ast.c \
 				expand_arithmetic/tools/token.c\
 				expand_token.c				\
+				expand_curly_tool.c			\
 				expand_tild.c				\
-				expand_tild_unit.c				\
+				expand_tild_unit.c			\
+				expand_param_glob.c			\
+				expand_question.c			\
 				expand_quote_removal.c
 
 EXPAND_SRCS = $(addprefix $(EXPAND_PATH),$(EXPAND_NAME))

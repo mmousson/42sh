@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/30 18:33:07 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:06:27 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 ** VS - 17:	Validation Star, Validation, but manage current char the next turn
 ** MO - 18:	MOre, incomplete lexing, ask for more char
 ** SD - 19: Store Dollard
+** VO - 20: Validate Old
 ** ER - -1: Error
 ** EN - -2:	ENd, end of the lexing phasis
 ** EP - -3: Error Patrenthesis, for stacking error
@@ -71,6 +72,7 @@ typedef enum	e_state
 	VS,
 	MO,
 	SD,
+	VO,
 	ER = -1,
 	EN = -2,
 	EP = -3,
