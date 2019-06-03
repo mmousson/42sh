@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:36:51 by akarasso          #+#    #+#             */
-/*   Updated: 2019/05/27 19:26:09 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/03 15:37:14 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int				is_matching_range(t_globtok *tok, t_rng_token *tkn, char *file);
 void			walk_range(char **beg);
 void			parse_range(char *allow, char *s);
 int				is_quote(int c);
-void			expansion_unquote(char *str);
+size_t			expansion_unquote(char *str);
 int				get_path_depth(char *path);
 t_globtok		*globtok_last(t_globtok *lst);
 unsigned int	globlexlen(t_globlex *container);
