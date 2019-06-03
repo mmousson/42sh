@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/03 18:09:07 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/03 18:49:38 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static int
 	while ((beg = look_for_arith_mark(*str))
 			&& *(end = walkparenthese(beg + 2)))
 	{
-		ft_putendl("lol");
 		ft_memset((void *)beg, 0, 3);
 		ft_memset((void *)(end - 1), 0, 2);
 		if (!(beg = ft_strdup(beg + 3)))
