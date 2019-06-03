@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/28 17:48:43 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/03 17:41:51 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,23 @@ int
 	return (-1);
 }
 
+static t_arithtok	*walk_parentheses_tok(t_arithtok *tok)
+{
+	while (tok)
+	{
+		if (tok->type == OP_PAR)
+		{
+			if (tok->next)
+				tok = walk_parentheses_tok(tok->next);
+		}
+		else if (tok->type == CL_PAR)
+			break ;
+		if (tok)
+			tok = tok->next;
+	}
+	return (tok);
+}
+
 void
 	routine_tok(t_arithtok **token, t_arithtok **primary,
 													t_arithtok **primary_prev)
@@ -56,8 +73,7 @@ void
 			*primary = *token;
 		}
 		if ((*token)->type == OP_PAR)
-			while (*token && (*token)->type != CL_PAR)
-				*token = (*token)->next;
+			*token = walk_parentheses_tok((*token)->next);
 		if (*token)
 		{
 			tmp = *token;

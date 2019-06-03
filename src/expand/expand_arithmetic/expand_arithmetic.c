@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/28 18:54:05 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/03 18:09:07 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int
 	*res = 0;
 	if (!check_expression(str, tok))
 	{
-		if (arith_build_ast(&ast, &tok)
-			|| compute(env, str, ast, res))
+		if (arith_build_ast(&ast, &tok))
+			return (1);
+		if (compute(env, str, ast, res))
 			return (1);
 		astlist_del(&ast);
 	}
@@ -38,6 +39,23 @@ int
 	return (0);
 }
 
+char	*look_for_arith_mark(char *s)
+{
+	while (*s)
+	{
+		if (*s == '\\')
+			++s;
+		else if (*s == '\'')
+			while (*(++s) != '\'')
+				;
+		else if (*s == '$' && *(s + 1) == '(' && *(s + 2) == '(')
+			return (s);
+		if (s)
+			++s;
+	}
+	return (NULL);
+}
+
 static int
 	expand_arithmetic_one(char **str, char ***env)
 {
@@ -45,9 +63,10 @@ static int
 	char		*end;
 	long		res;
 
-	while ((beg = ft_strstr(*str, "$(("))
+	while ((beg = look_for_arith_mark(*str))
 			&& *(end = walkparenthese(beg + 2)))
 	{
+		ft_putendl("lol");
 		ft_memset((void *)beg, 0, 3);
 		ft_memset((void *)(end - 1), 0, 2);
 		if (!(beg = ft_strdup(beg + 3)))

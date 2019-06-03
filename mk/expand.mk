@@ -39,7 +39,7 @@ EXPAND_NAME =	expand_manager.c			\
 				expand_arithmetic/parser/lexer/lexer.c \
 				expand_arithmetic/tools/skip_spaces.c \
 				expand_arithmetic/tools/ast.c \
-				expand_arithmetic/tools/token.c\
+				expand_arithmetic/tools/token.c \
 				expand_token.c				\
 				expand_curly_tool.c			\
 				expand_tild.c				\

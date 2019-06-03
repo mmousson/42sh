@@ -6,11 +6,12 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/28 16:46:19 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/03 17:19:16 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arithmetic.h"
+#include "libft.h"
 
 int		compute_operation(char ***env, char *exp, t_arithast *ast, long *res)
 {
