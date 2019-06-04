@@ -70,5 +70,6 @@ typedef struct	s_options_infos
 
 t_options_infos	*blt_fc_parse_options(int argc, char **argv, char **env);
 void			blt_fc_read_args(int argc, char **argv, t_options_infos *inf);
+void			blt_fc_set_default_values(t_options_inf *inf);
 
 #endif

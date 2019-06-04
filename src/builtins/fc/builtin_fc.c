@@ -33,8 +33,6 @@ int			blt_fc(int argc, char **argv, char ***env)
 	argc -= inf->parsed;
 	argv += inf->parsed;
 	blt_fc_read_args(argc, argv, inf);
-	ft_putendl_fd("Remaining:",2);
-	for(int i = 0; i < argc ; i++)
-		ft_putendl_fd(argv[i], 2);
+	blt_fc_set_default_values(inf);
 	return (0);
 }
