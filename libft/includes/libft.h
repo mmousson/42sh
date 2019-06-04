@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 02:11:28 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/29 14:10:40 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/04 15:00:33 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,7 @@ void				ft_putendl2_fd(char const *s1, char const *s2, int fd);
 void				ft_putendl3_fd(char const *s1, char const *s2, char const *s3, int fd);
 char				**ft_strtabdup(char **tab);
 char				**ft_strtaballoc(size_t len);
+char				*ft_strrev(char *str);
+int					ft_strnequ(char const *s1, char const *s2, size_t n);
 
 #endif
