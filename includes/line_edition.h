@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:21:08 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/30 19:02:41 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/04 23:20:59 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct			s_cm
 typedef struct			s_history
 {
 	char				*line;
+	int					id;
 	struct s_history	*next;
 	struct s_history	*prev;
 }						t_history;

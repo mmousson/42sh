@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 10:09:40 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/22 13:48:16 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/04 23:23:48 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void				hist_add(char *str)
 		sh_errorterm(TMALLOC);
 	new->next = tmp;
 	new->prev = NULL;
+	if (g_env.ry)
+		new->id = g_env.ry->id + 1;
 	if (tmp)
 		tmp->prev = new;
 	if (!(new->line = ft_strdup(str)))

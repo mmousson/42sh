@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 15:45:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/14 15:59:51 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/04 23:27:16 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		blt_print(t_history *ry, int i)
 		blt_print(ry->next, i - 1);
 	if (ry->line)
 	{
-		ft_putnbr(i);
+		ft_putnbr(ry->id + 1);
 		ft_putstr("  ");
 		ft_putendl(ry->line);
 	}
