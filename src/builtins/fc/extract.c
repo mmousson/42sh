@@ -76,12 +76,10 @@ void				blt_fc_extract(t_options_infos *inf)
 		inf->from = get_link_from_string(inf->first, &tmp);
 	if (inf->last == NULL)
 		return ;
-	if (ft_valid_to_atoi(inf->last) && (tmp = ft_atoi(inf->last)))
-		inf->to = get_link_at(ft_clamp(tmp, -depth, depth));
+	if (ft_valid_to_atoi(inf->last) && (tmp2 = ft_atoi(inf->last)))
+		inf->to = get_link_at(ft_clamp(tmp2, -depth, depth));
 	else
-	{
 		inf->to = get_link_from_string(inf->last, &tmp2);
-		if (tmp > tmp2)
-			inf->reversed = !inf->reversed;
-	}
+	if (ft_abs(tmp) > ft_abs(tmp2))
+		inf->reversed = !inf->reversed;
 }

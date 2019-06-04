@@ -14,9 +14,18 @@
 
 int	blt_fc_list(t_options_infos *inf)
 {
-	ft_putstr_fd("Starting listing procedure from: ", STDERR_FILENO);
-	ft_putstr_fd(inf->first, 2);
-	ft_putstr_fd(" to: ", STDERR_FILENO);
-	ft_putendl_fd(inf->last, 2);
+	t_history	*current;
+	t_history	*target;
+	
+	target = inf->reversed ? inf->to : inf->from;
+	current = inf->reversed ? inf->from : inf->to;
+	while (current != NULL)
+	{
+		ft_putchar('\t');
+		ft_putendl(current->line);
+		if (current == target)
+			break ;
+		current = current->prev;
+	}
 	return (0);
 }

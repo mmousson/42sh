@@ -23,14 +23,16 @@ static int	put_commands_to_file(t_options_infos *inf, char *filename)
 {
 	int			fd;
 	t_history	*current;
+	t_history	*target;
 
 	if ((fd = open(filename, O_RDWR | O_CREAT, 0644)) != -1)
 	{
-		current = inf->from;
+		current = inf->reversed ? inf->to : inf->from;
+		target = inf->reversed ? inf->from : inf->to;
 		while (current != NULL)
 		{
 			ft_putendl_fd(current->line, fd);
-			if (current == inf->to)
+			if (current == target)
 				break;
 			current = current->next;
 		}

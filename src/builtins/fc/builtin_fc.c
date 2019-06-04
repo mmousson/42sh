@@ -30,7 +30,7 @@ int			blt_fc(int argc, char **argv, char ***env)
 	blt_fc_set_default_values(inf);
 	blt_fc_extract(inf);
 	if (inf->dash_s != NULL)
-		ret = blt_fc_reinvoke(inf);
+		ret = blt_fc_reinvoke(inf, env);
 	else if (inf->listing)
 		ret = blt_fc_list(inf);
 	else
