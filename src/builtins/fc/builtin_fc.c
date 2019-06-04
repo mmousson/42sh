@@ -34,5 +34,6 @@ int			blt_fc(int argc, char **argv, char ***env)
 	argv += inf->parsed;
 	blt_fc_read_args(argc, argv, inf);
 	blt_fc_set_default_values(inf);
+	blt_fc_free_memory(inf);
 	return (0);
 }

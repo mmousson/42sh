@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:49:45 by mmousson          #+#    #+#              #
-#    Updated: 2019/06/04 09:22:04 by mmousson         ###   ########.fr        #
+#    Updated: 2019/06/04 12:34:09 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ BUILTINS =	builtin_alias.c									\
 			builtin_history.c								\
 			fc/builtin_fc.c									\
 			fc/parse.c										\
+			fc/read_args.c									\
+			fc/set_default_values.c							\
+			fc/free_memory.c								\
 			hash/hash.c										\
 			hash/hash_add_hash_entry.c						\
 			hash/hash_init_hash_table.c						\

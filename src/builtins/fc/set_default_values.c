@@ -12,7 +12,30 @@
 
 #include "fc.h"
 
-void	blt_fc_set_default_values(t_options_inf *inf)
-{
+/*
+**
+*/
 
+void	blt_fc_set_default_values(t_options_infos *inf)
+{
+	if (inf->dash_s != NULL)
+	{
+		if (inf->first == NULL)
+			inf->first = ft_strdup("-1");
+	}
+	else
+	{
+		if (inf->first == NULL)
+		{
+			inf->first = ft_strdup("1");
+			inf->last = ft_strdup("16");
+		}
+		else if (inf->last == NULL)
+		{
+			if (inf->listing)
+				inf->last = ft_strdup("-1");
+			else
+				inf->last = ft_strdup(inf->first);
+		}
+	}
 }
