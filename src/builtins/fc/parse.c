@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fc.h"
+#include "sh42.h"
 
 static int			e_option(t_options_infos *holder, char *opt, char *next)
 {
@@ -86,12 +87,35 @@ static int			parse_argument(t_options_infos *res, char **av, char **env)
 	return (0);
 }
 
+static void			loop(t_options_infos *res, int argc, char **av, char **env)
+{
+	while (++res->parsed < argc)
+	{
+		if (ft_strequ(av[res->parsed], "--"))
+		{
+			res->parsed++;
+			return ;
+		}
+		else if (av[res->parsed][0] == '-')
+		{
+			res->ret = parse_argument(res, av, env);
+			if (res->ret == -1)
+				return ;
+			res->parsed += res->ret;
+		}
+		else
+			return ;
+	}
+	return ;
+}
+
 /*
 **
 */
 
 t_options_infos		*blt_fc_parse_options(int argc, char **av, char **env)
 {
+	char			*tmp;
 	t_options_infos	*res;
 
 	if ((res = ft_memalloc(sizeof(t_options_infos))) == NULL)
@@ -99,22 +123,20 @@ t_options_infos		*blt_fc_parse_options(int argc, char **av, char **env)
 		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 		return (NULL);
 	}
-	while (++res->parsed < argc)
+	loop(res, argc, av, env);
+	if (res->editor_name == NULL)
+		res->editor_name = ft_strdup("/bin/ed");
+	else
 	{
-		if (ft_strequ(av[res->parsed], "--"))
-		{
-			res->parsed++;
-			return (res);
-		}
-		else if (av[res->parsed][0] == '-')
-		{
-			res->ret = parse_argument(res, av, env);
-			if (res->ret == -1)
-				return (res);
-			res->parsed += res->ret;
-		}
-		else
-			return (res);
+		tmp = utility_search(res->editor_name);
+		ft_strdel(&res->editor_name);
+		res->editor_name = tmp;
+	}
+	if (res->editor_name == NULL)
+	{
+		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
+		blt_fc_free_memory(res);
+		return (NULL);
 	}
 	return (res);
 }

@@ -74,6 +74,9 @@ void			blt_fc_read_args(int argc, char **argv, t_options_infos *inf);
 void			blt_fc_set_default_values(t_options_infos *inf);
 void			blt_fc_extract(t_options_infos *inf, t_history **from,
 	t_history **to);
+int				blt_fc_reinvoke(t_options_infos *inf);
+int				blt_fc_list(t_options_infos *inf);
+int				blt_fc_edit_and_reinvoke(t_options_infos *inf);
 void			blt_fc_free_memory(t_options_infos *inf);
 
 #endif

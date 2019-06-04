@@ -18,25 +18,24 @@
 
 int			blt_fc(int argc, char **argv, char ***env)
 {
+	int				ret;
 	t_history		*from;
 	t_history		*to;
 	t_options_infos	*inf;
 
 	if ((inf = blt_fc_parse_options(argc, argv, *env)) == NULL)
 		return (2);
-	if (inf->editor_name == NULL)
-	{
-		if ((inf->editor_name = ft_strdup("/bin/ed")) == NULL)
-		{
-			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
-			return (2);
-		}
-	}
 	argc -= inf->parsed;
 	argv += inf->parsed;
 	blt_fc_read_args(argc, argv, inf);
 	blt_fc_set_default_values(inf);
 	blt_fc_extract(inf, &from, &to);
+	if (inf->dash_s != NULL)
+		ret = blt_fc_reinvoke(inf);
+	else if (inf->listing)
+		ret = blt_fc_list(inf);
+	else
+		ret = blt_fc_edit_and_reinvoke(inf);
 	blt_fc_free_memory(inf);
-	return (0);
+	return (ret);
 }
