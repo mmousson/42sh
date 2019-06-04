@@ -6,14 +6,14 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:32:17 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/03 15:39:55 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/04 17:33:03 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 #include "libft.h"
 
-static t_chr_token	*glob_new_chr_token(int type, char **str)
+t_chr_token			*glob_new_chr_token(int type, char **str)
 {
 	t_chr_token	*new;
 
@@ -25,7 +25,7 @@ static t_chr_token	*glob_new_chr_token(int type, char **str)
 	return (new);
 }
 
-static t_str_token	*glob_new_str_token(int type, char **str)
+t_str_token			*glob_new_str_token(int type, char **str)
 {
 	t_str_token	*new;
 	char		*start;
@@ -45,7 +45,7 @@ static t_str_token	*glob_new_str_token(int type, char **str)
 	return (new);
 }
 
-static t_rng_token	*glob_new_range_token(int type, char **rng)
+t_rng_token			*glob_new_range_token(int type, char **rng)
 {
 	t_rng_token	*new;
 	char		*beg;
@@ -87,13 +87,11 @@ int					tokenize(t_glob *gl)
 
 	path = gl->expr;
 	while (*path)
-	{
 		if ((token = get_token(&path)))
 		{
 			if (token->type == GLO_CONST)
 				token->len = expansion_unquote(token->value);
 			globlex_pushback(gl->lexer, token);
 		}
-	}
 	return (!gl->lexer || !gl->lexer->first);
 }

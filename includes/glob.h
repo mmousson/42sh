@@ -6,14 +6,14 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:36:51 by akarasso          #+#    #+#             */
-/*   Updated: 2019/06/03 15:37:14 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:01:16 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOB_H
 # define GLOB_H
 
-# include <stdlib.h>
+#include <stdlib.h>
 
 # define GLO_STAR			0x01
 # define GLO_QUEST			0x02
@@ -52,6 +52,19 @@ typedef struct	s_glob
 	char		**res;
 	t_globlex	*lexer;
 }				t_glob;
+
+/*
+** Substring Match Main Struct
+*/
+
+typedef struct	s_submatch
+{
+	int			suffix;
+	int			greedy;
+	char		*param;
+	char		*word;
+	t_globlex	*lexer;
+}				t_submatch;
 
 /*
 ** Glob Token Types
@@ -113,5 +126,10 @@ t_globtok		*globlex_pushback(t_globlex *container, void *data);
 int				slice_path(t_glob *gl, char *path);
 void			walk_quote(char **str);
 void			walk_word(char **s);
+t_rng_token		*glob_new_range_token(int type, char **rng);
+t_str_token		*glob_new_str_token(int type, char **str);
+t_chr_token		*glob_new_chr_token(int type, char **str);
+char			*match_word(t_globtok *tok, char *param, int greedy);
+int				tokenize_word_pattern(t_submatch *gl);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 17:48:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/05/31 22:14:20 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ typedef struct		s_builtins
 # define FILETYPE_REGULAR 2
 # define HASH_POWER 31
 # define HASH_MOD 2731
+
+# define INVALID_OPTION 2
+# define SH_OPTS "c"
+# define C_OPTION_OFFSET 0
 
 /*
 **	Structure representing an element of the shell's hashtable

@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_fc.c                                       :+:      :+:    :+:   */
+/*   ft_valid_to_atoi.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 17:47:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 17:47:35 by mmousson         ###   ########.fr       */
+/*   Created: 2019/06/04 13:02:00 by mmousson          #+#    #+#             */
+/*   Updated: 2019/06/04 13:02:00 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	blt_fc(int argc, char **argv, char ***env)
+#include "libft.h"
+
+int	ft_valid_to_atoi(const char *str)
 {
-	(void)argc;
-	(void)argv;
-	(void)env;
-	return (0);
+	if (str == NULL)
+		return (0);
+	while (*str != '\0')
+	{
+		if (!(ft_isdigit(*str) || *str == 32 || (*str >= 9 || *str <= 13)))
+			return (0);
+		str++;
+	}
+	return (1);
 }

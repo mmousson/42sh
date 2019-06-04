@@ -6,7 +6,7 @@
 #    By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/07 00:53:31 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/28 18:56:09 by hben-yah         ###   ########.fr        #
+#    Updated: 2019/06/04 14:56:52 by hben-yah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC =	ft_memset.c				\
 		ft_strcmp.c				\
 		ft_strncmp.c			\
 		ft_atoi.c				\
+		ft_valid_to_atoi.c		\
 		ft_atol.c				\
 		ft_isalpha.c			\
 		ft_isdigit.c			\
@@ -115,7 +116,8 @@ SRC =	ft_memset.c				\
 		ft_atol_base.c			\
 		ft_indexof.c			\
 		ft_is_base.c			\
-		ft_strtabdup.c
+		ft_strtabdup.c			\
+		ft_strrev.c
 
 OBJ = $(subst .c,.o,$(addprefix ./$(OBJDIR)/,$(SRC)))
 DEPS = $(subst .c,.d,$(addprefix ./$(OBJDIR)/,$(SRC)))
