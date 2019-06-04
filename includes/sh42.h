@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 22:14:20 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/04 20:43:10 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,6 @@ void				utility_add_entry_to_environ(char ***environ, char *key,
 	char *value);
 int					utility_rm_entry_from_environ(char ***environ, char *key);
 char				*utility_generate_tmp_filename(void);
-char				*utility_generate_filename(void);
 char				*utility_get_env_var(char ***environ, char *key);
 int					utility_get_environ_length(char **tab);
 void				utility_add_internal_var(char *name, char *value);

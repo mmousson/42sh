@@ -72,7 +72,7 @@ static char	*next_permutation(const char *base)
 **		created and used
 */
 
-char		*utility_generate_filename(void)
+char		*utility_generate_tmp_filename(void)
 {
 	char	*res;
 	char	*tmp;

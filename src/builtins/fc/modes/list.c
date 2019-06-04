@@ -14,6 +14,9 @@
 
 int	blt_fc_list(t_options_infos *inf)
 {
-	(void)inf;
+	ft_putstr_fd("Starting listing procedure from: ", STDERR_FILENO);
+	ft_putstr_fd(inf->first, 2);
+	ft_putstr_fd(" to: ", STDERR_FILENO);
+	ft_putendl_fd(inf->last, 2);
 	return (0);
 }

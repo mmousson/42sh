@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 22:23:03 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/04 21:26:07 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ static void			loop_on_input(int argc, char **argv, char ***env)
 		job_sigchld_handler(0);
 		utility_flush_tmp_vars();
 		line = line_get_readline(PBASIC, argv[1]);
-		// line = ft_strdup("name=value");
+		// (void)argv;
+		// line = ft_strdup("fc -e vim -1");
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 		ret = !lex_str(&line, env);
 		g_last_ret = g_current_ret;

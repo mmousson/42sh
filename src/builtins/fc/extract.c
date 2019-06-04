@@ -63,8 +63,7 @@ static t_history	*get_link_from_string(const char *str, int *pos)
 	return (NULL);
 }
 
-void				blt_fc_extract(t_options_infos *inf, t_history **from,
-	t_history **to)
+void				blt_fc_extract(t_options_infos *inf)
 {
 	int	depth;
 	int	tmp;
@@ -72,16 +71,16 @@ void				blt_fc_extract(t_options_infos *inf, t_history **from,
 
 	depth = get_history_depth();
 	if (ft_valid_to_atoi(inf->first) && (tmp = ft_atoi(inf->first)))
-		*from = get_link_at(ft_clamp(tmp, -depth, depth));
+		inf->from = get_link_at(ft_clamp(tmp, -depth, depth));
 	else
-		*from = get_link_from_string(inf->first, &tmp);
+		inf->from = get_link_from_string(inf->first, &tmp);
 	if (inf->last == NULL)
 		return ;
 	if (ft_valid_to_atoi(inf->last) && (tmp = ft_atoi(inf->last)))
-		*to = get_link_at(ft_clamp(tmp, -depth, depth));
+		inf->to = get_link_at(ft_clamp(tmp, -depth, depth));
 	else
 	{
-		*to = get_link_from_string(inf->last, &tmp2);
+		inf->to = get_link_from_string(inf->last, &tmp2);
 		if (tmp > tmp2)
 			inf->reversed = !inf->reversed;
 	}

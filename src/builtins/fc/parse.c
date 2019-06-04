@@ -60,6 +60,7 @@ static int			add_option(t_options_infos *holder, char *opt, char *next)
 		ft_putstr_fd("42sh: fc: -", STDERR_FILENO);
 		ft_putchar_fd(*opt, STDERR_FILENO);
 		ft_putendl_fd(": invalid option", STDERR_FILENO);
+		holder->invalid = 1;
 		return (-1);
 	}
 	return (0);
@@ -128,15 +129,16 @@ t_options_infos		*blt_fc_parse_options(int argc, char **av, char **env)
 		res->editor_name = ft_strdup("/bin/ed");
 	else
 	{
-		tmp = utility_search(res->editor_name);
+		if ((tmp = utility_search(res->editor_name)) == NULL)
+		{
+			ft_putstr_fd("42sh: ", STDERR_FILENO);
+			ft_putstr_fd(res->editor_name, STDERR_FILENO);
+			ft_putendl_fd(": command not found", STDERR_FILENO);
+			blt_fc_free_memory(res);
+			return (NULL);
+		}
 		ft_strdel(&res->editor_name);
 		res->editor_name = tmp;
-	}
-	if (res->editor_name == NULL)
-	{
-		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
-		blt_fc_free_memory(res);
-		return (NULL);
 	}
 	return (res);
 }
