@@ -18,6 +18,8 @@
 
 int			blt_fc(int argc, char **argv, char ***env)
 {
+	t_history		*from;
+	t_history		*to;
 	t_options_infos	*inf;
 
 	if ((inf = blt_fc_parse_options(argc, argv, *env)) == NULL)
@@ -34,6 +36,7 @@ int			blt_fc(int argc, char **argv, char ***env)
 	argv += inf->parsed;
 	blt_fc_read_args(argc, argv, inf);
 	blt_fc_set_default_values(inf);
+	blt_fc_extract(inf, &from, &to);
 	blt_fc_free_memory(inf);
 	return (0);
 }
