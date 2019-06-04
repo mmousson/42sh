@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "fc.h"
 
 static int			get_history_depth(void)
@@ -27,7 +28,7 @@ static int			get_history_depth(void)
 	return (result);
 }
 
-static t_history	*get_link_at(int index)
+static t_history	*get_link_at(int index, int *pos)
 {
 	t_history	*current;
 
@@ -37,8 +38,12 @@ static t_history	*get_link_at(int index)
 		current = NULL;
 	while (current != NULL)
 	{
-		if ((index += (index > 0) ? -1 : 1) == 0)
+		if ((index >= 0 && current->id == index)
+			|| (index < 0 && ++index == 0))
+		{
+			*pos = current->id;
 			return (current);
+		}
 		current = current->next;
 	}
 	return (NULL);
@@ -56,30 +61,39 @@ static t_history	*get_link_from_string(const char *str, int *pos)
 	while (current != NULL)
 	{
 		if (ft_strnequ(current->line, str, ft_strlen(str)))
+		{
+			*pos = current->id;
 			return (current);
+		}
 		current = current->next;
-		(*pos)++;
 	}
 	return (NULL);
 }
 
 void				blt_fc_extract(t_options_infos *inf)
 {
-	int	depth;
-	int	tmp;
-	int	tmp2;
+	int			depth;
+	int			tmp;
+	int			tmp2;
+	t_history	*tmp_hist;
 
 	depth = get_history_depth();
 	if (ft_valid_to_atoi(inf->first) && (tmp = ft_atoi(inf->first)))
-		inf->from = get_link_at(ft_clamp(tmp, -depth, depth));
+		inf->from = get_link_at(ft_clamp(tmp, -depth, depth), &tmp);
 	else
 		inf->from = get_link_from_string(inf->first, &tmp);
 	if (inf->last == NULL)
 		return ;
 	if (ft_valid_to_atoi(inf->last) && (tmp2 = ft_atoi(inf->last)))
-		inf->to = get_link_at(ft_clamp(tmp2, -depth, depth));
+		inf->to = get_link_at(ft_clamp(tmp2, -depth, depth), &tmp2);
 	else
 		inf->to = get_link_from_string(inf->last, &tmp2);
+	if (inf->reversed)
+	{
+		tmp_hist = inf->from;
+		inf->from = inf->to;
+		inf->to = tmp_hist;
+	}
 	if (ft_abs(tmp) > ft_abs(tmp2))
 		inf->reversed = !inf->reversed;
 }

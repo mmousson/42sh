@@ -27,8 +27,8 @@ void	blt_fc_set_default_values(t_options_infos *inf)
 	{
 		if (inf->first == NULL)
 		{
-			inf->first = ft_strdup("1");
-			inf->last = ft_strdup("16");
+			inf->first = ft_strdup("-16");
+			inf->last = ft_strdup("-1");
 		}
 		else if (inf->last == NULL)
 		{
