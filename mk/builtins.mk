@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:49:45 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/31 17:52:02 by mmousson         ###   ########.fr        #
+#    Updated: 2019/06/04 09:22:04 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,14 @@ BUILTINS =	builtin_alias.c									\
 			builtin_echo.c									\
 			builtin_exit.c									\
 			builtin_export.c								\
-			builtin_fc.c									\
 			builtin_fg.c									\
 			builtin_set.c									\
 			builtin_type.c									\
 			builtin_unalias.c								\
 			builtin_unset.c									\
 			builtin_history.c								\
+			fc/builtin_fc.c									\
+			fc/parse.c										\
 			hash/hash.c										\
 			hash/hash_add_hash_entry.c						\
 			hash/hash_init_hash_table.c						\

@@ -78,7 +78,7 @@ char		*utility_generate_filename(void)
 	char	*tmp;
 	int		i;
 
-	if ((res = ft_strdup(".tmp_")) != NULL)
+	if ((res = ft_strdup("/tmp/.42sh_tmpfile_")) != NULL)
 	{
 		i = 0;
 		while (42)

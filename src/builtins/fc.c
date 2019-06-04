@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_fc.c                                       :+:      :+:    :+:   */
+/*   fc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 17:47:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 17:47:35 by mmousson         ###   ########.fr       */
+/*   Created: 2019/05/31 22:16:21 by mmousson          #+#    #+#             */
+/*   Updated: 2019/05/31 22:16:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	blt_fc(int argc, char **argv, char ***env)
+int	blt_fc(int ac, char **av, char ***env)
 {
-	(void)argc;
-	(void)argv;
+	(void)ac;
+	(void)av;
 	(void)env;
 	return (0);
 }
