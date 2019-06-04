@@ -15,6 +15,7 @@
 
 # include <inttypes.h>
 # include "libft.h"
+# include "line_edition.h"
 
 # define SWITCH 0
 # define GET_EDITOR 1
@@ -71,6 +72,8 @@ typedef struct	s_options_infos
 t_options_infos	*blt_fc_parse_options(int argc, char **argv, char **env);
 void			blt_fc_read_args(int argc, char **argv, t_options_infos *inf);
 void			blt_fc_set_default_values(t_options_infos *inf);
+void			blt_fc_extract(t_options_infos *inf, t_history **from,
+	t_history **to);
 void			blt_fc_free_memory(t_options_infos *inf);
 
 #endif
