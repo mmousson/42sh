@@ -46,7 +46,10 @@ EXPAND_NAME =	expand_manager.c			\
 				expand_tild_unit.c			\
 				expand_param_glob.c			\
 				expand_question.c			\
-				expand_quote_removal.c
+				expand_quote_removal.c		\
+				expand_param/expand_substring/remove_substring/remove_substring.c \
+				expand_param/expand_substring/remove_substring/tokenize.c \
+				expand_param/expand_substring/remove_substring/match_pattern.c
 
 EXPAND_SRCS = $(addprefix $(EXPAND_PATH),$(EXPAND_NAME))
 SRCS += $(EXPAND_SRCS)
