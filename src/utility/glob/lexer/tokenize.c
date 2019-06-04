@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:32:17 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/04 14:48:53 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/04 17:33:03 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,11 @@ int					tokenize(t_glob *gl)
 
 	path = gl->expr;
 	while (*path)
-	{
 		if ((token = get_token(&path)))
 		{
 			if (token->type == GLO_CONST)
 				token->len = expansion_unquote(token->value);
 			globlex_pushback(gl->lexer, token);
 		}
-	}
 	return (!gl->lexer || !gl->lexer->first);
 }

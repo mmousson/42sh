@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 12:45:57 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/04 12:45:57 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/04 17:14:38 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,11 @@ void				blt_fc_extract(t_options_infos *inf, t_history **from,
 	if (inf->last == NULL)
 		return ;
 	if (ft_valid_to_atoi(inf->last) && (tmp = ft_atoi(inf->last)))
-		*to = get_link_at(ft_clamp(tmp, -depth, depth));
-	else
-		*to = get_link_from_string(inf->last, &tmp2);
-	if (tmp > tmp2)
-		inf->reversed = !inf->reversed;
+        *to = get_link_at(ft_clamp(tmp, -depth, depth));
+    else
+    {
+        *to = get_link_from_string(inf->last, &tmp2);
+        if (tmp > tmp2)
+            inf->reversed = !inf->reversed;
+    }
 }
