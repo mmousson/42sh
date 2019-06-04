@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 12:03:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/04 21:14:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/04 23:48:34 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ char	*take_word_expand(const char *str, char ***arge);
 int		expand_question(char *var, const char *str, char ***arge);
 void	expand_glo(char **value, const char *str, char *var, char ***arge);
 char	*remove_substring(char *param, char *word, int suffix, int greedy);
+void	expand_size_word(char **value, const char *str, char ***arge);
 
 #endif

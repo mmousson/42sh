@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 09:18:57 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/04 21:30:43 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/05 00:06:01 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "expand.h"
 #include "libft.h"
 
-static void two_point(char **value, char ***arge, const char *str, char *var)
+static int	 two_point(char **value, char ***arge, const char *str, char *var)
 {
 	char	*res;
 
@@ -33,16 +33,24 @@ static void two_point(char **value, char ***arge, const char *str, char *var)
 		*value = res;
 	}
 	else if (str[1] == '?' && !*value)
+	{
 		expand_question(var, str, arge);
+		return (1);
+	}
+	return (0);
 }
 
-static void	compute_word(char **value, char ***arge, const char *str, char *var)
+static int	compute_word(char **value, char ***arge, const char *str, char *var)
 {
 	if (str[0] == ':')
-		two_point(value, arge, str, var);
+	{
+		if (two_point(value, arge, str, var))
+			return (1);
+	}
 	else if (ft_strchr("#%", str[0]))
 		expand_glo(value, str, var, arge);
-	}
+	return (0);
+}
 
 static int	is_valid_line(const char *str)
 {
@@ -88,7 +96,9 @@ char		*expand_curly(const char *str, char ***arge, int *end, int *error)
 	var = ft_strsub(str, 0, end_var);
 	if (!(value = get_spec_param(str)))
 		value = utility_get_param(var, *arge);
-	compute_word(&value, arge, str + end_var, var);
+	if (str[0] == '#')
+		expand_size_word(&value, str, arge);
+	*error = compute_word(&value, arge, str + end_var, var);
 	ft_strdel(&var);
 	return (value);
 }

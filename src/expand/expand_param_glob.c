@@ -6,15 +6,34 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 23:16:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/04 21:30:45 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/05 00:07:29 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include <stdlib.h>
 #include "sh42.h"
-
 #include "libft.h"
+
+void		expand_size_word(char **value, const char *str, char ***arge)
+{
+	char	*var;
+	char	*expanded;
+	int		size;
+
+	expanded = NULL;
+	if ((var = take_word_expand(str + 1, arge)))
+	{
+		expanded = utility_get_param(var, *arge);
+		ft_strdel(&var);
+	}
+	size = 0;
+	while (expanded && expanded[size])
+		size++;
+	*value = ft_itoa(size);
+	ft_strdel(&expanded);
+}
+
 void		expand_glo(char **value, const char *str, char *var, char ***arge)
 {
 	int		greedy;
