@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 09:18:57 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/03 00:56:24 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/04 02:06:39 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char		*expand_curly(const char *str, char ***arge, int *end, int *error)
 	{
 		if (str[k] == '$' && str[k + 1] == '{')
 			pile++;
-		else if (pile == 1 && !end_var && !is_char_exp(str[k]))
+		else if (pile == 1 && !end_var && !is_char_exp(str[k]) && str[k] != '/'))
 			end_var = k;
 		if (str[k] == '}')
 			pile--;
@@ -82,7 +82,7 @@ char		*expand_curly(const char *str, char ***arge, int *end, int *error)
 	*end = k + 1;
 	if (str[k])
 		(*end)++;
-	if (end_var != k && ft_strchr(":#%", str[end_var] != ':'))
+	if (end_var != k && !ft_strchr(":#%", str[end_var]))
 	{
 		*error = -1;
 		return (NULL);
