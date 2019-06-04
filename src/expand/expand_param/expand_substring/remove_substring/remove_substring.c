@@ -6,21 +6,21 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 14:40:16 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/04 16:01:09 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/04 17:09:36 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 #include "libft.h"
 
-void	free_submatch(t_submatch *sm)
+static void	free_submatch(t_submatch *sm)
 {
 	free(sm->param);
 	free(sm->word);
 	globlexdel(&sm->lexer);
 }
 
-int		get_match(t_submatch *sm)
+static char	*get_match(t_submatch *sm)
 {
 	char *ptr;
 
@@ -34,6 +34,7 @@ int		get_match(t_submatch *sm)
 char	*remove_substring(char *param, char *word, int suffix, int greedy)
 {
 	t_submatch sm;
+	char *res;
 
 	ft_bzero(&sm, sizeof(sm));
 	sm.suffix = suffix;
