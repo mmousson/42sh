@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 09:18:57 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/04 02:06:39 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/04 21:30:43 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ static void	compute_word(char **value, char ***arge, const char *str, char *var)
 {
 	if (str[0] == ':')
 		two_point(value, arge, str, var);
-	else if (str[0] == '#')
-		expand_hash(value, str, var, arge);
-	else if (str[0] == '%')
-		expand_perc(value, str, var, arge);
+	else if (ft_strchr("#%", str[0]))
+		expand_glo(value, str, var, arge);
 	}
 
 static int	is_valid_line(const char *str)
@@ -70,7 +68,7 @@ char		*expand_curly(const char *str, char ***arge, int *end, int *error)
 	{
 		if (str[k] == '$' && str[k + 1] == '{')
 			pile++;
-		else if (pile == 1 && !end_var && !is_char_exp(str[k]) && str[k] != '/'))
+		else if (pile == 1 && !end_var && !is_char_exp(str[k]) && str[k] != '/')
 			end_var = k;
 		if (str[k] == '}')
 			pile--;
