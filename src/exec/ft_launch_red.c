@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:02 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/01 19:38:07 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/05 03:55:44 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ static int	make_rel(t_red *red, int *og, int *dir)
 {
 	if (red->type == REL && red->end_nm)
 	{
-		if ((*dir = open(red->end_nm, O_RDONLY)) == -1)
+		if (red->end != -1)
+			*dir = red->end;
+		else if ((*dir = open(red->end_nm, O_RDONLY)) == -1)
 			return (error_open(red->end_nm));
 		*og = 0;
 	}
@@ -44,6 +46,11 @@ static int	make_rer(t_red *red, int *og, int *dir)
 				*dir = 1;
 			else
 				*dir = red->end;
+		}
+		else if (!ft_strcmp(red->end_nm, "-"))
+		{
+			*dir = -1;
+			red->close = 1;
 		}
 		else if ((*dir = open(red->end_nm, O_WRONLY | O_TRUNC | O_CREAT,
 					S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR)) == -1)
@@ -86,9 +93,7 @@ static int	make_one_red(t_red *red, t_launch *cmd)
 		og = red->srt;
 	if (dir != -2 && og != -2)
 	{
-		if (red->end == -3)
-			dir = -3;
-		ft_add_pile(og, dir, cmd);
+		ft_add_pile(og, dir, cmd, red->close);
 	}
 	return (0);
 }

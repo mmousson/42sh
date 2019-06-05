@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:21:40 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/01 02:22:35 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/05 03:55:43 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int		is_red(t_tree *tree)
 static void		ft_set_red(t_red **red, t_tree *tree, t_launch *cmd, char *set)
 {
 	t_tree		*tmp;
+	int			k;
 
 	tmp = tree;
 	if (is_red(tmp))
@@ -41,8 +42,11 @@ static void		ft_set_red(t_red **red, t_tree *tree, t_launch *cmd, char *set)
 		{
 			if (tmp->content && ft_atoi(tmp->content))
 				(*red)->end = ft_atoi(tmp->content);
-			if (tmp->content[0] == '-')
-				(*red)->end = -3;
+			k = 0;
+			while (ft_isdigit(tmp->content[k]))
+				k++;
+			if (tmp->content[k] == '-')
+				(*red)->close = 1;
 		}
 		(*red)->end_nm = ft_strdup(tmp->content);
 	}
