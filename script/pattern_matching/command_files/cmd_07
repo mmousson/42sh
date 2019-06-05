@@ -1,1 +1,1 @@
-cat ./*/*/* ./*/*
+mkdir '[x' && touch '[x/foo'

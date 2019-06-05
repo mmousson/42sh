@@ -7,10 +7,10 @@ ok=0
 ko=0
 for cmd in command_files/*; do
 	str=`cat $cmd`
-	printf "\nLaunching: %-65s%s" "$str" "=>"
+	printf "\n%2d: Launching: %-65s%s" $i "$str" "=>"
 	bash < $cmd > expected_outputs/out_$i 2>&1
 	../../42sh < $cmd > outputs/out_$i 2>&1
-	sed -i 's/42sh/bash/g' outputs/out_$i
+	sed -i '' "s/42sh/bash/g" outputs/out_$i
 	diff expected_outputs/out_$i outputs/out_$i > /dev/null 2>&1
 	if [ $? = 0 ]
 	then
@@ -19,6 +19,8 @@ for cmd in command_files/*; do
 	else
 		printf "\033[1;31m[DIFF KO]\033[0m"
 		ko=$(($ko + 1))
+		mkdir -p error_logs
+		cp /tmp/diff_log error_logs/err_`printf "%02d" $i`
 	fi
 	i=$(($i + 1))
 done
@@ -33,4 +35,4 @@ else
 	printf "\033[1;31m[UNIT TESTS FAILURE]\033[0m\n"
 fi
 printf "\n=== END OF REPORT =====================================================================\n\n"
-rm -f \[c\] a\? aa ab b\*
+rm -rf empty/ expected_outputs/ one outputs/ \[c\] a\? aa ab b\* !bc +bc ,bc -bc 0bc 1bc 11 22 33 \[x/foo ab\[x abc bb bbc cbc cc \[x/ a\[a-z\]\[x .bc

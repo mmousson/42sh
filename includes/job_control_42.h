@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/30 22:10:14 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/05 01:56:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,8 @@ extern t_job			*g_active_job_list;
 */
 
 void					job_add_to_active_job_list(t_job *job);
-int						job_check_variable_declaration(t_process *proc);
+int						job_check_variable_declaration(t_process *proc,
+	char ***env);
 void					job_free(t_job *job);
 int						job_argc(char **argv);
 int						job_launch(t_job *job, int fg);

@@ -18,7 +18,7 @@
 **
 */
 
-static int	list_manager(int flag, t_vars *element)
+static int	list_manager(int flag, t_vars *element, char ***env)
 {
 	static t_vars	*local_ref = NULL;
 	t_vars			*next;
@@ -35,7 +35,7 @@ static int	list_manager(int flag, t_vars *element)
 		{
 			next = local_ref->next;
 			if (flag == VAR_PUSH_INTERNAL)
-				utility_add_internal_var(local_ref->name, local_ref->value);
+				utility_set_var(local_ref->name, local_ref->value, env, 0);
 			else if (flag == VAR_PUSH_TMP)
 				utility_add_tmp_var(local_ref->name, local_ref->value);
 			ft_strdel(&local_ref->name);
@@ -78,9 +78,9 @@ static t_vars	*new_var(char *name, char *value, t_process *proc)
 **
 */
 
-static int	update_dropped_process_informations(t_process *proc)
+static int	update_dropped_process_informations(t_process *proc, char ***env)
 {
-	list_manager(VAR_PUSH_INTERNAL, NULL);
+	list_manager(VAR_PUSH_INTERNAL, NULL, env);
 	proc->valid_to_wait_for = false;
 	proc->status = 0;
 	proc->completed = true;
@@ -99,6 +99,7 @@ static int	update_dropped_process_informations(t_process *proc)
 **	Arguments:
 **	proc -> A pointer to the Data-Strucure holding informations about
 **		the process having possible varaible declaration
+**	env -> The shell's current environment
 **
 **	Return Value:
 **	DROP (0) -> All arguments have been consumeed by variable declarations
@@ -107,7 +108,7 @@ static int	update_dropped_process_informations(t_process *proc)
 **		JC engine must therefore try to start the process
 */
 
-int			job_check_variable_declaration(t_process *proc)
+int			job_check_variable_declaration(t_process *proc, char ***env)
 {
 	char	*catch;
 	char	*name;
@@ -127,11 +128,11 @@ int			job_check_variable_declaration(t_process *proc)
 			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 			return (DROP_PROCESS);
 		}
-		if (list_manager(VAR_ADD, new_var(name, value, proc)) == -1)
+		if (list_manager(VAR_ADD, new_var(name, value, proc), env) == -1)
 			break ;
 		if (proc->argv[0] == NULL)
-			return (update_dropped_process_informations(proc));
+			return (update_dropped_process_informations(proc, env));
 	}
-	list_manager(VAR_PUSH_TMP, NULL);
+	list_manager(VAR_PUSH_TMP, NULL, env);
 	return (CONTINUE_PROCESS);
 }

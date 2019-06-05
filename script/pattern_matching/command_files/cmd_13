@@ -1,1 +1,1 @@
-touch 'a[a-z][x' 'ab[x'
+echo [-ab]*

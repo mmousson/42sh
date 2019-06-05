@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 15:40:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/05 01:58:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void		job_command_search_and_exec(t_job *job, t_process *proc, int fg)
 {
 	int	blt_pos;
 
-	if (job_check_variable_declaration(proc) == DROP_PROCESS)
+	if (job_check_variable_declaration(proc, proc->environ) == DROP_PROCESS)
 		return ;
 	if (ft_strchr(proc->argv[0], '/') != NULL)
 	{

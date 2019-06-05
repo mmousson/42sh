@@ -11,7 +11,7 @@ for cmd in command_files/*; do
 	printf "\n%2d: Launching: %-65s%s" $i "$str" "=>"
 	bash < $cmd > expected_outputs/out_$i 2>&1
 	../../42sh < $cmd > outputs/out_$i 2>&1
-	sed -i 's/42sh/bash/g' outputs/out_$i
+	sed -i '' "s/42sh/bash/g" outputs/out_$i
 	diff expected_outputs/out_$i outputs/out_$i > /tmp/diff_log 2>&1
 	if [ $? = 0 ]
 	then
@@ -36,4 +36,4 @@ else
 	printf "\033[1;31m[UNIT TESTS FAILURE]\033[0m\n"
 fi
 printf "\n=== END OF REPORT =========================================================================\n\n"
-rm emptyfile exec noexec noread notempty notfifo nowrite read write
+rm -rf emptyfile exec noexec noread notempty notfifo nowrite read write expected_outputs outputs

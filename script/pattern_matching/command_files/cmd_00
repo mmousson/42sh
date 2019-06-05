@@ -1,1 +1,1 @@
-mkdir empty && cd empty
+mkdir -p empty && test -e empty || cd empty

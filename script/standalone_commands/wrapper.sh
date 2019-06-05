@@ -18,6 +18,8 @@ for cmd in command_files/*; do
 	else
 		printf "\033[1;31m[DIFF KO]\033[0m"
 		ko=$(($ko + 1))
+		mkdir -p error_logs
+		cp /tmp/diff_log error_logs/err_`printf "%02d" $i`
 	fi
 	i=$(($i + 1))
 done
@@ -32,3 +34,4 @@ else
 	printf "\033[1;31m[UNIT TESTS FAILURE]\033[0m\n"
 fi
 printf "\n=== END OF REPORT =============================\n\n"
+rm -rf expected_outputs/ outputs/

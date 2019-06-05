@@ -1,1 +1,1 @@
-rm -rf ./*
+touch 'a[a-z][x' 'ab[x'

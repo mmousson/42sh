@@ -1,1 +1,1 @@
-echo [*; echo *[x; echo [x/*
+touch ".bc" "abc" "bbc" "cbc" "-bc" '!bc' "+bc" ",bc" "0bc" "1bc"

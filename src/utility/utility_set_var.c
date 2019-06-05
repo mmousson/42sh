@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility_set_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 06:20:40 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/29 12:47:22 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/05 02:02:36 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ static int	set_already_existing_internal_var(char *name, char *value)
 	{
 		if (ft_strequ(name, current->name))
 		{
-			ft_strdel(&current->name);
-			if ((current->name = ft_strdup(value)) == NULL)
+			ft_strdel(&current->value);
+			if ((current->value = ft_strdup(value)) == NULL)
 			{
 				ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 				(prev != NULL) ? prev->next = current->next : (0);
