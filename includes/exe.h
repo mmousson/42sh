@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:04:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 03:55:52 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/05 06:54:37 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ typedef struct		s_red
 	struct s_red	*next;
 }					t_red;
 
-typedef struct		s_lstfd
-{
-	int				og;
-	int				dir;
-	int				close;
-	struct s_lstfd	*next;
-}					t_lstfd;
 
 typedef struct		s_launch
 {

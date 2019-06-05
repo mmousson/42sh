@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 03:56:55 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/05 07:08:36 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,30 @@ t_io_channels		pip_red(t_process *first)//toujours utile ?
 	return (chan);
 }
 
+/*////////// to remove after good red okay
+void				print_red(t_launch *cmd_og)
+{
+	t_lstfd			*tmp;
+	t_launch		*cmd;
+
+	cmd = cmd_og;
+	while (cmd)
+	{
+		tmp = cmd->lstfd;
+		while (tmp)
+		{
+			ft_putnbr(tmp->og);ft_putstr(" origin\n");
+			ft_putnbr(tmp->dir);ft_putstr(" direction\n");
+			if (tmp->close)
+				ft_putstr("Closing time..\n");
+			tmp = tmp->next;
+		}
+		ft_putstr("-----------\n");
+		cmd = cmd->next;
+	}
+}
+///////// until here*/
+
 t_process			*load_process(t_launch *cmd, char ***env)
 {
 	t_process		*proc;
@@ -85,25 +109,34 @@ t_process			*load_process(t_launch *cmd, char ***env)
 	proc->builtin_bkp.output = -1;
 	proc->builtin_bkp.error = -1;
 	proc->real_channels = cmd_red(cmd);
+	proc->lstfd = cmd->lstfd;
 	return (proc);
 }
 
 ////////// to remove after good red okay
-void				print_red(t_launch *cmd)
+void				print_red_proc(t_process *proc_og)
 {
 	t_lstfd			*tmp;
+	t_process		*proc;
 
-	tmp = cmd->lstfd;
-	while (tmp)
+	proc = proc_og;
+	while (proc)
 	{
-		ft_putnbr(tmp->og);ft_putstr(" origin\n");
-		ft_putnbr(tmp->dir);ft_putstr(" direction\n");
-		if (tmp->close)
-			ft_putstr("Closing time..\n");
-		tmp = tmp->next;
+		tmp = proc->lstfd;
+		while (tmp)
+		{
+			ft_putnbr(tmp->og);ft_putstr(" origin\n");
+			ft_putnbr(tmp->dir);ft_putstr(" direction\n");
+			if (tmp->close)
+				ft_putstr("Closing time..\n");
+			tmp = tmp->next;
+		}
+		ft_putstr("-----------\n");
+		proc = proc->next;
 	}
 }
 ///////// until here
+
 
 t_job				*exe_load_job(t_launch *cmd, char ***arge)
 {
@@ -117,6 +150,6 @@ t_job				*exe_load_job(t_launch *cmd, char ***arge)
 	if (!(job->first_process = load_process(cmd, arge)))
 		return (NULL);
 	job->command = ft_strdup(job->first_process->argv[0]);
-	print_red(cmd);// will disapear when working
+	//print_red_proc(job->first_process);// will disapear when working
 	return (job);	
 }

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/05 01:56:19 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/05 06:54:35 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,18 @@ typedef enum			e_bool
 }						t_bool;
 
 /*
+**	Fd chained_list with, origin, direction, closure (to apply or not).
+*/
+
+typedef struct		s_lstfd
+{
+	int				og;
+	int				dir;
+	int				close;
+	struct s_lstfd	*next;
+}					t_lstfd;
+
+/*
 **	Structure holding I/O channels of a spawned process
 */
 
@@ -125,6 +137,7 @@ typedef struct			s_process
 	t_bool				completed;
 	t_bool				stopped;
 	t_bool				valid_to_wait_for;
+	t_lstfd				*lstfd;
 	t_io_channels		builtin_bkp;
 	t_io_channels		io_channels;
 	t_io_channels		real_channels;
