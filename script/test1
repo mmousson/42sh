@@ -1,0 +1,20 @@
+total 96
+drwxr-xr-x  5 oboutrol  2018_paris   170 May 31 16:20 arithmetic
+-rw-r--r--  1 oboutrol  2018_paris     5 May 28 09:12 bs
+-rw-r--r--  1 oboutrol  2018_paris    49 May 28 09:12 bs2
+drwxr-xr-x  5 oboutrol  2018_paris   170 May 31 16:20 builtin_test
+-rw-r--r--  1 oboutrol  2018_paris   236 May 28 09:33 cmp.sh
+-rw-r--r--  1 oboutrol  2018_paris   216 May 29 19:38 expand_arith1
+-rw-r--r--  1 oboutrol  2018_paris    49 May 28 09:12 expand_hard
+-rw-r--r--  1 oboutrol  2018_paris    22 May 28 09:12 here
+-rw-r--r--  1 oboutrol  2018_paris    43 May 28 09:12 interact
+-rw-r--r--  1 oboutrol  2018_paris    75 May 28 09:12 multi_cmd
+-rw-r--r--  1 oboutrol  2018_paris    43 May 28 09:12 multi_line
+drwxr-xr-x  5 oboutrol  2018_paris   170 May 30 23:38 pattern_matching
+-rw-r--r--  1 oboutrol  2018_paris    30 May 28 09:12 red_basis
+-rw-r--r--  1 oboutrol  2018_paris    66 May 28 09:12 red_sec
+drwxr-xr-x  5 oboutrol  2018_paris   170 May 30 23:38 standalone_commands
+-rw-r--r--  1 oboutrol  2018_paris     0 Jun  4 20:41 test1
+-rw-r--r--  1 oboutrol  2018_paris  1302 Jun  4 20:41 test2
+lollil
+lignedeux
