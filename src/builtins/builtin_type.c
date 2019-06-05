@@ -6,11 +6,19 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 10:20:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 17:43:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/05 04:38:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "type.h"
+
+t_special_vars	g_msg_matcher[] = {
+	{ALIAS, " is aliased to "},
+	{BUILTIN, " is a shell builtin"},
+	{BINARY, " is "},
+	{NOT_FOUND, ": not found"},
+	{-1, NULL}
+};
 
 /*
 **	Function to display usage helper in case of error or if
@@ -78,27 +86,28 @@ static int	ft_parse_options(int argc, char **argv, int *option_all)
 **	Then it returns the passed 'ret_value' argument
 */
 
-static int	msg(char *tmp, char *part3, int fd, int ret_value)
+static int	msg(char *name, char *answer, int id, int fd)
 {
-	char	*final;
-
-	final = NULL;
-	if (tmp == NULL)
+	if (id == NOT_FOUND)
+		ft_putstr_fd("42sh: type: ", fd);
+	ft_putstr_fd(name, fd);
+	if (id <= 3)
+		ft_putstr_fd(g_msg_matcher[id].value, fd);
+	if (id == ALIAS)
+		ft_putchar_fd('`', fd);
+	if (answer != NULL)
 	{
-		ft_putendl_fd("42sh: Internal malloc error", STDERR_FILENO);
-		return (0);
+		if (id == BINARY)
+		{
+			ft_putstr_fd(answer, fd);
+			ft_putchar_fd('/', fd);
+			ft_putstr_fd(name, fd);
+		}
+		else
+			ft_putstr_fd(answer, fd);
 	}
-	if (part3 != NULL && (final = ft_strjoin(tmp, part3)) == NULL)
-	{
-		ft_putendl_fd("42sh: Internal malloc error", STDERR_FILENO);
-		ft_strdel(&tmp);
-		return (0);
-	}
-	ft_putstr_fd("42sh: ", fd);
-	ft_putendl_fd(final != NULL ? final : tmp, fd);
-	ft_strdel(&tmp);
-	ft_strdel(&final);
-	return (ret_value);
+	ft_putstr_fd((id == ALIAS) ? "`\n" : "\n", fd);
+	return (1);
 }
 
 /*
@@ -119,21 +128,21 @@ static int	ft_search(char *name, char **bin_paths, int search_all)
 	i = -1;
 	ret = 0;
 	if ((alias = alias_exists(name)) != NULL)
-		ret = msg(ft_strjoin(name, ": aliased to: "), alias, 1, 1);
+		ret = msg(name, alias, ALIAS, STDOUT_FILENO);
 	if (utility_is_builtin(name) != -1)
-		ret = msg(ft_strjoin(name, ": shell builtin command"), NULL, 1, 1);
+		ret = msg(name, NULL, BUILTIN, STDOUT_FILENO);
 	if (bin_paths == NULL && ret == 0)
-		return (msg(ft_strjoin(name, ": not found"), NULL, STDERR_FILENO, 1));
+		return (msg(name, NULL, NOT_FOUND, STDERR_FILENO));
 	while (bin_paths[++i] != NULL && (ret == 0 || search_all))
 		if ((dir = opendir(bin_paths[i])) != NULL)
 		{
 			while ((sd = readdir(dir)) != NULL && (ret == 0 || search_all))
 				if (ft_strequ(sd->d_name, name))
-					ret = msg(ft_strjoin(bin_paths[i], "/"), name, 1, 1);
+					ret = msg(name, bin_paths[i], BINARY, STDOUT_FILENO);
 			closedir(dir);
 		}
 	if (ret == 0)
-		return (msg(ft_strjoin(name, ": not found"), NULL, STDERR_FILENO, 1));
+		return (msg(name, NULL, NOT_FOUND, STDERR_FILENO));
 	return (0);
 }
 
