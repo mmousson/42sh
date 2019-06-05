@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 04:56:01 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/05 05:08:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,6 @@ void		ft_fork_or_not(t_launch *cmd, char *path, char ***arge)
 	}
 	else
 		do_fork(path, cmd->argv, *arge);
-}
-
-void		ft_launch_exe(t_launch *cmd, char ***arge)
-{
-	char	*path;
-	int		fct;
-
-	path = NULL;
-	fct = ft_get_home_cmd(cmd->argv[0]);
-	if (fct == 0)
-	{
-		sh_quiterm();
-		exit(0);
-	}
-	if (!(ft_launch_red(cmd->red, cmd)))
-	{
-		ft_do_home(fct, cmd->argv, arge);
-		if (fct == -1)
-		{
-			if (ft_path(cmd->argv[0], &path, *arge))
-				ft_fork_or_not(cmd, path, arge);
-			else
-				ft_cmd_nf(cmd->argv[0]);
-			if (path)
-				free(path);
-		}
-	}
-	ft_res_pile(cmd);
 }
 
 // static void print_structures(t_job *job)

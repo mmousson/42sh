@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/01 02:22:33 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/05 03:56:55 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,23 @@ t_process			*load_process(t_launch *cmd, char ***env)
 	return (proc);
 }
 
+////////// to remove after good red okay
+void				print_red(t_launch *cmd)
+{
+	t_lstfd			*tmp;
+
+	tmp = cmd->lstfd;
+	while (tmp)
+	{
+		ft_putnbr(tmp->og);ft_putstr(" origin\n");
+		ft_putnbr(tmp->dir);ft_putstr(" direction\n");
+		if (tmp->close)
+			ft_putstr("Closing time..\n");
+		tmp = tmp->next;
+	}
+}
+///////// until here
+
 t_job				*exe_load_job(t_launch *cmd, char ***arge)
 {
 	t_job			*job;
@@ -100,5 +117,6 @@ t_job				*exe_load_job(t_launch *cmd, char ***arge)
 	if (!(job->first_process = load_process(cmd, arge)))
 		return (NULL);
 	job->command = ft_strdup(job->first_process->argv[0]);
+	print_red(cmd);// will disapear when working
 	return (job);	
 }

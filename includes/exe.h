@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:04:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/01 02:22:28 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/05 03:55:52 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ typedef struct		s_red
 	int				type;
 	int				srt;
 	int				end;
+	int				close;
 	char			*end_nm;
 	struct s_red	*next;
 }					t_red;
 
 typedef struct		s_lstfd
 {
-	int				fd;
+	int				og;
+	int				dir;
+	int				close;
 	struct s_lstfd	*next;
 }					t_lstfd;
 
@@ -71,7 +74,7 @@ int					ft_launch_cmd(t_launch **cmd, char ***arge, int status);
 void				ft_launch_last(t_launch *cmd, char ***arge);
 int					ft_launch_red(t_red *red, t_launch *cmd);
 void				ft_res_pile(t_launch *cmd);
-void				ft_add_pile(int og, int dir, t_launch *cmd);
+void				ft_add_pile(int og, int dir, t_launch *cmd, int close);
 int					ft_heredoc(char *end);
 int					end_agg(char *str);
 int					ft_heredoc_read(int *og, int *dir);
