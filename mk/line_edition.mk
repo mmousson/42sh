@@ -13,7 +13,6 @@
 LINE_EDIT_PATH = ./src/line_edition/
 VIMODE_PATH = $(LINE_EDIT_PATH)vi_mode/
 AUTOCMP_PATH = $(LINE_EDIT_PATH)auto_completion/
-PROMPT_PATH = $(LINE_EDIT_PATH)classic_prompt/
 SIG_PATH = $(LINE_EDIT_PATH)signal/
 
 VIMODE =	vi_alloc.c							\
@@ -36,11 +35,6 @@ VIMODE =	vi_alloc.c							\
 			vi_prior_flag.c						\
 			vi_alloc_replace.c					\
 			vi_alloc_count.c
-
-PROMPT =	prompt_classic.c					\
-			prompt_format_path.c				\
-			prompt_get_additions_deletions.c	\
-			prompt_git_branch.c					\
 
 LINE_EDIT =	line_cpy.c							\
 			line_curmotion.c					\
@@ -96,10 +90,8 @@ SIGNAL = 	signal_func.c			\
 LINE_EDIT_SRCS = $(addprefix $(LINE_EDIT_PATH),$(LINE_EDIT))
 VIMODE_SRCS = $(addprefix $(VIMODE_PATH),$(VIMODE))
 AUTOCMP_SRCS = $(addprefix $(AUTOCMP_PATH),$(AUTOCMP))
-PROMPT_SRCS = $(addprefix $(PROMPT_PATH),$(PROMPT))
 SIGNAL_SRCS = $(addprefix $(SIG_PATH),$(SIGNAL))
 SRCS += $(LINE_EDIT_SRCS)
 SRCS += $(VIMODE_SRCS)
 SRCS += $(AUTOCMP_SRCS)
-SRCS += $(PROMPT_SRCS)
 SRCS += $(SIGNAL_SRCS)

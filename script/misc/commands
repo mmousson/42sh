@@ -1,0 +1,16 @@
+a=hello b=world; b=42 echo ${a}_${b} && echo ${b}
+directory=/ ls_opt=-atr ; ls ${ls_opt} ${directory}
+foo=bar ; foo=bariton ; echo $foo
+type bleu
+type type
+type fc
+type -a echo
+echo 'No error' || echo 'You cant see me'
+false && echo foo || echo bar
+echo 'No error' || echo 'You cant see me'
+true || echo foo && echo bar
+./atchoum
+$PWD
+ls doesnotexist || echo 'Notice me senpai'
+exit 1 | exit 2 | exit 3; echo "stayin' alive"
+echo $((2<3>0<=1>=2==0!=1))
