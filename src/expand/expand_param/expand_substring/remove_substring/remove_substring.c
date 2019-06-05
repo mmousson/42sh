@@ -6,14 +6,15 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 14:40:16 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/05 11:36:43 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/05 11:58:45 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 #include "libft.h"
 
-void	walk_const(char **s)
+void
+	walk_const(char **s)
 {
 	while (**s)
 	{
@@ -27,14 +28,16 @@ void	walk_const(char **s)
 	}
 }
 
-static void	free_submatch(t_submatch *sm)
+static void
+	free_submatch(t_submatch *sm)
 {
 	free(sm->param);
 	free(sm->word);
 	globlexdel(&sm->lexer);
 }
 
-static char	*get_match(t_submatch *sm)
+static char
+	*get_match(t_submatch *sm)
 {
 	char *ptr;
 
@@ -45,10 +48,11 @@ static char	*get_match(t_submatch *sm)
 	return (NULL);
 }
 
-char	*remove_substring(char *param, char *word, int suffix, int greedy)
+char
+	*remove_substring(char *param, char *word, int suffix, int greedy)
 {
-	t_submatch sm;
-	char *res;
+	t_submatch	sm;
+	char		*res;
 
 	ft_bzero(&sm, sizeof(sm));
 	sm.suffix = suffix;
@@ -59,8 +63,7 @@ char	*remove_substring(char *param, char *word, int suffix, int greedy)
 		return (NULL);
 	if (suffix)
 		ft_strrev(sm.param);
-	if (!(sm.lexer = globlexnew(0))
-		|| tokenize_word_pattern(&sm))	
+	if (!(sm.lexer = globlexnew(0)) || tokenize_word_pattern(&sm))
 	{
 		free_submatch(&sm);
 		return (NULL);

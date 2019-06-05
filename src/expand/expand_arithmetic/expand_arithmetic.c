@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/04 17:18:29 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/05 11:55:29 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 int
 	arithmetic(char ***env, long *res, char *str)
 {
-	t_arithtok		*tok;
-	t_arithast		*ast;
+	t_arithtok	*tok;
+	t_arithast	*ast;
 
 	tok = NULL;
 	ast = NULL;
@@ -39,7 +39,8 @@ int
 	return (0);
 }
 
-char	*look_for_arith_mark(char *s)
+static char
+	*look_for_arith_mark(char *s)
 {
 	while (*s)
 	{
@@ -59,9 +60,9 @@ char	*look_for_arith_mark(char *s)
 static int
 	expand_arithmetic_one(char **str, char ***env)
 {
-	char		*beg;
-	char		*end;
-	long		res;
+	char	*beg;
+	char	*end;
+	long	res;
 
 	while ((beg = look_for_arith_mark(*str))
 			&& *(end = walkparenthese(beg + 2)))
@@ -84,9 +85,10 @@ static int
 	return (0);
 }
 
-int	expand_arithmetic(char **str, char ***env)
+int
+	expand_arithmetic(char **str, char ***env)
 {
-		if (expand_arithmetic_one(str, env))
-			return (1);
+	if (expand_arithmetic_one(str, env))
+		return (1);
 	return (0);
 }

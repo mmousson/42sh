@@ -6,14 +6,15 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 14:44:16 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/04 21:30:50 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/05 11:57:21 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 #include "libft.h"
 
-static char	*match_asterisk(t_globtok *tok, char *param, int greedy)
+static char
+	*match_asterisk(t_globtok *tok, char *param, int greedy)
 {
 	char	*tmp;
 	char	*ptr;
@@ -34,7 +35,8 @@ static char	*match_asterisk(t_globtok *tok, char *param, int greedy)
 	return (match ? ptr : NULL);
 }
 
-static char	*match_question(t_globtok *tok, char *param, int greedy)
+static char
+	*match_question(t_globtok *tok, char *param, int greedy)
 {
 	char *ptr;
 
@@ -44,16 +46,16 @@ static char	*match_question(t_globtok *tok, char *param, int greedy)
 	return (ptr);
 }
 
-static char	*match_const(t_globtok *tok,
-	t_str_token *tkn, char *param, int greedy)
+static char
+	*match_const(t_globtok *tok, t_str_token *tkn, char *param, int greedy)
 {
 	if (ft_strnequ(tkn->value, param, tkn->len))
 		return (match_word(tok->next, param + tkn->len, greedy));
 	return (NULL);
 }
 
-static char	*match_range(t_globtok *tok,
-	t_rng_token *tkn, char *param, int greedy)
+static char
+	*match_range(t_globtok *tok, t_rng_token *tkn, char *param, int greedy)
 {
 	if ((!tkn->negative && tkn->allow[(unsigned char)*param])
 		|| (tkn->negative && !tkn->allow[(unsigned char)*param]))
@@ -61,8 +63,8 @@ static char	*match_range(t_globtok *tok,
 	return (NULL);
 }
 
-
-char		*match_word(t_globtok *tok, char *param, int greedy)
+char
+	*match_word(t_globtok *tok, char *param, int greedy)
 {
 	t_chr_token	*data;
 

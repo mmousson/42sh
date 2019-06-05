@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/03 17:41:51 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/05 11:55:55 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int
 	return (-1);
 }
 
-static t_arithtok	*walk_parentheses_tok(t_arithtok *tok)
+static t_arithtok
+	*walk_parentheses_tok(t_arithtok *tok)
 {
 	while (tok)
 	{

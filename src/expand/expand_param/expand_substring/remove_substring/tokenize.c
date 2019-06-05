@@ -6,14 +6,15 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 14:45:41 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/04 21:30:41 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/05 11:59:38 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 #include "libft.h"
 
-t_globtok		*globlex_append(t_globlex *container, void *data)
+t_globtok
+	*globlex_append(t_globlex *container, void *data)
 {
 	t_globtok	*new;
 	t_globtok	*ptr;
@@ -33,7 +34,8 @@ t_globtok		*globlex_append(t_globlex *container, void *data)
 	return (new);
 }
 
-t_globtok		*globlex_prepend(t_globlex *container, void *data)
+t_globtok
+	*globlex_prepend(t_globlex *container, void *data)
 {
 	t_globtok	*new;
 	t_globtok	*ptr;
@@ -53,7 +55,8 @@ t_globtok		*globlex_prepend(t_globlex *container, void *data)
 	return (new);
 }
 
-static void			*get_token(char **pattern)
+static void
+	*get_token(char **pattern)
 {
 	if (**pattern == '*')
 		return (glob_new_chr_token(GLO_STAR, pattern));
@@ -64,7 +67,8 @@ static void			*get_token(char **pattern)
 	return (glob_new_str_token(GLO_CONST, pattern));
 }
 
-int					tokenize_word_pattern(t_submatch *gl)
+int
+	tokenize_word_pattern(t_submatch *gl)
 {
 	char		*pattern;
 	t_str_token	*token;
