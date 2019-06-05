@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:32:17 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/04 17:33:03 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/05 11:36:39 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_str_token			*glob_new_str_token(int type, char **str)
 	if (!str || !*str || !(new = (t_str_token*)ft_memalloc(sizeof(*new))))
 		return (NULL);
 	start = *str;
-	walk_word(str);
+	walk_const(str);
 	new->len = *str - start;
 	if (!(new->value = ft_strsub(start, 0, new->len)))
 	{
