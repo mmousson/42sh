@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:20:18 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/03 15:39:02 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:46:38 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ size_t		expansion_unquote(char *str)
 						str = endquote - 2;
 				}
 			}
-			*str && ++str;
+			if (*str)
+				++str;
 		}
 	return ((size_t)(str - beg));
 }

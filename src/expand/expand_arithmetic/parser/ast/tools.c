@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/03 17:44:15 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:45:52 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*walkparenthese(char *s)
 			s = walkparenthese(s + 1);
 		else if (*s == ')')
 			break ;
-		*s && ++s;
+		if (*s)
+			++s;
 	}
 	return (s);
 }

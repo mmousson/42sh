@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:32:17 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/05 11:36:39 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:47:14 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ t_rng_token			*glob_new_range_token(int type, char **rng)
 	if (*(new->value + 1) == '!')
 		new->negative = 1;
 	parse_range(new->allow, new->value + 1 + new->negative);
-	**rng == ']' && ++*rng;
+	if (**rng == ']')
+		++*rng;
 	return (new);
 }
 

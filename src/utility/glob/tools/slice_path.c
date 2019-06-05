@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 18:01:12 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/27 19:28:25 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:46:55 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static char	*walk_next_complete_namespace(char *s)
 				|| *s == '*' || *s == '?'
 				|| *s == '[')
 			break ;
-		*s && ++s;
+		if (*s)
+			++s;
 	}
 	return (NULL);
 }
