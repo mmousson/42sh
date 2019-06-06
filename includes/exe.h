@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:04:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 06:54:37 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/06 03:35:55 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void				ft_free_lstfd(t_lstfd *lstfd);
 void				ft_launch_exe(t_launch *cmd, char ***arge);
 int					ft_launch_cmd(t_launch **cmd, char ***arge, int status);
 void				ft_launch_last(t_launch *cmd, char ***arge);
-int					ft_launch_red(t_red *red, t_launch *cmd);
+int					ft_launch_red(t_red *red, t_launch *cmd, char ***arge);
 void				ft_res_pile(t_launch *cmd);
 void				ft_add_pile(int og, int dir, t_launch *cmd, int close);
-int					ft_heredoc(char *end);
+int					ft_heredoc(char *end, char ***arge);
 int					end_agg(char *str);
 int					ft_heredoc_read(int *og, int *dir);
 

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 07:08:36 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/06 03:34:35 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ int					is_to_load(int fd)
 	return (0);
 }
 
-t_io_channels		cmd_red(t_launch *cmd)
+static t_io_channels	cmd_red(t_launch *cmd, char ***arge)
 {
-	t_io_channels	chan;
+	t_io_channels		chan;
 
-	ft_launch_red(cmd->red, cmd);
+	ft_launch_red(cmd->red, cmd, arge);
 	chan.input = !is_to_load(cmd->in) ? 0 : cmd->in;
 	chan.output = !is_to_load(cmd->out) ? 1 : cmd->out;
 	chan.error = !is_to_load(cmd->err) ? 2 : cmd->err;
 	return (chan);
 }
 
-t_io_channels		pip_red(t_process *first)//toujours utile ?
+t_io_channels			pip_red(t_process *first)//toujours utile ?
 {
-	t_io_channels	chan;
+	t_io_channels		chan;
 	
 	if (first)
 		chan.input = first->real_channels.input;
@@ -94,7 +94,7 @@ t_process			*load_process(t_launch *cmd, char ***env)
 	}
 	else
 		proc->next = NULL;
-	proc->name = ft_strdup(cmd->argv[0]);
+	proc->name = cmd->argv ? ft_strdup(cmd->argv[0]) : NULL;
 	proc->argv = ft_tabdup(cmd->argv);
 	//if (expand_manager(&(proc->argv), env))
 	//	return (NULL);
@@ -108,7 +108,7 @@ t_process			*load_process(t_launch *cmd, char ***env)
 	proc->builtin_bkp.input = -1;
 	proc->builtin_bkp.output = -1;
 	proc->builtin_bkp.error = -1;
-	proc->real_channels = cmd_red(cmd);
+	proc->real_channels = cmd_red(cmd, env);//storing red
 	proc->lstfd = cmd->lstfd;
 	return (proc);
 }

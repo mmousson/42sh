@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 10:19:28 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/03 23:43:49 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/06 03:11:49 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 #include "libft.h"
-int		expand_token(t_tok *token, char ***arge)
+int		expand_token(t_tok *token, char ***arge, int here)
 {
 	int	ret;
 
@@ -23,7 +23,9 @@ int		expand_token(t_tok *token, char ***arge)
 		return (0);
 	if (is_charkind(token->status))
 	{
-		if ((ret = expand_manager(&token->content, arge, token)))
+		if (here)
+			here = 0;
+		else if ((ret = expand_manager(&token->content, arge, token)))
 		{
 			if (ret == -1)
 			{
@@ -34,7 +36,9 @@ int		expand_token(t_tok *token, char ***arge)
 			return (1);
 		}
 	}
-	if (expand_token(token->next, arge))
+	if (token->status == REL && !ft_strcmp(token->content, "<<"))
+		here = 1;
+	if (expand_token(token->next, arge, here))
 		return (1);
 	return (0);
 }

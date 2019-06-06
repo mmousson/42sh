@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:02 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 03:55:44 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/06 03:35:38 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-static int	make_rel(t_red *red, int *og, int *dir)
+static int	make_rel(t_red *red, int *og, int *dir, char ***arge)
 {
 	if (red->type == REL && red->end_nm)
 	{
@@ -30,7 +30,7 @@ static int	make_rel(t_red *red, int *og, int *dir)
 	}
 	if (red->type == REL + DBL && red->end_nm)
 	{
-		ft_heredoc(red->end_nm);
+		ft_heredoc(red->end_nm, arge);
 		ft_heredoc_read(og, dir);
 	}
 	return (0);
@@ -75,7 +75,7 @@ static int	bad_fd(int dir)
 	return (1);
 }
 */
-static int	make_one_red(t_red *red, t_launch *cmd)
+static int	make_one_red(t_red *red, t_launch *cmd, char ***arge)
 {
 	int		dir;
 	int		og;
@@ -85,7 +85,7 @@ static int	make_one_red(t_red *red, t_launch *cmd)
 	og = -2;
 	if (!red)
 		return (0);
-	if ((ret = make_rel(red, &og, &dir)))
+	if ((ret = make_rel(red, &og, &dir, arge)))
 		return (ret);
 	if ((ret = make_rer(red, &og, &dir)))
 		return (ret);
@@ -98,7 +98,7 @@ static int	make_one_red(t_red *red, t_launch *cmd)
 	return (0);
 }
 
-int			ft_launch_red(t_red *red, t_launch *cmd)
+int			ft_launch_red(t_red *red, t_launch *cmd, char ***arge)
 {
 	t_red	*tmp;
 	int		ret;
@@ -107,7 +107,7 @@ int			ft_launch_red(t_red *red, t_launch *cmd)
 	tmp = red;
 	while (red && !ret)
 	{
-		ret = make_one_red(red, cmd);
+		ret = make_one_red(red, cmd, arge);
 		red = red->next;
 	}
 	red = tmp;
