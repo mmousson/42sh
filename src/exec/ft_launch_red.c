@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:02 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/06 03:35:38 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/06 05:41:05 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int	make_rel(t_red *red, int *og, int *dir, char ***arge)
 	}
 	if (red->type == REL + DBL && red->end_nm)
 	{
-		ft_heredoc(red->end_nm, arge);
-		ft_heredoc_read(og, dir);
+		ft_heredoc(red->end_nm, arge, red);
+		ft_heredoc_read(og, dir, red);
 	}
 	return (0);
 }

@@ -6,10 +6,11 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 01:06:53 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/06 03:31:03 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/06 05:41:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "sh42.h"
 #include "exe.h"
 #include "libft.h"
 #include "expand.h"
@@ -61,12 +62,16 @@ static void	ft_launch_here(char *end, int fd, int exp, char ***arge)
 	}
 }
 
-int			ft_heredoc(char *end, char ***arge)
+int			ft_heredoc(char *end, char ***arge, t_red *red)
 {
+	char	*name;
 	int		fd;
 	int		exp;
 
-	if ((fd = open(".tmp_here", O_WRONLY | O_TRUNC | O_CREAT,
+	if (!(name = utility_generate_tmp_filename()))
+		return (1);
+	add_name(red, name);
+	if ((fd = open(name, O_WRONLY | O_TRUNC | O_CREAT,
 					S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR)) == -1)
 		return (error_open("tmp file for heredoc"));
 	exp = is_end_esc(end);
@@ -76,9 +81,14 @@ int			ft_heredoc(char *end, char ***arge)
 	return (0);
 }
 
-int			ft_heredoc_read(int *og, int *dir)
+int			ft_heredoc_read(int *og, int *dir, t_red *red)
 {
-	if ((*dir = open(".tmp_here", O_RDONLY)) == -1)
+	t_lsther	*tmp;
+
+	tmp = red->lsther;
+	while (tmp && tmp->next)
+		tmp = tmp->next;
+	if ((*dir = open(tmp->name, O_RDONLY)) == -1)
 		return (error_open("tmp file for heredoc"));
 	*og = 0;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:04:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/06 03:35:55 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/06 05:41:09 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,15 @@
 # include "job_control_42.h"
 # include "lex.h"
 
+typedef struct		s_lsther
+{
+	struct s_lsther	*next;
+	char			*name;
+}					t_lsther;
+
 typedef struct		s_red
 {
+	t_lsther		*lsther;
 	int				type;
 	int				srt;
 	int				end;
@@ -68,9 +75,10 @@ void				ft_launch_last(t_launch *cmd, char ***arge);
 int					ft_launch_red(t_red *red, t_launch *cmd, char ***arge);
 void				ft_res_pile(t_launch *cmd);
 void				ft_add_pile(int og, int dir, t_launch *cmd, int close);
-int					ft_heredoc(char *end, char ***arge);
+int					ft_heredoc(char *end, char ***arge, t_red *red);
 int					end_agg(char *str);
-int					ft_heredoc_read(int *og, int *dir);
+int					ft_heredoc_read(int *og, int *dir, t_red *red);
+void				add_name(t_red *red, char *str);
 
 char				*ft_getenv(char **env, char *name);
 int					ft_do_home(int k, char **argv, char ***arge);

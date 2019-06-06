@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:09:53 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 03:10:13 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/06 05:35:45 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_red			*ft_init_red(void)
 	red->srt = 0;
 	red->close = 0;
 	red->end = -1;
+	red->lsther = NULL;
 	red->end_nm = NULL;
 	red->next = NULL;
 	return (red);

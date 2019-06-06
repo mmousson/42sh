@@ -6,7 +6,7 @@
 #    By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 20:38:11 by oboutrol          #+#    #+#              #
-#    Updated: 2019/06/05 00:55:28 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/06/06 05:32:48 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ EXEC_NAME = 	ft_exec.c\
 				exe_load.c\
 				exe_print_job.c\
 				end_agg.c\
+				add_name.c\
 				built_manager.c\
 				ft_path.c
 

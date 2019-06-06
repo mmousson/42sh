@@ -6,12 +6,23 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 21:25:00 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/06 15:43:26 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/06 05:24:25 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
 #include <stdlib.h>
+
+void	ft_free_lsther(t_lsther *lst)
+{
+	if (!lst)
+		return ;
+	ft_free_lsther(lst->next);
+	lst->next = NULL;
+	free(lst->name);
+	lst->name = NULL;
+	free(lst);
+}
 
 void	ft_free_lstfd(t_lstfd *lst)
 {
@@ -43,6 +54,8 @@ void	ft_free_red(t_red *red)
 		return ;
 	ft_free_red(red->next);
 	red->next = NULL;
+	ft_free_lsther(red->lsther);
+	red->lsther = NULL;
 	if (red->end_nm)
 		free(red->end_nm);
 	red->end_nm = NULL;
