@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 18:01:03 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/27 19:20:16 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/06 12:29:39 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		get_path_depth(char *path)
 	depth = 0;
 	while (*path)
 	{
-		if (*path == '[')
-			walk_range(&path);
+		if (*path == '[' && walk_range(&path))
+			++path;
 		else
 		{
 			if (*path == '/')

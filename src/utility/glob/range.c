@@ -6,11 +6,13 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:30:37 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/05 14:46:28 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/06 14:22:30 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void		walk_range(char **beg)
+#include "libft.h" // a virer
+
+int		walk_range(char **beg)
 {
 	char	*ptr;
 	char	*str;
@@ -26,13 +28,13 @@ void		walk_range(char **beg)
 			if (!*ptr || *ptr == '[')
 			{
 				*beg = str;
-				return ;
+				return (0);
 			}
 		}
 		if (*str)
 			++str;
 	}
-	*beg = str;
+	return (1);
 }
 
 void		parse_range(char *allow, char *s)
@@ -45,11 +47,11 @@ void		parse_range(char *allow, char *s)
 		{
 			c = *s;
 			while (c <= *(s + 2))
-				allow[(int)c++] = 1;
+				allow[(unsigned char)c++] = 1;
 			s += 3;
 		}
 		else
-			allow[(int)*s] = 1;
+			allow[(unsigned char)*s] = 1;
 		++s;
 	}
 }

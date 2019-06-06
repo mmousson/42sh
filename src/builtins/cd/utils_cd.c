@@ -6,12 +6,20 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:43:02 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/29 14:32:27 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/06 13:44:30 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cd.h"
 #include "libft.h"
+
+void	free_cdenv(char *cdenv[4])
+{
+	ft_strdel(&cdenv[0]);
+	ft_strdel(&cdenv[1]);
+	ft_strdel(&cdenv[2]);
+	ft_strdel(&cdenv[3]);
+}
 
 void	free_cd_tabs(char **tmp, char **nenv, char **narg)
 {

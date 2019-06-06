@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/03 17:19:10 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/06 13:50:00 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ int		compute_variable(char ***env, t_arithast *ast, long *res)
 	char *val;
 
 	val = utility_get_var(ast->token->val, *env);
-	if (val ? arithmetic(env, res, val) : 0)
-		return (1);
-	return (0);
+	return (val && arithmetic(env, res, val));
+	free(val);
 }
 
 int		compute_number(t_arithast *ast, long *res)

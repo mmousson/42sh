@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 07:36:36 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/04 17:30:06 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/06 13:53:58 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ char	**sh_glob(char *path)
 	if (slice_path(&gl, path))
 		return (NULL);
 	if (match_files(&gl))
+	{
+		reset_glob(&gl);
 		return (NULL);
+	}
 	files = gl.res;
 	reset_glob(&gl);
 	return (files);

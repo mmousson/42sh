@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:36:51 by akarasso          #+#    #+#             */
-/*   Updated: 2019/06/05 11:37:01 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/06 12:17:23 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int				is_matching_asterisk(t_globtok *tok, char *file);
 int				is_matching_question(t_globtok *tok, char *file);
 int				is_matching_const(t_globtok *tok, t_str_token *tkn, char *file);
 int				is_matching_range(t_globtok *tok, t_rng_token *tkn, char *file);
-void			walk_range(char **beg);
+int				walk_range(char **beg);
 void			parse_range(char *allow, char *s);
 int				is_quote(int c);
 size_t			expansion_unquote(char *str);

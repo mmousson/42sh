@@ -6,17 +6,13 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 14:09:13 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/29 14:32:38 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/06 13:44:02 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh42.h"
 #include "cd.h"
 #include "libft.h"
-
-/*
-**   http://pubs.opengroup.org/onlinepubs/9699919799/utilities/cd.html
-*/
 
 static int	manage_pwd(char ***env, char **cdenv, char *pwd, int options)
 {
@@ -50,27 +46,24 @@ static void	init_cdenv(char **cdenv, char **env)
 
 int			blt_cd(int argc, char **argv, char ***env)
 {
-	char			*pwd;
-	char			*cdenv[4];
-	int				pos_args;
-	int				options;
-
-	(void)argc;
-	options = 0;
+	char	*pwd;
+	char	*cdenv[4];
+	int		pos_args;
+	int		options;
+	int		res;
+	
 	pos_args = 0;
-	pwd = NULL;
-	if (!*env)
+	options = 0;
+	res = 0;
+	if (!argc || !*env)
 		return (0);
 	if (cd_options_parser(argv, &options, &pos_args) > 0)
 		return (1);
 	init_cdenv(&cdenv[0], *env);
-	if (!(pwd = get_pwd_for_cd(pos_args, argv, &cdenv[0])))
-		return (1);
-	if (!change_directory(env, pwd, &cdenv[0], options))
-	{
-		ft_strdel(&pwd);
-		return (1);
-	}
+	if (!(pwd = get_pwd_for_cd(pos_args, argv, &cdenv[0]))
+		|| !change_directory(env, pwd, &cdenv[0], options))
+		res = 1;
+	free_cdenv(cdenv);
 	ft_strdel(&pwd);
-	return (0);
+	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:32:17 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/05 14:47:14 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/06 12:40:55 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_str_token			*glob_new_str_token(int type, char **str)
 
 	if (!str || !*str || !(new = (t_str_token*)ft_memalloc(sizeof(*new))))
 		return (NULL);
-	start = *str;
+	start = (*str)++;
 	walk_const(str);
 	new->len = *str - start;
 	if (!(new->value = ft_strsub(start, 0, new->len)))
@@ -53,9 +53,14 @@ t_rng_token			*glob_new_range_token(int type, char **rng)
 	if (!rng || !*rng || !(new = (t_rng_token *)ft_memalloc(sizeof(*new))))
 		return (NULL);
 	beg = *rng;
-	walk_range(rng);
+	if (walk_range(rng))
+	{
+		free(new);
+		return (NULL);
+	}
 	if (!(new->value = ft_strsub(beg, 0, *rng - beg + 1)))
 	{
+
 		free(new);
 		return (NULL);
 	}
@@ -70,14 +75,21 @@ t_rng_token			*glob_new_range_token(int type, char **rng)
 
 static void			*get_token(char **path)
 {
+	t_rng_token *rng;
+	char		*ptr;
+
 	if (**path == '*')
 		return (glob_new_chr_token(GLO_STAR, path));
 	if (**path == '?')
 		return (glob_new_chr_token(GLO_QUEST, path));
-	if (**path == '[')
-		return (glob_new_range_token(GLO_RANGE, path));
 	if (**path == '/')
 		return (glob_new_chr_token(GLO_SEPAR, path));
+	if (**path == '[')
+	{
+		ptr = *path;
+		if ((rng = glob_new_range_token(GLO_RANGE, path)) || ptr != *path)
+			return (rng);
+	}
 	return (glob_new_str_token(GLO_CONST, path));
 }
 

@@ -6,11 +6,12 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:32:26 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/27 19:31:27 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/06 12:41:12 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
+#include "libft.h"
 
 void	globlexelemdel(t_globtok *tok)
 {
@@ -22,7 +23,7 @@ void	globlexelemdel(t_globtok *tok)
 		if (tkn)
 		{
 			if (tkn->type == GLO_CONST || tkn->type == GLO_RANGE)
-				free(((t_str_token *)tkn)->value);
+				ft_strdel(&((t_str_token *)tkn)->value);
 			free(tkn);
 			tkn = 0;
 		}

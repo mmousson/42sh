@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/05 11:52:59 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/06 13:48:40 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		compute_crementation(char ***env, t_arithast *ast, long *res)
 		if (!(val = ft_ltoa(a)))
 			return (1);
 		utility_set_var(ast->left->token->val, val, env, 0);
+		free(val);
 	}
 	else if (ast->right)
 	{
@@ -37,6 +38,7 @@ int		compute_crementation(char ***env, t_arithast *ast, long *res)
 		if (!(val = ft_ltoa(a)))
 			return (1);
 		utility_set_var(ast->right->token->val, val, env, 0);
+		free(val);
 	}
 	return (0);
 }
