@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/07 12:13:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/07 14:45:28 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct		s_lstfd
 	int				bkp;
 	int				og;
 	int				dir;
+	int				dir_creat;
 	int				close;
 	struct s_lstfd	*next;
 }					t_lstfd;

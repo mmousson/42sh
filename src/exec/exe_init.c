@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:09:53 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/06 05:35:45 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/07 14:46:29 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_launch		*ft_init_cmd(char **argv)
 	cmd->argv = argv;
 	cmd->fdpipe = NULL;
 	cmd->will_red = 0;
+	cmd->dir_creat = 0;
 	cmd->in = -2;
 	cmd->out = -2;
 	cmd->err = -2;

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:04:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/06 05:41:09 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/07 14:48:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct		s_launch
 	int				in;
 	int				out;
 	int				err;
+	int				dir_creat;
 	t_lstfd			*lstfd;
 	struct s_launch	*next;
 }					t_launch;
