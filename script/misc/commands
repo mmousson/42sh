@@ -14,3 +14,4 @@ $PWD
 ls doesnotexist || echo 'Notice me senpai'
 exit 1 | exit 2 | exit 3; echo "stayin' alive"
 echo $((2<3>0<=1>=2==0!=1))
+ls -y | cat -e && echo APPEAR || echo DOES_NOT_APPEAR

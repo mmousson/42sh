@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:41:35 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/24 22:12:41 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/07 22:58:50 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void		exe_print_proc(t_process *proc)
 	{
 		ft_putstr("   ==== proc ====\n");
 		ft_print_words_tables(proc->argv);
-		exe_print_chan(proc->real_channels);
 		exe_print_proc(proc->next);
 	}
 }

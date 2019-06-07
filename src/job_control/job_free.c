@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 23:53:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/30 16:25:35 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/07 23:53:36 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,6 @@ void		job_free(t_job *job)
 			close(current_process->io_channels.output);
 		if (current_process->io_channels.error != STDERR_FILENO)
 			close(current_process->io_channels.error);
-		if (current_process->real_channels.input != STDIN_FILENO)
-			close(current_process->real_channels.input);
-		if (current_process->real_channels.output != STDOUT_FILENO)
-			close(current_process->real_channels.output);
-		if (current_process->real_channels.error != STDERR_FILENO)
-			close(current_process->real_channels.error);
 		ft_strdel(&current_process->argv[i]);
 		ft_memdel((void **)&(current_process->argv));
 		ft_memdel((void **)&(current_process));

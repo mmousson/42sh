@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/07 14:45:28 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/07 23:08:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ typedef struct			s_process
 	t_lstfd				*lstfd;
 	t_io_channels		builtin_bkp;
 	t_io_channels		io_channels;
-	t_io_channels		real_channels;
 	int					status;
 	int					p[2];
 	struct s_process	*next;

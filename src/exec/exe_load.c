@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/07 14:47:19 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/07 23:09:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,40 +19,6 @@ int					is_to_load(int fd)
 	if (fd > 0 || fd == -3)
 		return (1);
 	return (0);
-}
-
-static t_io_channels	cmd_red(t_launch *cmd, char ***arge)
-{
-	t_io_channels		chan;
-
-	ft_launch_red(cmd->red, cmd, arge);
-	chan.input = !is_to_load(cmd->in) ? 0 : cmd->in;
-	chan.output = !is_to_load(cmd->out) ? 1 : cmd->out;
-	chan.error = !is_to_load(cmd->err) ? 2 : cmd->err;
-	return (chan);
-}
-
-t_io_channels			pip_red(t_process *first)//toujours utile ?
-{
-	t_io_channels		chan;
-	
-	if (first)
-		chan.input = first->real_channels.input;
-	else
-		chan.input = 0;
-	while (first && first->next)
-		first = first->next;
-	if (first)
-	{
-		chan.output = first->real_channels.output;
-		chan.error = first->real_channels.error;
-	}
-	else
-	{
-		chan.output = 1;
-		chan.error = 2;
-	}
-	return (chan);
 }
 
 /*////////// to remove after good red okay
@@ -108,7 +74,7 @@ t_process			*load_process(t_launch *cmd, char ***env)
 	proc->builtin_bkp.input = -1;
 	proc->builtin_bkp.output = -1;
 	proc->builtin_bkp.error = -1;
-	proc->real_channels = cmd_red(cmd, env);//storing red
+	ft_launch_red(cmd->red, cmd, env);
 	proc->lstfd = cmd->lstfd;
 	return (proc);
 }
