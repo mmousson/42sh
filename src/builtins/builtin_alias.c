@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 23:09:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 04:41:34 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/07 12:13:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	display_all_aliases(void)
 	local = g_alias_list;
 	while (local)
 	{
-		ft_putstr("alias ");
 		ft_putstr(local->token);
 		ft_putstr("=\'");
 		ft_putstr(local->replacement);
@@ -60,7 +59,6 @@ static int	display_alias_definition(char *tmp)
 	{
 		if (ft_strequ(tmp, local->token))
 		{
-			ft_putstr("alias ");
 			ft_putstr(local->token);
 			ft_putstr("=\'");
 			ft_putstr(local->replacement);
@@ -84,7 +82,7 @@ static int	display_alias_definition(char *tmp)
 **	tmp -> The sub-string of 'key' representing only its identifier (token)
 **
 **	Return Value:
-**	ALIAS_OK (0) -> Everythinf went well
+**	ALIAS_OK (0) -> Everything went well
 **	ALIAS_ERROR (1) -> An error occured
 */
 
@@ -135,7 +133,7 @@ static int	check_key(char *key)
 	ptrdiff_t	ptr_dist;
 	char		*tmp;
 
-	if ((tmp = ft_strrchr(key, '=')) == NULL)
+	if ((tmp = ft_strchr(key, '=')) == NULL)
 		return (display_alias_definition(key));
 	ptr_dist = (ptrdiff_t)tmp - (ptrdiff_t)key;
 	if ((tmp = ft_strsub(key, 0, ptr_dist)) == NULL)

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/05 06:54:35 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/07 12:13:47 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef enum			e_bool
 
 typedef struct		s_lstfd
 {
+	int				bkp;
 	int				og;
 	int				dir;
 	int				close;

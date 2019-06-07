@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 17:29:41 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 18:12:02 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/06 11:42:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 #include "libft.h"
 #include "sh42.h"
 #include "job_control_42.h"
+
+/*
+**
+*/
+
+static void	delete_lstfds(t_lstfd *fds)
+{
+	t_lstfd	*next_fds;
+
+	while (fds != NULL)
+	{
+		next_fds = fds->next;
+		ft_memdel((void **)&(fds));
+		fds = next_fds;
+	}
+}
 
 /*
 **
@@ -28,6 +44,7 @@ static void	drop_all_preceeding_processes(t_job *job, t_process *drop_target)
 	while (to_drop != drop_target)
 	{
 		next = to_drop->next;
+		delete_lstfds(to_drop->lstfd);
 		if (to_drop->real_channels.input != STDIN_FILENO)
 			close(to_drop->real_channels.input);
 		if (to_drop->real_channels.output != STDOUT_FILENO)
@@ -54,7 +71,7 @@ void		job_drop_unnecessary_processes(t_job *job)
 	current = job->first_process->next;
 	while (current != NULL)
 	{
-		if (current->real_channels.input != STDIN_FILENO)
+		if (current->lstfd != NULL)
 			drop_target = current;
 		current = current->next;
 	}

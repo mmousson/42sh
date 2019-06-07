@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 21:44:15 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/07 11:57:42 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	reset_signals_actions(void)
 **	Return Value: NONE
 */
 
-static void	setup_redirections(int input, int output, int error)
+static void	build_pipes(int input, int output, int error)
 {
 	if (input != STDIN_FILENO)
 	{
@@ -63,6 +63,32 @@ static void	setup_redirections(int input, int output, int error)
 	{
 		dup2 (error, STDERR_FILENO);
 		close (error);
+	}
+}
+
+/*
+**
+*/
+
+static void	build_redirections(t_lstfd *fds)
+{
+	while (fds != NULL)
+	{
+		if (fds->og != -1 && (fds->bkp = dup(fds->og)) == -1)
+		{
+			ft_putendl_fd("42sh: bad file descriptor", STDERR_FILENO);
+			return ;
+		}
+		else if (fds->dir != -1)
+		{
+			if (dup2(fds->dir, fds->og) == -1)
+				ft_putendl_fd("42sh: bad file descriptor", STDERR_FILENO);
+			else
+				close(fds->dir);
+		}
+		else if (fds->close)
+			close(fds->og);
+		fds = fds->next;
 	}
 }
 
@@ -110,11 +136,10 @@ void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 		if (foreground)
 			tcsetpgrp(STDIN_FILENO, pgid);
 		reset_signals_actions();
-	
+	}
 	io_chan = proc->io_channels;
-	setup_redirections(io_chan.input, io_chan.output, io_chan.error);}
-	io_chan = proc->real_channels;
-	setup_redirections(io_chan.input, io_chan.output, io_chan.error);
+	build_pipes(io_chan.input, io_chan.output, io_chan.error);
+	build_redirections(proc->lstfd);
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
 	{
 		execve(proc->name, proc->argv, *(proc->environ));
