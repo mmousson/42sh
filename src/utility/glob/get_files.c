@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:04:24 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/31 13:35:00 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/08 18:45:50 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,35 @@
 #include "glob.h"
 #include "libft.h"
 
-static int	check_entry(char ***files, DIR *dir, char *path, int depth)
+static int
+	check_repertory(char ***files, char **path, struct dirent *ent, int depth)
+{
+	if (!ft_strequ(ent->d_name, ".") && !ft_strequ(ent->d_name, "..")
+		&& ent->d_type & DT_DIR 
+		&& (!(*path = ft_strjoinfs(*path, "/", FT_ARG1))
+		|| read_directory(files, *path, depth - 1)))
+	{
+		ft_strdel(path);
+		return (1);
+	}
+	return (0);
+}
+
+static int
+	check_entry(char ***files, DIR *dir, char *path, int depth)
 {
 	struct dirent	*entry;
 	char			*ptr;
 
 	while ((entry = readdir(dir)))
 	{
+		//ft_putendl3_fd("path joined => ", path, "", 2);
 		if (!(ptr = ft_strjoin(path, entry->d_name)))
 			return (1);
 		if (depth > 0)
 		{
-			if (entry->d_type & DT_DIR
-				&& (!(ptr = ft_strjoinfs(ptr, "/", FT_ARG1))
-				|| read_directory(files, ptr, depth - 1)))
-			{
-				ft_strdel(&ptr);
+			if (check_repertory(files, &ptr, entry, depth))
 				return (1);
-			}
 			ft_strdel(&ptr);
 		}
 		else if (!ft_strtabadd(files, ptr))
@@ -43,25 +54,26 @@ static int	check_entry(char ***files, DIR *dir, char *path, int depth)
 	return (0);
 }
 
-int			read_directory(char ***files, char *path, int depth)
+int
+	read_directory(char ***files, char *path, int depth)
 {
 	DIR		*dir;
 	int		ret;
-	int		cur_dir;
+	//int		cur_dir;
 
 	ret = 0;
-	cur_dir = !*path || ft_strequ(path, "./");
-	if ((dir = opendir(cur_dir ? "./" : path)))
+	//cur_dir = !*path; // || ft_strequ(path, "./")
+	if ((dir = opendir(!*path ? "./" : path)))
 	{
-		readdir(dir) && readdir(dir);
-		if ((ret = check_entry(files, dir, cur_dir ? "" : path, depth)))
+		if ((ret = check_entry(files, dir, !*path ? "" : path, depth)))
 			ft_strtabdel(files);
 		closedir(dir);
 	}
 	return (ret);
 }
 
-char		**get_files_to_match(t_glob *gl)
+char
+	**get_files_to_match(t_glob *gl)
 {
 	char	**files;
 

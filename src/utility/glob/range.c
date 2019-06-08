@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:30:37 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/06 14:22:30 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/07 14:04:14 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		parse_range(char *allow, char *s)
 
 	while (*s)
 	{
-		if (*(s + 1) == '-' && *(s + 2) && *(s + 3))
+		if (*s != '\\' && *(s + 1) == '-' && *(s + 2) && *(s + 3))
 		{
 			c = *s;
 			while (c <= *(s + 2))
@@ -51,7 +51,7 @@ void		parse_range(char *allow, char *s)
 			s += 3;
 		}
 		else
-			allow[(unsigned char)*s] = 1;
+			allow[(unsigned char)(*s == '\\' ? *(++s) : *s)] = 1;
 		++s;
 	}
 }

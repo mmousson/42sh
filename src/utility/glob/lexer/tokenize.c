@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:32:17 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/06 12:40:55 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/08 18:14:57 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_chr_token			*glob_new_chr_token(int type, char **str)
 		return (NULL);
 	new->type = type;
 	new->value = **str;
-	++(*str);
+	if (type != GLO_HIDE || **str == '.')
+		++(*str);
 	return (new);
 }
 
@@ -73,11 +74,13 @@ t_rng_token			*glob_new_range_token(int type, char **rng)
 	return (new);
 }
 
-static void			*get_token(char **path)
+static void			*get_token(char **path, void *prev)
 {
 	t_rng_token *rng;
 	char		*ptr;
 
+	if (!prev || ((t_chr_token *)prev)->type == GLO_SEPAR)
+		return (glob_new_chr_token(GLO_HIDE, path));
 	if (**path == '*')
 		return (glob_new_chr_token(GLO_STAR, path));
 	if (**path == '?')
@@ -97,14 +100,17 @@ int					tokenize(t_glob *gl)
 {
 	char		*path;
 	t_str_token	*token;
+	t_str_token	*prev;
 
 	path = gl->expr;
+	prev = NULL;
 	while (*path)
-		if ((token = get_token(&path)))
+		if ((token = get_token(&path, prev)))
 		{
 			if (token->type == GLO_CONST)
 				token->len = expansion_unquote(token->value);
 			globlex_pushback(gl->lexer, token);
+			prev = token;
 		}
 	return (!gl->lexer || !gl->lexer->first);
 }

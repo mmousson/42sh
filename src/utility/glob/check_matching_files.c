@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:35:55 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/04 17:30:14 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/08 18:54:26 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		is_file_matching_pattern(t_globtok *tok, char *path)
 	if (tok && tok->data)
 	{
 		data = (t_chr_token *)tok->data;
+		//ft_putendl3_fd(ft_itoa(data->type), " : ", path, 2);		
 		if (data->type == GLO_STAR)
 			return (is_matching_asterisk(tok, path));
 		if (data->type == GLO_QUEST)
@@ -30,6 +31,8 @@ int		is_file_matching_pattern(t_globtok *tok, char *path)
 			return (is_matching_const(tok, tok->data, path));
 		if (data->type == GLO_RANGE)
 			return (is_matching_range(tok, tok->data, path));
+		if (data->type == GLO_HIDE)
+			return (is_matching_hidden(tok, tok->data, path));
 		if (data->type == GLO_SEPAR)
 		{
 			if (!*path)
@@ -47,9 +50,11 @@ int		check_matching_files(t_glob *gl, char **files)
 	int		pos;
 
 	pos = 0;
+	//ft_putendl3_fd("pour le mot : ", "", gl->expr, 2);
 	if (files)
 		while (*files)
 		{
+			//ft_putendl3_fd("pour le fichier : ", *files, "", 2);
 			if (is_file_matching_pattern(gl->lexer->first,
 												*files + gl->root_len))
 			{

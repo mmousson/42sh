@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:36:00 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/03 15:41:02 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:30:16 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,14 @@ int		is_matching_range(t_globtok *tok,
 	if ((!tkn->negative && tkn->allow[(unsigned char)*file])
 		|| (tkn->negative && !tkn->allow[(unsigned char)*file]))
 		return (is_file_matching_pattern(tok->next, file + 1));
+	return (0);
+}
+
+int		is_matching_hidden(t_globtok *tok, t_chr_token *tkn, char *file)
+{
+	if (tkn->value == '.' && *file == '.')
+		return (is_file_matching_pattern(tok->next, file + 1));
+	else if (tkn->value != '.' && *file != '.')
+		return (is_file_matching_pattern(tok->next, file));
 	return (0);
 }
