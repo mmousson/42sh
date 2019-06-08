@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 17:29:41 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/06 11:42:28 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/07 22:55:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,7 @@ static void	drop_all_preceeding_processes(t_job *job, t_process *drop_target)
 	{
 		next = to_drop->next;
 		delete_lstfds(to_drop->lstfd);
-		if (to_drop->real_channels.input != STDIN_FILENO)
-			close(to_drop->real_channels.input);
-		if (to_drop->real_channels.output != STDOUT_FILENO)
-			close(to_drop->real_channels.output);
-		if (to_drop->real_channels.error != STDERR_FILENO)
-			close(to_drop->real_channels.error);
+		//Close open fds in lstfd
 		ft_del_words_tables(&to_drop->argv);
 		ft_memdel((void **)&(to_drop));
 		to_drop = next;

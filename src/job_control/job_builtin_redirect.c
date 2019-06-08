@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:51:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 17:07:12 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/07 15:34:01 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,13 @@
 
 void	job_builtin_redirect(t_process *proc)
 {
-	if (proc->real_channels.input != STDIN_FILENO)
+	t_lstfd	*fds;
+
+	fds = proc->lstfd;
+	while (fds != NULL)
 	{
-		proc->builtin_bkp.input = dup(STDIN_FILENO);
-		dup2 (proc->real_channels.input, STDIN_FILENO);
-		close (proc->real_channels.input);
-	}
-	if (proc->real_channels.output != STDOUT_FILENO)
-	{
-		proc->builtin_bkp.output = dup(STDOUT_FILENO);
-		dup2 (proc->real_channels.output, STDOUT_FILENO);
-		close (proc->real_channels.output);
-	}
-	if (proc->real_channels.error != STDERR_FILENO)
-	{
-		proc->builtin_bkp.error = dup(STDERR_FILENO);
-		dup2 (proc->real_channels.error, STDERR_FILENO);
-		close (proc->real_channels.error);
+		(void)fds;
+		fds = fds->next;
 	}
 }
 

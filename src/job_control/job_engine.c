@@ -6,11 +6,9 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 02:19:56 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/06 11:42:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/07 23:53:25 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include <sys/wait.h>
 #include "libft.h"
@@ -42,7 +40,7 @@ static void	pipe_setup(t_process *process)
 			process->io_channels.output = process->p[1];
 	}
 	else
-		process->io_channels.output = process->real_channels.output;
+		process->io_channels.output = STDOUT_FILENO;
 }
 
 /*
@@ -98,7 +96,7 @@ int			job_wait_completion(t_job *job, t_process *proc)
 			if (job_mark_process_status(pid, ret)
 				+ job_is_stopped(job, SAVE_CONF)
 				+ job_is_completed(job, FREE_JOB) != 0)
-				break ;
+					break ;
 		}
 		else
 			ret = proc->status;

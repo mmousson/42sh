@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:02 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/06 05:41:05 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/07 14:47:49 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-static int	make_rel(t_red *red, int *og, int *dir, char ***arge)
+static int	make_rel(t_red *red, int *og, int *dir, char ***arge, t_launch *cmd)
 {
 	if (red->type == REL && red->end_nm)
 	{
@@ -26,6 +26,8 @@ static int	make_rel(t_red *red, int *og, int *dir, char ***arge)
 			*dir = red->end;
 		else if ((*dir = open(red->end_nm, O_RDONLY)) == -1)
 			return (error_open(red->end_nm));
+		if (red->end != -1)
+			cmd->dir_creat = 1;
 		*og = 0;
 	}
 	if (red->type == REL + DBL && red->end_nm)
@@ -36,7 +38,7 @@ static int	make_rel(t_red *red, int *og, int *dir, char ***arge)
 	return (0);
 }
 
-static int	make_rer(t_red *red, int *og, int *dir)
+static int	make_rer(t_red *red, int *og, int *dir, t_launch *cmd)
 {
 	if (red->type == RER && red->end_nm)
 	{
@@ -55,6 +57,8 @@ static int	make_rer(t_red *red, int *og, int *dir)
 		else if ((*dir = open(red->end_nm, O_WRONLY | O_TRUNC | O_CREAT,
 					S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR)) == -1)
 			return (error_open(red->end_nm));
+		if (*dir != 1 && *dir != -1)
+			cmd->dir_creat = 1;
 		*og = 1;
 	}
 	if (red->type == RER + DBL && red->end_nm)
@@ -62,6 +66,7 @@ static int	make_rer(t_red *red, int *og, int *dir)
 		if ((*dir = open(red->end_nm, O_WRONLY | O_APPEND | O_CREAT,
 					S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR)) == -1)
 			return (error_open(red->end_nm));
+		cmd->dir_creat = 1;
 		*og = 1;
 	}
 	return (0);
@@ -85,9 +90,9 @@ static int	make_one_red(t_red *red, t_launch *cmd, char ***arge)
 	og = -2;
 	if (!red)
 		return (0);
-	if ((ret = make_rel(red, &og, &dir, arge)))
+	if ((ret = make_rel(red, &og, &dir, arge, cmd)))
 		return (ret);
-	if ((ret = make_rer(red, &og, &dir)))
+	if ((ret = make_rer(red, &og, &dir, cmd)))
 		return (ret);
 	if (red->srt)
 		og = red->srt;

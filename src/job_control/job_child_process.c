@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/07 11:57:42 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/07 23:49:08 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,39 @@ static void	build_pipes(int input, int output, int error)
 **
 */
 
-static void	build_redirections(t_lstfd *fds)
+static int	bad_fd(int bad_fd, t_process *proc)
+{
+	ft_putstr_fd("42sh: ", STDERR_FILENO);
+	ft_putnbr_fd(bad_fd, STDERR_FILENO);
+	ft_putendl_fd(": Bad file descriptor", STDERR_FILENO);
+	proc->completed = true;
+	proc->valid_to_wait_for = false;
+	proc->status = 1;
+	return (0);
+}
+
+/*
+**
+*/
+
+static int	build_redirections(t_lstfd *fds, t_process *proc)
 {
 	while (fds != NULL)
 	{
-		if (fds->og != -1 && (fds->bkp = dup(fds->og)) == -1)
-		{
-			ft_putendl_fd("42sh: bad file descriptor", STDERR_FILENO);
-			return ;
-		}
+		if (fds->og != -1 && (fds->bkp = dup(fds->dir)) == -1)
+			return (bad_fd(fds->dir, proc));
 		else if (fds->dir != -1)
 		{
 			if (dup2(fds->dir, fds->og) == -1)
-				ft_putendl_fd("42sh: bad file descriptor", STDERR_FILENO);
-			else
+				return (bad_fd(fds->dir, proc));
+			else if (fds->dir_creat)
 				close(fds->dir);
 		}
 		else if (fds->close)
 			close(fds->og);
 		fds = fds->next;
 	}
+	return (1);
 }
 
 /*
@@ -139,7 +152,8 @@ void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 	}
 	io_chan = proc->io_channels;
 	build_pipes(io_chan.input, io_chan.output, io_chan.error);
-	build_redirections(proc->lstfd);
+	if (build_redirections(proc->lstfd, proc) == 0)
+		exit(1) ;
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
 	{
 		execve(proc->name, proc->argv, *(proc->environ));

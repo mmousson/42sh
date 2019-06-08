@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 10:52:54 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 03:55:47 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/07 14:40:55 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,28 @@ static t_lstfd	*new_fd(int dir, int og, int close)
 	new->dir = dir;
 	new->og = og;
 	new->close = close;
+	new->dir_creat = 0;
 	return (new);
 }
 
 static void		ft_add_fd(int dir, int og, int close, t_launch *cmd)
 {
 	t_lstfd		*lst;
+	t_lstfd		*new;
 
 	lst = cmd->lstfd;
 	while (lst && lst->next)
 		lst = lst->next;
+	new = new_fd(dir, og, close);
+	if (cmd->dir_creat)
+	{
+		new->dir_creat = 1;
+		cmd->dir_creat = 0;
+	}
 	if (lst)
-		lst->next = new_fd(dir, og, close);
+		lst->next = new;
 	else
-		cmd->lstfd = new_fd(dir, og, close);
+		cmd->lstfd = new;
 }
 
 void			ft_add_pile(int og, int dir, t_launch *cmd, int close)
