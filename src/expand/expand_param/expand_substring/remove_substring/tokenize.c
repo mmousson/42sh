@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 14:45:41 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/05 11:59:38 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/08 19:51:13 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,19 @@ t_globtok
 static void
 	*get_token(char **pattern)
 {
+	t_rng_token *rng;
+	char		*ptr;
+
 	if (**pattern == '*')
 		return (glob_new_chr_token(GLO_STAR, pattern));
 	if (**pattern == '?')
 		return (glob_new_chr_token(GLO_QUEST, pattern));
 	if (**pattern == '[')
-		return (glob_new_range_token(GLO_RANGE, pattern));
+	{
+		ptr = *pattern;
+		if ((rng = glob_new_range_token(GLO_RANGE, pattern)) || ptr != *pattern)
+			return (rng);
+	}
 	return (glob_new_str_token(GLO_CONST, pattern));
 }
 
