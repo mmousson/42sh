@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:04:24 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/08 18:45:50 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/08 19:34:02 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int
 	check_repertory(char ***files, char **path, struct dirent *ent, int depth)
 {
 	if (!ft_strequ(ent->d_name, ".") && !ft_strequ(ent->d_name, "..")
-		&& ent->d_type & DT_DIR 
+		&& ent->d_type & DT_DIR
 		&& (!(*path = ft_strjoinfs(*path, "/", FT_ARG1))
 		|| read_directory(files, *path, depth - 1)))
 	{
@@ -36,7 +36,6 @@ static int
 
 	while ((entry = readdir(dir)))
 	{
-		//ft_putendl3_fd("path joined => ", path, "", 2);
 		if (!(ptr = ft_strjoin(path, entry->d_name)))
 			return (1);
 		if (depth > 0)
@@ -59,10 +58,8 @@ int
 {
 	DIR		*dir;
 	int		ret;
-	//int		cur_dir;
 
 	ret = 0;
-	//cur_dir = !*path; // || ft_strequ(path, "./")
 	if ((dir = opendir(!*path ? "./" : path)))
 	{
 		if ((ret = check_entry(files, dir, !*path ? "" : path, depth)))

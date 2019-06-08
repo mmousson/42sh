@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:32:17 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/08 18:14:57 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/08 19:33:50 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_rng_token			*glob_new_range_token(int type, char **rng)
 	}
 	if (!(new->value = ft_strsub(beg, 0, *rng - beg + 1)))
 	{
-
 		free(new);
 		return (NULL);
 	}

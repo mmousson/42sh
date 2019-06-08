@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:35:55 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/08 18:54:26 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/08 19:33:22 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ int		is_file_matching_pattern(t_globtok *tok, char *path)
 
 	if (!tok)
 		return (!*path);
-	if (tok && tok->data)
+	if (tok && (data = (t_chr_token *)tok->data))
 	{
-		data = (t_chr_token *)tok->data;
-		//ft_putendl3_fd(ft_itoa(data->type), " : ", path, 2);		
 		if (data->type == GLO_STAR)
 			return (is_matching_asterisk(tok, path));
 		if (data->type == GLO_QUEST)
@@ -50,11 +48,9 @@ int		check_matching_files(t_glob *gl, char **files)
 	int		pos;
 
 	pos = 0;
-	//ft_putendl3_fd("pour le mot : ", "", gl->expr, 2);
 	if (files)
 		while (*files)
 		{
-			//ft_putendl3_fd("pour le fichier : ", *files, "", 2);
 			if (is_file_matching_pattern(gl->lexer->first,
 												*files + gl->root_len))
 			{

@@ -6,13 +6,11 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:30:37 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/07 14:04:14 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/08 19:33:41 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" // a virer
-
-int		walk_range(char **beg)
+int			walk_range(char **beg)
 {
 	char	*ptr;
 	char	*str;
