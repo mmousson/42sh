@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 11:41:32 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 20:22:16 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ int			is_in_brac(t_stat *stat, char *str)
 	while (str[++k])
 	{
 		if (str[k] == ']')
+		{
+			stat->status = stat->old_status;
 			return (1);
+		}
 	}
 	return (0);
 }
@@ -81,10 +84,7 @@ int			lex_exclam(t_stat *stat, t_tok **token, char **str, char buff[BUF])
 	char	*old_sub;
 
 	if (is_in_brac(stat, *str))
-	{
-		stat->status = stat->old_status;
 		return (0);
-	}
 	mem = stat->k;
 	if ((old_sub = lex_following(str, stat)))
 	{
@@ -92,7 +92,10 @@ int			lex_exclam(t_stat *stat, t_tok **token, char **str, char buff[BUF])
 		if (!sub)
 			return (event_not_found(&old_sub));
 		else
+		{
+			ft_strdel(&old_sub);
 			stat->exclam = 1;
+		}
 		lex_include(str, &sub, mem, stat->k);
 		return (lex_reline(stat, token, buff));
 	}

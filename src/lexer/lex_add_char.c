@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:02:48 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/26 19:10:40 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 20:20:37 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void		lex_add_tok(char buf[BUF], char *load, int stat, t_tok *tok)
 void		lex_add_char(char buf[BUF], char **load, char cha)
 {
 	int		size;
+	char	*tmp;
 
 	size = ft_strlen(buf);
 	if (size >= BUF - 1)
@@ -44,7 +45,11 @@ void		lex_add_char(char buf[BUF], char **load, char cha)
 		if (!(*load))
 			*load = ft_strdup(buf);
 		else
+		{
+			tmp = *load;
 			*load = ft_strjoin(*load, buf);
+			free(tmp);
+		}
 		ft_bzero(buf, BUF);
 		buf[0] = cha;
 	}

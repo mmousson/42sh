@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:43:44 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 18:21:52 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 15:10:10 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 t_tree				*ft_select_pars(t_tok *tok, int start, int end, char c)
 {
 	static t_tree	*(*fct_pars[NB_PARS])(t_tok*, int, int) = {
-		ft_pars_line, ft_pars_cmd, ft_pars_pipe};
+		ft_pars_line, ft_pars_cmd, ft_pars_pipe
+	};
 	static char		pars_char[NB_PARS] = ";| ";
 	int				select;
 
