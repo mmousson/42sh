@@ -5,13 +5,21 @@ mkdir -p expected_outputs
 i=0
 ok=0
 ko=0
+system=`uname`
 rm -rf error_logs
 for cmd in command_files/*; do
 	str=`cat $cmd`
 	printf "\n%2d: Launching: %-65s%s" $i "$str" "=>"
 	bash < $cmd > expected_outputs/out_$i 2>&1
 	../../42sh < $cmd > outputs/out_$i 2>&1
-	sed -i '' "s/42sh/bash/g" outputs/out_$i
+	if [ $system != 'Linux' ]
+	then
+		sed -i '' "s/42sh:/bash:/g" outputs/out_$i
+		sed -i '' "s/line [0-9]*: //g" expected_outputs/out_$i
+	else
+		sed -i "s/42sh:/bash:/g" outputs/out_$i
+		sed -i "s/line [0-9]*: //g" expected_outputs/out_$i
+	fi
 	diff expected_outputs/out_$i outputs/out_$i > /tmp/diff_log 2>&1
 	if [ $? = 0 ]
 	then

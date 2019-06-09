@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 09:19:57 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 16:38:10 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/09 18:44:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	integer_expected(const char *s)
 {
-	ft_putstr_fd("42sh: line 1: test: ", STDERR_FILENO);
+	ft_putstr_fd("42sh: test: ", STDERR_FILENO);
 	ft_putstr_fd(s, STDERR_FILENO);
 	ft_putendl_fd(": integer expression expected", STDERR_FILENO);
 	return (TEST_ERROR);
