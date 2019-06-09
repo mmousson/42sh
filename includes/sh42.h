@@ -162,6 +162,7 @@ void				hash_add_entry(int string_hash, char *utility_name,
 char				*core_spec_var_setget(int id, char *new_value,
 	int set_or_get);
 int					core_hash_spec_var(char var);
+void				core_free_shell_spec_vars_list(void);
 
 /*
 **	==================== BUILTIN functions ====================

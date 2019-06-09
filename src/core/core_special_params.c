@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 01:13:45 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/28 16:14:28 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/09 18:36:47 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,23 @@ t_special_vars	g_spec_vars[16] = {
 	{14, NULL},
 	{15, NULL}
 };
+
+/*
+**	Function to free the shell's reserved vars
+**
+**	Arguments: NONE
+**
+**	Return Value: NONE
+*/
+
+void	core_free_shell_spec_vars_list(void)
+{
+	int				i;
+
+	i = -1;
+	while (++i < 16)
+		ft_strdel(&(g_spec_vars[i].value));
+}
 
 /*
 **	Functions that returns the index of the Special Variables table defined

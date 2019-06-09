@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:51:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/09 15:55:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/09 18:09:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ void	job_builtin_redirect(t_process *proc)
 /*
 **	Function used to restore builtin I/O channels redirections when they are
 **	alone in a pipeline loop
-**	It is done by checking if a field in 'builtin_bkp' corresponding to an I/O
-**	channel is different than (-1), which is the default value assigned to
-**	those field when the process Data-Structure is loaded
+**	It is done by using the 'bkp' field in the 't_lstfd' data-structure
 **
 **	Arguments:
 **	proc -> A pointer to the Data-Structure holfding informations about the

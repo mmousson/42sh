@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 12:49:08 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 18:31:06 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ static void		lex_following(char **str, t_tok *tok, char ***arge, t_stat *sta)
 	{
 		lex_free_token(tok);
 		ft_strdel(str);
-		ft_del_words_tables(arge);
-		sh_quiterm();
+		blt_exit(1, NULL, arge);
 	}
 	pars_tok(tok, arge, *str);
 	lex_free_token(tok);

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 12:06:58 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 09:07:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/09 18:36:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int					blt_exit(int argc, char **argv, char ***env)
 			close(g_env.t_fd);
 		}
 		line_delenv();
+		core_free_shell_spec_vars_list();
 		utility_free_alias_list();
 		utility_free_shell_vars_list();
 		exit(argc == 2 ? ft_atoi(argv[1]) : g_last_ret);

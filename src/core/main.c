@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/09 14:11:38 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/09 18:18:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int			usage(char detected_invalid_option)
 {
 	ft_putstr_fd("42sh: -", STDERR_FILENO);
 	ft_putchar_fd(detected_invalid_option, STDERR_FILENO);
-	ft_putendl_fd("\nUsage: 42sh [-c COMMAND_LINE] ...", STDERR_FILENO);
+	ft_putendl_fd(": invalid option", 2);
+	ft_putendl_fd("Usage: 42sh [-c COMMAND_LINE] ...", STDERR_FILENO);
 	return (-1);
 }
 
@@ -87,8 +88,6 @@ static void			loop_on_input(int argc, char **argv, char ***env)
 	{
 		job_sigchld_handler(0);
 		line = line_get_readline(PBASIC, argv[1]);
-		(void)argv;
-		// line = ft_strdup("echo $empty | cat -e");
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 		ret = !lex_str(&line, env);
 		g_last_ret = g_current_ret;
@@ -129,7 +128,5 @@ int					main(int argc, char **argv, char **arge_sys)
 		lex_str(&argv[2], &env);
 	else
 		loop_on_input(argc, argv, &env);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell_term_conf);
-	blt_exit(1, NULL, &env);
 	return (g_last_ret);
 }
