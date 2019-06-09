@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 22:52:39 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 17:16:44 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/09 20:09:03 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ char				*line_delchar_bs(int size)
 char				*line_alloc_history(int stline)
 {
 	char			*prompt;
+	char			*tmp;
 
 	if (stline && g_env.oldline)
 	{
@@ -118,5 +119,10 @@ char				*line_alloc_history(int stline)
 	if (!(prompt = line_get_prompt(g_env.prompt)))
 		sh_errorterm(TMALLOC);
 	ft_strdel(&(g_env.line));
+	if ((int)ft_strlen(g_env.ry->line) < BUFF_SIZE)
+		return (ft_strjoinf(prompt, g_env.ry->line));
+	tmp = ft_strsub(g_env.ry->line, 0, BUFF_SIZE - (int)ft_strlen(prompt));
+	ft_strdel(&g_env.ry->line);
+	g_env.ry->line = tmp;
 	return (ft_strjoinf(prompt, g_env.ry->line));
 }
