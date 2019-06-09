@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 06:12:09 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/24 21:07:45 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/09 14:11:44 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	utility_free_alias_list(void)
 
 	while (g_alias_list)
 	{
+		next = g_alias_list->next;
 		ft_strdel(&(g_alias_list->token));
 		ft_strdel(&(g_alias_list->replacement));
-		next = g_alias_list->next;
 		ft_memdel((void **)&(g_alias_list));
 		g_alias_list = next;
 	}
