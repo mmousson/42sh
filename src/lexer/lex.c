@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 08:34:20 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 12:49:08 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@ int				lex_step(t_stat **stat, char **str)
 	return (1);
 }
 
-static void		lex_following(char **str, t_tok *tok, char ***arge)
+static void		lex_following(char **str, t_tok *tok, char ***arge, t_stat *sta)
 {
-	if (g_env.ctrld && g_env.jobs == 1)// && g_active_job_list)
+	if (sta->exclam)
+		ft_putendl_fd(*str, 2);
+	lex_free_stat(sta);
+	if (g_env.ctrld && g_env.jobs == 1)
 	{
 		ft_putendl_fd("There are still jobs active:\n", 2);
 		blt_jobs(1, NULL, NULL);
 		ft_putendl_fd("\nA second attempt to exit will terminate them.", 2);
 	}
-	if ((!str || !(*str[0])) && g_env.ctrld 
+	if ((!str || !(*str[0])) && g_env.ctrld
 			&& (!g_active_job_list || g_env.jobs > 1))
 	{
 		lex_free_token(tok);
@@ -82,7 +85,7 @@ static int		lex_last(t_stat **stat, t_tok **token, char **str)
 		if (!(ret = pars_prepars(*token)))
 			return (0);
 		if (ret == 2)
-			if (!(lex_more(*stat, str, 0)))
+			if (!(lex_more(*stat, str, 0, 0)))
 				return (clean_out(token, stat, str));
 	}
 	return (1);
@@ -95,7 +98,6 @@ int				lex_str(char **str, char ***arge)
 	char		buff[BUF];
 	int			ret;
 
-	ret = 0;
 	if (!str || !(*str))
 		return (0);
 	if (!(token = lex_init_token()))
@@ -107,17 +109,12 @@ int				lex_str(char **str, char ***arge)
 	{
 		if (lex_step(&stat, str))
 			if ((ret = lex_proc(stat, buff, &token, str)) == -1)
-				if (!(lex_more(stat, str, 1)))
+				if (!(lex_more(stat, str, 1, ret)))
 					return (clean_out(&token, &stat, str));
-		if (ret == -2)
-			return (clean_out(&token, &stat, str));
 		if (!(lex_last(&stat, &token, str)))
 			return (clean_out(&token, &stat, str));
 		(stat->k)++;
 	}
-	if (stat->exclam)
-		ft_putendl_fd(*str, 2);
-	lex_free_stat(stat);
-	lex_following(str, token, arge);
+	lex_following(str, token, arge, stat);
 	return (0);
 }

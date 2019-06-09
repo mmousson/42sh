@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:16:07 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/30 11:22:17 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/09 11:26:53 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ char			*hist_getexpend(char **str)
 		result = hist_getnbrneg(ft_atoi(*str));
 	else
 		result = hist_getstr(*str);
-	ft_strdel(str);
 	return (result);
 }

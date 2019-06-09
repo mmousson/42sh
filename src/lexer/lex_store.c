@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 11:51:09 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 09:46:21 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 12:50:20 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,19 +99,19 @@ int			lex_pile_up(t_stat *stat, char buff[BUF])
 	}
 	stat->status = lex_last_pile(stat);
 	lex_add_char(buff, &(stat->load), stat->cha);
-	return (0);	
+	return (0);
 }
 
 int			lex_store(t_stat *stat, char buff[BUF])
 {
 	if (stat->status == SK)
 	{
-		if (lex_pile_up(stat, buff))//pile up if last != current
-			return (1);//error case if 
+		if (lex_pile_up(stat, buff))
+			return (1);
 	}
 	else if (stat->status == US)
-		if (lex_pile_down(stat, buff))//pile down if last != current
+		if (lex_pile_down(stat, buff))
 			return (1);
-	stat->status = lex_last_pile(stat);// return last type enconter in pile
+	stat->status = lex_last_pile(stat);
 	return (0);
 }

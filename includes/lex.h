@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 08:34:29 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 12:49:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ t_tok			*new_token_space(void);
 t_stat			*lex_init_stat(void);
 int				lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str);
 int				lex_str(char **str, char ***arge);
-int				lex_more(t_stat *stat, char **str, int nl);
+int				lex_more(t_stat *stat, char **str, int nl, int ret);
 int				lex_get_next_state(int state, int ch);
 int				pars_tok(t_tok *tok, char ***arge, char *str);
-int				lex_exclam(t_stat *stat, t_tok **tok, char **str);
+int				lex_exclam(t_stat *stat, t_tok **tok, char **str, char bf[BUF]);
 int				lex_back_slash_quote(t_stat *stat, char **str, char buff[BUF]);
 int				lex_store(t_stat *stat, char buff[BUF]);
 int				lex_last_pile(t_stat *stat);
@@ -123,6 +123,8 @@ int				lex_pile_up(t_stat *stat, char buff[BUF]);
 int				lex_step(t_stat **stat, char **str);
 int				lex_welding(t_stat *stat);
 int				error_ep_or_ec(char close, t_stat *stat);
+void			lex_include(char **str, char **sub, int start, int end);
+int				lex_reline(t_stat *stat, t_tok **token, char buff[BUF]);
 
 /*
 ** fonctions affichages

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 08:34:27 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 12:45:00 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ static int		ft_append_nl(char **str, int nl)
 	return (0);
 }
 
-static void		in_back_slash_case(t_stat *stat, char **str, int *nl)
+static void		in_back_slash_case(t_stat *stat, char **str, int *nl, char **f)
 {
 	int			k;
 
+	*f = NULL;
 	k = 0;
 	if (stat->old_status == BS)
 	{
@@ -76,38 +77,36 @@ static void		in_back_slash_case(t_stat *stat, char **str, int *nl)
 			while ((*str)[k] && (*str)[k + 1])
 				k++;
 			(*str)[k] = 0;
-			stat->k --;
+			stat->k--;
 			stat->old_status = stat->older_status;
 		}
 	}
+	if (stat->old_status == PS)
+		*nl = 0;
 }
 
-int				lex_more(t_stat *stat, char **str, int nl)
+int				lex_more(t_stat *stat, char **str, int nl, int ret)
 {
 	char		*fus;
 	char		*tmp;
 	int			prompt;
 
+	if (ret == -2)
+		return (0);
 	prompt = get_prompt(stat->old_status);
-	fus = NULL;
-	in_back_slash_case(stat, str, &nl);
-	if (stat->old_status == PS)
-		nl = 0;
+	in_back_slash_case(stat, str, &nl, &fus);
 	while (!fus)
 	{
 		if (g_env.isatty)
 			fus = line_get_readline(prompt, NULL);
 		if (((fus == NULL || fus[0] == 0) && g_env.ctrld) || !g_env.isatty)
 			return (ft_nomatch(stat->old_status, fus, stat));
-		if (ft_append_nl(str, nl))
-			return (0);
-		if (!(tmp = ft_strjoin(*str, fus)))
+		if (ft_append_nl(str, nl) || !(tmp = ft_strjoin(*str, fus)))
 			return (0);
 		free(*str);
 		*str = tmp;
 	}
-	if (fus)
-		free(fus);
+	ft_strdel(&fus);
 	stat->k--;
 	stat->status = stat->old_status;
 	if (stat->stack)
