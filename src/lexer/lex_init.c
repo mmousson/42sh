@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:18 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 17:35:05 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 08:34:25 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_stat			*lex_init_stat(void)
 	stat->ch = 0;
 	stat->cha = '\0';
 	stat->k = 0;
+	stat->exclam = 0;
 	stat->load = NULL;
 	stat->stack = NULL;
 	return (stat);

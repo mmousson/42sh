@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/07 16:18:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 07:41:20 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int				lex_get_next_state(int state, int ch)
 {
 	static int	mat[NB_STATE][NB_CH] = {
 		{EN, CH, SP, RL, RR, SK, SK, SK, ES, BS, PI, VA, US, ML, SD},
-		{VS, CH, VS, VS, VS, SK, SK, SK, VS, BS, VS, VS, VS, VS, SD},
+		{VS, CH, VS, VS, VS, SK, SK, SK, VS, BS, VS, VS, VS, ML, SD},
 		{VS, VS, SP, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS, VS},
 		{VS, VS, VS, RL, VS, VS, VS, VS, VO, VS, VS, VS, VS, VS, VS},
 		{VS, VS, VS, VS, RR, VS, VS, VS, VO, VS, VS, VS, VS, VS, VS},

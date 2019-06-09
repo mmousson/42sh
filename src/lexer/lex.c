@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/31 00:04:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/09 08:34:20 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ int				lex_str(char **str, char ***arge)
 	t_tok		*token;
 	t_stat		*stat;
 	char		buff[BUF];
+	int			ret;
 
+	ret = 0;
 	if (!str || !(*str))
 		return (0);
 	if (!(token = lex_init_token()))
@@ -104,13 +106,17 @@ int				lex_str(char **str, char ***arge)
 	while (stat->status != EN && stat->status != EP && stat->status != -1)
 	{
 		if (lex_step(&stat, str))
-			if (lex_proc(stat, buff, &token, str) == -1)
+			if ((ret = lex_proc(stat, buff, &token, str)) == -1)
 				if (!(lex_more(stat, str, 1)))
 					return (clean_out(&token, &stat, str));
+		if (ret == -2)
+			return (clean_out(&token, &stat, str));
 		if (!(lex_last(&stat, &token, str)))
 			return (clean_out(&token, &stat, str));
 		(stat->k)++;
 	}
+	if (stat->exclam)
+		ft_putendl_fd(*str, 2);
 	lex_free_stat(stat);
 	lex_following(str, token, arge);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/07 16:19:51 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 08:39:03 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,34 +58,28 @@ static char	*lex_following(char **str, t_stat *stat)
 	return (sub);
 }
 
-static int	event_not_found(char *event)
+static int	event_not_found(char **event)
 {
 	ft_putstr_fd("42sh: !", 2);
-	ft_putstr_fd(event, 2);
+	ft_putstr_fd(*event, 2);
 	ft_putstr_fd(": event not found\n", 2);
-	return (1);
+	ft_strdel(event);
+	return (-2);
 }
 
-int			is_in_brac(t_stat *stats, char *str)
+int			is_in_brac(t_stat *stat, char *str)
 {
 	int		k;
-	int		stat;
-	int		brac;
 
-	brac = 0;
-	k = -1;
-	while (++k < stats->k)
+	k = stat->k;
+	if (stat->k == 0 || str[stat->k - 1] != '[')
+		return (0);
+	while (str[++k])
 	{
-		if (str[k] == '\'' && !(stat == 3 || (k > 0 && str[k - 1] == '\\')))
-			stat = stat == 1 ? 0 : 1;
-		if (str[k] == '"' && !(stat == 1 || (k > 0 && str[k - 1] == '\\')))
-			stat = stat == 3 ? 0 : 3;
-		if (str[k] == '[' && (k <= 0 || str[k - 1] != '\\') && !(stat % 2))
-			brac = 1;
-		if (str[k] == ']' && (k <= 0 || str[k - 1] != '\\') && !(stat % 2))
-			brac = 0;
+		if (str[k] == ']')
+			return (1);
 	}
-	return (brac);
+	return (0);
 }
 
 int			lex_exclam(t_stat *stat, t_tok **token, char **str)
@@ -97,18 +91,23 @@ int			lex_exclam(t_stat *stat, t_tok **token, char **str)
 	char	*end;
 
 	if (is_in_brac(stat, *str))
-		return (1);
+	{
+		stat->status = stat->old_status;
+		return (0);
+	}
 	mem = stat->k;
 	if ((old_sub = lex_following(str, stat)))
 	{
-		ft_putendl(old_sub);
+		end = ft_strdup(old_sub);
+		sub = hist_getexpend(&old_sub);
+		if (!sub)
+			return (event_not_found(&end));
+		else
+			stat->exclam = 1;
 		lex_free_token(*token);
 		*token = lex_init_token();
 		start = ft_strsub(*str, 0, mem);
-		sub = hist_getexpend(&old_sub);
-		ft_putendl(sub);
-		if (!sub || !old_sub || !ft_strcmp(sub, old_sub))
-			return (event_not_found(old_sub));
+		ft_strdel(&end);
 		end = ft_strdup(*str + stat->k);
 		if (sub)
 			start = ft_strjoinf(start, sub);
@@ -120,11 +119,9 @@ int			lex_exclam(t_stat *stat, t_tok **token, char **str)
 		ft_strdel(&start);
 		ft_strdel(&end);
 		ft_strdel(&sub);
-		return (0);
+		return (1);
 	}
-	//else
-	//	return (event_not_found(old_sub));
 	stat->k = mem;
 	stat->status = lex_last_pile(stat);
-	return (1);
+	return (0);
 }

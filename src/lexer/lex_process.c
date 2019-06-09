@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/07 16:19:57 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 08:34:22 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int	is_bs_to_store(t_stat *stat, char **str)
 
 int			lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str)
 {
+	int		ret;
+
 	if (stat->status == VS)
 	{
 		(stat->k)--;
@@ -50,8 +52,8 @@ int			lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str)
 		return (-1);
 	else if (stat->status == DB && !lex_back_slash_quote(stat, str, buff))
 		return (0);
-	else if (stat->status == ML && !lex_exclam(stat, tok, str))
-		return (0);
+	else if (stat->status == ML && (ret = lex_exclam(stat, tok, str)))
+		return (ret);
 	else if (stat->status != EN && is_bs_to_store(stat, str))
 		lex_add_char(buff, &(stat->load), stat->cha);
 	return (0);
