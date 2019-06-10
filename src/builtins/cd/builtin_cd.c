@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 14:09:13 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/08 19:34:38 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/10 17:05:10 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static int	manage_pwd(char ***env, char **cdenv, char *pwd, int options)
 {
-	if (options & (1 << 28))
+	if (options == 1)
 		utility_set_var("PWD", getcwd(NULL, 0), env, 0);
 	else
 		utility_set_var("PWD", pwd, env, 0);

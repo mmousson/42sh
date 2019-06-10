@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 22:33:38 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/29 12:27:50 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/10 17:01:21 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ char			*get_pwd_for_cd(int pos_args, char **args, char **cdenv)
 	}
 	else
 	{
-		str = ft_strdup(args[pos_args]);
+		if (!(str = ft_strdup(args[pos_args])))
+			return (0);
 		pwd = get_final_path(&str, cdenv);
 		ft_strdel(&str);
 	}

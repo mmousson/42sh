@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 14:11:12 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/28 19:16:07 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/10 17:10:57 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,30 @@ static int		is_valid_option(char c, char *options)
 	return (1);
 }
 
-static int		set_options(char *ops, int *options, int pos)
+static int		set_options(char *ops, int *options)
 {
-	if (ops[pos] == '\0')
-		return (0);
-	if (is_valid_option(ops[pos], "LP"))
+	int pos;
+
+	pos = 0;
+	while (ops[pos])
 	{
-		if (ops[pos] == 'L')
-			*options |= (1 << 27);
-		else if (ops[pos] == 'P')
-			*options |= (1 << 28);
+		if (is_valid_option(ops[pos], "LP"))
+		{
+			if (ops[pos] == 'L')
+				*options = 1;
+			else if (ops[pos] == 'P')
+				*options = 2;
+		}
+		else
+		{
+			ft_putstr_fd(""SH_NAME": cd: illegal option --", 2);
+			ft_putchar_fd(ops[pos], 2);
+			ft_putendl_fd("\nusage :cd [-LP] [dir]", 2);
+			return (1);
+		}
+		++pos;
 	}
-	else
-	{
-		ft_putstr_fd(""SH_NAME": cd: illegal option --", 2);
-		ft_putchar_fd(ops[pos], 2);
-		ft_putendl_fd("\nusage :cd [-LP] [dir]", 2);
-		return (EXIT_FAILURE);
-	}
-	set_options(ops, options, (pos + 1));
-	return (EXIT_SUCCESS);
+	return (0);
 }
 
 int				cd_options_parser(char **args, int *options, int *pos_args)
@@ -58,8 +62,8 @@ int				cd_options_parser(char **args, int *options, int *pos_args)
 				takeoptions = 0;
 			else
 			{
-				if (set_options(args[i], options, 1) == EXIT_FAILURE)
-					return (EXIT_FAILURE);
+				if (set_options(args[i] + 1, options) == 1)
+					return (1);
 			}
 		}
 		else
@@ -68,5 +72,5 @@ int				cd_options_parser(char **args, int *options, int *pos_args)
 			break ;
 		}
 	}
-	return (EXIT_SUCCESS);
+	return (0);
 }
