@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 01:06:53 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/10 14:30:13 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 15:08:40 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int			ft_heredoc_read(int *og, int *dir, t_red *red)
 		tmp = tmp->next;
 	if ((*dir = open(tmp->name, O_RDONLY)) == -1)
 		return (error_open("tmp file for heredoc"));
+	unlink(tmp->name);
 	*og = 0;
 	return (0);
 }
