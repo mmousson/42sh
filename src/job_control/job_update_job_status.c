@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:34:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/10 19:01:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:25:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	job_update_status(t_job *first_job)
 			current = current->next;
 			continue ;
 		}
-		pid = waitpid (WAIT_ANY, &status, WUNTRACED | WNOHANG);
-		if (job_mark_process_status (pid, status))
+		pid = waitpid(WAIT_ANY, &status, WUNTRACED | WNOHANG);
+		if (job_mark_process_status(pid, status))
 			break ;
 	}
 }

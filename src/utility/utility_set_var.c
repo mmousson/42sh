@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 06:20:40 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/05 02:02:36 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:34:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,13 +191,13 @@ static char	*delete_internal_var_and_get_value(char *name)
 **	Return Value: NONE
 */
 
-void		utility_set_var(char *name, char *value, char ***env, int export_var)
+void		utility_set_var(char *name, char *value, char ***env, int export)
 {
 	char	*tmp;
 
 	if (name == NULL || env == NULL)
 		return ;
-	if (export_var)
+	if (export)
 	{
 		tmp = delete_internal_var_and_get_value(name);
 		utility_add_entry_to_environ(env, name, value ? value : tmp);

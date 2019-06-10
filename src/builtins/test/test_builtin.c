@@ -6,15 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 09:23:25 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:20:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 17:00:22 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
-
-/*
-**
-*/
 
 t_unary_matcher		g_unary_table[UNARY_TABLE_LEN] = {
 	{"-b", &check_type, S_IFBLK},
@@ -35,10 +31,6 @@ t_unary_matcher		g_unary_table[UNARY_TABLE_LEN] = {
 	{"-z", &test_z, IGNORE_TYPE}
 };
 
-/*
-**
-*/
-
 t_binary_matcher	g_binary_table[BINARY_TABLE_LEN] = {
 	{"=", &ft_strcmp},
 	{"!=", &ft_strequ},
@@ -49,10 +41,6 @@ t_binary_matcher	g_binary_table[BINARY_TABLE_LEN] = {
 	{"-lt", &test_lt},
 	{"-le", &test_le}
 };
-
-/*
-**
-*/
 
 int					blt_test(int argc, char **argv, char ***env)
 {

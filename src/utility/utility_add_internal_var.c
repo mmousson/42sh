@@ -6,17 +6,34 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 08:24:16 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 18:02:27 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:31:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "sh42.h"
 
+static void	job_update_var(t_vars *internal, t_vars **target)
+{
+	t_vars	*slider;
+
+	slider = *target;
+	internal->prev = NULL;
+	internal->next = NULL;
+	while (slider != NULL && slider->next != NULL)
+		slider = slider->next;
+	if (slider == NULL)
+		*target = internal;
+	else
+	{
+		slider->next = internal;
+		internal->prev = slider;
+	}
+}
+
 static void	add_var(char *name, char *value, t_vars **target)
 {
 	t_vars	*internal;
-	t_vars	*slider;
 
 	if ((internal = (t_vars *)ft_memalloc(sizeof(t_vars))) == NULL)
 		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
@@ -33,20 +50,7 @@ static void	add_var(char *name, char *value, t_vars **target)
 			ft_memdel((void **)&(internal));
 		}
 		else
-		{
-			slider = *target;
-			internal->prev = NULL;
-			internal->next = NULL;
-			while (slider != NULL && slider->next != NULL)
-				slider = slider->next;
-			if (slider == NULL)
-				*target = internal;
-			else
-			{
-				slider->next = internal;
-				internal->prev = slider;
-			}
-		}
+			job_update_var(internal, target);
 	}
 }
 
@@ -69,18 +73,10 @@ void		utility_add_internal_var(char *name, char *value)
 	add_var(name, value, &g_shell_var_list);
 }
 
-/*
-**
-*/
-
 void		utility_add_tmp_var(char *name, char *value)
 {
 	add_var(name, value, &g_shell_tmp_vars);
 }
-
-/*
-**
-*/
 
 void		utility_flush_tmp_vars(void)
 {

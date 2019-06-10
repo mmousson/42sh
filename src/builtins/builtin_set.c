@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 21:24:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 17:57:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:52:15 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include "line_edition.h"
 
 /*
- **	Function to print an error message when an invalid option is caught, along
- **	with the usage information, all on Standard Error Output (2)
- **
- **	Arguments:
- **	caught_invalid_option -> The actual bad option character
- **
- **	Return Value: ALWAYS (-1)
- */
+**	Function to print an error message when an invalid option is caught, along
+**	with the usage information, all on Standard Error Output (2)
+**
+**	Arguments:
+**	caught_invalid_option -> The actual bad option character
+**
+**	Return Value: ALWAYS (-1)
+*/
 
 static int	usage(char caught_invalid_option)
 {
@@ -89,9 +89,8 @@ static int	parse_options(int argc, char **argv, int *parsed)
 	{
 		if (ft_strequ(argv[*parsed], "--"))
 			return (options);
-		else if (argv[*parsed][0] == '-')
+		else if (argv[*parsed][0] == '-' && !(i = 0))
 		{
-			i = 0;
 			while (argv[*parsed][++i] != '\0')
 			{
 				j = 0;
@@ -109,19 +108,19 @@ static int	parse_options(int argc, char **argv, int *parsed)
 }
 
 /*
- **	In case the 'o' option has been passed to this utility, this function is
- **	called to handle it
- **	If 'mode' is NULL, then it means that no 'option_name' has been passed
- **	In this case, we just display the status of the available 'option_name'
- **
- **	Arguments:
- **	mode -> The string 'option_name' immediatly following the last 'o' option
- **
- **	Return Value:
- **	SET_UNAVAILABLE_OPTION (2) -> 'mode' does not correspond to a valid option
- **		name
- **	SET_OK (0) -> Everything went fine
- */
+**	In case the 'o' option has been passed to this utility, this function is
+**	called to handle it
+**	If 'mode' is NULL, then it means that no 'option_name' has been passed
+**	In this case, we just display the status of the available 'option_name'
+**
+**	Arguments:
+**	mode -> The string 'option_name' immediatly following the last 'o' option
+**
+**	Return Value:
+**	SET_UNAVAILABLE_OPTION (2) -> 'mode' does not correspond to a valid option
+**		name
+**	SET_OK (0) -> Everything went fine
+*/
 
 static int	set_lineedit_mode(char *mode)
 {

@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:56:59 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/30 17:08:23 by mmousson         ###   ########.fr        #
+#    Updated: 2019/06/10 19:08:46 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ JOB_CTRL_PATH = ./src/job_control/
 
 JOB_CTRL =	job_initialize.c					\
 			job_add_to_active_jobs.c			\
+			job_bad_fd_notifier.c				\
 			job_builtin_redirect.c				\
 			job_check_variable_declaration.c	\
 			job_child_process.c					\

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 01:13:45 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/09 18:36:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 18:53:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	core_free_shell_spec_vars_list(void)
 **	0 <= x <= 15 -> The corresponding index in the Special Variables table
 */
 
-int				core_hash_spec_var(char var)
+int		core_hash_spec_var(char var)
 {
 	if ((var >= '0' && var <= '9') || var == '?' || var == '$' || var == '_'
 		|| var == '!')
@@ -96,11 +96,11 @@ int				core_hash_spec_var(char var)
 **		interacting with
 **	new_value -> In case the variable is to be updated, this argument holds
 **		the new value (NOTE: the argument is duplicated in memory)
-**	set_or_get -> Flag (can be either SET ot GET) telling the function whether it
-**		should modify the Special Variable or only return its value
+**	set_or_get -> Flag (can be either SET ot GET) telling the function whether
+**		it should modify the Special Variable or only return its value
 */
 
-char			*core_spec_var_setget(int id, char *new_value, int set_or_get)
+char	*core_spec_var_setget(int id, char *new_value, int set_or_get)
 {
 	char	*tmp;
 

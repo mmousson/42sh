@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/07 22:52:34 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:26:24 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 **	Return Value: The computed argc count
 */
 
-int			job_argc(char **argv)
+int		job_argc(char **argv)
 {
 	int	res;
 
@@ -50,7 +50,7 @@ int			job_argc(char **argv)
 **	not NULL -> Pointer to the active job associated with the specified 'pgid'
 */
 
-t_job	*find_job (pid_t pgid, t_job *first_job)
+t_job	*find_job(pid_t pgid, t_job *first_job)
 {
 	t_job	*current_job;
 
@@ -75,7 +75,7 @@ t_job	*find_job (pid_t pgid, t_job *first_job)
 **	1 -> The job has stopped
 */
 
-int		job_is_stopped (t_job *j, int action)
+int		job_is_stopped(t_job *j, int action)
 {
 	t_process	*p;
 
@@ -104,7 +104,7 @@ int		job_is_stopped (t_job *j, int action)
 **	1 -> The job has completed
 */
 
-int		job_is_completed (t_job *j, int action)
+int		job_is_completed(t_job *j, int action)
 {
 	t_process	*p;
 	int			status;

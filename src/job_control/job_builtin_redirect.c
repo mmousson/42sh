@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:51:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 13:23:58 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:10:48 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,6 @@
 #include "libft.h"
 #include "sh42.h"
 #include "job_control_42.h"
-
-/*
-**
-*/
-
-static void	bad_fd(int bad_fd, t_process *proc)
-{
-	ft_putstr_fd("42sh: ", STDERR_FILENO);
-	ft_putnbr_fd(bad_fd, STDERR_FILENO);
-	ft_putendl_fd(": Bad file descriptor", STDERR_FILENO);
-	proc->completed = true;
-	proc->valid_to_wait_for = false;
-	proc->status = 1;
-}
 
 /*
 **	Function used to setup builtin I/O channels redirections when they are
@@ -45,7 +31,7 @@ static void	bad_fd(int bad_fd, t_process *proc)
 **	Return Value: NONE
 */
 
-void	job_builtin_redirect(t_process *proc)
+void		job_builtin_redirect(t_process *proc)
 {
 	t_lstfd	*fds;
 
@@ -53,11 +39,17 @@ void	job_builtin_redirect(t_process *proc)
 	while (fds != NULL)
 	{
 		if (fds->og != -1 && (fds->bkp = fcntl(fds->og, F_DUPFD, 10)) == -1)
-			return (bad_fd(fds->og, proc));
+		{
+			job_bad_fd(fds->og, proc);
+			return ;
+		}
 		else if (fds->dir != -1)
 		{
 			if (dup2(fds->dir, fds->og) == -1)
-				return (bad_fd(fds->dir, proc));
+			{
+				job_bad_fd(fds->dir, proc);
+				return ;
+			}
 			else if (fds->dir_creat)
 				close(fds->dir);
 		}
@@ -79,7 +71,7 @@ void	job_builtin_redirect(t_process *proc)
 **	Return Value: NONE
 */
 
-void	job_builtin_restore(t_process *proc)
+void		job_builtin_restore(t_process *proc)
 {
 	t_lstfd	*fds;
 

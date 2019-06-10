@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 17:29:41 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/07 22:55:19 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 18:56:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include "libft.h"
 #include "sh42.h"
 #include "job_control_42.h"
-
-/*
-**
-*/
 
 static void	delete_lstfds(t_lstfd *fds)
 {
@@ -31,10 +27,6 @@ static void	delete_lstfds(t_lstfd *fds)
 	}
 }
 
-/*
-**
-*/
-
 static void	drop_all_preceeding_processes(t_job *job, t_process *drop_target)
 {
 	t_process	*next;
@@ -45,17 +37,12 @@ static void	drop_all_preceeding_processes(t_job *job, t_process *drop_target)
 	{
 		next = to_drop->next;
 		delete_lstfds(to_drop->lstfd);
-		//Close open fds in lstfd
 		ft_del_words_tables(&to_drop->argv);
 		ft_memdel((void **)&(to_drop));
 		to_drop = next;
 	}
 	job->first_process = drop_target;
 }
-
-/*
-**
-*/
 
 void		job_drop_unnecessary_processes(t_job *job)
 {

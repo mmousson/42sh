@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:21:03 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:10:50 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:24:31 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*search_directory(char *dir_name, char *utility, DIR *dir)
 		if (ft_strequ(sd->d_name, utility))
 		{
 			result = generate_path(dir_name, utility);
-			break;
+			break ;
 		}
 	}
 	closedir(dir);
@@ -86,6 +86,7 @@ static char	*search_directory(char *dir_name, char *utility, DIR *dir)
 **	If the binary doesn't exist in PATH, it will return (NULL)
 **
 **	Arguments:
+**	env -> The shell's current environment
 **	name -> The name of the binary to search for (e.g: ls)
 **
 **	Return Value:
@@ -94,7 +95,7 @@ static char	*search_directory(char *dir_name, char *utility, DIR *dir)
 **	in a newly allocated buffer
 */
 
-char		*utility_search(char *name)
+char		*utility_search(char **env, char *name)
 {
 	int		i;
 	DIR		*dir;
@@ -103,7 +104,7 @@ char		*utility_search(char *name)
 
 	i = -1;
 	result = NULL;
-	if ((paths = ft_strsplit(getenv("PATH"), ':')) == NULL)
+	if ((paths = ft_strsplit(utility_get_env_var(env, "PATH"), ':')) == NULL)
 	{
 		ft_putendl_fd("42sh: Internal malloc error", STDERR_FILENO);
 		return (NULL);

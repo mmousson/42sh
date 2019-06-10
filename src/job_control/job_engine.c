@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 02:19:56 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 13:39:00 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:18:32 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int			job_wait_completion(t_job *job, t_process *proc)
 {
 	t_bool		is_only_builtins;
 	int			ret;
-	pid_t 		pid;
+	pid_t		pid;
 
 	ret = 0;
 	is_only_builtins = true;
@@ -96,7 +96,7 @@ int			job_wait_completion(t_job *job, t_process *proc)
 			if (job_mark_process_status(pid, ret)
 				+ job_is_stopped(job, SAVE_CONF)
 				+ job_is_completed(job, FREE_JOB) != 0)
-					break ;
+				break ;
 		}
 		else
 			ret = proc->status;

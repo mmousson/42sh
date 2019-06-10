@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 22:56:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/15 13:25:04 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/10 15:13:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
+#include <stdio.h>
 #include "line_edition.h"
 
 void			sig_handler(int val)

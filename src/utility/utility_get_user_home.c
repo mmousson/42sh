@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 22:56:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/05 03:47:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:32:44 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*utility_get_user_home(void)
 	if ((user_id = geteuid()) == (uid_t)-1)
 	{
 		write(STDERR_FILENO, "geteuid Undefined Error", 23);
-		return(NULL);
+		return (NULL);
 	}
 	else
 	{

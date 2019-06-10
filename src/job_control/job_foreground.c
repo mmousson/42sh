@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 12:58:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:17:10 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 **	must_continue -> boolean value telling us whether we should wake upthe job
 **		pointed by 'job'
 **
-**	Return Value: The return value of the last process in the job's pipeline loop
+**	Return Value: The return value of the last process in the job's pipeline
+**		loop
 */
 
 int	job_send_to_foreground(t_job *job, int must_continue)
@@ -55,7 +56,7 @@ int	job_send_to_foreground(t_job *job, int must_continue)
 		}
 	}
 	ret = job_wait_completion(job, job->first_process);
-	tcsetpgrp(STDIN_FILENO, shell_proc_group_id);
+	tcsetpgrp(STDIN_FILENO, g_shell_proc_group_id);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell_term_conf);
 	return (ret);
 }

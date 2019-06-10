@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 17:26:00 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/04 17:26:00 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:54:01 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	blt_fc_list(t_options_infos *inf)
 	while (current != NULL)
 	{
 		if (!inf->suppressed)
-			ft_putnbr(current->id);	
+			ft_putnbr(current->id);
 		ft_putchar('\t');
 		ft_putendl(current->line);
 		if (current == target)

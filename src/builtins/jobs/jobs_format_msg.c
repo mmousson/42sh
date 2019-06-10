@@ -6,15 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 10:32:04 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/13 22:40:06 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:59:36 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "jobs.h"
-
-/*
-**
-*/
 
 static void	write_status(t_job *current, int options)
 {
@@ -43,10 +39,6 @@ static void	write_status(t_job *current, int options)
 	else
 		ft_putstr("Running\t\t");
 }
-
-/*
-**
-*/
 
 void		format_job_info(t_job *head, int options, int i)
 {

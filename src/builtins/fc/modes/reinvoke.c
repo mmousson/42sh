@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 17:25:11 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/04 17:25:11 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:55:25 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static char	*get_fresh_command(t_options_infos *inf)
 **		the re-invoked command
 */
 
-int	blt_fc_reinvoke(t_options_infos *inf, char ***env)
+int			blt_fc_reinvoke(t_options_infos *inf, char ***env)
 {
 	int		ret;
 	char	*fresh;

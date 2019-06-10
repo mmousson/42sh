@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 05:42:31 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 07:32:27 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:49:30 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ static int	parse_options(int argc, char **argv, int *parsed)
 	{
 		if (ft_strequ(argv[*parsed], "--"))
 			return (options);
-		else if (argv[*parsed][0] == '-')
+		else if (argv[*parsed][0] == '-' && !(i = 0))
 		{
-			i = 0;
 			while (argv[*parsed][++i] != '\0')
 			{
 				j = 0;
@@ -76,10 +75,6 @@ static int	parse_options(int argc, char **argv, int *parsed)
 	}
 	return (options);
 }
-
-/*
-**
-*/
 
 static int	export_var(char *def, char ***env)
 {
@@ -102,10 +97,6 @@ static int	export_var(char *def, char ***env)
 	return (EXPORT_OK);
 }
 
-/*
-**
-*/
-
 static int	list_vars(char **env)
 {
 	int	i;
@@ -118,10 +109,6 @@ static int	list_vars(char **env)
 	}
 	return (EXPORT_OK);
 }
-
-/*
-**
-*/
 
 int			blt_export(int argc, char **argv, char ***env)
 {

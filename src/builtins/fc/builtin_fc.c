@@ -6,15 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 17:47:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 17:47:35 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:53:18 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fc.h"
-
-/*
-**
-*/
 
 int			blt_fc(int argc, char **argv, char ***env)
 {

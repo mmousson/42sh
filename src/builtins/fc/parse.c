@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 08:12:46 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/04 08:12:46 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:57:48 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ static int			e_option(t_options_infos *holder, char *opt, char *next)
 		return (-1);
 	}
 }
-
-/*
-**
-*/
 
 static int			add_option(t_options_infos *holder, char *opt, char *next)
 {
@@ -65,10 +61,6 @@ static int			add_option(t_options_infos *holder, char *opt, char *next)
 	}
 	return (0);
 }
-
-/*
-**
-*/
 
 static int			parse_argument(t_options_infos *res, char **av, char **env)
 {
@@ -110,10 +102,6 @@ static void			loop(t_options_infos *res, int argc, char **av, char **env)
 	return ;
 }
 
-/*
-**
-*/
-
 t_options_infos		*blt_fc_parse_options(int argc, char **av, char **env)
 {
 	char			*tmp;
@@ -129,7 +117,7 @@ t_options_infos		*blt_fc_parse_options(int argc, char **av, char **env)
 		res->editor_name = ft_strdup("/bin/ed");
 	else
 	{
-		if ((tmp = utility_search(res->editor_name)) == NULL)
+		if ((tmp = utility_search(env, res->editor_name)) == NULL)
 		{
 			ft_putstr_fd("42sh: ", STDERR_FILENO);
 			ft_putstr_fd(res->editor_name, STDERR_FILENO);

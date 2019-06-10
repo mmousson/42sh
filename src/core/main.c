@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/09 18:18:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 18:54:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@ t_vars			*g_shell_var_list = NULL;
 t_vars			*g_shell_tmp_vars = NULL;
 t_job			*g_active_job_list = NULL;
 
-/*
-**
-*/
-
 static int			usage(char detected_invalid_option)
 {
 	ft_putstr_fd("42sh: -", STDERR_FILENO);
@@ -40,10 +36,6 @@ static int			usage(char detected_invalid_option)
 	ft_putendl_fd("Usage: 42sh [-c COMMAND_LINE] ...", STDERR_FILENO);
 	return (-1);
 }
-
-/*
-**
-*/
 
 static int			parse_options(int ac, char **av, int current, int options)
 {
@@ -73,10 +65,6 @@ static int			parse_options(int ac, char **av, int current, int options)
 	return (options);
 }
 
-/*
-**
-*/
-
 static void			loop_on_input(int argc, char **argv, char ***env)
 {
 	int		ret;
@@ -98,10 +86,6 @@ static void			loop_on_input(int argc, char **argv, char ***env)
 			ret = 0;
 	}
 }
-
-/*
-**
-*/
 
 int					main(int argc, char **argv, char **arge_sys)
 {

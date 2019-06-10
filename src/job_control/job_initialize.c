@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:23 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 08:06:42 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:17:50 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <sys/types.h>
 #include "job_control_42.h"
 
-pid_t	shell_proc_group_id;
+pid_t	g_shell_proc_group_id;
 
 /*
 **	This functions checks if the shell is launched as an intercative one
@@ -38,20 +38,20 @@ int		init_job_ctrl(void)
 	is_shell_intercative = isatty(STDIN_FILENO);
 	if (is_shell_intercative)
 	{
-		while (tcgetpgrp(STDERR_FILENO) != (shell_proc_group_id = getpgrp()))
-			kill(-shell_proc_group_id, SIGTTIN);
+		while (tcgetpgrp(STDERR_FILENO) != (g_shell_proc_group_id = getpgrp()))
+			kill(-g_shell_proc_group_id, SIGTTIN);
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGTSTP, SIG_IGN);
 		signal(SIGTTIN, SIG_IGN);
 		signal(SIGTTOU, SIG_IGN);
-		shell_proc_group_id = getpid();
-		if (setpgid(shell_proc_group_id, shell_proc_group_id) < 0)
+		g_shell_proc_group_id = getpid();
+		if (setpgid(g_shell_proc_group_id, g_shell_proc_group_id) < 0)
 		{
 			write(STDERR_FILENO, "Error initializing the shell", 28);
 			return (-1);
 		}
-		tcsetpgrp(STDIN_FILENO, shell_proc_group_id);
+		tcsetpgrp(STDIN_FILENO, g_shell_proc_group_id);
 		tcgetattr(STDIN_FILENO, &shell_term_conf);
 	}
 	return (1);

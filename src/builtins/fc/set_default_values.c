@@ -6,15 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 10:13:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/04 10:13:15 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:56:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fc.h"
-
-/*
-**
-*/
 
 void	blt_fc_set_default_values(t_options_infos *inf)
 {

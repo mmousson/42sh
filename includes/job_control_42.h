@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/07 23:08:52 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:16:26 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct			s_sig_matcher
 
 extern uint8_t			g_last_ret;
 extern int16_t			g_current_ret;
-extern pid_t			shell_proc_group_id;
+extern pid_t			g_shell_proc_group_id;
 extern struct termios	shell_term_conf;
 extern t_sig_matcher	g_sig_table[];
 
@@ -177,7 +177,8 @@ extern t_job			*g_active_job_list;
 **
 **	job_add_to_active_job_list -> job_control/job_add_to_active_job_list.c
 **	job_free -> job_control/job_free.c
-**	job_argc -> job_control/job_utility.c
+**	job_argc -> job_control/job_utility.
+**	job_bad_fd -> job_control/job_bad_fd_notifier.c
 **	job_launch -> job_control/job_engine.c
 **	job_command_search_and_exec -> job_control/job_command_search_and_exec.c
 **	job_parent_process -> job_control/job_parent_process.c
@@ -196,6 +197,7 @@ int						job_check_variable_declaration(t_process *proc,
 	char ***env);
 void					job_free(t_job *job);
 int						job_argc(char **argv);
+int						job_bad_fd(int bad_fd, t_process *proc);
 int						job_launch(t_job *job, int fg);
 void					job_command_search_and_exec(t_job *job,
 	t_process *proc, int fg);

@@ -6,15 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 16:35:55 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/30 16:35:55 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:26:59 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-**
-*/
 
 void	utility_array_shift(char **to_shift)
 {

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 16:52:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/30 16:52:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 18:57:42 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 #include "sh42.h"
 #include "job_control_42.h"
 
-/*
-**
-*/
-
-static int	list_manager(int flag, t_vars *element, char ***env)
+static int		list_manager(int flag, t_vars *element, char ***env)
 {
 	static t_vars	*local_ref = NULL;
 	t_vars			*next;
@@ -46,10 +42,6 @@ static int	list_manager(int flag, t_vars *element, char ***env)
 	return (1);
 }
 
-/*
-**
-*/
-
 static t_vars	*new_var(char *name, char *value, t_process *proc)
 {
 	int		i;
@@ -74,11 +66,8 @@ static t_vars	*new_var(char *name, char *value, t_process *proc)
 	return (result);
 }
 
-/*
-**
-*/
-
-static int	update_dropped_process_informations(t_process *proc, char ***env)
+static int		update_dropped_process_informations(t_process *proc,
+	char ***env)
 {
 	list_manager(VAR_PUSH_INTERNAL, NULL, env);
 	proc->valid_to_wait_for = false;
@@ -108,7 +97,7 @@ static int	update_dropped_process_informations(t_process *proc, char ***env)
 **		JC engine must therefore try to start the process
 */
 
-int			job_check_variable_declaration(t_process *proc, char ***env)
+int				job_check_variable_declaration(t_process *proc, char ***env)
 {
 	char	*catch;
 	char	*name;

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 13:38:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:11:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,50 +53,31 @@ static void	build_pipes(int input, int output, int error)
 {
 	if (input != STDIN_FILENO)
 	{
-		dup2 (input, STDIN_FILENO);
-		close (input);
+		dup2(input, STDIN_FILENO);
+		close(input);
 	}
 	if (output != STDOUT_FILENO)
 	{
-		dup2 (output, STDOUT_FILENO);
-		close (output);
+		dup2(output, STDOUT_FILENO);
+		close(output);
 	}
 	if (error != STDERR_FILENO)
 	{
-		dup2 (error, STDERR_FILENO);
-		close (error);
+		dup2(error, STDERR_FILENO);
+		close(error);
 	}
 }
-
-/*
-**
-*/
-
-static int	bad_fd(int bad_fd, t_process *proc)
-{
-	ft_putstr_fd("42sh: ", STDERR_FILENO);
-	ft_putnbr_fd(bad_fd, STDERR_FILENO);
-	ft_putendl_fd(": Bad file descriptor", STDERR_FILENO);
-	proc->completed = true;
-	proc->valid_to_wait_for = false;
-	proc->status = 1;
-	return (0);
-}
-
-/*
-**
-*/
 
 static int	build_redirections(t_lstfd *fds, t_process *proc)
 {
 	while (fds != NULL)
 	{
 		if (fds->dir != -1 && (fds->bkp = fcntl(fds->dir, F_DUPFD, 10)) == -1)
-			return (bad_fd(fds->dir, proc));
+			return (job_bad_fd(fds->dir, proc));
 		else if (fds->dir != -1)
 		{
 			if (dup2(fds->dir, fds->og) == -1)
-				return (bad_fd(fds->dir, proc));
+				return (job_bad_fd(fds->dir, proc));
 			else if (fds->dir_creat)
 				close(fds->dir);
 		}
@@ -105,6 +86,26 @@ static int	build_redirections(t_lstfd *fds, t_process *proc)
 		fds = fds->next;
 	}
 	return (1);
+}
+
+static void	job_child_exec(t_process *proc)
+{
+	int				blt_pos;
+
+	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
+	{
+		execve(proc->name, proc->argv, *(proc->environ));
+		ft_putstr_fd("Failed to execute process: ", STDERR_FILENO);
+		ft_putendl_fd(proc->argv[0], STDERR_FILENO);
+		ft_putendl_fd("Reason: The file is marked as executable but could not "
+			"be run by the operating system", STDERR_FILENO);
+		exit(126);
+	}
+	else
+		exit(g_builtins[blt_pos].handler(
+				job_argc(proc->argv),
+				proc->argv,
+				proc->environ));
 }
 
 /*
@@ -136,7 +137,6 @@ static int	build_redirections(t_lstfd *fds, t_process *proc)
 
 void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 {
-	int				blt_pos;
 	pid_t			child_id;
 	t_bool			interactive;
 	t_io_channels	io_chan;
@@ -155,19 +155,6 @@ void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 	io_chan = proc->io_channels;
 	build_pipes(io_chan.input, io_chan.output, io_chan.error);
 	if (build_redirections(proc->lstfd, proc) == 0)
-		exit(1) ;
-	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
-	{
-		execve(proc->name, proc->argv, *(proc->environ));
-		ft_putstr_fd("Failed to execute process: ", STDERR_FILENO);
-		ft_putendl_fd(proc->argv[0], STDERR_FILENO);
-		ft_putendl_fd("Reason: The file is marked as executable but could not "
-			"be run by the operating system", STDERR_FILENO);
-		exit(126);
-	}
-	else
-		exit(g_builtins[blt_pos].handler(
-				job_argc(proc->argv),
-				proc->argv,
-				proc->environ));
+		exit(1);
+	job_child_exec(proc);
 }

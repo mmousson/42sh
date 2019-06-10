@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 13:18:18 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/13 21:41:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:33:45 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	hash_string(char *string)
 	const int	power = HASH_POWER;
 	const int	mod = HASH_MOD;
 	int			result;
-	int			current_power;;
+	int			current_power;
 	int			i;
 
 	if (string == NULL)

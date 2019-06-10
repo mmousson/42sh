@@ -223,7 +223,7 @@ void				utility_array_shift(char **to_shift);
 int					utility_file_exists(const char *path);
 void				utility_free_alias_list(void);
 void				utility_free_shell_vars_list(void);
-char				*utility_search(char *name);
+char				*utility_search(char **env, char *name);
 int					utility_is_builtin(char *name);
 char				**utility_duplicate_environ(char **env);
 char				*utility_get_user_home(void);
@@ -233,7 +233,7 @@ void				utility_add_entry_to_environ(char ***environ, char *key,
 	char *value);
 int					utility_rm_entry_from_environ(char ***environ, char *key);
 char				*utility_generate_tmp_filename(void);
-char				*utility_get_env_var(char ***environ, char *key);
+char				*utility_get_env_var(char **environ, char *key);
 int					utility_get_environ_length(char **tab);
 void				utility_add_internal_var(char *name, char *value);
 void				utility_add_tmp_var(char *name, char *value);

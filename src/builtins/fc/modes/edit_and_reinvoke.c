@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 17:26:52 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/04 17:26:52 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:57:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 #include "fc.h"
 #include "lex.h"
 #include "sh42.h"
-
-/*
-**
-*/
 
 static int	put_commands_to_file(t_options_infos *inf, char *filename)
 {
@@ -43,10 +39,6 @@ static int	put_commands_to_file(t_options_infos *inf, char *filename)
 	ft_putendl_fd("42sh: fc: Failed to create temporary file", STDERR_FILENO);
 	return (-1);
 }
-
-/*
-**
-*/
 
 static int	launch_editor(char *path, char *filename, char **env)
 {
@@ -94,10 +86,6 @@ static int	launch_commands(char *filename, char ***env)
 	close(fd);
 	return (ret);
 }
-
-/*
-**
-*/
 
 int			blt_fc_edit_and_reinvoke(t_options_infos *inf, char ***env)
 {

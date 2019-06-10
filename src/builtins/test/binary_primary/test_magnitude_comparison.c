@@ -6,20 +6,16 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 09:41:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 16:36:07 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 17:01:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-/*
-**
-*/
-
 int	test_gt(const char *n1, const char *n2)
 {
-	int	nb1;
-	int	nb2;
+	int			nb1;
+	int			nb2;
 	const char	*bkp1;
 	const char	*bkp2;
 
@@ -38,14 +34,10 @@ int	test_gt(const char *n1, const char *n2)
 	return (nb1 > nb2 ? TEST_TRUE : TEST_FALSE);
 }
 
-/*
-**
-*/
-
 int	test_ge(const char *n1, const char *n2)
 {
-	int	nb1;
-	int	nb2;
+	int			nb1;
+	int			nb2;
 	const char	*bkp1;
 	const char	*bkp2;
 
@@ -64,14 +56,10 @@ int	test_ge(const char *n1, const char *n2)
 	return (nb1 >= nb2 ? TEST_TRUE : TEST_FALSE);
 }
 
-/*
-**
-*/
-
 int	test_lt(const char *n1, const char *n2)
 {
-	int	nb1;
-	int	nb2;
+	int			nb1;
+	int			nb2;
 	const char	*bkp1;
 	const char	*bkp2;
 
@@ -90,14 +78,10 @@ int	test_lt(const char *n1, const char *n2)
 	return (nb1 < nb2 ? TEST_TRUE : TEST_FALSE);
 }
 
-/*
-**
-*/
-
 int	test_le(const char *n1, const char *n2)
 {
-	int	nb1;
-	int	nb2;
+	int			nb1;
+	int			nb2;
 	const char	*bkp1;
 	const char	*bkp2;
 

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 00:54:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/27 15:14:54 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 15:53:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,18 @@
 **	Otherwise, a pointer to the variable's value (after the first '=' sign)
 */
 
-char	*utility_get_env_var(char ***environ, char *key)
+char	*utility_get_env_var(char **environ, char *key)
 {
 	int			i;
 	size_t		key_len;
-	static char	***internal_reference = NULL;
 
-	if (environ == NULL)
-		environ = internal_reference;
 	i = -1;
 	key_len = ft_strlen(key);
-	internal_reference = environ;
-	while (environ && *environ && (*environ)[++i] != NULL)
+	while (environ && environ[++i] != NULL)
 	{
-		if (ft_strncmp(key, (*environ)[i], key_len) == 0
-			&& (*environ)[i][key_len] == '=')
-			return (ft_strchr((*environ)[i], '=') + 1);
+		if (ft_strncmp(key, environ[i], key_len) == 0
+			&& environ[i][key_len] == '=')
+			return (ft_strchr(environ[i], '=') + 1);
 	}
 	return (NULL);
 }

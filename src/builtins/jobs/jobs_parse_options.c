@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_options.c                                    :+:      :+:    :+:   */
+/*   jobs_parse_options.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 10:30:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/12 10:31:28 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:58:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "jobs.h"
-
-/*
-**
-*/
 
 static int	option_index(char c)
 {
@@ -29,10 +25,6 @@ static int	option_index(char c)
 	}
 	return (-1);
 }
-
-/*
-**
-*/
 
 int			parse_options(int argc, char **argv, int *parsed)
 {
