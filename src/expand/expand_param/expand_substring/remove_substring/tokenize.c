@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 14:45:41 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/08 19:51:13 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:30:38 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ int
 	{
 		if ((token = get_token(&pattern)))
 		{
-			if (token->type == GLO_CONST)
-				token->len = expansion_unquote(token->value);
 			if (gl->suffix)
 			{
 				if (token->type == GLO_CONST)
