@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:33:56 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/04 17:29:23 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:18:48 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int			match_files(t_glob *gl)
 	{
 		if (gl->lexer->first && check_matching_files(gl, files) == 0)
 		{
-			expansion_unquote(gl->expr);
 			if (!(path = ft_strjoin(gl->root, gl->expr))
 				|| !ft_strtabadd(&gl->res, path))
 				return (1);
