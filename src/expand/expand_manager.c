@@ -6,14 +6,13 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:52:12 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/10 15:24:17 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:43:25 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include <unistd.h>
 
-#include "libft.h"
 int		expand_manager(char **str, char ***arge, t_tok *token, int red)
 {
 	int	ret;

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 13:33:13 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/10 15:24:13 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:43:12 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ static int	remove_quote(char *str)
 	return (0);
 }
 
-#include "libft.h"
 int			expand_quote_removal(char **str)
 {
 	if (!str || !*str)
