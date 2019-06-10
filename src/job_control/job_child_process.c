@@ -6,9 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/09 14:13:32 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:38:47 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <fcntl.h>
 
 #include <signal.h>
 #include <unistd.h>
@@ -89,7 +91,7 @@ static int	build_redirections(t_lstfd *fds, t_process *proc)
 {
 	while (fds != NULL)
 	{
-		if (fds->dir != -1 && (fds->bkp = dup(fds->dir)) == -1)
+		if (fds->dir != -1 && (fds->bkp = fcntl(fds->dir, F_DUPFD, 10)) == -1)
 			return (bad_fd(fds->dir, proc));
 		else if (fds->dir != -1)
 		{

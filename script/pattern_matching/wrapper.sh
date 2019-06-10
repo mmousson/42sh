@@ -43,4 +43,4 @@ else
 	printf "\033[1;31m[UNIT TESTS FAILURE]\033[0m\n"
 fi
 printf "\n=== END OF REPORT =====================================================================\n\n"
-rm -rf empty/ expected_outputs/ one outputs/ \[c\] a\? aa ab b\* !bc +bc ,bc -bc 0bc 1bc 11 22 33 \[x/foo ab\[x abc bb bbc cbc cc \[x/ a\[a-z\]\[x .bc
+rm -rf empty/ expected_outputs/ one outputs/ \[c\] \[x/ a\? aa ab b\* empty/ one/ \[c\] a\? aa ab b\* !bc +bc ,bc -bc 0bc 1bc 11 22 33 \[x/foo ab\[x abc bb bbc cbc cc \[x/ a\[a-z\]\[x .bc

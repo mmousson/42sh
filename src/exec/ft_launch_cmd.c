@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 07:15:44 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:32:39 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	handle_logical_operators(void)
 	{
 		if ((g_prev_status == PIP + DBL && g_current_ret == 0)
 			|| (g_prev_status == ESP + DBL && g_current_ret != 0))
-			return (SKIP_JOB);
+				return (SKIP_JOB);
 	}
 	return (DONT_SKIP_JOB);
 }
