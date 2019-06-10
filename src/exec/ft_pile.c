@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 10:52:54 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/07 14:40:55 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:38:12 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,4 @@ static void		ft_add_fd(int dir, int og, int close, t_launch *cmd)
 void			ft_add_pile(int og, int dir, t_launch *cmd, int close)
 {
 	ft_add_fd(dir, og, close, cmd);
-	if (og == 0)
-		cmd->in = dir;
-	if (og == 1)
-		cmd->out = dir;
-	if (og == 2)
-		cmd->err = dir;//origine: dup des fd 0 1 2, le rez n'a plus de sens
 }

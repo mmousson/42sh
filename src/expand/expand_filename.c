@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 07:36:36 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/05 09:33:33 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 14:30:05 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 #include "pars.h"
 #include "lex.h"
 
-int			expand_filename(char **path, t_tok *token)
+int			expand_filename(char **path, t_tok *token, int red)
 {
 	char	**files;
 	int		k;
 	t_tok	*end;
 
+	(void)red;
 	end = token->next;
 	if (!path || !(files = sh_glob(*path)))
 		return (0);

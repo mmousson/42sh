@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 01:06:53 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/06 05:41:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 14:30:13 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	ft_launch_here(char *end, int fd, int exp, char ***arge)
 		}
 		line = line_get_readline(PHEREDOC, NULL);
 		if (exp)
-			expand_manager(&line, arge, NULL);
+			expand_manager(&line, arge, NULL, 0);
 		if ((!line || !line[0]) && g_env.ctrld)
 			stop = 1;
 		else if (ft_strcmp(line, end))
@@ -93,18 +93,3 @@ int			ft_heredoc_read(int *og, int *dir, t_red *red)
 	*og = 0;
 	return (0);
 }
-/*
-int			heredoc_store(t_red *red)
-{
-	t_red	*tmp;
-
-	tmp = red;
-	while (tmp)
-	{
-		if (tmp->type == REL + 20 && tmp->end_nm)
-			if (ft_heredoc(tmp->end_nm))
-				return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}*/

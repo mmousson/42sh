@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 08:07:28 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 03:55:49 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:36:53 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ static int		ft_add(t_tree *tree, t_launch **cmd, char ***arge)
 	t_red		*red;
 	int			ret;
 
-	if (!tree)
-		return (0);
-	if ((ret = ft_add_red(tree, ft_last(*cmd))))
+	if (tree && (ret = ft_add_red(tree, ft_last(*cmd))))
 	{
 		if (ft_add(tree->left, cmd, arge))
 			return (1);
@@ -72,7 +70,7 @@ static int		ft_add(t_tree *tree, t_launch **cmd, char ***arge)
 		else if (tree->content && tree->type != SPA)
 			ft_add_elmt(tree, cmd, &red);
 	}
-	if (ret || ft_last(*cmd)->will_red == -1)
+	if (tree && (ret || ft_last(*cmd)->will_red == -1))
 		if (ft_add(tree->right, cmd, arge))
 			return (1);
 	return (0);

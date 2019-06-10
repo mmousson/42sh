@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 10:19:28 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 21:02:26 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 14:30:04 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,18 @@
 #include <stdlib.h>
 #include "libft.h"
 
-int		expand_token(t_tok *token, char ***arge, int here)
+int		ret_if_neg(t_tok *token, int ret)
+{
+	if (ret == -1)
+	{
+		lex_free_token(token->next);
+		token->next = NULL;
+		return (1);
+	}
+	return (1);
+}
+
+int		expand_token(t_tok *token, char ***arge, int here, int red)
 {
 	int	ret;
 
@@ -25,20 +36,16 @@ int		expand_token(t_tok *token, char ***arge, int here)
 	{
 		if (here)
 			here = 0;
-		else if ((ret = expand_manager(&token->content, arge, token)))
-		{
-			if (ret == -1)
-			{
-				lex_free_token(token->next);
-				token->next = NULL;
-				return (1);
-			}
-			return (1);
-		}
+		else if ((ret = expand_manager(&token->content, arge, token, red)))
+			return (ret_if_neg(token, ret));
+		if (red)
+			red = 0;
 	}
 	if (token->status == REL && !ft_strcmp(token->content, "<<"))
 		here = 1;
-	if (expand_token(token->next, arge, here))
+	else if (token->status == RER || token->status == REL)
+		red = 1;
+	if (expand_token(token->next, arge, here, red))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 07:15:44 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:37:32 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,47 +33,6 @@ void		ft_next_pipe(t_launch *cmd)
 {
 	cmd->next = ft_init_cmd(NULL);
 }
-
-void		ft_fork_or_not(t_launch *cmd, char *path, char ***arge)
-{
-	if (cmd->nbr_pipe)
-	{
-		execve(path, cmd->argv, *arge);
-		exit(1);
-	}
-	else
-		do_fork(path, cmd->argv, *arge);
-}
-
-// static void print_structures(t_job *job)
-// {
-// 	t_process *current;
-
-// 	current = job->first_process;
-// 	printf("pgid = %d\n", job->pgid);
-// 	printf("command = %s\n", job->command);
-// 	printf("notified = %d\n", job->notified);
-// 	while (current)
-// 	{
-// 		printf("arguments:\n");
-// 		char **tmp = current->argv;
-// 		while (*tmp != NULL)
-// 		{
-// 			printf("%s\n", *tmp);
-// 			tmp++;
-// 		}
-// 		printf("io_channels:\n");
-// 		printf("input = %d\n", current->io_channels.input);
-// 		printf("output = %d\n", current->io_channels.output);
-// 		printf("error = %d\n", current->io_channels.error);
-// 		printf("real_channels:\n");
-// 		printf("input = %d\n", current->real_channels.input);
-// 		printf("output = %d\n", current->real_channels.output);
-// 		printf("error = %d\n", current->real_channels.error);
-// 		current = current->next;
-// 	}
-
-// }
 
 static int	handle_logical_operators(void)
 {

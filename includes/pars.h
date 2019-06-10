@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/06 03:10:18 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 14:01:24 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ t_tree				*ft_expend(t_tree *tree, char **arge);
 char				*ft_cmpct(t_tree *tree, char **arge);
 int					is_clean(int val);
 char				*ft_doll(t_tree *tree, char **arge);
-int					expand_token(t_tok *token, char ***arge, int here);
+int					expand_token(t_tok *token, char ***arge, int here, int red);
 
 /*
 ** Tool Function

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:41:35 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/07 22:58:50 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:22:20 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void		exe_print_chan(t_io_channels chan)
 	ft_putstr("\nerror  :  ");
 	ft_putnbr(chan.error);
 	ft_putchar('\n');
-
 }
 
 void		exe_print_proc(t_process *proc)

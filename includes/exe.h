@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:04:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/07 14:48:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 14:30:01 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include "job_control_42.h"
 # include "lex.h"
+
+typedef struct		s_dup
+{
+	int				og;
+	int				dir;
+}					t_dup;
 
 typedef struct		s_lsther
 {
@@ -54,11 +60,9 @@ t_launch			*ft_init_cmd(char **argv);
 char				**extend(char **argv, char *str);
 void				ft_exec(t_tree *tree, char ***arge, int sep);
 int					ft_path(char *name, char **path, char **arge);
-int					ft_get_home_cmd(char *name);
 int					ft_fct(char *name, char **path, char **arge);
 int					is_exec(char *path);
 char				**ft_split_path(char **env);
-int					do_fork(char *name, char **arg, char **arge);
 void				ft_cmd_nf(char *str);
 int					ft_add_red(t_tree *tree, t_launch *cmd);
 t_red				*ft_target_last(t_launch *cmd);
@@ -82,7 +86,6 @@ int					ft_heredoc_read(int *og, int *dir, t_red *red);
 void				add_name(t_red *red, char *str);
 
 char				*ft_getenv(char **env, char *name);
-int					ft_do_home(int k, char **argv, char ***arge);
 
 void				exe_print_job(t_job *job);
 t_job				*exe_load_job(t_launch *cmd, char ***arge);
