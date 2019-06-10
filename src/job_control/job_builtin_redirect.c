@@ -6,9 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:51:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/09 18:09:17 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:23:58 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -50,7 +52,7 @@ void	job_builtin_redirect(t_process *proc)
 	fds = proc->lstfd;
 	while (fds != NULL)
 	{
-		if (fds->og != -1 && (fds->bkp = dup(fds->og)) == -1)
+		if (fds->og != -1 && (fds->bkp = fcntl(fds->og, F_DUPFD, 10)) == -1)
 			return (bad_fd(fds->og, proc));
 		else if (fds->dir != -1)
 		{
@@ -71,7 +73,7 @@ void	job_builtin_redirect(t_process *proc)
 **	It is done by using the 'bkp' field in the 't_lstfd' data-structure
 **
 **	Arguments:
-**	proc -> A pointer to the Data-Structure holfding informations about the
+**	proc -> A pointer to the Data-Structure holding informations about the
 **		builtin process
 **
 **	Return Value: NONE
