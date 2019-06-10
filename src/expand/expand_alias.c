@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 08:10:04 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 21:44:48 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:17:31 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void			replace_tok(t_tok *token, char *str)
 	t_tok		*tmp;
 	int			k;
 
-	if (str)
+	if (!str)
 		return ;
 	tab = ft_strsplit(str, ' ');
 	tmp = token;
