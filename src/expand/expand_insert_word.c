@@ -6,12 +6,31 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 20:56:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/29 13:59:40 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 21:16:33 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
+
+static int	insert_paste(char **str, char **end, char **first)
+{
+	if (*first)
+	{
+		if (*end)
+		{
+			if (!(*str = ft_strjoin(*first, *end)))
+				return (1);
+			ft_strdel(first);
+			ft_strdel(end);
+		}
+		else
+			*str = *first;
+	}
+	else
+		*str = *end;
+	return (0);
+}
 
 int			insert_word(char **str, char *expand, int start, int len)
 {
@@ -31,19 +50,7 @@ int			insert_word(char **str, char *expand, int start, int len)
 			return (1);
 		ft_strdel(&tmp);
 	}
-	if (first)
-	{
-		if (end)
-		{
-			if (!(*str = ft_strjoin(first, end)))
-				return (1);
-			ft_strdel(&first);
-			ft_strdel(&end);
-		}
-		else
-			*str = first;
-	}
-	else
-		*str = end;
+	if (insert_paste(str, &end, &first))
+		return (1);
 	return (0);
 }

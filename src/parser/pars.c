@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 12:59:22 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 20:40:25 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:05:03 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int					pars_tok(t_tok *token, char ***arge, char *str)
 			tmp = tmp->next;
 		sep = get_sep(tmp);
 		ft_exec(tree, arge, sep);
+		if (tmp)
+			tmp = tmp->next;
 	}
 	return (0);
 }

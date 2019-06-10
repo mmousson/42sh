@@ -6,15 +6,15 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 10:19:28 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/06 03:11:49 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 21:02:26 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 #include "expand.h"
 #include <stdlib.h>
-
 #include "libft.h"
+
 int		expand_token(t_tok *token, char ***arge, int here)
 {
 	int	ret;

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 09:18:57 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 00:06:01 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:05:05 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "expand.h"
 #include "libft.h"
 
-static int	 two_point(char **value, char ***arge, const char *str, char *var)
+static int	two_point(char **value, char ***arge, const char *str, char *var)
 {
 	char	*res;
 
@@ -23,8 +23,8 @@ static int	 two_point(char **value, char ***arge, const char *str, char *var)
 		*value = take_word_expand(str + 2, arge);
 	if (str[1] == '+' && *value)
 	{
-			free(*value);
-			*value = take_word_expand(str + 2, arge);
+		free(*value);
+		*value = take_word_expand(str + 2, arge);
 	}
 	if (str[1] == '=' && !*value)
 	{
@@ -61,28 +61,36 @@ static int	is_valid_line(const char *str)
 	return (0);
 }
 
+static int	find_k(const char *str, int *end_var)
+{
+	int		pil;
+	int		k;
+
+	k = 0;
+	pil = 1;
+	while (str[k] && pil)
+	{
+		if (str[k] == '$' && str[k + 1] == '{')
+			pil++;
+		else if (pil == 1 && !*end_var && !is_char_exp(str[k]) && str[k] != '/')
+			*end_var = k;
+		if (str[k] == '}')
+			pil--;
+		if (pil)
+			k++;
+	}
+	return (k);
+}
+
 char		*expand_curly(const char *str, char ***arge, int *end, int *error)
 {
 	int		k;
 	int		end_var;
 	char	*var;
 	char	*value;
-	int		pile;
 
 	end_var = 0;
-	k = 0;
-	pile = 1;
-	while (str[k] && pile)
-	{
-		if (str[k] == '$' && str[k + 1] == '{')
-			pile++;
-		else if (pile == 1 && !end_var && !is_char_exp(str[k]) && str[k] != '/')
-			end_var = k;
-		if (str[k] == '}')
-			pile--;
-		if (pile)
-			k++;
-	}
+	k = find_k(str, &end_var);
 	if (!end_var && is_valid_line(str))
 		end_var = k;
 	*end = k + 1;

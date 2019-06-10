@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 08:10:04 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/05 09:33:27 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 21:44:48 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,24 @@ void			replace_tok(t_tok *token, char *str)
 	int			k;
 
 	if (str)
+		return ;
+	tab = ft_strsplit(str, ' ');
+	tmp = token;
+	end = token->next;
+	if (tab && tab[0])
 	{
-		tab = ft_strsplit(str, ' ');
-		tmp = token;
-		end = token->next;
-		if (tab && tab[0])
+		ft_strdel(&token->content);
+		token->content = tab[0];
+		k = 0;
+		while (tab[++k])
 		{
-			ft_strdel(&token->content);
-			token->content = tab[0];
-			k = 0;
-			while (tab[++k])
-			{
-				tmp->next = new_token_space();
-				tmp = tmp->next;
-				tmp->next = new_token_char(tab[k]);
-				tmp = tmp->next;
-			}
-			free(tab);
-			tmp->next = end;
+			tmp->next = new_token_space();
+			tmp = tmp->next;
+			tmp->next = new_token_char(tab[k]);
+			tmp = tmp->next;
 		}
+		free(tab);
+		tmp->next = end;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:51:24 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/04 21:59:07 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 21:01:12 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ static int		expand_one_param(char **str, int *j, char ***arge)
 	if (error)
 		return (error_substitute(*str, *j, end, error));
 	if (insert_word(str, expand, *j, end))
-			return (1);
+		return (1);
 	if (expand)
 	{
-	//	if ((*str)[*j + 1] == '{')
-	//		(*j)++;
 		*j += ft_strlen(expand) - 1;
 		ft_strdel(&expand);
 	}
@@ -81,7 +79,7 @@ int				expand_param_word(char **str, char ***arge)
 		if (state % 2 == 1)
 			state--;
 		else if (c == '\\')
-			state ++;
+			state++;
 		else if (c == '$' && !state && is_doll_exp((*str)[j + 1]))
 		{
 			if ((ret = expand_one_param(str, &j, arge)))
@@ -94,9 +92,9 @@ int				expand_param_word(char **str, char ***arge)
 	return (0);
 }
 
-int		expand_shell_param(char **str, char ***arge)
+int				expand_shell_param(char **str, char ***arge)
 {
-	int	ret;
+	int			ret;
 
 	if (!str || !(*str))
 		return (1);

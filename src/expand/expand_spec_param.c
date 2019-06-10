@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:06:51 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/03 00:56:22 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 21:09:39 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdlib.h>
 #define OFFSET 10
 
-#include "libft.h"
 char			*get_spec_param(const char *word)
 {
 	static char	*table = "?$_!";

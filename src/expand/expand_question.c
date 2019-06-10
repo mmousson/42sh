@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 23:09:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/02 23:16:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/09 21:11:29 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			expand_question(char *var, const char *str, char ***arge)
 
 	if ((res = take_word_expand(str + 2, arge)) && res[0])
 	{
-		ft_putstr_fd("42sh: ",2 );
+		ft_putstr_fd("42sh: ", 2);
 		ft_putstr_fd(var, 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(res, 2);
