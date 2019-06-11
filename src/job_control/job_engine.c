@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 02:19:56 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 13:53:38 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 15:05:30 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int			job_launch(t_job *job, int fg)
 {
 	t_process	*current_process;
 
-	job_drop_unnecessary_processes(job);
+	// job_drop_unnecessary_processes(job);
 	current_process = job->first_process;
 	while (current_process)
 	{

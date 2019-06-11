@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 17:29:41 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 18:56:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 15:07:20 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void		job_drop_unnecessary_processes(t_job *job)
 	while (current != NULL)
 	{
 		if (current->lstfd != NULL)
-			drop_target = current;
+		{
+			if (current->lstfd->dir == STDIN_FILENO)
+				drop_target = current;
+		}
 		current = current->next;
 	}
 	if (drop_target != NULL)

@@ -3,12 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utility_generate_tmp_filename.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 10:20:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 14:14:25 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/11 14:48:32 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifdef __linux__
+
+# include <sys/random.h>
+#endif
 
 #include <unistd.h>
 #include <sys/syscall.h>
@@ -16,9 +21,7 @@
 #include "sh42.h"
 #include "libft.h"
 
-#ifndef __linux__
-
-# include <sys/random.h>
+#ifdef __linux__
 
 static void	action(char *next_suffix)
 {
