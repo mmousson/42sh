@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_utility.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:26:24 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:27:36 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ int		job_argc(char **argv)
 	return (res);
 }
 
-/* Find the active job with the indicated pgid.  */
 /*
+**	Find the active job with the indicated pgid.
+**
 **	This function returns the active job associated with the specified pgid
 **
 **	Arguments:

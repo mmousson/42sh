@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_and_reinvoke.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 17:26:52 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 16:57:09 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:11:43 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	put_commands_to_file(t_options_infos *inf, char *filename)
 		{
 			ft_putendl_fd(current->line, fd);
 			if (current == target)
-				break;
+				break ;
 			current = current->next;
 		}
 		close(fd);
@@ -79,7 +79,7 @@ static int	launch_commands(char *filename, char ***env)
 	}
 	while (get_next_line(fd, &line) > 0)
 	{
-		ft_putendl_fd(line,2);
+		ft_putendl_fd(line, 2);
 		ret = !lex_str(&line, env);
 		ft_strdel(&line);
 	}

@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:09:47 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/10 16:10:03 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/11 12:43:28 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ char		**ft_strtabjoin4(char **tab1, char **tab2, char **tab3, char **tab4)
 	len1 = tab1 ? ft_strtablen(tab1) : 0;
 	len2 = tab2 ? ft_strtablen(tab2) : 0;
 	len3 = tab3 ? ft_strtablen(tab3) : 0;
-	if ((res = ft_strtaballoc(len1 + len2 + len3 + (tab4 ? ft_strtablen(tab4) : 0))))
+	if ((res = ft_strtaballoc(len1 + len2 + len3
+		+ (tab4 ? ft_strtablen(tab4) : 0))))
 	{
 		if (tab1)
 			ft_strtabcpy(res, tab1);

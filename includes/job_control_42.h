@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_control_42.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:16:26 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:06:25 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef enum			e_bool
 **	Fd chained_list with, origin, direction, closure (to apply or not).
 */
 
-typedef struct		s_lstfd
+typedef struct			s_lstfd
 {
 	int				bkp;
 	int				og;
@@ -105,7 +105,7 @@ typedef struct		s_lstfd
 	int				dir_creat;
 	int				close;
 	struct s_lstfd	*next;
-}					t_lstfd;
+}						t_lstfd;
 
 /*
 **	Structure holding I/O channels of a spawned process
@@ -201,7 +201,8 @@ int						job_bad_fd(int bad_fd, t_process *proc);
 int						job_launch(t_job *job, int fg);
 void					job_command_search_and_exec(t_job *job,
 	t_process *proc, int fg);
-void					job_parent_process(t_job *job, t_process *proc, pid_t pid);
+void					job_parent_process(t_job *job, t_process *proc,
+																	pid_t pid);
 void					job_child_process(t_process *proc, int foreground,
 	pid_t pgid);
 int						job_send_to_foreground(t_job *job, int must_continue);

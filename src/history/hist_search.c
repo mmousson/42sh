@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hist_search.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 09:45:50 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 18:20:51 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:25:53 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		hist_searchline(char c)
 	forwards = 0;
 	if ((index = hist_initsearch(c)) == -1)
 		return ;
-	while (g_env.ry->next)
+	while (g_env.ry->next) // ==> while (g_env.ry->next && ++index)
 	{
 		index++;
 		if ((forwards = hist_strstr(g_env.ry->line, g_env.h_word)) > -1)
@@ -76,6 +76,10 @@ static void		hist_searchline(char c)
 		}
 		g_env.ry = g_env.ry->next;
 	}
+	//	Ou remplacer tout le bas par ça
+	//	if (hist_checksearch(&tmp) && (g_env.ry = tmp)
+	// 	&& !ft_strcmp(buff, g_env.line))
+	// 	hist_searchline(CTRLR);
 	if (!hist_checksearch(&tmp))
 		return ;
 	g_env.ry = tmp;

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   sh42.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/06 04:11:02 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/11 12:55:42 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_42_H
-# define SH_42_H
+#ifndef SH42_H
+# define SH42_H
 
 # include <termios.h>
 
@@ -76,7 +76,7 @@ typedef struct		s_hash
 }					t_hash;
 
 /*
-**
+**	Variables structure
 */
 
 typedef struct		s_vars

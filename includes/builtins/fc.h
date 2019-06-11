@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 21:04:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 21:04:39 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:08:04 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define FILL 2
 
 /*
-**
+** Offset Matcher structure
 */
 
 typedef struct	s_offset_matcher
@@ -33,7 +33,7 @@ typedef struct	s_offset_matcher
 }				t_offset_matcher;
 
 /*
-**
+** Reinvoke structure
 */
 
 typedef struct	s_reinvoke
@@ -46,8 +46,8 @@ typedef struct	s_reinvoke
 **	Structure holding everything we need to know about the options of the
 **	fc builtin utility
 **
-**	options -> 
-**	parsed -> 
+**	options ->
+**	parsed ->
 **	editor_name ->
 */
 
@@ -70,7 +70,7 @@ typedef struct	s_options_infos
 }				t_options_infos;
 
 /*
-**
+** Prototypes
 */
 
 t_options_infos	*blt_fc_parse_options(int argc, char **argv, char **env);
