@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_launch_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/04 16:45:32 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/10 14:35:57 by oboutrol         ###   ########.fr       */
-/*   Updated: 2019/06/10 13:32:39 by mmousson         ###   ########.fr       */
+/*   Created: 2019/06/11 12:23:04 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/06/11 12:24:37 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -40,8 +37,8 @@ static int	handle_logical_operators(void)
 	if (g_current_ret != -1)
 	{
 		if ((g_prev_status == PIP + DBL && g_current_ret == 0)
-			|| (g_prev_status == ESP + DBL && g_current_ret != 0))
-				return (SKIP_JOB);
+				|| (g_prev_status == ESP + DBL && g_current_ret != 0))
+			return (SKIP_JOB);
 	}
 	return (DONT_SKIP_JOB);
 }
