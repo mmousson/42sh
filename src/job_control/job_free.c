@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 23:53:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:30:15 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:55:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,18 @@ static void	job_delete_process(t_process *to_del)
 
 	i = -1;
 	ft_strdel(&to_del->name);
-	while (to_del->argv[++i] != NULL)
+	if (to_del->argv != NULL)
+	{
+		while (to_del->argv[++i] != NULL)
+			ft_strdel(&to_del->argv[i]);
 		ft_strdel(&to_del->argv[i]);
+	}
 	if (to_del->io_channels.input != STDIN_FILENO)
 		close(to_del->io_channels.input);
 	if (to_del->io_channels.output != STDOUT_FILENO)
 		close(to_del->io_channels.output);
 	if (to_del->io_channels.error != STDERR_FILENO)
 		close(to_del->io_channels.error);
-	ft_strdel(&to_del->argv[i]);
 	ft_memdel((void **)&(to_del->argv));
 	ft_memdel((void **)&(to_del));
 }
