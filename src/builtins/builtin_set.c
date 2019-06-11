@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 21:24:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 16:52:15 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:11:14 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ static int	usage(char caught_invalid_option)
 }
 
 /*
- **	This function displays all the shell's internal variables
- **	It is done by looping through the 'shell_var_list' extern variable
- **	(declared in includes/sh42.h and initialized in src/core/main.c)
- **	The display format is the following: "%s=%s\n", name, value
- **
- **	Arguments: NONE
- **
- **	Return Value: ALWAYS SET_OK (0)
- */
+**	This function displays all the shell's internal variables
+**	It is done by looping through the 'shell_var_list' extern variable
+**	(declared in includes/sh42.h and initialized in src/core/main.c)
+**	The display format is the following: "%s=%s\n", name, value
+**
+**	Arguments: NONE
+**
+**	Return Value: ALWAYS SET_OK (0)
+*/
 
 static int	list_shell_variables(char **env)
 {
@@ -64,19 +64,19 @@ static int	list_shell_variables(char **env)
 }
 
 /*
- **	This function parses the possible options provided to this utility
- **
- **	Arguments:
- **	argc -> The arguments count
- **	argv -> The arguments array
- **	parsed -> An int pointer which will be used in the main function to know
- **		how many arguments have been read and parsed, so the main function will
- **		skip them
- **
- **	Return Value:
- **	(-1)   -> Invalid option provided
- **	(>= 0) -> The options have been successfully parsed
- */
+**	This function parses the possible options provided to this utility
+**
+**	Arguments:
+**	argc -> The arguments count
+**	argv -> The arguments array
+**	parsed -> An int pointer which will be used in the main function to know
+**		how many arguments have been read and parsed, so the main function will
+**		skip them
+**
+**	Return Value:
+**	(-1)   -> Invalid option provided
+**	(>= 0) -> The options have been successfully parsed
+*/
 
 static int	parse_options(int argc, char **argv, int *parsed)
 {
@@ -139,22 +139,22 @@ static int	set_lineedit_mode(char *mode)
 }
 
 /*
- **	============================= BUITLIN COMMAND =============================
- **	Main function for the 'set' utility
- **	Only accepted option is: -o. Of course, this option will be ignored and
- **	treated as a regular argument if the double-hyphen operand "--" is provided
- **	beforehand
- **	Effect of the 'o' option is to select the active builtin editor during user
- **	input which is by default Readline (also called Emacs)
- **	Therefore, 'o' option has two possible option_name: 'vi' or 'emacs'
- **	The normal behaviour of this utility is to list all the shell's internal
- **	variables
- **
- **	Return Value:
- **	SET_OK (0) -> Everything went fine
- **	SET_ERROR (1) -> Some error occured (not used in this implementation)
- **	SET_INVALID_OPTION (2) -> The user provided an invalid option / option_name
- */
+**	============================= BUITLIN COMMAND =============================
+**	Main function for the 'set' utility
+**	Only accepted option is: -o. Of course, this option will be ignored and
+**	treated as a regular argument if the double-hyphen operand "--" is provided
+**	beforehand
+**	Effect of the 'o' option is to select the active builtin editor during user
+**	input which is by default Readline (also called Emacs)
+**	Therefore, 'o' option has two possible option_name: 'vi' or 'emacs'
+**	The normal behaviour of this utility is to list all the shell's internal
+**	variables
+**
+**	Return Value:
+**	SET_OK (0) -> Everything went fine
+**	SET_ERROR (1) -> Some error occured (not used in this implementation)
+**	SET_INVALID_OPTION (2) -> The user provided an invalid option / option_name
+*/
 
 int			blt_set(int argc, char **argv, char ***env)
 {

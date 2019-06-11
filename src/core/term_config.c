@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/10 18:53:55 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:42:02 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "line_edition.h"
+
+#ifndef __linux__
+
+static const	int g_not_linux = 1;
+
+#elif
+
+static const	int g_not_linux = 0;
+
+#endif
 
 void				sh_switch_term(int reset)
 {
@@ -24,9 +34,8 @@ void				sh_switch_term(int reset)
 	if (reset)
 	{
 		g_env.term.c_lflag |= (ECHO | ICANON);
-		#ifndef __linux__
-		g_env.term.c_cc[VDSUSP] = CTRLY;
-		#endif
+		if (g_not_linux)
+			g_env.term.c_cc[VDSUSP] = CTRLY;
 		sig_reset(1);
 	}
 	else
@@ -34,9 +43,8 @@ void				sh_switch_term(int reset)
 		sig_handler(1);
 		g_env.term.c_lflag &= ~(ECHO | ICANON);
 		tputs(g_env.tc->key[0], 1, ft_putchar);
-		#ifndef __linux__
-		g_env.term.c_cc[VDSUSP] = _POSIX_VDISABLE;
-		#endif
+		if (g_not_linux)
+			g_env.term.c_cc[VDSUSP] = _POSIX_VDISABLE;
 	}
 	if ((tcsetattr(g_env.t_fd, TCSANOW, &(g_env.term))) == -1)
 		sh_errorterm(TBADFD);
@@ -96,9 +104,8 @@ void				sh_configterm(int argc)
 		return ;
 	g_env.term.c_cc[VMIN] = 1;
 	g_env.term.c_cc[VTIME] = 0;
-	#ifndef __linux__
-	g_env.term.c_cc[VDSUSP] = _POSIX_VDISABLE;
-	#endif
+	if (g_not_linux)
+		g_env.term.c_cc[VDSUSP] = _POSIX_VDISABLE;
 	g_env.term.c_lflag &= ~(ICANON | ECHO);
 	if ((tcsetattr(g_env.t_fd, TCSANOW, &(g_env.term))) == -1)
 		sh_errorterm(TBADFD);

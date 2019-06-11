@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_command_search_and_exec.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:15:26 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:32:32 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,14 +159,14 @@ void		job_command_search_and_exec(t_job *job, t_process *pr, int fg)
 	{
 		if (job->first_process->next == NULL
 			&& (blt_pos = utility_is_builtin(pr->argv[0])) != -1)
-			{
-				job_builtin_redirect(pr);
-				pr->status = g_builtins[blt_pos].handler(job_argc(pr->argv),
-					pr->argv,pr->environ);
-				pr->completed = true;
-				pr->valid_to_wait_for = false;
-				job_builtin_restore(pr);
-			}
+		{
+			job_builtin_redirect(pr);
+			pr->status = g_builtins[blt_pos].handler(job_argc(pr->argv),
+				pr->argv, pr->environ);
+			pr->completed = true;
+			pr->valid_to_wait_for = false;
+			job_builtin_restore(pr);
+		}
 		else
 			search_using_path(job, pr, fg);
 	}

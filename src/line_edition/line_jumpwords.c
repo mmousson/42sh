@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_jumpwords.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 03:54:03 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/28 16:00:37 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:29:17 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void				line_ljump(void)
 			while (i && line_isword(g_env.line[i]))
 				i--;
 		if (g_env.line[i + 1])
-				line_cursor_motion(MLEFT, g_env.cm->pos - i - 1);
+			line_cursor_motion(MLEFT, g_env.cm->pos - i - 1);
 	}
 }
 
