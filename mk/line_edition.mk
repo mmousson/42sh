@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:51:22 by mmousson          #+#    #+#              #
-#    Updated: 2019/05/28 19:14:47 by roliveir         ###   ########.fr        #
+#    Updated: 2019/06/11 17:19:58 by roliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ LINE_EDIT =	line_cpy.c							\
 			line_undo.c							\
 			line_inverse.c						\
 			line_isaltinv.c						\
-			line_utils.c
+			line_utils.c						\
+			line_endhome.c
 
 AUTOCMP =	auto_main.c				\
 			auto_utils.c			\
