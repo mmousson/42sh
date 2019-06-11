@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 02:19:56 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 18:04:53 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 18:40:55 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,21 @@ static void	pipe_setup(t_process *process)
 
 static void	pipe_cleanup(t_process *process)
 {
+	t_lstfd	*current;
+
+	current = process->lstfd;
 	if (process->io_channels.input != STDIN_FILENO)
 		close(process->io_channels.input);
 	if (process->io_channels.output != STDOUT_FILENO)
 		close(process->io_channels.output);
 	if (process->next)
 		process->next->io_channels.input = process->p[0];
+	while (current)
+	{
+		if (current->dir_creat)
+			close(current->dir);
+		current = current->next;
+	}
 }
 
 /*
