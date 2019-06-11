@@ -6,14 +6,14 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:36:51 by akarasso          #+#    #+#             */
-/*   Updated: 2019/06/07 14:09:05 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:06:10 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOB_H
 # define GLOB_H
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 # define GLO_STAR			0x01
 # define GLO_QUEST			0x02
@@ -114,7 +114,8 @@ int				is_matching_asterisk(t_globtok *tok, char *file);
 int				is_matching_question(t_globtok *tok, char *file);
 int				is_matching_const(t_globtok *tok, t_str_token *tkn, char *file);
 int				is_matching_range(t_globtok *tok, t_rng_token *tkn, char *file);
-int				is_matching_hidden(t_globtok *tok, t_chr_token *tkn, char *file);
+int				is_matching_hidden(t_globtok *tok, t_chr_token *tkn,
+																	char *file);
 int				walk_range(char **beg);
 void			parse_range(char *allow, char *s);
 int				is_quote(int c);

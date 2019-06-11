@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   set.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 21:28:21 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/25 00:47:34 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:08:20 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
+#ifndef SET_H
+# define SET_H
 
 # include "sh42.h"
 # include "libft.h"

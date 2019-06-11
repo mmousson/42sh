@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 08:13:04 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 16:19:01 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:07:22 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 **		corresponding unary comparator
 */
 
-typedef struct		s_unary_matcher
+typedef struct			s_unary_matcher
 {
 	char				*unary_name;
 	int					(*handler) (const char *str, const unsigned int mask);

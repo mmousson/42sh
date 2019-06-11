@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   auto_completion.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 16:49:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/30 11:51:20 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:06:47 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <dirent.h>
 
 # define COMWOPT 24 + 1
-
 
 typedef struct			s_name
 {
@@ -99,7 +98,6 @@ void					auto_printoption();
 /*
 **	utils
 */
-
 
 int						auto_checkroot(char *name, char *root);
 void					auto_calclen(void);
