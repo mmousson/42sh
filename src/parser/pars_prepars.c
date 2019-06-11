@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 11:04:39 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/10 13:17:38 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:42:12 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int		ft_mat_type(int old_type, int type)
 		{CHAR, SMCL, REDI, PIPE, CHAR, SMCL, SMCL},
 		{CHAR, SMCL, REDI, EROR, SMCL, SMCL, SMCL},
 		{CHAR, EROR, EROR, EROR, REDI, EROR, EROR},
-		{CHAR, EROR, EROR, EROR, PIPE, MORE, EROR}
+		{CHAR, EROR, REDI, EROR, PIPE, MORE, EROR}
 	};
 
 	if (old_type >= NB_TY || old_type < 0 || type >= NB_PR || type < 0)
