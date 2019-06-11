@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:34:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:25:35 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:57:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	job_update_status(t_job *first_job)
 	current = first_job->first_process;
 	while (current)
 	{
-		if (current->completed)
+		if (current->completed || current->valid_to_wait_for == false)
 		{
 			current = current->next;
 			continue ;

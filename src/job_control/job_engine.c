@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 02:19:56 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:18:32 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:53:38 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,14 @@ int			job_launch(t_job *job, int fg)
 	current_process = job->first_process;
 	while (current_process)
 	{
-		pipe_setup(current_process);
-		job_command_search_and_exec(job, current_process, fg);
-		pipe_cleanup(current_process);
+		if (current_process->argv != NULL)
+		{
+			pipe_setup(current_process);
+			job_command_search_and_exec(job, current_process, fg);
+			pipe_cleanup(current_process);
+		}
+		else
+			current_process->valid_to_wait_for = false;
 		current_process = current_process->next;
 	}
 	job_add_to_active_job_list(job);
