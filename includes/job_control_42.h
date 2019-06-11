@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_control_42.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 13:06:25 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/11 18:05:48 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ void					job_sigchld_handler(int signo);
 /*
 **	=================== Job-objects' utility functions ===================
 **
+**	job_join_env_tmpvars -> JC/job_join_env_tmpvars.c
 **	job_drop_unnecessary_processes -> JC/job_drop_unnecessary_processes.c
 **	job_builtin_redirect -> job_control/job_builtin_redirect.c
 **	job_builtin_restore -> job_control/job_builtin_redirect.c
@@ -226,6 +227,7 @@ void					job_sigchld_handler(int signo);
 **	job_first_job_set_and_get -> job_control/job_sigchld_handler.c
 */
 
+char					**job_join_env_tmpvars(char **env);
 void					job_drop_unnecessary_processes(t_job *job);
 void					job_builtin_redirect(t_process *proc);
 void					job_builtin_restore(t_process *proc);

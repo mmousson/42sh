@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 15:05:59 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 18:19:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	job_child_exec(t_process *proc)
 
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
 	{
-		execve(proc->name, proc->argv, *(proc->environ));
+		execve(proc->name, proc->argv, job_join_env_tmpvars(*(proc->environ)));
 		ft_putstr_fd("Failed to execute process: ", STDERR_FILENO);
 		ft_putendl_fd(proc->argv[0], STDERR_FILENO);
 		ft_putendl_fd("Reason: The file is marked as executable but could not "

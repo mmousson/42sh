@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:56:59 by mmousson          #+#    #+#              #
-#    Updated: 2019/06/10 19:08:46 by mmousson         ###   ########.fr        #
+#    Updated: 2019/06/11 17:40:25 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ JOB_CTRL =	job_initialize.c					\
 			job_foreground.c					\
 			job_background.c					\
 			job_mark_process_status.c			\
+			job_join_env_tmpvars.c				\
 			job_update_job_status.c				\
 			job_search_utility.c				\
 			job_sig_table.c						\
