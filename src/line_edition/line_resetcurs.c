@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:22:35 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/30 18:32:31 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/11 17:30:35 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void			line_back_left(int pos)
 	int				i;
 	int				len_line;
 
-	while (pos != g_env.cm->pos)
+	while (pos > g_env.cm->pos)
 	{
 		i = -1;
 		if (!line_getx(pos))
