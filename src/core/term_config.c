@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/11 14:49:46 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 14:52:05 by mmousson         ###   ########.fr       */
+/*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
+/*   Updated: 2019/06/11 15:14:44 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 
 #ifndef __linux__
 
-static void set_term_vdsusp(int val)
+static void		set_term_vdsusp(int val)
 {
 	g_env.term.c_cc[VDSUSP] = val;
 }
 
 #else
 
-static void set_term_vdsusp(int val)
+static void		set_term_vdsusp(int val)
 {
 	(void)val;
 }
 
 #endif
 
-void				sh_switch_term(int reset)
+void			sh_switch_term(int reset)
 {
 	if (!g_env.tc->tc)
 		return ;
@@ -52,7 +52,7 @@ void				sh_switch_term(int reset)
 		sh_errorterm(TBADFD);
 }
 
-static void			sh_initerm(void)
+static void		sh_initerm(void)
 {
 	int				ret;
 	char			*type;
@@ -67,7 +67,7 @@ static void			sh_initerm(void)
 	line_update_termsize();
 }
 
-void				sh_configterm(int argc)
+void			sh_configterm(int argc)
 {
 	if (isatty(STDIN_FILENO) && argc < 2)
 		g_env.isatty = 1;

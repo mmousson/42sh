@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   term_config.c                                      :+:      :+:    :+:   */
+/*   term_quit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/11 14:51:06 by mmousson         ###   ########.fr       */
+/*   Created: 2019/06/11 15:04:00 by hben-yah          #+#    #+#             */
+/*   Updated: 2019/06/11 15:16:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edition.h"
+
+int					sh_quiterm(void)
+{
+	if (g_env.isatty)
+	{
+		sh_switch_term(1);
+		close(g_env.t_fd);
+	}
+	line_delenv();
+	exit(0);
+}
 
 void				sh_errorterm(t_error error)
 {
@@ -25,15 +36,4 @@ void				sh_errorterm(t_error error)
 	auto_free();
 	line_delenv();
 	exit(error);
-}
-
-int					sh_quiterm(void)
-{
-	if (g_env.isatty)
-	{
-		sh_switch_term(1);
-		close(g_env.t_fd);
-	}
-	line_delenv();
-	exit(0);
 }
