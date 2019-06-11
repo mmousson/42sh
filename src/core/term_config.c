@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/11 14:17:34 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/11 14:20:48 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,18 @@
 
 #ifndef __linux__
 
-static const	int g_not_linux = 1;
+static void set_term_vdsusp(int val)
+{
+	g_env.term.c_cc[VDSUSP] = val;
+}
 
 #else
 
-static const	int g_not_linux = 0;
+static void set_term_vdsusp(int val)
+{
+	if (val)
+		;
+}
 
 #endif
 
@@ -34,8 +41,7 @@ void				sh_switch_term(int reset)
 	if (reset)
 	{
 		g_env.term.c_lflag |= (ECHO | ICANON);
-		if (g_not_linux)
-			g_env.term.c_cc[VDSUSP] = CTRLY;
+		set_term_vdsusp(CTRLY);
 		sig_reset(1);
 	}
 	else
@@ -43,8 +49,7 @@ void				sh_switch_term(int reset)
 		sig_handler(1);
 		g_env.term.c_lflag &= ~(ECHO | ICANON);
 		tputs(g_env.tc->key[0], 1, ft_putchar);
-		if (g_not_linux)
-			g_env.term.c_cc[VDSUSP] = _POSIX_VDISABLE;
+		set_term_vdsusp(_POSIX_VDISABLE);
 	}
 	if ((tcsetattr(g_env.t_fd, TCSANOW, &(g_env.term))) == -1)
 		sh_errorterm(TBADFD);
@@ -104,8 +109,7 @@ void				sh_configterm(int argc)
 		return ;
 	g_env.term.c_cc[VMIN] = 1;
 	g_env.term.c_cc[VTIME] = 0;
-	if (g_not_linux)
-		g_env.term.c_cc[VDSUSP] = _POSIX_VDISABLE;
+	set_term_vdsusp(_POSIX_VDISABLE);
 	g_env.term.c_lflag &= ~(ICANON | ECHO);
 	if ((tcsetattr(g_env.t_fd, TCSANOW, &(g_env.term))) == -1)
 		sh_errorterm(TBADFD);
