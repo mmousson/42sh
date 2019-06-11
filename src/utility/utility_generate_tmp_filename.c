@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 10:20:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 14:02:50 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/11 14:06:16 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 static const	int g_not_linux = 1;
 
-#elif
+#else
 
 static const	int g_not_linux = 0;
 
