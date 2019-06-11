@@ -3,23 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   utility_generate_tmp_filename.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 10:20:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/25 12:13:58 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:42:13 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifdef __linux__
-
-# include <sys/random.h>
-#endif
 
 #include <unistd.h>
 #include <sys/syscall.h>
 #include <stdio.h>
 #include "sh42.h"
 #include "libft.h"
+
+#ifndef __linux__
+
+# include <sys/random.h>
+
+static const	int g_not_linux = 1;
+
+#elif
+
+static const	int g_not_linux = 0;
+
+#endif
 
 /*
 **	Generates a new permutation of the filename, which will then be used to
@@ -47,11 +54,10 @@ static char	*next_permutation(const char *base)
 		return (NULL);
 	}
 	ft_strcpy(new, base);
-	#ifdef __linux__
-	getentropy(&next_suffix, 1);
-	#else
-	syscall(SYS_getentropy, &next_suffix, 1);
-	#endif
+	if (g_not_linux)
+		getentropy(&next_suffix, 1);
+	else
+		syscall(SYS_getentropy, &next_suffix, 1);
 	new[len] = (ft_abs(next_suffix) % 40) + 42;
 	return (new);
 }

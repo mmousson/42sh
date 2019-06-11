@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility_alias_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 05:21:50 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/05 09:33:23 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:39:16 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_alias		*g_alias_list = NULL;
 
 static int	notify_bad_alias(t_alias *tmp, const char *line)
 {
-	ft_putstr_fd("42sh: WARNING: '", STDERR_FILENO);
+	ft_putstr_fd("42sh: WARNING: \'", STDERR_FILENO);
 	ft_putstr_fd(line, STDERR_FILENO);
-	ft_putendl_fd("' alias definition is badly formatted (ignored)", 2);
+	ft_putendl_fd("\' alias definition is badly formatted (ignored)", 2);
 	ft_memdel((void **)&(tmp));
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_read_notty.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 21:27:30 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/30 18:49:04 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:53:10 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int					line_read_isarg(char *argv)
 		sh_errorterm(TMALLOC);
 	if ((fd = open(argv, O_RDONLY)) < 1)
 	{
-		ft_putstr_fd("21sh: cannot open ", 2);
+		ft_putstr_fd("42sh: cannot open ", 2);
 		ft_putendl_fd(argv, 2);
 		sh_quiterm();
 	}

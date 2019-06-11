@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 23:07:53 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/09 20:09:01 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:28:38 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ void					line_get_dhistory(int count)
 	if (!g_env.index || !line_is_dhistory(count))
 		return ;
 	ft_strcpy(buff, g_env.line);
-	g_env.index -= count;
-	if (!g_env.index)
+	if (!(g_env.index -= count))
 		g_env.line = line_alloc_history(1);
 	else
 	{
