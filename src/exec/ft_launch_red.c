@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:45:02 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/10 14:34:17 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/11 15:39:53 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	make_rer(t_red *red, t_dup *dup, t_launch *cmd)
 		else if ((dup->dir = open(red->end_nm, O_WRONLY | O_TRUNC | O_CREAT,
 					S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR)) == -1)
 			return (error_open(red->end_nm));
-		if (dup->dir != 1)
+		if (dup->dir != 1 && red->end == -1)
 			cmd->dir_creat = 1;
 		dup->og = 1;
 	}
