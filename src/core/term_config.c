@@ -6,25 +6,23 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/11 14:20:48 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/11 15:08:08 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
 #include <fcntl.h>
 #include "line_edition.h"
 
 #ifndef __linux__
 
-static void set_term_vdsusp(int val)
+static void		set_term_vdsusp(int val)
 {
 	g_env.term.c_cc[VDSUSP] = val;
 }
 
 #else
 
-static void set_term_vdsusp(int val)
+static void		set_term_vdsusp(int val)
 {
 	if (val)
 		;
@@ -32,7 +30,7 @@ static void set_term_vdsusp(int val)
 
 #endif
 
-void				sh_switch_term(int reset)
+void			sh_switch_term(int reset)
 {
 	if (!g_env.tc->tc)
 		return ;
@@ -55,33 +53,7 @@ void				sh_switch_term(int reset)
 		sh_errorterm(TBADFD);
 }
 
-void				sh_errorterm(t_error error)
-{
-	ft_putstr_fd("42sh: error ID=", STDERR_FILENO);
-	ft_putnbr_fd(error, STDERR_FILENO);
-	ft_putstr_fd(" Exiting\n", STDERR_FILENO);
-	if (error != TBADFD)
-	{
-		sh_switch_term(1);
-		close(g_env.t_fd);
-	}
-	auto_free();
-	line_delenv();
-	exit(error);
-}
-
-int					sh_quiterm(void)
-{
-	if (g_env.isatty)
-	{
-		sh_switch_term(1);
-		close(g_env.t_fd);
-	}
-	line_delenv();
-	exit(0);
-}
-
-static void			sh_initerm(void)
+static void		sh_initerm(void)
 {
 	int				ret;
 	char			*type;
@@ -96,7 +68,7 @@ static void			sh_initerm(void)
 	line_update_termsize();
 }
 
-void				sh_configterm(int argc)
+void			sh_configterm(int argc)
 {
 	if (isatty(STDIN_FILENO) && argc < 2)
 		g_env.isatty = 1;
