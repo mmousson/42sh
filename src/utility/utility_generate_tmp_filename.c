@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 10:20:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 14:06:16 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/11 14:14:25 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,17 @@
 
 # include <sys/random.h>
 
-static const	int g_not_linux = 1;
+static void	action(char *next_suffix)
+{
+	getentropy(next_suffix, 1);
+}
 
 #else
 
-static const	int g_not_linux = 0;
+static void	action(char *next_suffix)
+{
+	syscall(SYS_getentropy, next_suffix, 1);
+}
 
 #endif
 
@@ -54,10 +60,7 @@ static char	*next_permutation(const char *base)
 		return (NULL);
 	}
 	ft_strcpy(new, base);
-	if (g_not_linux)
-		getentropy(&next_suffix, 1);
-	else
-		syscall(SYS_getentropy, &next_suffix, 1);
+	action(&next_suffix);
 	new[len] = (ft_abs(next_suffix) % 40) + 42;
 	return (new);
 }
