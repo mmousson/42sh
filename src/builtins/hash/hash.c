@@ -6,51 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:10:42 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 16:58:54 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 16:29:00 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hash.h"
 
 t_hash	g_hash[HASH_MOD];
-
-/*
-**	This function will loop through the entire hashtable and clear every link
-**	of every list of every occupied cell of the table, as well as free the
-**	allocated memory occupied by excess elements
-**
-**	Arguments: NONE
-**
-**	Return Value: NONE
-*/
-
-static void	purge_hash_table(void)
-{
-	int		i;
-	int		not_base;
-	t_hash	*current;
-	t_hash	*next;
-
-	i = -1;
-	while (++i < HASH_MOD)
-	{
-		if (g_hash[i].full_path != NULL)
-		{
-			not_base = 0;
-			current = &(g_hash[i]);
-			while (current)
-			{
-				next = current->next;
-				current->hits = 0;
-				ft_strdel(&(current->full_path));
-				if (not_base)
-					ft_memdel((void **)&(current));
-				current = next;
-				not_base = 1;
-			}
-		}
-	}
-}
 
 /*
 **	Function to format the informations held in a cell of the hashtable
@@ -143,7 +105,7 @@ static int	parse_options(int *ac, char ***av)
 		while ((*av)[0][++i] != '\0')
 		{
 			if ((*av)[0][i] == 'r')
-				purge_hash_table();
+				utility_purge_hash_table();
 			else
 			{
 				ft_putstr_fd("42sh: hash: -", STDERR_FILENO);

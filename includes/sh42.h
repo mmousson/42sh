@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh42.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 12:55:42 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/11 16:28:22 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,7 @@ int					blt_history(int argc, char **argv, char ***env);
 **	utility_get_effective_user_name -> utility/utility_get_effective_username.c
 */
 
+void				utility_purge_hash_table(void);
 void				utility_array_shift(char **to_shift);
 int					utility_file_exists(const char *path);
 void				utility_free_alias_list(void);

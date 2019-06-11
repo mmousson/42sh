@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 18:54:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 16:23:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,5 @@ int					main(int argc, char **argv, char **arge_sys)
 		lex_str(&argv[2], &env);
 	else
 		loop_on_input(argc, argv, &env);
-	return (g_last_ret);
+	blt_exit(1, NULL, &env);
 }
