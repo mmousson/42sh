@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 09:53:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/30 18:29:59 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/12 22:38:05 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int					auto_printword(void)
 			break ;
 		while ((dt = readdir(dir)))
 			auto_lstmanager(dt, i);
+		ft_strdel(&expand_path);
 		(void)closedir(dir);
 	}
 	ft_strdel(&expand_path);

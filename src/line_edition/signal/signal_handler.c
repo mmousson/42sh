@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 22:56:41 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/10 15:13:19 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/13 00:21:17 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			sig_reset(int val)
 		if (val == SIGWINCH)
 			signal(val, SIG_DFL);
 		if (val == SIGINT)
-			signal(val, SIG_DFL);
+			signal(val, SIG_IGN);
 		val++;
 	}
 }
