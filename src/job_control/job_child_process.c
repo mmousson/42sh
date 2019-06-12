@@ -6,12 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 18:19:28 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/12 13:41:50 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
+#include <stdio.h>
 
+#include <fcntl.h>
 #include <signal.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -40,17 +41,24 @@ static void	reset_signals_actions(void)
 
 /*
 **	Handle the redirection of I/O channels
+**	Also closes ALL opened file descriptors used by the pipes EXCEPT the one
+**	that is actually used for reading OR writing of the process
 **
 **	Arguments:
 **	input -> Target input file descriptor channel
 **	output -> Target output file descriptor channel
 **	error -> Target error output file descriptor channel
+**	job -> A pointer to the Data-Structure holding information about the
+**		pipeline loop
 **
 **	Return Value: NONE
 */
 
-static void	build_pipes(int input, int output, int error)
+static void	build_pipes(int input, int output, int error, t_job *job)
 {
+	t_process	*pipeline;
+
+	pipeline = job->first_process;
 	if (input != STDIN_FILENO)
 	{
 		dup2(input, STDIN_FILENO);
@@ -65,6 +73,13 @@ static void	build_pipes(int input, int output, int error)
 	{
 		dup2(error, STDERR_FILENO);
 		close(error);
+	}
+	while (pipeline != NULL)
+	{
+		if (pipeline->p[0] != STDIN_FILENO && pipeline->p[0] != STDOUT_FILENO
+			&& pipeline->p[0] != input && pipeline->p[0] != output)
+			close(pipeline->p[0]);
+		pipeline = pipeline->next;
 	}
 }
 
@@ -135,7 +150,7 @@ static void	job_child_exec(t_process *proc)
 **	Return Value: NONE
 */
 
-void		job_child_process(t_process *proc, int foreground, pid_t pgid)
+void		job_child_process(t_job *job, t_process *proc, int foreground, pid_t pgid)
 {
 	pid_t			child_id;
 	t_bool			interactive;
@@ -153,7 +168,7 @@ void		job_child_process(t_process *proc, int foreground, pid_t pgid)
 		reset_signals_actions();
 	}
 	io_chan = proc->io_channels;
-	build_pipes(io_chan.input, io_chan.output, io_chan.error);
+	build_pipes(io_chan.input, io_chan.output, io_chan.error, job);
 	if (build_redirections(proc->lstfd, proc) == 0)
 		exit(1);
 	job_child_exec(proc);

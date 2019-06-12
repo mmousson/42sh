@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 18:05:48 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/12 13:33:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,8 +203,8 @@ void					job_command_search_and_exec(t_job *job,
 	t_process *proc, int fg);
 void					job_parent_process(t_job *job, t_process *proc,
 																	pid_t pid);
-void					job_child_process(t_process *proc, int foreground,
-	pid_t pgid);
+void					job_child_process(t_job *job, t_process *proc,
+	int foreground, pid_t pgid);
 int						job_send_to_foreground(t_job *job, int must_continue);
 int						job_send_to_background(t_job *job, int must_continue);
 int						job_wait_completion(t_job *job, t_process *proc);

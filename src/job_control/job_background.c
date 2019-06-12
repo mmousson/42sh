@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:36 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/14 00:36:26 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/11 20:20:48 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	job_send_to_background(t_job *job, int must_continue)
 			ft_putendl_fd(job->command, STDERR_FILENO);
 			exit(126);
 		}
-		tmp = ft_itoa(job->pgid);
-		core_spec_var_setget(SPEC_EXCLAMATION, tmp, SET);
-		ft_strdel(&tmp);
 	}
+	tmp = ft_itoa(job->pgid);
+	core_spec_var_setget(SPEC_EXCLAMATION, tmp, SET);
+	ft_strdel(&tmp);
 	return (0);
 }

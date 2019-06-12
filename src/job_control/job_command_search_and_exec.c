@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_command_search_and_exec.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 13:32:32 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/12 13:33:36 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	launch_proc(t_job *job, t_process *pr, int fg)
 	pid_t	pid;
 
 	if ((pid = fork()) == 0)
-		job_child_process(pr, fg, job->pgid);
+		job_child_process(job, pr, fg, job->pgid);
 	else if (pid > 0)
 		job_parent_process(job, pr, pid);
 	else

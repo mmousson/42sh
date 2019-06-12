@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 02:19:56 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 18:40:55 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/12 13:42:20 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 **	Arguments:
 **	job -> The job that is being launched
 **	process -> the next-to-be-launched process
-**	p -> int array to store Writing and Reading end of the pipe
 **
 **	Return Value: NONE
 */
