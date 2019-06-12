@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 23:16:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 21:06:27 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/12 18:29:52 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,8 @@ void		expand_glo(char **value, const char *str, char *var, char ***arge)
 		pattern = take_word_expand(str + 1, arge);
 	}
 	var_exp = utility_get_param(var, *arge);
+	ft_strdel(value);
 	*value = remove_substring(var_exp, pattern, suffix, greedy);
+	ft_strdel(&pattern);
+	ft_strdel(&var_exp);
 }
