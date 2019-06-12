@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:27:00 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/12 03:52:13 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/12 04:17:51 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ char		*expand_param(const char *str, char ***arge, int *end)
 	if (!str || str[0] != '$')
 		return (NULL);
 	k = 1;
-	while (is_char_exp(str[k]))
+	while (is_char_exp(str[k]) && (!ft_isdigit(str[1])))
 		k++;
 	word = ft_strsub(str, 1, k - 1);
 	if (!(value = get_spec_param(&(str[1]))))
 		value = utility_get_param(word, *arge);
 	ft_strdel(&word);
 	*end = k - 1;
-	if (str[1] == '?' || str[1] == '$' || str[1] == '!')
+	if (ft_strchr("?$!", str[1]) || ft_isdigit(str[1]))
 		(*end)++;
 	return (value);
 }
