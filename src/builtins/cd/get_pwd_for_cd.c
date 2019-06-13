@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 22:33:38 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/10 17:01:21 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:05:47 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int		home_cd(char **pwd, char **cdenv)
 		ft_putendl_fd(""SH_NAME": cd: HOME not set", 2);
 		return (0);
 	}
-	str = ft_strdup((cdenv)[0]);
+	if (!(str = ft_strdup((cdenv)[0])))
+		return (0);
 	*pwd = get_final_path(&str, cdenv);
 	ft_strdel(&str);
 	return (1);
@@ -38,8 +39,10 @@ static int		oldpwd_cd(char **pwd, char **cdenv)
 		ft_putendl_fd(""SH_NAME": cd: OLDPWD not set", 2);
 		return (0);
 	}
-	str = ft_strdup((cdenv)[1]);
+	if (!(str = ft_strdup((cdenv)[1])))
+		return (0);
 	*pwd = get_final_path(&str, cdenv);
+	ft_putendl_fd(*pwd, 1);
 	ft_strdel(&str);
 	return (1);
 }

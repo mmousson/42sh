@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   auto_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 09:53:19 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/12 22:38:05 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:18:29 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,5 @@ int					auto_printword(void)
 	auto_printoption();
 	auto_sort();
 	auto_calclen();
-	if (g_data.lenlst < 2)
-		return (auto_printcomp());
-	return (1);
+	return (g_data.lenlst < 2 ? auto_printcomp() : 1);
 }

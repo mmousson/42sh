@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_child_process.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/12 13:41:50 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:14:19 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,8 @@ static void	job_child_exec(t_process *proc)
 **	Return Value: NONE
 */
 
-void		job_child_process(t_job *job, t_process *proc, int foreground, pid_t pgid)
+void		job_child_process(t_job *job, t_process *proc, int foreground,
+																	pid_t pgid)
 {
 	pid_t			child_id;
 	t_bool			interactive;

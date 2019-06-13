@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 19:33:08 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/29 14:17:13 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:08:00 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static char		*check_cdpath(char *cdpath, char *dir)
 		if (access(res, F_OK) == 0)
 		{
 			ft_strtabdel(&list);
+			ft_putendl_fd(res, 1);
 			return (res);
 		}
 		ft_strdel(&res);
