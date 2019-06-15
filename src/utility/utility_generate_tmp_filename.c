@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 10:20:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 14:48:32 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 15:26:08 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*next_permutation(const char *base)
 	}
 	ft_strcpy(new, base);
 	action(&next_suffix);
-	new[len] = (ft_abs(next_suffix) % 40) + 42;
+	new[len] = (ft_abs(next_suffix) % 40) + 48;
 	return (new);
 }
 

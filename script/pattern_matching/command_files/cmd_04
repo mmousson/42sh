@@ -1,1 +1,1 @@
-echo 'four' > one/two/three
+mkdir -p one/two

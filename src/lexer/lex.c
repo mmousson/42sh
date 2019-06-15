@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:11:08 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 18:31:06 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:17:24 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void		lex_following(char **str, t_tok *tok, char ***arge, t_stat *sta)
 		ft_strdel(str);
 		blt_exit(1, NULL, arge);
 	}
-	pars_tok(tok, arge, *str);
+	pars_tok(tok, arge);
 	lex_free_token(tok);
 }
 
@@ -99,10 +99,10 @@ int				lex_str(char **str, char ***arge)
 
 	if (!str || !(*str))
 		return (0);
-	if (!(token = lex_init_token()))
+	if (!(token = lex_init_token()) || !(stat = lex_init_stat()))
 		return (1);
-	if (!(stat = lex_init_stat()))
-		return (1);
+	ret = 0;
+	stat->tok = &token;
 	buff[0] = '\0';
 	while (stat->status != EN && stat->status != EP && stat->status != -1)
 	{
@@ -110,7 +110,7 @@ int				lex_str(char **str, char ***arge)
 			if ((ret = lex_proc(stat, buff, &token, str)) == -1)
 				if (!(lex_more(stat, str, 1, ret)))
 					return (clean_out(&token, &stat, str));
-		if (!(lex_last(&stat, &token, str)))
+		if (ret != 1 && !(lex_last(&stat, &token, str)))
 			return (clean_out(&token, &stat, str));
 		(stat->k)++;
 	}

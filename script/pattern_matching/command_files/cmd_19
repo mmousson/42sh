@@ -1,1 +1,1 @@
-echo [z-a]*
+echo [!ab]*

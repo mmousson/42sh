@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:04:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/05/28 21:51:39 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/14 15:21:55 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,28 @@ int					lex_get_ch(char c)
 	else if (c == '}')
 		return (PAC);
 	return (CHA);
+}
+
+int					get_sub_type(int stat)
+{
+	static int		mat_type[NB_CH] = {
+		EROR, CHAR, SPAC, REDI, REDI,
+		CHAR, CHAR, CHAR, SMCL, CHAR,
+		PIPE, SMCL, CHAR, CHAR, CHAR,
+		CHAR, CHAR
+	};
+
+	if (stat >= NB_CH || stat < 0)
+		return (EROR);
+	return (mat_type[stat]);
+}
+
+int					ft_get_type(t_tok *token)
+{
+	int				stat;
+
+	if (!token)
+		return (ENDT);
+	stat = token->status;
+	return (get_sub_type(stat));
 }

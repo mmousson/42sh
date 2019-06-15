@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/06 13:50:00 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/13 03:01:53 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,16 @@
 
 int		compute_variable(char ***env, t_arithast *ast, long *res)
 {
-	char *val;
+	int		ret;
+	char	*val;
 
 	val = utility_get_var(ast->token->val, *env);
-	return (val && arithmetic(env, res, val));
-	free(val);
+	if (val && arithmetic(env, res, val))
+		ret = 1;
+	else
+		ret = 0;
+	ft_strdel(&val);
+	return (ret);
 }
 
 int		compute_number(t_arithast *ast, long *res)

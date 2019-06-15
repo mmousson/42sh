@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 12:03:51 by mmousson          #+#    #+#              #
-#    Updated: 2019/06/11 16:28:05 by mmousson         ###   ########.fr        #
+#    Updated: 2019/06/13 02:24:32 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ UTILITY =	utility_add_internal_var.c			\
 			utility_internal_var_exists.c		\
 			utility_write_alias_list_to_file.c	\
 			utility_purge_hash_table.c			\
+			utility_put_posix_string.c			\
 			glob/check_matching_files.c			\
 			glob/get_files.c					\
 			glob/glob.c							\

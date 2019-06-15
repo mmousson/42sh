@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:51:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:10:48 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 13:13:06 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void		job_builtin_redirect(t_process *proc)
 	fds = proc->lstfd;
 	while (fds != NULL)
 	{
-		if (fds->og != -1 && (fds->bkp = fcntl(fds->og, F_DUPFD, 10)) == -1)
+		if (fds->og > -1 && (fds->bkp = fcntl(fds->og, F_DUPFD, 10)) == -1)
 		{
 			job_bad_fd(fds->og, proc);
 			return ;
 		}
-		else if (fds->dir != -1)
+		else if (fds->dir > -1)
 		{
 			if (dup2(fds->dir, fds->og) == -1)
 			{

@@ -6,12 +6,13 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 08:10:04 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/10 13:17:31 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 15:42:21 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh42.h"
 #include "pars.h"
+#include "expand.h"
 #include "lex.h"
 #include "libft.h"
 #define NBR_RES 13
@@ -25,6 +26,8 @@ int				is_reserved(char *str)
 		"then", "until", "while"
 	};
 
+	if (!str)
+		return (0);
 	k = -1;
 	while (++k < NBR_RES)
 	{
@@ -34,48 +37,55 @@ int				is_reserved(char *str)
 	return (0);
 }
 
-void			replace_tok(t_tok *token, char *str)
+static int		is_space(char *str)
 {
-	char		**tab;
-	t_tok		*end;
-	t_tok		*tmp;
 	int			k;
 
 	if (!str)
-		return ;
-	tab = ft_strsplit(str, ' ');
-	tmp = token;
-	end = token->next;
-	if (tab && tab[0])
-	{
-		ft_strdel(&token->content);
-		token->content = tab[0];
-		k = 0;
-		while (tab[++k])
-		{
-			tmp->next = new_token_space();
-			tmp = tmp->next;
-			tmp->next = new_token_char(tab[k]);
-			tmp = tmp->next;
-		}
-		free(tab);
-		tmp->next = end;
-	}
+		return (0);
+	k = -1;
+	while (str[++k])
+		if (str[k] == ' ' && !str[k + 1])
+			return (1);
+	return (0);
 }
 
-void			expand_alias(t_tok *token)
+int				replace_tok(char **str, char *value, char *exp, t_stat *stat)
 {
-	t_alias		*tmp;
+	int			k;
 
-	if (!token || !token->content)
-		return ;
-	if (is_reserved(token->content))
-		return ;
-	tmp = g_alias_list;
-	while (tmp)
+	k = value ? ft_strlen(value) : 0;
+	insert_word(str, exp, stat->k - k + 1, k - 1);
+	stat->k = stat->k - k + 1 + ft_strlen(exp);
+	while (exp && exp[0] && is_space(exp))
 	{
-		if (!ft_strcmp(tmp->token, token->content))
-			return (replace_tok(token, tmp->replacement));
-		tmp = tmp->next;
+		ft_strdel(&value);
+		value = grep_next_word(*str + stat->k, stat);
+		ft_strdel(&exp);
+		if ((exp = get_alias(value)))
+		{
+			k = value ? ft_strlen(value) : 0;
+			insert_word(str, exp, stat->k - k + 1, k - 1);
+			stat->k = stat->k - k + 1 + ft_strlen(exp);
+		}
 	}
+	ft_strdel(&value);
+	ft_strdel(&exp);
+	stat->unalias = stat->k;
+	stat->k = -1;
+	stat->status = 0;
+	return (1);
+}
+
+int				expand_alias(char **str, char *word, t_stat *stat)
+{
+	char		*exp;
+
+	if (stat->k < stat->unalias || is_reserved(word))
+		return (0);
+	if ((exp = get_alias(word)))
+	{
+		return (replace_tok(str, word, exp, stat));
+	}
+	return (0);
 }

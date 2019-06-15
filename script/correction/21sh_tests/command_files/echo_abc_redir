@@ -1,0 +1,2 @@
+echo abc >redir_one_to_all
+cat 9 abc

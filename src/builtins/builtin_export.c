@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 05:42:31 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 16:49:30 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/13 02:51:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,15 @@ static int	export_var(char *def, char ***env)
 			ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
 			return (EXPORT_ERROR);
 		}
-		utility_add_entry_to_environ(env, name, def + ft_strlen(def) + 1);
+		utility_add_entry_to_environ(env, name, def + ft_strlen(name) + 1);
 		utility_set_var(name, def + ft_strlen(name) + 1, env, EXPORT);
 		ft_strdel(&name);
 	}
 	else if ((name = utility_internal_var_exists(def, NULL)) != NULL)
+	{
 		utility_add_entry_to_environ(env, def, name);
+		ft_strdel(&name);
+	}
 	return (EXPORT_OK);
 }
 
@@ -105,7 +108,8 @@ static int	list_vars(char **env)
 	while (env[++i] != NULL)
 	{
 		ft_putstr("export ");
-		ft_putendl(env[i]);
+		utility_put_posix_string(env[i]);
+		ft_putchar('\n');
 	}
 	return (EXPORT_OK);
 }

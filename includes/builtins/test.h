@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 08:13:04 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 13:07:22 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/13 13:02:45 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define TEST_TRUE 0
 # define TEST_FALSE 1
 # define TEST_ERROR 2
-# define IGNORE_TYPE 1
-# define CHECK_SIZE 12
+# define IGNORE_TYPE 101
+# define CHECK_SIZE 102
 
 /*
 **	Set the length of the two dispatchers used by 'test' utility

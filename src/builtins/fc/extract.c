@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 12:45:57 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/04 17:35:55 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/15 15:23:02 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,6 @@ void				blt_fc_extract(t_options_infos *inf)
 		inf->from = inf->to;
 		inf->to = tmp_hist;
 	}
-	if (ft_abs(tmp) > ft_abs(tmp2))
+	if (tmp < tmp2)
 		inf->reversed = !inf->reversed;
 }

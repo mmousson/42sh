@@ -1,1 +1,1 @@
-echo out>&- || echo out2
+cd -L /tmp ; cd -P .. ; pwd

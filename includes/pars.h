@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/11 13:00:46 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/15 11:18:17 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int					is_sep(int status);
 int					pars_prepars(t_tok *token);
 void				expand_arith(t_tok **token);
 int					is_charkind(int status);
+int					ft_get_type(t_tok *token);
+int					get_sub_type(int stat);
 
 /*
 ** Function parsing

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getline.c                                          :+:      :+:    :+:   */
+/*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:53:38 by roliveir          #+#    #+#             */
-/*   Updated: 2019/04/06 21:55:49 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:08:38 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int				get_line(const int fd, char **line, char **isread)
 	int			ret;
 	char		*tmp;
 
-	ret = 1;
 	if (fd < 0 || !line || BUFF_SIZE < 1)
 		return (-1);
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)

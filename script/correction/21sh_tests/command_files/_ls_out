@@ -1,0 +1,2 @@
+ls > /tmp/ftsh_ls_out /
+cat /tmp/ftsh_ls_out

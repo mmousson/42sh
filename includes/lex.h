@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 12:49:11 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 12:07:35 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ typedef struct	s_stat
 	int			older_status;
 	int			exclam;
 	int			ch;
+	int			unalias;
+	int			cmd;
+	t_tok		**tok;
 	char		cha;
 	int			k;
 	char		*load;
@@ -102,7 +105,7 @@ typedef struct	s_stat
 char			**ft_tabdup(char **tabl);
 
 t_st			*init_pile(int status);
-void			lex_add_tok(char buf[BUF], char *ld, int stat, t_tok *tok);
+int				lex_add_tok(char bf[BUF], t_stat *stat, int status, char **str);
 void			lex_add_char(char buff[BUF], char **load, char cha);
 void			lex_free_stat(t_stat *stat);
 t_tok			*lex_init_token(void);
@@ -113,7 +116,7 @@ int				lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str);
 int				lex_str(char **str, char ***arge);
 int				lex_more(t_stat *stat, char **str, int nl, int ret);
 int				lex_get_next_state(int state, int ch);
-int				pars_tok(t_tok *tok, char ***arge, char *str);
+int				pars_tok(t_tok *tok, char ***arge);
 int				lex_exclam(t_stat *stat, t_tok **tok, char **str, char bf[BUF]);
 int				lex_back_slash_quote(t_stat *stat, char **str, char buff[BUF]);
 int				lex_store(t_stat *stat, char buff[BUF]);
@@ -125,6 +128,7 @@ int				lex_welding(t_stat *stat);
 int				error_ep_or_ec(char close, t_stat *stat);
 void			lex_include(char **str, char **sub, int start, int end);
 int				lex_reline(t_stat *stat, t_tok **token, char buff[BUF]);
+void			lex_add_arg_token(t_tok *tok, char *content, int status);
 
 /*
 ** fonctions affichages

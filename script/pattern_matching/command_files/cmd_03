@@ -1,1 +1,1 @@
-mkdir -p one/two
+rm -f aa ab 'a?'

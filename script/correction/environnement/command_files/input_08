@@ -1,0 +1,6 @@
+unset PATH
+PATH=/bin:/usr/bin
+mkdir testdir
+echo ${?}
+ls -1 | grep testdir
+rm -rf testdir

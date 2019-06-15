@@ -1,0 +1,2 @@
+ONESHOT= env | grep ONESHOT
+env | grep ONESHOT

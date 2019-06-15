@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 21:36:53 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/06 13:44:43 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/15 14:43:41 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		build_pwd_tab(char ***arg_tab, char ***pwd_tab, int pwd_tab_len);
 int		cd_options_parser(char **args, int *options, int *pos_args);
 char	*get_final_path(char **path, char **cdenv);
 char	*get_pwd_for_cd(int pos_args, char **args, char **cdenv);
-int		change_directory(char ***env, char *pwd, char **cdenv, int options);
+int		change_directory(char ***env, char *pwd, char **cdenv);
 void	free_cd_tabs(char **tmp, char **nenv, char **narg);
 void	free_cdenv(char *cdenv[4]);
 int		blt_cd(int argc, char **argv, char ***env);

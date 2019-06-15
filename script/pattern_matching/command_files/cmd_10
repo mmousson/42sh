@@ -1,1 +1,1 @@
-echo a[a-z][*; echo a[a-z]*; echo a[a\-z]*
+touch 'a[a-z][x' 'ab[x'

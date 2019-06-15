@@ -6,12 +6,24 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 23:53:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 13:55:17 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 13:58:51 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "job_control_42.h"
+
+/*
+**	This function destroys a job's links to the active job list
+**	It does nothing if searched pgid is 0, meaning the job we warnt to delete
+**	has not been added to the list yet
+**
+**	Arguments:
+**	pgid -> The pgid of the job we want to remove from the active job list
+**		and free
+**
+**	Return Value: NONE
+*/
 
 static void	remove_job_from_list(pid_t pgid)
 {
@@ -33,6 +45,31 @@ static void	remove_job_from_list(pid_t pgid)
 		g_active_job_list = current->next;
 }
 
+static void	job_delete_redirections(t_process *to_del)
+{
+	t_lstfd		*fds;
+	t_lstfd		*next_fds;
+	t_lstred	*reds;
+	t_lstred	*next_reds;
+
+	fds = to_del->lstfd;
+	reds = to_del->lstred;
+	while (fds)
+	{
+		next_fds = fds->next;
+		ft_memdel((void **)&(fds));
+		fds = next_fds;
+	}
+	while (reds)
+	{
+		next_reds = reds->next;
+		ft_strdel(&reds->name_og);
+		ft_strdel(&reds->name_dir);
+		ft_memdel((void **)&(reds));
+		reds = next_reds;
+	}
+}
+
 /*
 **	This function is called inside the while loop of the function below
 **	It is the one that is actually responsible of freeing all the memory
@@ -47,7 +84,7 @@ static void	remove_job_from_list(pid_t pgid)
 
 static void	job_delete_process(t_process *to_del)
 {
-	int			i;
+	int		i;
 
 	i = -1;
 	ft_strdel(&to_del->name);
@@ -64,6 +101,7 @@ static void	job_delete_process(t_process *to_del)
 	if (to_del->io_channels.error != STDERR_FILENO)
 		close(to_del->io_channels.error);
 	ft_memdel((void **)&(to_del->argv));
+	job_delete_redirections(to_del);
 	ft_memdel((void **)&(to_del));
 }
 

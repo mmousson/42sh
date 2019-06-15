@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hist_search.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 09:45:50 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/11 17:23:33 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:10:46 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void		hist_searchline(char c)
 
 	ft_strcpy(buff, g_env.line);
 	tmp = g_env.ry;
-	forwards = 0;
 	if ((index = hist_initsearch(c)) == -1)
 		return ;
 	while (g_env.ry->next && ++index)

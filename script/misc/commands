@@ -16,9 +16,8 @@ exit 1 | exit 2 | exit 3; echo "stayin' alive"
 echo $((2<3>0<=1>=2==0!=1))
 ls -y | cat -e && echo APPEAR || echo DOES_NOT_APPEAR
 echo out>&-;echo out2
-echo out>&- | echo out2
 echo out>&- ; echo out2
 echo out>&- && echo out2
 echo out>&- || echo out2
-cd -L /tmp ; cd .. ; pwd
+cd -L /tmp ; cd -P .. ; pwd
 rm -f file ; ls | 2>&1 | ls | cat -e > file && echo PAUSE || echo "AN ERROR OCCURED" ; test -s file && echo "file created successfully" || echo "FATAL: COULD NOT CREATE FILE"

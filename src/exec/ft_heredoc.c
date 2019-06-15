@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 01:06:53 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/10 15:08:40 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 12:19:10 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include "history.h"
 
 static int	is_end_esc(char *str)
 {
@@ -48,6 +49,7 @@ static void	ft_launch_here(char *end, int fd, int exp, char ***arge)
 			line = NULL;
 		}
 		line = line_get_readline(PHEREDOC, NULL);
+		hist_update(line, 1);
 		if (exp)
 			expand_manager(&line, arge, NULL, 0);
 		if ((!line || !line[0]) && g_env.ctrld)
@@ -55,11 +57,7 @@ static void	ft_launch_here(char *end, int fd, int exp, char ***arge)
 		else if (ft_strcmp(line, end))
 			ft_putendl_fd(line, fd);
 	}
-	if (line)
-	{
-		free(line);
-		line = NULL;
-	}
+	ft_strdel(&line);
 }
 
 int			ft_heredoc(char *end, char ***arge, t_red *red)
@@ -81,16 +79,15 @@ int			ft_heredoc(char *end, char ***arge, t_red *red)
 	return (0);
 }
 
-int			ft_heredoc_read(int *og, int *dir, t_red *red)
+int			ft_heredoc_read(t_dup *dup, t_red *red)
 {
 	t_lsther	*tmp;
 
 	tmp = red->lsther;
 	while (tmp && tmp->next)
 		tmp = tmp->next;
-	if ((*dir = open(tmp->name, O_RDONLY)) == -1)
+	if (!(dup->name_dir = ft_strdup(tmp->name)))
 		return (error_open("tmp file for heredoc"));
-	unlink(tmp->name);
-	*og = 0;
+	dup->int_og = 0;
 	return (0);
 }

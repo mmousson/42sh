@@ -1,1 +1,1 @@
-cd -L /tmp ; cd .. ; pwd
+rm -f file ; ls | 2>&1 | ls | cat -e > file && echo PAUSE || echo "AN ERROR OCCURED" ; test -s file && echo "file created successfully" || echo "FATAL: COULD NOT CREATE FILE"

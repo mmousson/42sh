@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 22:24:24 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 16:30:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:21:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		hash_already_exists(int index, char *name)
 **	Return Value: NONE
 */
 
-void	hash_add_entry(int string_hash, char *util_name, char *full_path)
+void	hash_add_entry(int string_hash, char *util_name, char *full_path, int value)
 {
 	t_hash	*target;
 	t_hash	*new_entry;
@@ -55,7 +55,7 @@ void	hash_add_entry(int string_hash, char *util_name, char *full_path)
 		return ;
 	if (g_hash[string_hash].full_path == NULL)
 	{
-		g_hash[string_hash].hits = 0;
+		g_hash[string_hash].hits = value;
 		g_hash[string_hash].full_path = ft_strdup(full_path);
 		g_hash[string_hash].utility_name = ft_strdup(util_name);
 	}
@@ -63,7 +63,7 @@ void	hash_add_entry(int string_hash, char *util_name, char *full_path)
 	{
 		if ((new_entry = (t_hash *)ft_memalloc(sizeof(t_hash))) == NULL)
 			return ;
-		new_entry->hits = 0;
+		new_entry->hits = value;
 		new_entry->full_path = ft_strdup(full_path);
 		new_entry->utility_name = ft_strdup(util_name);
 		new_entry->next = NULL;

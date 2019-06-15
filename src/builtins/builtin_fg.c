@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 09:32:07 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 21:42:30 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/13 00:10:58 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,21 @@ static pid_t	get_jobspec(char *arg)
 int				blt_fg(int argc, char **argv, char ***env)
 {
 	t_job	*current;
-	pid_t	jobspec;
+	int		jobspec;
+	int		i;
 
 	(void)env;
+	i = 1;
 	job_first_job_set_and_get(&current, GET);
 	jobspec = get_jobspec(argc == 1 ? NULL : argv[1]);
 	while (current)
 	{
-		if (jobspec == -1 || current->pgid == jobspec)
+		if (jobspec == -1 || i == jobspec)
 		{
 			job_unstop(current, FOREGROUND_LAUNCH);
 			return (FG_JOB_FOUND);
 		}
+		i++;
 		current = current->next;
 	}
 	ft_putstr_fd("42sh: fg: ", STDERR_FILENO);

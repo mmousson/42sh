@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/12 13:33:36 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:26:32 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "libft.h"
 #include "job_control_42.h"
 
-static void	notify_bad_command(t_process *pr, const char *cmd, const char *msg)
+static void	notify_bad_command(t_process *pr, const char *cmd, const char *msg,
+	int code)
 {
 	if (pr->io_channels.input != STDIN_FILENO)
 		close(pr->io_channels.input);
@@ -26,7 +27,7 @@ static void	notify_bad_command(t_process *pr, const char *cmd, const char *msg)
 		close(pr->p[0]);
 		close(pr->p[1]);
 	}
-	pr->status = 127;
+	pr->status = code;
 	pr->completed = true;
 	pr->valid_to_wait_for = false;
 	ft_putstr_fd("42sh: ", STDERR_FILENO);
@@ -42,20 +43,20 @@ static int	is_path_valid(t_process *pr, const char *path)
 	{
 		if (file_type == FILETYPE_DIRECTORY)
 		{
-			notify_bad_command(pr, path, ": Is a directory");
+			notify_bad_command(pr, path, ": Is a directory", 127);
 			return (0);
 		}
 		else if (access(path, X_OK) == 0)
 			return (1);
 		else
 		{
-			notify_bad_command(pr, path, ": Permission denied");
+			notify_bad_command(pr, path, ": Permission denied", 126);
 			return (0);
 		}
 	}
 	else
 	{
-		notify_bad_command(pr, path, ": No such file or directory");
+		notify_bad_command(pr, path, ": No such file or directory", 127);
 		return (0);
 	}
 }
@@ -109,10 +110,10 @@ static void	search_using_path(t_job *job, t_process *pr, int fg)
 			g_hash[hash].hits += 1;
 			pr->name = ft_strdup(g_hash[hash].full_path);
 		}
-		else if (!(pr->name = utility_search(*(pr->environ), pr->name)))
+		else if (!(pr->name = utility_search(*(pr->environ), pr->name, 1)))
 		{
 			pr->name = to_del;
-			notify_bad_command(pr, to_del, ": Command not found");
+			notify_bad_command(pr, to_del, ": command not found", 127);
 			return ;
 		}
 		ft_strdel(&to_del);
@@ -160,6 +161,8 @@ void		job_command_search_and_exec(t_job *job, t_process *pr, int fg)
 		if (job->first_process->next == NULL
 			&& (blt_pos = utility_is_builtin(pr->argv[0])) != -1)
 		{
+			job->pgid = 0;
+			job_open_files(pr);
 			job_builtin_redirect(pr);
 			pr->status = g_builtins[blt_pos].handler(job_argc(pr->argv),
 				pr->argv, pr->environ);

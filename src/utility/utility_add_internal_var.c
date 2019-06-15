@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 08:24:16 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:31:17 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/13 09:34:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ static void	job_update_var(t_vars *internal, t_vars **target)
 		*target = internal;
 	else
 	{
-		slider->next = internal;
-		internal->prev = slider;
+		internal->next = *target;
+		*target = internal;
+		(*target)->prev = NULL;
 	}
 }
 

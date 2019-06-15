@@ -1,1 +1,1 @@
-echo [ab-]*
+echo a[a-z][*; echo a[a-z]*; echo a[a\-z]*

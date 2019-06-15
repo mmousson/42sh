@@ -1,0 +1,1 @@
+echo out >&- | echo out2 > /tmp/out2 ; sleep 0.1 ; cat /tmp/out2

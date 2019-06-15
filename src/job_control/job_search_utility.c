@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:21:03 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:24:31 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:25:50 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,28 +95,31 @@ static char	*search_directory(char *dir_name, char *utility, DIR *dir)
 **	in a newly allocated buffer
 */
 
-char		*utility_search(char **env, char *name)
+char		*utility_search(char **env, char *name, int value_to_set_hash_to_hash_hits)
 {
 	int		i;
 	DIR		*dir;
+	char	*path;
 	char	**paths;
 	char	*result;
 
 	i = -1;
 	result = NULL;
-	if ((paths = ft_strsplit(utility_get_env_var(env, "PATH"), ':')) == NULL)
+	path = utility_get_var("PATH", env);
+	if ((paths = ft_strsplit(path, ':')) == NULL)
 	{
 		ft_putendl_fd("42sh: Internal malloc error", STDERR_FILENO);
-		return (NULL);
+		ft_strdel(&path);
 	}
-	while (paths[++i] != NULL)
+	while (paths && paths[++i] != NULL)
 	{
 		if (result == NULL && (dir = opendir(paths[i])) != NULL)
 			result = search_directory(paths[i], name, dir);
 		ft_strdel(&(paths[i]));
 	}
+	ft_strdel(&path);
 	ft_memdel((void *)(&paths));
-	if (result != NULL)
-		hash_add_entry(hash_string(name), name, result);
+	if (value_to_set_hash_to_hash_hits > -1 && result != NULL)
+		hash_add_entry(hash_string(name), name, result, value_to_set_hash_to_hash_hits);
 	return (result);
 }

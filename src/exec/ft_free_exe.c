@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_exe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 21:25:00 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/06 05:24:25 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 15:03:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ void	ft_free_lsther(t_lsther *lst)
 	free(lst);
 }
 
-void	ft_free_lstfd(t_lstfd *lst)
+void	ft_free_lstred(t_lstred *lst)
 {
 	if (!lst)
 		return ;
-	ft_free_lstfd(lst->next);
+	ft_strdel(&lst->name_og);
+	ft_strdel(&lst->name_dir);
+	ft_free_lstred(lst->next);
 	lst->next = NULL;
 	free(lst);
 }
@@ -72,8 +74,6 @@ void	ft_free_cmd(t_launch *cmd)
 	cmd->red = NULL;
 	ft_free_tab(cmd->argv);
 	cmd->argv = NULL;
-	ft_free_lstfd(cmd->lstfd);
-	cmd->lstfd = NULL;
 	if (cmd->fdpipe)
 		free(cmd->fdpipe);
 	cmd->fdpipe = NULL;

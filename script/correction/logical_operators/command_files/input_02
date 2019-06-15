@@ -1,0 +1,2 @@
+echo 'No error' || echo 'You cant see me'
+echo ${?}

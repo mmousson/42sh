@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/12 13:33:17 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 11:07:59 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,18 @@ typedef struct			s_lstfd
 	struct s_lstfd	*next;
 }						t_lstfd;
 
+typedef struct			s_lstred
+{
+	int				int_og;
+	int				int_dir;
+	char			*name_og;
+	char			*name_dir;
+	int				simple;
+	int				close;
+	int				is_here;
+	struct s_lstred	*next;
+}						t_lstred;
+
 /*
 **	Structure holding I/O channels of a spawned process
 */
@@ -140,6 +152,7 @@ typedef struct			s_process
 	t_bool				stopped;
 	t_bool				valid_to_wait_for;
 	t_lstfd				*lstfd;
+	t_lstred			*lstred;
 	t_io_channels		builtin_bkp;
 	t_io_channels		io_channels;
 	int					status;
@@ -183,6 +196,7 @@ extern t_job			*g_active_job_list;
 **	job_command_search_and_exec -> job_control/job_command_search_and_exec.c
 **	job_parent_process -> job_control/job_parent_process.c
 **	job_child_process -> job_control/job_child_process.c
+**	job_open_files -> job_control/job_open_files.c
 **	job_send_to_foreground -> job_control/job_foreground.c
 **	job_send_to_background -> job_control/job_background.c
 **	job_wait_completion -> job_control/job_engine.c
@@ -205,6 +219,7 @@ void					job_parent_process(t_job *job, t_process *proc,
 																	pid_t pid);
 void					job_child_process(t_job *job, t_process *proc,
 	int foreground, pid_t pgid);
+int						job_open_files(t_process *process);
 int						job_send_to_foreground(t_job *job, int must_continue);
 int						job_send_to_background(t_job *job, int must_continue);
 int						job_wait_completion(t_job *job, t_process *proc);

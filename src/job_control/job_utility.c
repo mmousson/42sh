@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_utility.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 13:27:36 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/15 12:25:26 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int		job_is_completed(t_job *j, int action)
 
 void	job_inform_user_about_completion(t_job *j, char *msg)
 {
-	if (j != NULL && j->notified)
+	if (j == NULL || (j != NULL && j->notified))
 		return ;
 	ft_putstr_fd("\nJob '", STDERR_FILENO);
 	ft_putstr_fd(j->command, STDERR_FILENO);

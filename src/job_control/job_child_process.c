@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_child_process.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/13 12:14:19 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/15 13:07:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ static int	build_redirections(t_lstfd *fds, t_process *proc)
 {
 	while (fds != NULL)
 	{
-		if (fds->dir != -1 && (fds->bkp = fcntl(fds->dir, F_DUPFD, 10)) == -1)
+		if (fds->dir > -1 && (fds->bkp = fcntl(fds->dir, F_DUPFD, 10)) == -1)
 			return (job_bad_fd(fds->dir, proc));
-		else if (fds->dir != -1)
+		else if (fds->dir > -1)
 		{
 			if (dup2(fds->dir, fds->og) == -1)
 				return (job_bad_fd(fds->dir, proc));
@@ -151,7 +151,7 @@ static void	job_child_exec(t_process *proc)
 */
 
 void		job_child_process(t_job *job, t_process *proc, int foreground,
-																	pid_t pgid)
+	pid_t pgid)
 {
 	pid_t			child_id;
 	t_bool			interactive;
@@ -170,6 +170,8 @@ void		job_child_process(t_job *job, t_process *proc, int foreground,
 	}
 	io_chan = proc->io_channels;
 	build_pipes(io_chan.input, io_chan.output, io_chan.error, job);
+	if (job_open_files(proc) == -1)
+		exit(130);
 	if (build_redirections(proc->lstfd, proc) == 0)
 		exit(1);
 	job_child_exec(proc);

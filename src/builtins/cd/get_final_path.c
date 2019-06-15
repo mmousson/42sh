@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 19:33:08 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/13 12:08:00 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/15 14:40:45 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ char			*get_final_path(char **path, char **cdenv)
 		cdenv[2] = getcwd(NULL, 0);
 	clean_absolute_path(path);
 	if (cdenv[3] && (*path)[0] != '/' && !ft_strnequ(*path, "./", 2)
-		&& !ft_strnequ(*path, "../", 3)
+		&& !ft_strnequ(*path, "../", 3) && !ft_strequ(*path, ".")
+		&& !ft_strequ(*path, "..")
 		&& (str = check_cdpath(cdenv[3], *path)))
 		return (str);
 	if ((*path)[0] == '/' && (*path)[1] != '.')

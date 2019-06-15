@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:45:33 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/07 22:52:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/13 04:47:01 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void					format_process_info(t_process *proc, char *cmd,
 	ft_strdel(&tmp);
 	if (!WIFSIGNALED(status))
 		return ;
-	ft_putstr_fd("\n42sh: Process ", STDERR_FILENO);
+	ft_putstr_fd("42sh: Process ", STDERR_FILENO);
 	ft_putnbr_fd(proc->pid, STDERR_FILENO);
 	ft_putstr_fd(", '", STDERR_FILENO);
 	ft_putstr_fd(proc->argv[0], STDERR_FILENO);

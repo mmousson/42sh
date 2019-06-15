@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 08:12:46 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 16:57:48 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:26:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ t_options_infos		*blt_fc_parse_options(int argc, char **av, char **env)
 		res->editor_name = ft_strdup("/bin/ed");
 	else
 	{
-		if ((tmp = utility_search(env, res->editor_name)) == NULL)
+		if ((tmp = utility_search(env, res->editor_name, -1)) == NULL)
 		{
 			ft_putstr_fd("42sh: ", STDERR_FILENO);
 			ft_putstr_fd(res->editor_name, STDERR_FILENO);

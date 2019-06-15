@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 20:22:16 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 10:55:35 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 static void	process_sign(char **str, t_stat *stat, char **sub, char buff[BUF])
 {
-	if ((*str)[stat->k] == '-')
+	if ((*str)[stat->k] == '-' && (*str)[stat->k + 1])
 	{
 		lex_add_char(buff, sub, (*str)[stat->k]);
 		(stat->k)++;
 	}
-	else if ((*str)[stat->k] == '+')
+	else if ((*str)[stat->k] == '+' && (*str)[stat->k + 1])
 		(stat->k)++;
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:36 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 20:20:48 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 14:58:27 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int	job_send_to_background(t_job *job, int must_continue)
 	tmp = ft_itoa(job->pgid);
 	core_spec_var_setget(SPEC_EXCLAMATION, tmp, SET);
 	ft_strdel(&tmp);
+	tcgetattr(STDIN_FILENO, &job->tmodes);
 	return (0);
 }

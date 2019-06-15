@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 11:04:39 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/11 13:42:12 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/13 07:19:47 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,6 @@ static int		pars_error(int type)
 	}
 	ft_putstr_fd("\n", 2);
 	return (0);
-}
-
-int				ft_get_type(t_tok *token)
-{
-	int			stat;
-	static int	mat_type[NB_CH] = {
-		EROR, CHAR, SPAC, REDI, REDI,
-		CHAR, CHAR, CHAR, SMCL, CHAR,
-		PIPE, SMCL, CHAR, CHAR, CHAR,
-		CHAR, CHAR
-	};
-
-	if (!token)
-		return (ENDT);
-	stat = token->status;
-	if (stat >= NB_CH || stat < 0)
-		return (EROR);
-	return (mat_type[stat]);
 }
 
 static int		ft_mat_type(int old_type, int type)
@@ -111,8 +93,6 @@ int				pars_prepars(t_tok *token)
 			expand_arith(&tmp);
 		else if (type == REDI && red_valid(tmp))
 			return (0);
-		if (type == CHAR && old_type == SMCL)
-			expand_alias(tmp);
 		old_type = ft_mat_type(old_type, type);
 		if (old_type == EROR)
 			return (pars_error(type));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 12:59:22 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/10 14:01:54 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:09:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int					get_sep(t_tok *tmp)
 	return (sep);
 }
 
-int					pars_tok(t_tok *token, char ***arge, char *str)
+int					pars_tok(t_tok *token, char ***arge)
 {
 	t_tree			*tree;
 	t_tok			*tmp;
@@ -37,8 +37,6 @@ int					pars_tok(t_tok *token, char ***arge, char *str)
 			|| (token->next->status == SPA && !token->next->next))
 		return (0);
 	tmp = token->next;
-	if (str)
-		hist_update(str);
 	while (tmp)
 	{
 		if (expand_token(tmp, arge, 0, 0))

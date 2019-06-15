@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 12:06:58 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 16:29:31 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 15:23:31 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,29 @@
 **		was sent to foreground, and the shell still has control over terminal
 */
 
-int					blt_exit(int argc, char **argv, char ***env)
+static void	blt_exit_select_argument(int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		if (ft_valid_to_atoi(argv[1]))
+			exit(ft_atoi(argv[1]));
+		else
+		{
+			ft_putstr_fd("42sh: exit: ", STDERR_FILENO);
+			ft_putstr_fd(argv[1], STDERR_FILENO);
+			ft_putendl_fd(": numeric argument required", STDERR_FILENO);
+			exit(2);
+		}
+	}
+	else
+		exit(g_last_ret);
+}
+
+int			blt_exit(int argc, char **argv, char ***env)
 {
 	if (argc > 2)
 	{
-		ft_putendl_fd("42sh: exit: Too many arguments", STDERR_FILENO);
+		ft_putendl_fd("42sh: exit: too many arguments", STDERR_FILENO);
 		return (1);
 	}
 	else
@@ -53,7 +71,7 @@ int					blt_exit(int argc, char **argv, char ***env)
 		utility_purge_hash_table();
 		utility_free_alias_list();
 		utility_free_shell_vars_list();
-		exit(argc == 2 ? ft_atoi(argv[1]) : g_last_ret);
+		blt_exit_select_argument(argc, argv);
 	}
 	return (0);
 }

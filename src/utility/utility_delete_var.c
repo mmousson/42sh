@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:46:01 by mmousson          #+#    #+#             */
-/*   Updated: 2019/05/31 18:12:43 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/12 23:14:47 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	utility_delete_var(char *name, char ***env)
 			holder_next->prev = holder->prev;
 		if (holder->prev != NULL)
 			holder->prev->next = holder_next;
+		ft_strdel(&ret);
 		ft_strdel(&holder->name);
 		ft_strdel(&holder->value);
 		ft_memdel((void **)&(holder));

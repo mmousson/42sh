@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_filename.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 07:36:36 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/10 14:58:59 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:24:46 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "pars.h"
 #include "lex.h"
 #include "libft.h"
+#include "job_control_42.h"
 
 static int	error_filename(char **file, char *path)
 {
@@ -22,6 +23,7 @@ static int	error_filename(char **file, char *path)
 	ft_putstr_fd(path, 2);
 	ft_putstr_fd(" Ambiguous redirect\n", 2);
 	ft_del_words_tables(&file);
+	g_current_ret = 1;
 	return (-1);
 }
 

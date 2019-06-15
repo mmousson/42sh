@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 16:28:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:24:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ extern t_hash		g_hash[HASH_MOD];
 **
 **	init_hash_table -> builtins/hash.c
 **	hash_string -> utility/hash_string.c
-**	add_hash_entry -> builtins/hash/add_hash_entry.c
+**	hash_add_entry -> builtins/hash/add_hash_entry.c
 **	alias_init -> utility/alias_init.c
 **	is_builtin -> utility/builtins_utilty.c
 **	init_job_ctrl -> job_control/initialize.c
@@ -158,7 +158,7 @@ int					init_job_ctrl(void);
 int					hash_string(char *string);
 int					hash_already_exists(int index, char *name);
 void				hash_add_entry(int string_hash, char *utility_name,
-	char *full_path);
+	char *full_path, int value);
 char				*core_spec_var_setget(int id, char *new_value,
 	int set_or_get);
 int					core_hash_spec_var(char var);
@@ -214,6 +214,7 @@ int					blt_history(int argc, char **argv, char ***env);
 **	write_alias_list_to_file -> utility/write_alias_list_to_file.c
 **	utility_generate_tmp_filename -> utility/utility_generate_tmp_filename.c
 **	utility_get_var -> utility/utility_get_var.c
+**	utility_put_posix_string -> utility/utility_put_posix_string.c
 **	utility_set_var -> utility/utility_set_var.c
 **	internal_variable_exists -> utility/internal_variable_exists.c
 **	utility_get_effective_user_name -> utility/utility_get_effective_username.c
@@ -224,7 +225,7 @@ void				utility_array_shift(char **to_shift);
 int					utility_file_exists(const char *path);
 void				utility_free_alias_list(void);
 void				utility_free_shell_vars_list(void);
-char				*utility_search(char **env, char *name);
+char				*utility_search(char **env, char *name, int value_to_set);
 int					utility_is_builtin(char *name);
 char				**utility_duplicate_environ(char **env);
 char				*utility_get_user_home(void);
@@ -241,6 +242,7 @@ void				utility_add_tmp_var(char *name, char *value);
 void				utility_flush_tmp_vars(void);
 char				*utility_get_param(char *key, char **env);
 char				*utility_get_var(char *name, char **env);
+void				utility_put_posix_string(const char *str);
 void				utility_set_var(char *name, char *value, char ***env,
 	int export_var);
 void				utility_delete_var(char *name, char ***env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_and_reinvoke.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 17:26:52 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 13:11:43 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:22:04 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	launch_commands(char *filename, char ***env)
 	int		fd;
 	char	*line;
 
+	ret = 0;
 	if ((fd = open(filename, O_RDONLY)) == -1)
 	{
 		ft_putstr_fd("42sh: fc: Failed to open file '", STDERR_FILENO);
@@ -90,6 +91,7 @@ static int	launch_commands(char *filename, char ***env)
 int			blt_fc_edit_and_reinvoke(t_options_infos *inf, char ***env)
 {
 	int		fd;
+	int		ret;
 	char	*filename;
 
 	if ((filename = utility_generate_tmp_filename()) == NULL)
@@ -101,8 +103,8 @@ int			blt_fc_edit_and_reinvoke(t_options_infos *inf, char ***env)
 	if ((fd = put_commands_to_file(inf, filename)) == -1)
 		return (2);
 	launch_editor(inf->editor_name, filename, *env);
-	launch_commands(filename, env);
+	ret = launch_commands(filename, env);
 	unlink(filename);
 	ft_strdel(&filename);
-	return (0);
+	return (ret);
 }

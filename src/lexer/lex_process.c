@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 20:20:39 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/14 15:25:02 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,24 @@ static int	is_bs_to_store(t_stat *stat, char **str)
 	return (1);
 }
 
-static void	validate_new_old(t_stat *stat, char buff[BUF], t_tok **tok)
+static int	validate_new_old(t_stat *stat, char buff[BUF], char **str)
 {
 	lex_add_char(buff, &(stat->load), stat->cha);
 	if (stat->status == VO)
 		stat->ch = stat->old_status;
-	lex_add_tok(buff, stat->load, stat->ch, *tok);
+	if (lex_add_tok(buff, stat, stat->ch, str))
+		return (1);
 	stat->status = 0;
+	return (0);
+}
+
+static int	validate(char buff[BUF], t_stat *stat, char **str)
+{
+	(stat->k)--;
+	if (lex_add_tok(buff, stat, stat->old_status, str))
+		return (1);
+	stat->status = 0;
+	return (0);
 }
 
 int			lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str)
@@ -41,12 +52,14 @@ int			lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str)
 
 	if (stat->status == VS)
 	{
-		(stat->k)--;
-		lex_add_tok(buff, stat->load, stat->old_status, *tok);
-		stat->status = 0;
+		if (validate(buff, stat, str))
+			return (1);
 	}
 	else if (stat->status == VA || stat->status == VO)
-		validate_new_old(stat, buff, tok);
+	{
+		if (validate_new_old(stat, buff, str))
+			return (1);
+	}
 	else if (stat->status == SK || stat->status == US)
 		return (lex_store(stat, buff));
 	else if (stat->status == SD && lex_store_dol(stat, buff, str))

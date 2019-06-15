@@ -1,1 +1,1 @@
-echo [*; echo *[x; echo [x/*
+mkdir -p '[x' && touch '[x/foo'

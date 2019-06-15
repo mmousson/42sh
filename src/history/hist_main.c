@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 13:27:51 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/15 11:34:52 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/15 12:05:42 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		hist_readfile(char **line, char **isread, int fd)
 	while (get_next_line(fd, line) > 0)
 	{
 		if ((new_line = hist_parsline(*line)))
-			hist_add(new_line);
+			hist_add(new_line, 0);
 		ft_strdel(line);
 		ft_strdel(&new_line);
 	}
@@ -77,7 +77,7 @@ static void		hist_w_infile(int fd, t_history *ry)
 	}
 }
 
-void			hist_update(char *line)
+void			hist_update(char *line, int stock)
 {
 	int			fd;
 	char		*path;
@@ -86,7 +86,7 @@ void			hist_update(char *line)
 		return ;
 	fd = open(path, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	ft_strdel(&path);
-	hist_add(line);
+	hist_add(line, stock);
 	if (fd == -1)
 		return ;
 	hist_w_infile(fd, g_env.ry);

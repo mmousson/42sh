@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:56:59 by mmousson          #+#    #+#              #
-#    Updated: 2019/06/11 17:40:25 by mmousson         ###   ########.fr        #
+#    Updated: 2019/06/15 11:09:36 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ JOB_CTRL =	job_initialize.c					\
 			job_bad_fd_notifier.c				\
 			job_builtin_redirect.c				\
 			job_check_variable_declaration.c	\
+			job_open_files.c					\
 			job_child_process.c					\
 			job_free.c							\
 			job_parent_process.c				\

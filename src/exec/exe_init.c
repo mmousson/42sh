@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:09:53 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/07 14:46:29 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 10:38:37 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_launch		*ft_init_cmd(char **argv)
 		ft_memdel((void**)&cmd);
 		return (NULL);
 	}
-	cmd->lstfd = NULL;
+	cmd->lstred = NULL;
 	cmd->argv = argv;
 	cmd->fdpipe = NULL;
 	cmd->will_red = 0;

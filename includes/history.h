@@ -6,7 +6,7 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 10:08:21 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/23 14:06:18 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/15 11:43:45 by roliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include "line_edition.h"
 
 char				*hist_parsline(char *line);
-void				hist_add(char *str);
+void				hist_add(char *str, int stock);
 void				hist_init(void);
-void				hist_update(char *line);
+void				hist_update(char *line, int stock);
 char				*hist_getexpend(char **str);
 
 /*

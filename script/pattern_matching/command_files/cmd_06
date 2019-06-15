@@ -1,1 +1,1 @@
-ls /??r
+echo 'six' > one/five

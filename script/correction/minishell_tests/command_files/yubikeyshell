@@ -1,0 +1,2 @@
+/sbin/yubikey_shell
+echo ${?}

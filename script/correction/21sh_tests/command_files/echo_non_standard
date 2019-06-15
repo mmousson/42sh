@@ -1,0 +1,2 @@
+echo non-standard fd > dup_fd
+cat dup_fd

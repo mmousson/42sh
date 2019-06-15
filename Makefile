@@ -6,7 +6,7 @@
 #    By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/06/11 14:15:54 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/06/12 19:05:35 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIBFT = libft
 LIBS = -lft
 LIBSFOLDERS = -L./$(LIBFT)
 vpath %.c $(dir MAKEFILE_LIST)
-CFLAGS = -Wno-error=unused-value -g3 -Wall -Wextra -Werror -I./includes -I./includes/builtins -I./libft/includes -Wno-deprecated
+CFLAGS = -g3 -Wall -Wextra -Werror -I./includes -I./includes/builtins -I./libft/includes -Wno-deprecated
 CPPFLAGS += -MMD -MP
 OBJDIR = .o
 UNAME = $(shell uname)

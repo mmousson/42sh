@@ -1,0 +1,1 @@
+ls | sort -rn | cat -e

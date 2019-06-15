@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:10:42 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 16:29:00 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:32:04 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	format_infos(t_hash *current)
 
 	pad = 0;
 	mag = ft_order_of_magnitude(current->hits);
-	while (++pad < mag)
+	while (++pad + mag <= 4)
 		ft_putchar(' ');
 	ft_putnbr(current->hits);
 	ft_putchar('\t');
@@ -70,7 +70,7 @@ static int	display_table(void)
 		}
 	}
 	if (!witness)
-		ft_putendl("hash: hash table is empty");
+		ft_putendl("hash: hash table empty");
 	return (HASH_OK);
 }
 
@@ -145,7 +145,7 @@ int			blt_hash(int argc, char **argv, char ***env)
 		return (HASH_NO_SUCH_OPTION);
 	while (argc > 1)
 	{
-		if ((tmp = utility_search(*env, argv[1])) == NULL)
+		if ((tmp = utility_search(*env, argv[1], 0)) == NULL)
 		{
 			ft_putstr_fd("42sh: hash: ", STDERR_FILENO);
 			ft_putstr_fd(argv[1], STDERR_FILENO);

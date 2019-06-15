@@ -6,13 +6,14 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 12:03:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/10 14:03:00 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 15:12:44 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPAND_H
 # define EXPAND_H
 # include "pars.h"
+# include "lex.h"
 
 int		expand_manager(char **str, char ***arge, t_tok *token, int red);
 int		expand_quote_removal(char **str);
@@ -33,6 +34,11 @@ int		expand_question(char *var, const char *str, char ***arge);
 void	expand_glo(char **value, const char *str, char *var, char ***arge);
 char	*remove_substring(char *param, char *word, int suffix, int greedy);
 void	expand_size_word(char **value, const char *str, char ***arge);
-void	expand_alias(t_tok *token);
+int		expand_alias(char **str, char *word, t_stat *stat);
+int		is_reserved(char *str);
+char	*grep_first(char *word);
+char	*grep_next_word(char *str, t_stat *stat);
+char	*grep_iter(char *word, int iter, int *start);
+char	*get_alias(char *value);
 
 #endif

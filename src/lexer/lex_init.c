@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:18 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 08:34:25 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/13 07:50:10 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,9 @@ t_stat			*lex_init_stat(void)
 {
 	t_stat		*stat;
 
-	if (!(stat = (t_stat*)malloc(sizeof(t_stat))))
+	if (!(stat = (t_stat*)ft_memalloc(sizeof(t_stat))))
 		return (NULL);
-	stat->status = 0;
-	stat->old_status = 0;
-	stat->older_status = 0;
-	stat->ch = 0;
-	stat->cha = '\0';
-	stat->k = 0;
-	stat->exclam = 0;
-	stat->load = NULL;
-	stat->stack = NULL;
+	stat->unalias = -1;
 	return (stat);
 }
 

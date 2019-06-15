@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:04:31 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/11 13:07:03 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/15 10:37:58 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ typedef struct		s_dup
 {
 	int				og;
 	int				dir;
+	int				int_og;
+	int				int_dir;
+	char			*name_og;
+	char			*name_dir;
+	int				simple;
+	int				is_here;
 }					t_dup;
 
 typedef struct		s_lsther
@@ -50,7 +56,7 @@ typedef struct		s_launch
 	int				out;
 	int				err;
 	int				dir_creat;
-	t_lstfd			*lstfd;
+	t_lstred		*lstred;
 	struct s_launch	*next;
 }					t_launch;
 
@@ -81,9 +87,9 @@ void				ft_res_pile(t_launch *cmd);
 void				ft_add_pile(int og, int dir, t_launch *cmd, int close);
 int					ft_heredoc(char *end, char ***arge, t_red *red);
 int					end_agg(char *str);
-int					ft_heredoc_read(int *og, int *dir, t_red *red);
+int					ft_heredoc_read(t_dup *dup, t_red *red);
 void				add_name(t_red *red, char *str);
-
+void				pile_red(t_dup *dup, t_launch *cmd, int close);
 char				*ft_getenv(char **env, char *name);
 
 void				exe_print_job(t_job *job);

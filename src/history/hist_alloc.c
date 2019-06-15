@@ -6,29 +6,39 @@
 /*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 10:09:40 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/04 23:23:48 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/15 12:07:36 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
 
-void				hist_add(char *str)
+void				hist_add(char *str, int stock)
 {
 	t_history		*tmp;
 	t_history		*new;
 
 	tmp = g_env.ry;
-	if (!(new = (t_history*)ft_memalloc(sizeof(t_history))))
-		sh_errorterm(TMALLOC);
-	new->next = tmp;
-	new->prev = NULL;
-	if (g_env.ry)
-		new->id = g_env.ry->id + 1;
-	if (tmp)
-		tmp->prev = new;
-	if (!(new->line = ft_strdup(str)))
-		sh_errorterm(TMALLOC);
-	g_env.ry = new;
+	if (!stock)
+	{
+		if (!(new = (t_history*)ft_memalloc(sizeof(t_history))))
+			sh_errorterm(TMALLOC);
+		new->next = tmp;
+		new->prev = NULL;
+		if (g_env.ry)
+			new->id = g_env.ry->id + 1;
+		if (tmp)
+			tmp->prev = new;
+		if (!(new->line = ft_strdup(str)))
+			sh_errorterm(TMALLOC);
+		g_env.ry = new;
+	}
+	else if (g_env.ry->line)
+	{
+		if (!(g_env.ry->line = ft_strjoinf(g_env.ry->line, "\n")))
+			sh_errorterm(TMALLOC);
+		if (!(g_env.ry->line = ft_strjoinf(g_env.ry->line, str)))
+			sh_errorterm(TMALLOC);
+	}
 }
 
 void				hist_alloc_search(t_prompt prompt)

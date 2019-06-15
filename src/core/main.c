@@ -6,10 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 16:23:19 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:38:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "job_control_42.h"
@@ -20,6 +21,7 @@
 #include "lex.h"
 #include "libft.h"
 #include "line_edition.h"
+#include "history.h"
 
 struct termios	shell_term_conf;
 int16_t			g_current_ret = -1;
@@ -71,11 +73,15 @@ static void			loop_on_input(int argc, char **argv, char ***env)
 	char	*line;
 
 	ret = 1;
+	line = NULL;
 	(void)argc;
 	while (ret)
 	{
 		job_sigchld_handler(0);
 		line = line_get_readline(PBASIC, argv[1]);
+		(void)argv;
+		// line = ft_strdup("hash mkdir ; hash");
+		hist_update(line, 0);
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 		ret = !lex_str(&line, env);
 		g_last_ret = g_current_ret;

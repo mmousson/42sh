@@ -1,25 +1,31 @@
 mkdir -p empty && test -e empty || cd empty
 touch a? b* [c]; ls -1
 echo a > aa && echo b > ab && cat -e a?
+rm -f aa ab 'a?'
 mkdir -p one/two
 echo 'four' > one/two/three
 echo 'six' > one/five
 ls /??r
-mkdir '[x' && touch '[x/foo'
+mkdir -p '[x' && touch '[x/foo'
 echo [*; echo *[x; echo [x/*
 touch 'a[a-z][x' 'ab[x'
+ls
 echo a[a-z][*; echo a[a-z]*; echo a[a\-z]*
 touch ".bc" "abc" "bbc" "cbc" "-bc" '!bc' "+bc" ",bc" "0bc" "1bc"
+rm -rf '!bc' +bc ,bc -bc 0bc 1bc 11 22 33 \[c\] \[x/ a\[a-z\]\[x  aa ab\[x abc bb bbc cbc cc empty/ one/
 echo [ab-]*
+rm -rf '!bc' +bc ,bc -bc 0bc 1bc 11 22 33 \[c\] \[x/ a\[a-z\]\[x  aa ab\[x abc bb bbc cbc cc empty/ one/
 echo [-ab]*
 echo [!-ab]*
 echo [!ab]*
+rm -rf '!bc' +bc ,bc -bc 0bc 1bc 11 22 33 \[c\] \[x/ a\[a-z\]\[x  aa ab\[x abc bb bbc cbc cc empty/ one/
 echo []ab]*
 echo [+--]*
 echo [--1]*
 echo [z-a]*
 echo [a-a]bc
 touch aa bb cc 11 22 33
+rm -rf '!bc' +bc ,bc -bc 0bc 1bc 11 22 33 \[c\] \[x/ a\[a-z\]\[x  aa ab\[x abc bb bbc cbc cc empty/ one/
 echo **
 echo [!a-z]
 echo [4-z][A-b]
