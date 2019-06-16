@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 16:01:14 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 18:23:29 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void			loop_on_input(int argc, char **argv, char ***env)
 	{
 		job_sigchld_handler(0);
 		line = line_get_readline(PBASIC, argv[1]);
-		hist_update(line, 0);
+		lex_add_hist(&line, 0);
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 		ret = !lex_str(&line, env);
 		g_last_ret = g_current_ret;
