@@ -6,12 +6,38 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 23:53:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/15 13:58:51 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 19:48:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "job_control_42.h"
+
+/*
+**	This function deletes a list of redirection 't_lstfd' from a process
+**	data-structure
+**
+**	Arguments:
+**	process -> A pointer to the Data-Structure holding all informations
+**		about the process from which we want to delete a 't_lstfd'
+**
+**	Return Value: ALWAYS (-1)
+*/
+
+int			job_delete_lstfd(t_process *process)
+{
+	t_lstfd	*current;
+	t_lstfd	*next;
+
+	current = process->lstfd;
+	while (current)
+	{
+		next = current->next;
+		ft_memdel((void **)&(current));
+		current = next;
+	}
+	return (-1);
+}
 
 /*
 **	This function destroys a job's links to the active job list

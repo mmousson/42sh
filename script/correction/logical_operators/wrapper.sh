@@ -30,7 +30,7 @@ for cmd in command_files/*; do
 		sed -i '' "s/line [0-9]*: //g" /tmp/expected_outputs/out_$i
 	else
 		sed -i "/SIGPIPE/d" /tmp/outputs/out_$i
-		sed -i '' "s/Yes/No/g" /tmp/outputs/out_$i
+		sed -i "s/Yes/No/g" /tmp/outputs/out_$i
 		sed -i "s/42sh:/bash:/g" /tmp/outputs/out_$i
 		sed -i "s/line [0-9]*: //g" /tmp/expected_outputs/out_$i
 	fi
