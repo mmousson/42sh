@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 17:33:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 11:07:59 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,6 @@ int						job_mark_process_status(pid_t pid, int status);
 void					job_update_status (t_job *first_job);
 void					job_unstop(t_job *job, int foreground);
 void					job_sigchld_handler(int signo);
-void					job_sigterm(int signo);
 
 /*
 **	=================== Job-objects' utility functions ===================

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 14:58:14 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/15 13:07:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	reset_signals_actions(void)
 	signal(SIGTTIN, SIG_DFL);
 	signal(SIGTTOU, SIG_DFL);
 	signal(SIGCHLD, SIG_DFL);
-	signal(SIGTERM, SIG_DFL);
 }
 
 /*
