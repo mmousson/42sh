@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 12:06:58 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/15 15:23:31 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 14:56:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	blt_exit_select_argument(int argc, char **argv)
 
 int			blt_exit(int argc, char **argv, char ***env)
 {
+	(void)env;
 	if (argc > 2)
 	{
 		ft_putendl_fd("42sh: exit: too many arguments", STDERR_FILENO);
@@ -60,7 +61,7 @@ int			blt_exit(int argc, char **argv, char ***env)
 	}
 	else
 	{
-		ft_del_words_tables(env);
+		ft_del_words_tables(g_env.env);
 		if (g_env.isatty)
 		{
 			sh_switch_term(1);

@@ -6,11 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 01:42:11 by mmousson          #+#    #+#             */
-/*   Updated: 2018/11/08 06:47:57 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 14:30:06 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
+#include "libft.h"
 
 void	ft_striter(char *s, void (*f)(char *))
 {

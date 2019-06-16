@@ -6,9 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 10:38:17 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/15 16:01:38 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 14:36:10 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifdef __linux__
+
+# include <signal.h>
+#endif
 
 #include <fcntl.h>
 #include "libft.h"

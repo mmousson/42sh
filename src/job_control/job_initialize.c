@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:23 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/13 08:35:11 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 14:57:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		init_job_ctrl(void)
 		signal(SIGTSTP, SIG_IGN);
 		signal(SIGTTIN, SIG_IGN);
 		signal(SIGTTOU, SIG_IGN);
+		signal(SIGTERM, job_sigterm);
 		g_shell_proc_group_id = getpid();
 		if (setpgid(g_shell_proc_group_id, g_shell_proc_group_id) < 0)
 		{

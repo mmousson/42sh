@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strimplode.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 18:52:44 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/28 18:58:49 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/16 14:30:44 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
+#include "libft.h"
 
 char		*ft_strimplode(char **tab, char delim)
 {
