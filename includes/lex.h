@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 12:07:35 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 20:31:49 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,12 @@ t_tok			*lex_init_token(void);
 t_tok			*new_token_char(char *str);
 t_tok			*new_token_space(void);
 t_stat			*lex_init_stat(void);
-int				lex_proc(t_stat *stat, char buff[BUF], t_tok **tok, char **str);
+int				lex_proc(t_stat *stat, char buff[BUF], char **str);
 int				lex_str(char **str, char ***arge);
 int				lex_more(t_stat *stat, char **str, int nl, int ret);
 int				lex_get_next_state(int state, int ch);
 int				pars_tok(t_tok *tok, char ***arge);
-int				lex_exclam(t_stat *stat, t_tok **tok, char **str, char bf[BUF]);
+int				lex_exclam(char **str);
 int				lex_back_slash_quote(t_stat *stat, char **str, char buff[BUF]);
 int				lex_store(t_stat *stat, char buff[BUF]);
 int				lex_last_pile(t_stat *stat);
@@ -129,6 +129,8 @@ int				error_ep_or_ec(char close, t_stat *stat);
 void			lex_include(char **str, char **sub, int start, int end);
 int				lex_reline(t_stat *stat, t_tok **token, char buff[BUF]);
 void			lex_add_arg_token(t_tok *tok, char *content, int status);
+void			lex_add_hist(char **str, int status);
+int				is_in_brac(int pos, char *str);
 
 /*
 ** fonctions affichages

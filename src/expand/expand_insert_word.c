@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 20:56:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 16:36:32 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:58:23 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,15 @@ int			insert_word(char **str, char *expand, int start, int len)
 	char	*first;
 	char	*end;
 	char	*tmp;
+	int		size;
 
 	if (start < 0 || len < 0 || !str || !(*str))
 		return (0);
 	first = ft_strsub(*str, 0, start);
-	end = ft_strsub(*str, start + len + 1, ft_strlen(*str) - start - len);
+	if ((size = ft_strlen(*str) - start - len) > 0)
+		end = ft_strsub(*str, start + len + 1, ft_strlen(*str) - start - len);
+	else
+		end = NULL;
 	if (expand)
 	{
 		tmp = first;

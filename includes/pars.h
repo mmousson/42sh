@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 11:18:17 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 19:10:47 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARS_H
 # define NB_PR 7
 # define NB_TY 4
-# define NB_CH 17
+# define NB_CH 16
 # define DBL 20
 
 /*
@@ -32,11 +32,10 @@
 ** PIP - 10 : PIPe, '|'
 ** SMC - 11: SeMiColomn, ';'
 ** PAC - 12: Parenthesis Closure, ')'
-** EXC - 13: EXClamation point, '!'
-** DOL - 14: DOLlard, '$'
-** CBO - 15: Curly Bracket Openning, '{'
-** CBC - 16: Curly Bracket Closing, '}'
-** EXP - 17: to_expend
+** DOL - 13: DOLlard, '$'
+** CBO - 14: Curly Bracket Openning, '{'
+** CBC - 15: Curly Bracket Closing, '}'
+** EXP - 16: to_expend
 */
 
 typedef enum		e_charac
@@ -54,7 +53,6 @@ typedef enum		e_charac
 	PIP,
 	SMC,
 	PAC,
-	EXC,
 	DOL,
 	CBO,
 	CBC,

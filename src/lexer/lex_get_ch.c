@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:04:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/14 15:21:55 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 19:12:27 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int					lex_get_ch(char c)
 {
-	static char		line[NB_CH - F_STAT] = "<>\"'(&\\|;)!$";
+	static char		line[NB_CH - F_STAT] = "<>\"'(&\\|;)$";
 	int				k;
 
 	if (c == 0)
@@ -41,7 +41,7 @@ int					get_sub_type(int stat)
 		EROR, CHAR, SPAC, REDI, REDI,
 		CHAR, CHAR, CHAR, SMCL, CHAR,
 		PIPE, SMCL, CHAR, CHAR, CHAR,
-		CHAR, CHAR
+		CHAR
 	};
 
 	if (stat >= NB_CH || stat < 0)

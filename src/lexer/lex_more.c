@@ -6,14 +6,13 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:03:29 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 12:25:04 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 19:34:17 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "lex.h"
 #include "libft.h"
-#include "history.h"
 
 static int		ft_nomatch(int status, char *fus, t_stat *stat)
 {
@@ -99,7 +98,7 @@ int				lex_more(t_stat *stat, char **str, int nl, int ret)
 	while (!fus)
 	{
 		if (g_env.isatty && (fus = line_get_readline(prompt, NULL)))
-			hist_update(fus, 1);
+			lex_add_hist(&fus, 1);
 		if (((fus == NULL || fus[0] == 0) && g_env.ctrld) || !g_env.isatty)
 			return (ft_nomatch(stat->old_status, fus, stat));
 		if (ft_append_nl(str, nl) || !(tmp = ft_strjoin(*str, fus)))

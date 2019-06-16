@@ -6,47 +6,47 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 10:55:35 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 20:48:31 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 #include "history.h"
 
-static void	process_sign(char **str, t_stat *stat, char **sub, char buff[BUF])
+static void	process_sign(char **str, int *pos, char **sub, char buff[BUF])
 {
-	if ((*str)[stat->k] == '-' && (*str)[stat->k + 1])
+	if ((*str)[*pos] == '-' && (*str)[*pos + 1])
 	{
-		lex_add_char(buff, sub, (*str)[stat->k]);
-		(stat->k)++;
+		lex_add_char(buff, sub, (*str)[*pos]);
+		(*pos)++;
 	}
-	else if ((*str)[stat->k] == '+' && (*str)[stat->k + 1])
-		(stat->k)++;
+	else if ((*str)[*pos] == '+' && (*str)[(*pos) + 1])
+		(*pos)++;
 }
 
-static char	*lex_following(char **str, t_stat *stat)
+static char	*lex_following(char **str, int pos, int *len)
 {
 	int		was_char;
 	char	*sub;
 	char	buff[BUF];
-	int		memory;
 
 	sub = NULL;
 	ft_bzero(buff, BUF);
-	stat->k++;
-	memory = stat->k;
-	process_sign(str, stat, &sub, buff);
-	was_char = ft_isalpha((*str)[stat->k]);
-	if ((*str)[stat->k] == '!' && (stat->k)++)
+	pos++;
+	*len = pos;
+	process_sign(str, &pos, &sub, buff);
+	was_char = ft_isalpha((*str)[pos]);
+	if ((*str)[pos] == '!' && (pos)++)
 		return (ft_strdup("!"));
-	while (ft_isdigit((*str)[stat->k])
-			|| (was_char && ft_isalpha((*str)[stat->k])))
+	while (ft_isdigit((*str)[pos])
+			|| (was_char && ft_isalpha((*str)[pos])))
 	{
-		lex_add_char(buff, &sub, (*str)[stat->k]);
-		(stat->k)++;
+		lex_add_char(buff, &sub, (*str)[pos]);
+		(pos)++;
 	}
-	if (memory != stat->k)
+	if (*len != pos)
 		sub = sub ? ft_strjoin(sub, buff) : ft_strdup(buff);
+	*len = pos - *len;
 	return (sub);
 }
 
@@ -59,47 +59,51 @@ static int	event_not_found(char **event)
 	return (-2);
 }
 
-int			is_in_brac(t_stat *stat, char *str)
+static int	find_expandable(char *str, int k)
 {
-	int		k;
+	int		spqt;
+	int		dbqt;
 
-	k = stat->k;
-	if (stat->k == 0 || str[stat->k - 1] != '[')
-		return (0);
-	while (str[++k])
+	dbqt = 0;
+	spqt = 0;
+	while (str[k])
 	{
-		if (str[k] == ']')
-		{
-			stat->status = stat->old_status;
-			return (1);
-		}
+		if (str[k] == '\'' && (k <= 0 || str[k - 1] != '\\') && !dbqt)
+			spqt = spqt * -1 + 1;
+		if (str[k] == '"' && (k <= 0 || str[k - 1] != '\\') && !spqt)
+			dbqt = dbqt * -1 + 1;
+		if (str[k] == '!' && !spqt && !is_in_brac(k, str))
+			return (k);
+		k++;
 	}
-	return (0);
+	return (-1);
 }
 
-int			lex_exclam(t_stat *stat, t_tok **token, char **str, char buff[BUF])
+int			lex_exclam(char **str)
 {
-	int		mem;
-	char	*sub;
+	int		k;
 	char	*old_sub;
+	char	*sub;
+	int		exclam;
+	int		len;
 
-	if (is_in_brac(stat, *str))
-		return (0);
-	mem = stat->k;
-	if ((old_sub = lex_following(str, stat)))
+	exclam = 0;
+	k = -1;
+	while ((*str)[++k])
 	{
-		sub = hist_getexpend(&old_sub);
-		if (!sub)
-			return (event_not_found(&old_sub));
-		else
+		if ((k = find_expandable(*str, k)) == -1)
+			return (exclam);
+		if ((old_sub = lex_following(str, k, &len)))
 		{
-			ft_strdel(&old_sub);
-			stat->exclam = 1;
+			sub = hist_getexpend(&old_sub);
+			if (!sub)
+				return (event_not_found(&old_sub));
+			else if ((exclam = 1))
+				ft_strdel(&old_sub);
+			lex_include(str, &sub, k, len + 1);
 		}
-		lex_include(str, &sub, mem, stat->k);
-		return (lex_reline(stat, token, buff));
+		if ((*str)[k + 1] == '!')
+			k++;
 	}
-	stat->k = mem;
-	stat->status = lex_last_pile(stat);
-	return (0);
+	return (exclam);
 }

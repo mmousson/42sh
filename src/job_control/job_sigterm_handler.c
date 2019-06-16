@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 14:40:07 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 14:40:07 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 17:35:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		job_sigterm(int signo)
 
 	(void)signo;
 	ft_putendl("\n42sh: Received deadly signal SIGTERM");
-	seconds = time(NULL) + (time_t)10;
+	seconds = time(NULL) + (time_t)3;
 	ft_putendl("Sending SIGTERM to all processes...");
 	job_signal_all_processes(SIGTERM);
 	while (time(NULL) != seconds)

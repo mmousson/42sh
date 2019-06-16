@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 01:06:53 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 12:19:10 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 19:35:47 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	ft_launch_here(char *end, int fd, int exp, char ***arge)
 			line = NULL;
 		}
 		line = line_get_readline(PHEREDOC, NULL);
-		hist_update(line, 1);
+		lex_add_hist(&line, 1);
 		if (exp)
 			expand_manager(&line, arge, NULL, 0);
 		if ((!line || !line[0]) && g_env.ctrld)

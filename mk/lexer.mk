@@ -6,7 +6,7 @@
 #    By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 20:29:33 by oboutrol          #+#    #+#              #
-#    Updated: 2019/06/14 15:16:32 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/06/15 20:30:34 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,12 @@ LEXER_NAME =	lex_init.c				\
 			 	lex_print_state.c		\
 			 	lex_process.c			\
 			 	lex_free_stat.c			\
+				lex_in_brace.c			\
 				lex_include.c			\
 				lex_welding.c			\
 			 	lex_free_token.c		\
 				lex_print_stack.c		\
+				lex_add_hist.c			\
 				lex_store.c				\
 				lex_store_dol.c			\
 				lex_add_arg_token.c		\

@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   lex_in_brace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/01 17:27:04 by marvin            #+#    #+#             */
-/*   Updated: 2019/06/15 17:50:40 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/06/15 20:27:08 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/06/15 20:31:45 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_isalnum(int c)
+int		is_in_brac(int pos, char *str)
 {
-	return (ft_isalpha(c) || ft_isdigit(c));
+	int		k;
+
+	k = pos;
+	if (pos == 0 || str[pos - 1] != '[')
+		return (0);
+	while (str[++k])
+	{
+		if (str[k] == ']')
+			return (1);
+	}
+	return (0);
 }

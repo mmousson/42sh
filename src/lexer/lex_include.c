@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 10:52:30 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 20:20:35 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/15 19:15:46 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,4 @@ void	lex_include(char **str, char **sub, int start, int end)
 	ft_strdel(&str_start);
 	ft_strdel(&str_end);
 	ft_strdel(sub);
-}
-
-int		lex_reline(t_stat *stat, t_tok **token, char buff[BUF])
-{
-	stat->old_status = 0;
-	stat->k = -1;
-	stat->status = 0;
-	ft_strdel(&stat->load);
-	ft_bzero(buff, BUF);
-	lex_free_token(*token);
-	*token = lex_init_token();
-	return (1);
 }

@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   lex_add_hist.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/01 17:27:04 by marvin            #+#    #+#             */
-/*   Updated: 2019/06/15 17:50:40 by oboutrol         ###   ########.fr       */
+/*   Created: 2019/06/15 19:30:07 by oboutrol          #+#    #+#             */
+/*   Updated: 2019/06/15 20:48:53 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lex.h"
+#include "history.h"
 
-int	ft_isalnum(int c)
+void		lex_add_hist(char **str, int status)
 {
-	return (ft_isalpha(c) || ft_isdigit(c));
+	if (lex_exclam(str))
+		ft_putendl(*str);
+	hist_update(*str, status);
 }
