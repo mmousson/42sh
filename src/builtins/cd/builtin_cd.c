@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 14:09:13 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/15 14:48:03 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/16 15:32:04 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,23 @@
 #include "cd.h"
 #include "libft.h"
 
-int			change_directory(char ***env, char *pwd, char **cdenv)
+static int	manage_pwd(char ***env, char **cdenv, char *pwd, int options)
+{
+	char *cwd;
+
+	if (options == 2)
+	{
+		cwd = getcwd(NULL, 0);
+		utility_set_var("PWD", cwd, env, 0);
+		ft_strdel(&cwd);
+	}
+	else
+		utility_set_var("PWD", pwd, env, 0);
+	utility_set_var("OLDPWD", cdenv[2], env, 0);
+	return (1);
+}
+
+int			change_directory(char ***env, char *pwd, char **cdenv, int options)
 {
 	if (!check_path_errors(pwd))
 		return (0);
@@ -25,7 +41,7 @@ int			change_directory(char ***env, char *pwd, char **cdenv)
 	}
 	utility_set_var("PWD", pwd, env, 0);
 	utility_set_var("OLDPWD", cdenv[2], env, 0);
-	return (1);
+	return (manage_pwd(env, cdenv, pwd, options));
 }
 
 static void	init_cdenv(char **cdenv, char **env, int options)
@@ -56,7 +72,7 @@ int			blt_cd(int argc, char **argv, char ***env)
 		return (1);
 	init_cdenv(&cdenv[0], *env, options);
 	if (!(pwd = get_pwd_for_cd(pos_args, argv, &cdenv[0]))
-		|| !change_directory(env, pwd, &cdenv[0]))
+		|| !change_directory(env, pwd, &cdenv[0], options))
 		res = 1;
 	free_cdenv(cdenv);
 	ft_strdel(&pwd);
