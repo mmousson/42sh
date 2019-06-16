@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/15 16:24:52 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 15:55:54 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ char				*core_spec_var_setget(int id, char *new_value,
 	int set_or_get);
 int					core_hash_spec_var(char var);
 void				core_free_shell_spec_vars_list(void);
+int					core_parse_options(int ac, char **av, char **opts);
 
 /*
 **	==================== BUILTIN functions ====================
