@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 10:38:17 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 14:36:10 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 19:59:04 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@
 #endif
 
 #include <fcntl.h>
+#include "sh42.h"
 #include "libft.h"
 #include "job_control_42.h"
+
+int				g_intr = 0;
 
 static void		job_open_interrupt(int signo)
 {
 	(void)signo;
+	g_intr = 1;
 	ft_putendl_fd("\n42sh: open: Interrupted system call", STDERR_FILENO);
 }
 
@@ -50,34 +54,38 @@ static t_lstfd	*job_add_lstfd(t_process *process)
 	return (res);
 }
 
-static int		job_open_files_malloc_fail(t_process *process)
+static void		job_check_file(char *p, int is_input)
 {
-	t_lstfd	*current;
-	t_lstfd	*next;
+	int	type;
 
-	current = process->lstfd;
-	while (current)
-	{
-		next = current->next;
-		ft_memdel((void **)&(current));
-		current = next;
-	}
-	return (-1);
-}
-
-static int		job_do_open(t_lstred *current, t_lstfd *fds)
-{
-	if (current->int_og == 0)
-		fds->dir = open(current->name_dir, O_RDONLY);
+	if ((type = utility_file_exists(p)) == 0 && is_input)
+		ft_putendl3_fd("42sh: ", p, ": No such file or directory", 2);
+	else if (type == 0)
+		ft_putendl3_fd("42sh: ", p, ": Permission denied", STDERR_FILENO);
 	else
 	{
-		if (current->simple == 1)
-			fds->dir = open(current->name_dir, O_WRONLY | O_TRUNC | O_CREAT,
+		if (type == FILETYPE_DIRECTORY)
+			ft_putendl3_fd("42sh: ", p, ": Is a directory", STDERR_FILENO);
+		else if (type == FILETYPE_REGULAR)
+			ft_putendl3_fd("42sh: ", p, ": Permission denied", STDERR_FILENO);
+	}
+}
+
+static int		job_do_open(t_lstred *curr, t_lstfd *fds)
+{
+	if (curr->int_og == 0)
+		fds->dir = open(curr->name_dir, O_RDONLY);
+	else
+	{
+		if (curr->simple == 1)
+			fds->dir = open(curr->name_dir, O_WRONLY | O_TRUNC | O_CREAT,
 				S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
-		else if (current->simple == 0)
-			fds->dir = open(current->name_dir, O_WRONLY | O_APPEND | O_CREAT,
+		else if (curr->simple == 0)
+			fds->dir = open(curr->name_dir, O_WRONLY | O_APPEND | O_CREAT,
 				S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
 	}
+	if (!g_intr && fds->dir == -1)
+		job_check_file(curr->name_dir, !curr->int_og);
 	return (fds->dir != -1);
 }
 
@@ -89,9 +97,10 @@ int				job_open_files(t_process *process)
 	current = process->lstred;
 	while (current)
 	{
+		g_intr = 0;
 		signal(SIGINT, job_open_interrupt);
 		if ((fds = job_add_lstfd(process)) == NULL)
-			return (job_open_files_malloc_fail(process));
+			return (job_delete_lstfd(process));
 		if (current->close)
 			fds->close = 1;
 		if (current->int_og >= 0)
@@ -101,7 +110,7 @@ int				job_open_files(t_process *process)
 		else if (current->name_dir != NULL)
 		{
 			if (!job_do_open(current, fds))
-				return (job_open_files_malloc_fail(process));
+				return (job_delete_lstfd(process));
 		}
 		signal(SIGINT, SIG_DFL);
 		current = current->next;

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 14:58:14 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 20:04:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ static int	build_redirections(t_lstfd *fds, t_process *proc)
 
 static void	job_child_exec(t_process *proc)
 {
-	int				blt_pos;
+	int					blt_pos;
+	static const char	*exit_args[3] = {"exit", "126", NULL};
 
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
 	{
@@ -115,7 +116,7 @@ static void	job_child_exec(t_process *proc)
 		ft_putendl_fd(proc->argv[0], STDERR_FILENO);
 		ft_putendl_fd("Reason: The file is marked as executable but could not "
 			"be run by the operating system", STDERR_FILENO);
-		exit(126);
+		blt_exit(2, (char **)exit_args, proc->environ);
 	}
 	else
 		exit(g_builtins[blt_pos].handler(
@@ -154,9 +155,10 @@ static void	job_child_exec(t_process *proc)
 void		job_child_process(t_job *job, t_process *proc, int foreground,
 	pid_t pgid)
 {
-	pid_t			child_id;
-	t_bool			interactive;
-	t_io_channels	io_chan;
+	pid_t				child_id;
+	t_bool				interactive;
+	t_io_channels		io_chan;
+	static const char	*exit_args[3] = {"exit", "130", NULL};
 
 	interactive = isatty(0);
 	if (interactive)
@@ -172,8 +174,8 @@ void		job_child_process(t_job *job, t_process *proc, int foreground,
 	io_chan = proc->io_channels;
 	build_pipes(io_chan.input, io_chan.output, io_chan.error, job);
 	if (job_open_files(proc) == -1)
-		exit(130);
+		blt_exit(2, (char **)exit_args, proc->environ);
 	if (build_redirections(proc->lstfd, proc) == 0)
-		exit(1);
+		blt_exit(2, (char **)exit_args, proc->environ);
 	job_child_exec(proc);
 }

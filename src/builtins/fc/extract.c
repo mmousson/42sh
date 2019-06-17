@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 12:45:57 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/15 15:23:02 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/17 09:51:48 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,37 @@ static t_history	*get_link_from_string(const char *str, int *pos)
 	return (NULL);
 }
 
+static void			blt_fc_select_dir(t_options_infos *inf)
+{
+	t_history	*hist;
+	t_history	*hist2;
+
+	if (inf->reversed)
+	{
+		hist = inf->from;
+		inf->from = inf->to;
+		inf->to = hist;
+	}
+	hist = inf->from;
+	hist2 = inf->from;
+	while (hist != inf->to && hist2 != inf->to)
+	{
+		if (hist != NULL)
+			hist = hist->next;
+		if (hist2 != NULL)
+			hist2 = hist2->prev;
+	}
+	if (hist == inf->to)
+		inf->dir = DIR_NEXT;
+	else
+		inf->dir = DIR_PREV;
+}
+
 void				blt_fc_extract(t_options_infos *inf)
 {
 	int			depth;
 	int			tmp;
 	int			tmp2;
-	t_history	*tmp_hist;
 
 	depth = get_history_depth();
 	if (ft_valid_to_atoi(inf->first) && (tmp = ft_atoi(inf->first)))
@@ -88,12 +113,5 @@ void				blt_fc_extract(t_options_infos *inf)
 		inf->to = get_link_at(ft_clamp(tmp2, -depth, depth), &tmp2);
 	else
 		inf->to = get_link_from_string(inf->last, &tmp2);
-	if (inf->reversed)
-	{
-		tmp_hist = inf->from;
-		inf->from = inf->to;
-		inf->to = tmp_hist;
-	}
-	if (tmp < tmp2)
-		inf->reversed = !inf->reversed;
+	blt_fc_select_dir(inf);
 }

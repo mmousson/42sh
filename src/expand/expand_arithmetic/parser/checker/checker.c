@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/17 11:20:47 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:24:11 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			arith_div_zero_error(char *expr, t_arithtok *tok)
 	{
 		ft_putstr2_fd(""SH_NAME": ", expr, 2);
 		ft_putstr_fd(": division by 0 (error token is \"", 2);
-		ft_putendl2_fd(&tok->val[tok->length - 1], "\")\n", 2);
+		ft_putendl2_fd(&tok->val[tok->length - 1], "\")", 2);
 	}
 	return (1);
 }
@@ -34,7 +34,7 @@ int			arith_value_base_error(t_arithtok *begin, t_arithtok *tok)
 		begin = begin->next;
 	}
 	ft_putstr_fd(": value too great for base (error token is \"", 2);
-	ft_putendl2_fd(tok->val, "\")\n", 2);
+	ft_putendl2_fd(tok->val, "\")", 2);
 	return (1);
 }
 
@@ -50,7 +50,7 @@ int			arith_syntax_error(char *expr, t_arithtok *tok, int err)
 			ft_putstr2_fd(tok->val, (tok->next ? " " : ""), 2);
 			tok = tok->next;
 		}
-		ft_putendl_fd("\")\n", 2);
+		ft_putendl_fd("\")", 2);
 	}
 	return (258);
 }

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 17:26:00 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/13 00:23:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/17 09:46:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ int	blt_fc_list(t_options_infos *inf)
 		ft_putendl(current->line);
 		if (current == target)
 			break ;
-		if (inf->reversed)
-			current = current->next;
-		else
-			current = current->prev;
+		current = inf->dir == DIR_NEXT ? current->next : current->prev;
 	}
 	return (0);
 }

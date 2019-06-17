@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 17:33:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/16 19:48:54 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ extern t_job			*g_active_job_list;
 **
 **	job_add_to_active_job_list -> job_control/job_add_to_active_job_list.c
 **	job_free -> job_control/job_free.c
+**	job_delete_lstfd -> job_control/job_free.c
 **	job_argc -> job_control/job_utility.
 **	job_bad_fd -> job_control/job_bad_fd_notifier.c
 **	job_launch -> job_control/job_engine.c
@@ -210,6 +211,7 @@ void					job_add_to_active_job_list(t_job *job);
 int						job_check_variable_declaration(t_process *proc,
 	char ***env);
 void					job_free(t_job *job);
+int						job_delete_lstfd(t_process *process);
 int						job_argc(char **argv);
 int						job_bad_fd(int bad_fd, t_process *proc);
 int						job_launch(t_job *job, int fg);
