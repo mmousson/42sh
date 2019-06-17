@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_parse_opts.c                               :+:      :+:    :+:   */
+/*   core_parse_options.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:41:05 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 15:41:05 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:31:07 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static char	*opt_arg(char *cur, char *next)
 		if (next != NULL && (res = ft_strdup(next)) == NULL)
 			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 		else if (next == NULL)
-			ft_putendl_fd("42sh: -c: option requires an argument", STDERR_FILENO);
+			ft_putendl_fd("42sh: -c: option requires an argument",
+															STDERR_FILENO);
 	}
 	else
 	{

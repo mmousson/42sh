@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:42:09 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/16 17:53:18 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:24:11 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,8 @@ int			check_expression(char *expr, t_arithtok *token)
 			val = ft_itoa(arith_value_base_error(token, error_tok));
 		else
 			val = ft_itoa(arith_syntax_error(expr, error_tok, err));
-		if (!val)
-			return (1);
 		core_spec_var_setget(10, val, SET);
+		ft_strdel(&val);
 		return (1);
 	}
 	return (0);
