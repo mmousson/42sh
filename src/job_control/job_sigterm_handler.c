@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 14:40:07 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 17:35:35 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:39:20 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "libft.h"
 #include "job_control_42.h"
 
-static void	job_signal_all_processes(int signal)
+void	job_signal_all_processes(int signal)
 {
 	t_job		*next_job;
 	t_job		*current_job;
@@ -39,13 +39,13 @@ static void	job_signal_all_processes(int signal)
 	}
 }
 
-void		job_sigterm(int signo)
+void	job_sigterm(int signo)
 {
 	time_t	seconds;
 
 	(void)signo;
 	ft_putendl("\n42sh: Received deadly signal SIGTERM");
-	seconds = time(NULL) + (time_t)3;
+	seconds = time(NULL) + (time_t)2;
 	ft_putendl("Sending SIGTERM to all processes...");
 	job_signal_all_processes(SIGTERM);
 	while (time(NULL) != seconds)
