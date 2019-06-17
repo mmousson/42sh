@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 14:40:07 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/17 15:39:20 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:40:25 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	job_signal_all_processes(int signal)
 		current_process = current_job->first_process;
 		while (current_process != NULL)
 		{
-			kill(current_process->pid, SIGTERM);
+			kill(current_process->pid, signal);
 			current_process = current_process->next;
 		}
 		if (signal == SIGKILL)
