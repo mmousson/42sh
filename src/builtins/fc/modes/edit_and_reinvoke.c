@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 17:26:52 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/15 17:22:04 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/17 09:45:03 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static int	put_commands_to_file(t_options_infos *inf, char *filename)
 
 	if ((fd = open(filename, O_RDWR | O_CREAT, 0644)) != -1)
 	{
-		current = inf->reversed ? inf->to : inf->from;
-		target = inf->reversed ? inf->from : inf->to;
+		current = inf->from;
+		target = inf->to;
 		while (current != NULL)
 		{
 			ft_putendl_fd(current->line, fd);
 			if (current == target)
 				break ;
-			current = current->next;
+			current = inf->dir == DIR_NEXT ? current->next : current->prev;
 		}
 		close(fd);
 		return (0);

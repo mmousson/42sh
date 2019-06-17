@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 21:04:39 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 13:08:04 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/17 09:45:00 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define SWITCH 0
 # define GET_EDITOR 1
 # define FILL 2
+# define DIR_NEXT 3
+# define DIR_PREV 4
 
 /*
 ** Offset Matcher structure
@@ -67,6 +69,7 @@ typedef struct	s_options_infos
 	t_history	*to;
 	int			from_index;
 	int			to_index;
+	int			dir;
 }				t_options_infos;
 
 /*
