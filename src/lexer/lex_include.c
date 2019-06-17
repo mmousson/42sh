@@ -6,20 +6,20 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 10:52:30 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 19:15:46 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:26:40 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lex.h"
 
-void	lex_include(char **str, char **sub, int start, int end)
+void	lex_include(char **str, char **sub, int start, int len)
 {
 	char	*str_start;
 	char	*str_end;
 
 	str_start = ft_strsub(*str, 0, start);
-	str_end = ft_strdup(*str + end);
+	str_end = ft_strdup(*str + start + len);
 	if (sub)
 		str_start = ft_strjoinf(str_start, *sub);
 	free(*str);

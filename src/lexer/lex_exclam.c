@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/16 18:28:05 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:34:02 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ int			lex_exclam(char **str)
 		if ((old_sub = lex_following(str, k, &len)))
 		{
 			sub = hist_getexpend(&old_sub);
-			if (!sub)
+			if (!sub || !(exclam = 1))
 				return (event_not_found(&old_sub));
-			else if ((exclam = 1))
-				ft_strdel(&old_sub);
+			ft_strdel(&old_sub);
 			lex_include(str, &sub, k, len + 1);
+			k = k + ft_strlen(sub) - len;
 		}
 		if ((*str)[k + 1] == '!')
 			k++;
