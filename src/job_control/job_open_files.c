@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 10:38:17 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 19:59:04 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:09:10 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ static int		job_do_open(t_lstred *curr, t_lstfd *fds)
 			fds->dir = open(curr->name_dir, O_WRONLY | O_APPEND | O_CREAT,
 				S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
 	}
+	if (curr->is_here)
+		unlink(curr->name_dir);
 	if (!g_intr && fds->dir == -1)
 		job_check_file(curr->name_dir, !curr->int_og);
 	return (fds->dir != -1);
@@ -100,7 +102,7 @@ int				job_open_files(t_process *process)
 		g_intr = 0;
 		signal(SIGINT, job_open_interrupt);
 		if ((fds = job_add_lstfd(process)) == NULL)
-			return (job_delete_lstfd(process));
+			return (-1);
 		if (current->close)
 			fds->close = 1;
 		if (current->int_og >= 0)
@@ -110,7 +112,7 @@ int				job_open_files(t_process *process)
 		else if (current->name_dir != NULL)
 		{
 			if (!job_do_open(current, fds))
-				return (job_delete_lstfd(process));
+				return (-1);
 		}
 		signal(SIGINT, SIG_DFL);
 		current = current->next;

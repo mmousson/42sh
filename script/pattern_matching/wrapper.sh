@@ -1,7 +1,7 @@
 #!/bin/bash
 printf "=== TESTING PATTERN MATCHING COMMANDS =====================================================\n"
 bkp_pwd=`pwd`
-cd pattern_matching
+cd pattern_matching 2>&-
 rm -rf error_logs
 rm -f /tmp/pattern_memory_report
 rm -rf /tmp/outputs
@@ -64,5 +64,5 @@ else
 	printf "\033[1;31m[UNIT TESTS FAILURE]\033[0m\n"
 fi
 printf "\n=== END OF REPORT =====================================================================\n\n"
-rm -rf !bc +bc ,bc -bc 0bc 1bc 11 22 33 \[c\] \[x/ a\[a-z\]\[x  aa ab\[x abc bb bbc cbc cc empty/ one/ /tmp/outputs /tmp/expected_outputs
+rm -rf 11 22 33 \[c\] \[x/ a\[a-z\]\[x aa ab a\? ab\[x b\* bb cc empty/ one/ /tmp/outputs /tmp/expected_outputs
 cd $bkp_pwd

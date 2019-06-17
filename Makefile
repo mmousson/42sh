@@ -27,7 +27,7 @@ LIBFT = libft
 LIBS = -lft
 LIBSFOLDERS = -L./$(LIBFT)
 vpath %.c $(dir MAKEFILE_LIST)
-CFLAGS = -g3 -Wall -Wextra -Werror -I./includes -I./includes/builtins -I./libft/includes -Wno-deprecated
+CFLAGS = -g3 -Wall -Wextra -Werror -I./includes -I./includes/builtins -I./libft/includes
 CPPFLAGS += -MMD -MP
 OBJDIR = .o
 UNAME = $(shell uname)

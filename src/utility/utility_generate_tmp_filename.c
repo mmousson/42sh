@@ -6,36 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 10:20:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/15 15:26:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:05:08 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef __linux__
-
-# include <sys/random.h>
-#endif
-
+#include <fcntl.h>
 #include <unistd.h>
-#include <sys/syscall.h>
-#include <stdio.h>
 #include "sh42.h"
 #include "libft.h"
-
-#ifdef __linux__
-
-static void	action(char *next_suffix)
-{
-	getentropy(next_suffix, 1);
-}
-
-#else
-
-static void	action(char *next_suffix)
-{
-	syscall(SYS_getentropy, next_suffix, 1);
-}
-
-#endif
 
 /*
 **	Generates a new permutation of the filename, which will then be used to
@@ -50,11 +28,11 @@ static void	action(char *next_suffix)
 **	NON-NULL -> The next permutation
 */
 
-static char	*next_permutation(const char *base)
+static char	*next_permutation(const int fd, const char *base)
 {
 	size_t	len;
 	char	*new;
-	char	next_suffix;
+	char	*line;
 
 	len = ft_strlen(base);
 	if ((new = ft_strnew(len + 1)) == NULL)
@@ -63,8 +41,9 @@ static char	*next_permutation(const char *base)
 		return (NULL);
 	}
 	ft_strcpy(new, base);
-	action(&next_suffix);
-	new[len] = (ft_abs(next_suffix) % 40) + 48;
+	get_next_line(fd, &line);
+	new[len] = (ft_abs(line[0]) % 40) + 48;
+	ft_strdel(&line);
 	return (new);
 }
 
@@ -89,21 +68,25 @@ char		*utility_generate_tmp_filename(void)
 	char	*res;
 	char	*tmp;
 	int		i;
+	int		fd;
 
 	if ((res = ft_strdup("/tmp/.42sh_tmpfile_")) != NULL)
 	{
 		i = 0;
+		fd = open("/dev/urandom", O_RDONLY);
 		while (42)
 		{
-			if ((tmp = next_permutation(res)) == NULL)
+			if ((tmp = next_permutation(fd, res)) == NULL)
 				return (NULL);
 			ft_strdel(&res);
 			res = tmp;
 			if (!utility_file_exists(res))
-				return (res);
+				break;
 			i %= 10;
 			i++;
 		}
+		close(fd);
+		return (res);
 	}
 	ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 	return (NULL);
