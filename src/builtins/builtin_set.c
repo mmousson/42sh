@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 21:24:53 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/11 13:11:14 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/17 10:21:06 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,17 @@ static int	list_shell_variables(char **env)
 
 	i = -1;
 	while (env[++i] != NULL)
-		ft_putendl(env[i]);
+	{
+		utility_put_set_posix_str(env[i]);
+		ft_putchar('\n');
+	}
 	current = g_shell_var_list;
 	while (current)
 	{
 		ft_putstr(current->name);
 		ft_putchar('=');
-		ft_putendl(current->value);
+		utility_put_set_posix_str(current->value);
+		ft_putchar('\n');
 		current = current->next;
 	}
 	return (SET_OK);

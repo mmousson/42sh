@@ -15,22 +15,24 @@ rm -rf error_logs
 for cmd in command_files/*; do
 	str=`cat $cmd`
 	printf "\n%2d: Launching: %-65s%s" $i "$str" "=>"
-	bash < $cmd > /tmp/expected_outputs/out_$i 2>&1
+	bash < $cmd > /tmp/expected_outputs/out_$i 2>/dev/null
 	if [ "$#" -eq 2 ]
 	then
-		valgrind --quiet --leak-check=full --log-file=/tmp/log --suppressions=../"$2" ../"$1" < $cmd > /tmp/outputs/out_$i 2>&1
+		valgrind --quiet --leak-check=full --log-file=/tmp/log --suppressions=../"$2" ../"$1" < $cmd > /tmp/outputs/out_$i 2>/dev/null
 		if [ $system = 'Linux' ]
 		then
+			sed -i "/PR_SET_PTRACER/d" /tmp/log
 			sed -i "/MACH_SEND_TRAILER/d" /tmp/log
 		else
+			sed -i '' "/PR_SET_PTRACER/d" /tmp/log
 			sed -i '' "/MACH_SEND_TRAILER/d" /tmp/log
 		fi
-		test -s /tmp/log && cat /tmp/log >> /tmp/arithmetic_memory_report
+		test -s /tmp/log && echo "=== REPORT OF COMMAND: "$str >> /tmp/arithmetic_memory_report && cat /tmp/log >> /tmp/arithmetic_memory_report
 	elif [ "$#" -eq 1 ]
 	then
-		../"$1" < $cmd > /tmp/outputs/out_$i 2>&1
+		../"$1" < $cmd > /tmp/outputs/out_$i 2>/dev/null
 	else
-		../../42sh < $cmd > /tmp/outputs/out_$i 2>&1
+		../../42sh < $cmd > /tmp/outputs/out_$i 2>/dev/null
 	fi
 	if [ $system != 'Linux' ]
 	then

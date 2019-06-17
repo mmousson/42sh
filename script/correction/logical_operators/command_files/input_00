@@ -1,1 +1,1 @@
-ls -l && ls
+/bin/ls -l && /bin/ls

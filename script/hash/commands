@@ -2,7 +2,7 @@ hash mkdir; hash
 hash -r
 hash
 hash DOESNOTEXIST; hash
-hash ps 42sh umount; hash
+hash cp 42sh ls; hash
 ls >/dev/null; ls >/dev/null;ls >/dev/null; ls >/dev/null
 hash ls
 hash

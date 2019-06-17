@@ -1,7 +1,7 @@
 #!/bin/bash
 printf "=== TESTING STANDALONES COMMANDS ==============\n"
 bkp_pwd=`pwd`
-cd standalone_commands
+cd standalone_commands 2>&-
 rm -f /tmp/standalone_memory_report
 rm -rf /tmp/outputs
 rm -rf /tmp/expected_outputs
@@ -10,6 +10,7 @@ mkdir -p /tmp/expected_outputs
 i=0
 ok=0
 ko=0
+system=`uname`
 for cmd in command_files/*; do
 	str=`cat $cmd`
 	printf "\nLaunching: %-25s%s" "$str" "=>"
@@ -30,7 +31,15 @@ for cmd in command_files/*; do
 	else
 		../../42sh < $cmd > /tmp/outputs/out_$i 2>&1
 	fi
-	diff /tmp/expected_outputs/out_$i /tmp/outputs/out_$i > /dev/null 2>&1
+	if [ $system != "Linux" ]
+	then
+		sed -i '' "s/42sh:/bash:/g" /tmp/outputs/out_$i
+		sed -i '' "s/line [0-9]*: //g" /tmp/expected_outputs/out_$i
+	else
+		sed -i "s/42sh:/bash:/g" /tmp/outputs/out_$i
+		sed -i "s/line [0-9]*: //g" /tmp/expected_outputs/out_$i
+	fi
+	diff /tmp/expected_outputs/out_$i /tmp/outputs/out_$i > /tmp/diff_log 2>&1
 	if [ $? = 0 ]
 	then
 		printf "\033[1;32m[DIFF OK]\033[0m"

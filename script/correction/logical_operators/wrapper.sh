@@ -1,7 +1,7 @@
 #!/bin/bash
 printf "=== TESTING LOGICAL OPERATORS COMMANDS =============================================================================\n"
 bkp_pwd=`pwd`
-cd correction/builtins 1>/dev/null 2>&1
+cd correction/logical_operators 1>/dev/null 2>&1
 rm -rf /tmp/outputs
 rm -rf /tmp/expected_outputs
 mkdir -p /tmp/outputs

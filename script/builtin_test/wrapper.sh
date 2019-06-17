@@ -21,9 +21,11 @@ for cmd in command_files/*; do
 		valgrind --quiet --leak-check=full --log-file=/tmp/log --suppressions=../"$2" ../"$1" < $cmd > /tmp/outputs/out_$i 2>&1
 		if [ $system = 'Linux' ]
 		then
+			sed -i "/PR_SET_PTRACER/d" /tmp/log
 			sed -i "/MACH_SEND_TRAILER/d" /tmp/log
 			sed -i "/dsymutil/d" /tmp/log
 		else
+			sed -i '' "/PR_SET_PTRACER/d" /tmp/log
 			sed -i '' "/MACH_SEND_TRAILER/d" /tmp/log
 			sed -i '' "/dsymutil/d" /tmp/log
 		fi

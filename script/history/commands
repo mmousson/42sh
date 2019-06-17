@@ -1,8 +1,8 @@
 echo hello world
 !! | cat -e
 !echo
-fc -ln
-fc -lr
+fc -ln -- -1 -2
+fc -lr -- -1 -2
 !-1
 ls DOESNOTEXIST
 fc -s -- -1 2>/dev/null

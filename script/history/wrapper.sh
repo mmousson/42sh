@@ -1,7 +1,7 @@
 #!/bin/bash
 printf "=== TESTING HISTORY COMMANDS ==============================================================\n"
 bkp_pwd=`pwd`
-cd history
+cd history 2>&-
 rm -f /tmp/history_memory_report
 rm -rf /tmp/outputs
 rm -rf /tmp/expected_outputs
@@ -34,14 +34,21 @@ for cmd in command_files/*; do
 	else
 		../../42sh < $cmd > /tmp/outputs/out_$i 2>&1
 	fi
+	cp bash_interactive_output/expected_0$i /tmp/expected_outputs/out_$i
 	if [ $system != 'Linux' ]
 	then
+		sed -i '' "s/^[0-9]*\s*//g" /tmp/outputs/out_$i
+		sed -i '' "s/^[0-9]*\s*//g" /tmp/expected_outputs/out_$i
 		sed -i '' "s/42sh:/bash:/g" /tmp/outputs/out_$i
 		sed -i '' "s/line [0-9]*: //g" /tmp/expected_outputs/out_$i
 	else
+		sed -i "s/^[0-9]*\s*//g" /tmp/outputs/out_$i
+		sed -i "s/^[0-9]*\s*//g" /tmp/expected_outputs/out_$i
 		sed -i "s/42sh:/bash:/g" /tmp/outputs/out_$i
 		sed -i "s/line [0-9]*: //g" /tmp/expected_outputs/out_$i
 	fi
+	cp /tmp/outputs/out_$i out_$i
+	cp /tmp/expected_outputs/out_$i exp_$i
 	diff /tmp/expected_outputs/out_$i /tmp/outputs/out_$i > /tmp/diff_log 2>&1
 	if [ $? = 0 ]
 	then
@@ -68,4 +75,3 @@ fi
 printf "\n=== END OF REPORT =========================================================================\n\n"
 rm -rf /tmp/expected_outputs /tmp/outputs
 cd $bkp_pwd
-rm fifo

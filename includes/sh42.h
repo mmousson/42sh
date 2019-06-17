@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 15:55:54 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/17 10:13:54 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,7 @@ void				utility_add_tmp_var(char *name, char *value);
 void				utility_flush_tmp_vars(void);
 char				*utility_get_param(char *key, char **env);
 char				*utility_get_var(char *name, char **env);
+void				utility_put_set_posix_str(const char *str);
 void				utility_put_posix_string(const char *str);
 void				utility_set_var(char *name, char *value, char ***env,
 	int export_var);

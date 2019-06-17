@@ -1,1 +1,1 @@
-hash ps 42sh umount; hash
+hash cp 42sh ls; hash

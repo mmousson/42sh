@@ -5,3 +5,17 @@ pwd
 whoami
 rm
 rmdir
+md5sum /bin/ls
+git --version
+echo 42*42 | bc
+find
+echo bleu | rev
+[
+bleu
+whoami
+ip
+pwd
+false bleu
+dir
+tar --version
+chmod
