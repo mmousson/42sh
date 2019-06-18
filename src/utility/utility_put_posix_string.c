@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:21:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/17 10:26:09 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 10:59:38 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	utility_str_must_be_quoted(const char *str)
 	ret = 0;
 	while (*str)
 	{
-		if (*str == '*' || *str == '$' || *str == ';' )
+		if (*str == '*' || *str == '$' || *str == ';')
 			ret |= 1;
 		else if (*str == '=')
 			ret |= 2;

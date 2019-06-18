@@ -6,7 +6,7 @@
 #    By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/06/12 19:05:35 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/06/18 10:54:41 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,9 @@ NAME = 42sh
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 DEPS = $(subst .c,.d,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 
-all: lib_rule $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): lib_rule $(OBJS)
 	@$(RM) tmp_log
 	@$(RM) tmp_errors
 	@if [ -e files_missing ]; then \

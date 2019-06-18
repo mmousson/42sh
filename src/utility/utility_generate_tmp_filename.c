@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 10:20:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/17 15:05:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 10:59:24 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char		*utility_generate_tmp_filename(void)
 			ft_strdel(&res);
 			res = tmp;
 			if (!utility_file_exists(res))
-				break;
+				break ;
 			i %= 10;
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 12:45:57 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/17 15:48:07 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 10:58:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void			blt_fc_select_dir(t_options_infos *inf)
 		if (hist2 != NULL)
 			hist2 = hist2->prev;
 		if (hist == NULL && hist2 == NULL)
-			break;
+			break ;
 	}
 	if (hist == inf->to)
 		inf->dir = DIR_NEXT;
