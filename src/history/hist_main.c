@@ -3,29 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   hist_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 13:27:51 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/15 12:05:42 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:05:48 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
-#include "sh42.h"
+#include <stdio.h>
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include "history.h"
+#include "sh42.h"
 
 static void		hist_readfile(char **line, char **isread, int fd)
 {
-	char		*new_line;
+	char	*nl;
 
 	while (get_next_line(fd, line) > 0)
 	{
-		if ((new_line = hist_parsline(*line)))
-			hist_add(new_line, 0);
+		if ((nl = hist_parsline(*line)))
+		{
+			if (!hist_must_skip_cmd(nl))
+				hist_add(nl, 0);
+		}
 		ft_strdel(line);
-		ft_strdel(&new_line);
+		ft_strdel(&nl);
 	}
 	ft_strdel(isread);
 	close(fd);
@@ -82,6 +87,8 @@ void			hist_update(char *line, int stock)
 	int			fd;
 	char		*path;
 
+	if (hist_must_skip_cmd(line))
+		return ;
 	if (!(path = hist_getpath()))
 		return ;
 	fd = open(path, O_CREAT | O_RDWR | O_TRUNC, 0644);

@@ -6,12 +6,37 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:46:01 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/12 23:14:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 12:28:54 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "sh42.h"
+
+static void	nullify_shell_var(t_vars *holder)
+{
+	t_vars	*current;
+	t_vars	*prev;
+
+	prev = NULL;
+	current = g_shell_var_list;
+	while (current != NULL)
+	{
+		if (current == holder)
+		{
+			if (prev == NULL)
+				g_shell_var_list = NULL;
+			else
+				prev->next = NULL;
+			break ;
+		}
+		prev = current;
+		current = current->next;
+	}
+	ft_strdel(&holder->name);
+	ft_strdel(&holder->value);
+	ft_memdel((void **)&(holder));
+}
 
 /*
 **	This function deletes an internal variable definition from the
@@ -24,14 +49,16 @@
 **	Return Value: NONE
 */
 
-void	utility_delete_var(char *name, char ***env)
+void		utility_delete_var(char *name, char ***env)
 {
 	char	*ret;
+	void	**to_nullify;
 	t_vars	*holder;
 	t_vars	*holder_next;
 
 	if ((ret = utility_internal_var_exists(name, &holder)) != NULL)
 	{
+		to_nullify = (void **)&holder;
 		if (holder == g_shell_var_list)
 			g_shell_var_list = g_shell_var_list->next;
 		holder_next = holder->next;
@@ -40,9 +67,7 @@ void	utility_delete_var(char *name, char ***env)
 		if (holder->prev != NULL)
 			holder->prev->next = holder_next;
 		ft_strdel(&ret);
-		ft_strdel(&holder->name);
-		ft_strdel(&holder->value);
-		ft_memdel((void **)&(holder));
+		nullify_shell_var(holder);
 	}
 	else
 		utility_rm_entry_from_environ(env, name);

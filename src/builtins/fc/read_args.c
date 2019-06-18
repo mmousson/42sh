@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 09:42:57 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 16:55:03 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 14:53:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ void		blt_fc_read_args(int argc, char **argv, t_options_infos *inf)
 		else if (inf->first == NULL)
 			inf->first = ft_strdup(argv[i]);
 		else if (inf->last == NULL)
-			inf->last = ft_strdup(argv[i]);
+		{
+			if (ft_valid_to_atoi(argv[i]) && ft_atoi(argv[i]) == 0)
+				inf->last = ft_strdup("-1");
+			else
+				inf->last = ft_strdup(argv[i]);
+		}
 		else
 			break ;
 	}

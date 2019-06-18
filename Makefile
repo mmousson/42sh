@@ -6,7 +6,7 @@
 #    By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/06/18 10:54:41 by mmousson         ###   ########.fr        #
+#    Updated: 2019/06/18 12:46:02 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,7 @@ ifeq ($(UNAME), Linux)
 else
 	DECODE64_FLAG = -D
 endif
-ALIAS_LIST = "bHM9bHMgLUcKbD1scyAtbGFoCmxsPWxzIC1saApncmVwICAtLWNvbG9yPWF1dG8gLS1leGNsdWRlLWRpcj17LmJ6cixDVlMsLmdpdCwuaGcsLnN2bn0KLT1jZCAtCi4uLj0uLi8uLgouLi4uPS4uLy4uLy4uCi4uLi4uPS4uLy4uLy4uLy4uCi4uLi4uLj0uLi8uLi8uLi8uLi8uLgoxPWNkIC0KMj1jZCAtMgozPWNkIC0zCjQ9Y2QgLTQKNT1jZCAtNQo2PWNkIC02Cjc9Y2QgLTcKOD1jZCAtOAo5PWNkIC05CmdjYj1naXQgY2hlY2tvdXQgLWIKZ2NkPWdpdCBjaGVja291dCBkZXZlbG9wCmdjZj1nY2MgLVdhbGwgLVdleHRyYSAtV2Vycm9yCmdjbD1naXQgY2xvbmUgLS1yZWN1cnNlLXN1Ym1vZHVsZXMKZ2NsZWFuPWdpdCBjbGVhbiAtZmQKZ2NtPWdpdCBjaGVja291dCBtYXN0ZXIKZ2Ntc2c9Z2l0IGNvbW1pdCAtbQo="
-
+ALIAS_LIST = "Z2Ntc2c9Z2l0IGNvbW1pdCAtbQpnY209Z2l0IGNoZWNrb3V0IG1hc3RlcgpnY2xlYW49Z2l0IGNsZWFuIC1mZApnY2w9Z2l0IGNsb25lIC0tcmVjdXJzZS1zdWJtb2R1bGVzCmdjZj1nY2MgLVdhbGwgLVdleHRyYSAtV2Vycm9yCmdjZD1naXQgY2hlY2tvdXQgZGV2ZWxvcApnY2I9Z2l0IGNoZWNrb3V0IC1iCi4uLi4uLj0uLi8uLi8uLi8uLi8uLgouLi4uLj0uLi8uLi8uLi8uLgouLi4uPS4uLy4uLy4uCi4uLj0uLi8uLgotPWNkIC0KZ3JlcCAgLS1jb2xvcj1hdXRvIC0tZXhjbHVkZS1kaXI9ey5ienIsQ1ZTLC5naXQsLmhnLC5zdm59CmxsPWxzIC1saApsPWxzIC1sYWgKbHM9bHMgLUcK"
 NAME = 42sh
 
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
@@ -51,17 +50,21 @@ $(NAME): lib_rule $(OBJS)
 	@if [ -e files_missing ]; then \
 		printf "\033[1;31m\n[42SH COMPILATION FAILED]\033[0m\n"; \
 	else \
-		$(CC) $(OBJS) -o $(NAME) $(LIBSFOLDERS) $(LIBS) -ltermcap; \
-		printf "\033[1;36m\n[42SH COMPILATION SUCCESSFUL]\033[0m\n"; \
+		if [ -e /tmp/.42sh_makefile_link ]; then \
+			$(CC) $(OBJS) -o $(NAME) $(LIBSFOLDERS) $(LIBS) -ltermcap; \
+			printf "\033[1;36m\n[42SH COMPILATION SUCCESSFUL]\033[0m\n"; \
+		fi;\
 	fi;
 	@echo $(ALIAS_LIST) | base64 $(DECODE64_FLAG) > ~/.42sh_aliases
 	@$(RM) files_missing
+	@$(RM) /tmp/.42sh_makefile_link
 
 $(OBJDIR):
 	@$(shell mkdir -p $(OBJDIR))
 
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 	@$(shell mkdir -p $(dir $@))
+	@$(shell touch /tmp/.42sh_makefile_link)
 	@printf "%-50s" "Precompiling $(notdir $@)..."
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $< 2> ./tmp_log || /usr/bin/touch ./tmp_errors
 	@if [ -e tmp_errors ]; then \

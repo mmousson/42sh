@@ -6,9 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 14:40:07 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/18 10:35:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 13:22:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include <time.h>
 #include <signal.h>
@@ -30,7 +32,8 @@ void	job_signal_all_processes(int signal)
 		current_process = current_job->first_process;
 		while (current_process != NULL)
 		{
-			kill(current_process->pid, signal);
+			if (current_process->pid != 0)
+				kill(current_process->pid, signal);
 			current_process = current_process->next;
 		}
 		if (signal == SIGKILL)

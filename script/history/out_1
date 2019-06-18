@@ -1,3 +1,0 @@
-echo hello world | cat -e
-
-hello world$
