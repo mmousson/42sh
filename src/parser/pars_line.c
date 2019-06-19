@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "pars.h"
-#include <stdlib.h>
 #include "libft.h"
-#include <unistd.h>
 
 t_tree		*ft_sep(t_tok *tok, int start, int end, char c)
 {

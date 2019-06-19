@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "lex.h"
-#include <stdlib.h>
 
 static void	lex_free_stack(t_st *stack)
 {

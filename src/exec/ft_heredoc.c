@@ -12,14 +12,8 @@
 
 #include "sh42.h"
 #include "exe.h"
-#include "libft.h"
 #include "expand.h"
-#include <unistd.h>
 #include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdlib.h>
-#include "history.h"
 
 static int	is_end_esc(char *str)
 {

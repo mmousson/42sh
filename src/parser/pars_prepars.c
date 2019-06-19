@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
 #include "expand.h"
-#include "libft.h"
 
 static int		pars_error(int type)
 {

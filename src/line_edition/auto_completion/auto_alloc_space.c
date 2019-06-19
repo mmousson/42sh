@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_edition.h"
 #include "history.h"
 
 char				*auto_alloc_name(char **str)

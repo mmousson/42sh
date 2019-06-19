@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
-#include "sh42.h"
 #include "job_control_42.h"
 
 static void	delete_lstfds(t_lstfd *fds)

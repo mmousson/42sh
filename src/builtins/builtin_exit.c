@@ -12,7 +12,6 @@
 
 #include <time.h>
 #include <signal.h>
-#include "libft.h"
 #include "sh42.h"
 #include "job_control_42.h"
 #include "line_edition.h"

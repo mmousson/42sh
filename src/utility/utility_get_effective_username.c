@@ -10,11 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pwd.h>
-#include <unistd.h>
-#include <uuid/uuid.h>
-#include <sys/types.h>
-#include "libft.h"
 
 /*
 **	This functions returns the Path to the HOME directory associated with

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "arithmetic.h"
-#include "libft.h"
 
 char	*walkparenthese(char *s)
 {

@@ -10,10 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exe.h"
 #include "sh42.h"
 #include "expand.h"
-#include "libft.h"
 
 static int	two_point(char **value, char ***arge, const char *str, char *var)
 {

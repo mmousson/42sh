@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "line_edition.h"
-#include <unistd.h>
 #include <fcntl.h>
 
 int					line_read_isnotatty(void)

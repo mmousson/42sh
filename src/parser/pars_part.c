@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "pars.h"
-#include <stdlib.h>
 #include "libft.h"
 #define NB_CHAR_KIND 4
 

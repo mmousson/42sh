@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 static int	insert_paste(char **str, char **end, char **first)
 {

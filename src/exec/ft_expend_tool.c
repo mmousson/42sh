@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
 #include "exe.h"
-#include "libft.h"
-#include <stdlib.h>
 
 int		is_clean(int val)
 {

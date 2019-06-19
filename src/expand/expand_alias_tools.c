@@ -11,10 +11,7 @@
 /* ************************************************************************** */
 
 #include "sh42.h"
-#include "pars.h"
 #include "expand.h"
-#include "lex.h"
-#include "libft.h"
 
 static void	add_file(t_tok *names, char *content)
 {

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "exe.h"
-#include <stdlib.h>
 
 static t_lsther		*init_lsther(char *str)
 {

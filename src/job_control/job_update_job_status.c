@@ -11,10 +11,8 @@
 /* ************************************************************************** */
 
 #include <sys/wait.h>
-#include "libft.h"
 #include "job_control_42.h"
 
-#include <errno.h>
 #include <stdio.h>
 
 /*

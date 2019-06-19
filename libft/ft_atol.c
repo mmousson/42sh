@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 03:08:58 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/22 19:21:46 by marvin           ###   ########.fr       */
+/*   Updated: 2019/06/19 14:28:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 long int	ft_atol(const char *s, int *error)
 {

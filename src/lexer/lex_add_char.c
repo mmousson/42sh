@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lex.h"
-#include <stdlib.h>
-#include "libft.h"
 #include "expand.h"
 
 static int	is_sepa(int status)

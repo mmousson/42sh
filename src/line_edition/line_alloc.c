@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "line_edition.h"
-#include <stdlib.h>
 
 char				*line_get_prompt(t_prompt prompt)
 {

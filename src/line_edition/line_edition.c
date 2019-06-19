@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "line_edition.h"
-#include <stdlib.h>
-#include <unistd.h>
 #include <sys/ioctl.h>
 #include <term.h>
 

@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "exe.h"
-#include "job_control_42.h"
 
 static t_lstred	*new_lstred(t_dup *dup, int close)
 {

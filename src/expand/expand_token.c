@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
 #include "expand.h"
-#include <stdlib.h>
-#include "libft.h"
 
 int		ret_if_neg(t_tok *token, int ret)
 {

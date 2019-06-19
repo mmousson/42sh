@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <fcntl.h>
 #include "libft.h"
 #include "sh42.h"

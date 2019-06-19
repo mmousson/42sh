@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <signal.h>
-#include <stdio.h>
 #include "line_edition.h"
 
 void			sig_handler(int val)

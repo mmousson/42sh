@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "exe.h"
-#include "libft.h"
-#include <stdlib.h>
 
 static int		ft_point_slash(char *name, char **path)
 {

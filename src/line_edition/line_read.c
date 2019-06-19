@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "line_edition.h"
-#include <unistd.h>
 
 static int			line_read_notermcaps(void)
 {

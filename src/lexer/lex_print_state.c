@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "lex.h"
 
 void			ft_print_stat_fd(int stat, int fd)

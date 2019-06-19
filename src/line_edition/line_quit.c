@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_edition.h"
 #include "history.h"
 #include "job_control_42.h"
 

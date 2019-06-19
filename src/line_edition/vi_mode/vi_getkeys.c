@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_edition.h"
 #include "history.h"
 
 static int			vi_minsert(char *str, int ret)

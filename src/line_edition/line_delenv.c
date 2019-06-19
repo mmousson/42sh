@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "line_edition.h"
-#include <stdlib.h>
 
 static void			line_free_history(t_history *ry)
 {

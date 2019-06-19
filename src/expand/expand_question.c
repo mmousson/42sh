@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "expand.h"
-#include "libft.h"
 
 int			expand_question(char *var, const char *str, char ***arge)
 {

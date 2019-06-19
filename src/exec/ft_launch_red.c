@@ -11,12 +11,6 @@
 /* ************************************************************************** */
 
 #include "exe.h"
-#include "libft.h"
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdlib.h>
 
 static int	make_rel(t_red *red, t_dup *dup, char ***arge)
 {

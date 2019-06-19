@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "lex.h"
-#include "libft.h"
 
 static int		ft_nomatch(int status, char *fus, t_stat *stat)
 {

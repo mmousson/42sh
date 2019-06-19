@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_edition.h"
 #include "expand.h"
 
 static int			auto_replace_option(char *str)

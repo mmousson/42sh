@@ -6,14 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:23 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/18 10:58:25 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/19 14:10:11 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <termios.h>
 #include <unistd.h>
 #include <signal.h>
-#include <sys/types.h>
 #include "job_control_42.h"
 
 pid_t	g_shell_proc_group_id;
@@ -46,6 +44,7 @@ int		init_job_ctrl(void)
 		signal(SIGTTIN, SIG_IGN);
 		signal(SIGTTOU, SIG_IGN);
 		signal(SIGTERM, job_sigterm);
+		signal(SIGHUP, job_sigterm);
 		g_shell_proc_group_id = getpid();
 		if (setpgid(g_shell_proc_group_id, g_shell_proc_group_id) < 0)
 		{

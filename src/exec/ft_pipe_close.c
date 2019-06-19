@@ -11,11 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdlib.h>
-#include <sys/types.h>
 #include <sys/wait.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 void		ft_pipe_close(int *fdpipe, int nbr_pipes)
 {

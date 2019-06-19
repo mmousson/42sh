@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_edition.h"
 #include "history.h"
 
 static int			line_cpy_pst(char *str, int ret)

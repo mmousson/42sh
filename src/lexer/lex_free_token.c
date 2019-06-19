@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "lex.h"
-#include <stdlib.h>
 
 void	lex_free_token(t_tok *token)
 {

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "expand.h"
-#include <unistd.h>
 
 int		expand_manager(char **str, char ***arge, t_tok *token, int red)
 {

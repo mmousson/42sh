@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "expand.h"
-#include <stdlib.h>
 #include "sh42.h"
-#include "libft.h"
 
 void		expand_size_word(char **value, const char *str, char ***arge)
 {

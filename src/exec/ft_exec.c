@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "exe.h"
-#include "libft.h"
-#include <stdlib.h>
 
 void			ft_add_argv(char *str, t_launch *cmd)
 {

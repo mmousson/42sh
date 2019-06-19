@@ -6,14 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 22:56:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/18 10:36:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/19 14:03:47 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pwd.h>
-#include <unistd.h>
-#include <uuid/uuid.h>
-#include <sys/types.h>
 #include "libft.h"
 #include "sh42.h"
 
@@ -33,7 +30,7 @@ char	*utility_get_user_home(void)
 	login = getlogin();
 	if (login == NULL || *login == '\0')
 	{
-		ft_putendl_fd("42sh: getlogin error, using default value: /tmp/",
+		ft_putendl_fd("42sh: getlogin error, using default HOME value: /tmp/",
 			STDERR_FILENO);
 		return (ft_strdup("/tmp/"));
 	}

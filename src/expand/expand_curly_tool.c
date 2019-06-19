@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "expand.h"
 
 char		*take_word_expand(const char *str, char ***arge)

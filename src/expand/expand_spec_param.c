@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "sh42.h"
-#include "expand.h"
 #include <stdlib.h>
 #define OFFSET 10
 

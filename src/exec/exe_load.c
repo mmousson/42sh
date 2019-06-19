@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "exe.h"
-#include <stdlib.h>
-#include "expand.h"
 
 int					is_to_load(int fd)
 {

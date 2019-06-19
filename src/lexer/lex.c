@@ -10,13 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include "sh42.h"
 #include "job_control_42.h"
 #include "lex.h"
-#include "pars.h"
-#include "libft.h"
 
 int				lex_step(t_stat **stat, char **str)
 {

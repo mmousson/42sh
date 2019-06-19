@@ -42,9 +42,9 @@ NAME = 42sh
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 DEPS = $(subst .c,.d,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 
-all: $(NAME)
+all: lib_rule $(NAME)
 
-$(NAME): lib_rule $(OBJS)
+$(NAME): $(OBJS)
 	@$(RM) tmp_log
 	@$(RM) tmp_errors
 	@if [ -e files_missing ]; then \

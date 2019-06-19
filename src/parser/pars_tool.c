@@ -12,7 +12,6 @@
 
 #include "pars.h"
 #include "libft.h"
-#include <stdlib.h>
 
 int			is_sepa_tok(t_tok *token)
 {

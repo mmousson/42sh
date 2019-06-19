@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "arithmetic.h"
-#include "libft.h"
 
 int		compute_operation(char ***env, char *exp, t_arithast *ast, long *res)
 {

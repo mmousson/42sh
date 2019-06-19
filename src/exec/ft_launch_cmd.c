@@ -10,13 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <unistd.h>
 #include "sh42.h"
-#include "job_control_42.h"
 #include "exe.h"
-#include "libft.h"
 
 uint8_t		g_prev_status;
 

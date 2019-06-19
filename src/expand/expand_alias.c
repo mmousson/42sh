@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh42.h"
-#include "pars.h"
 #include "expand.h"
-#include "lex.h"
-#include "libft.h"
 #define NBR_RES 13
 
 int				is_reserved(char *str)

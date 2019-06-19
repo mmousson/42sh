@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "sh42.h"
 #include "libft.h"
 #include "job_control_42.h"

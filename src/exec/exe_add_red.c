@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "exe.h"
-#include "libft.h"
 
 static int		is_red(t_tree *tree)
 {

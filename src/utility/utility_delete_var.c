@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:46:01 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/18 12:28:54 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/19 14:03:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,11 @@ static void	nullify_shell_var(t_vars *holder)
 void		utility_delete_var(char *name, char ***env)
 {
 	char	*ret;
-	void	**to_nullify;
 	t_vars	*holder;
 	t_vars	*holder_next;
 
 	if ((ret = utility_internal_var_exists(name, &holder)) != NULL)
 	{
-		to_nullify = (void **)&holder;
 		if (holder == g_shell_var_list)
 			g_shell_var_list = g_shell_var_list->next;
 		holder_next = holder->next;

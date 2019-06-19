@@ -12,7 +12,6 @@
 
 #include "line_edition.h"
 #include <sys/stat.h>
-#include <unistd.h>
 
 static int			auto_attribute_statvalue(char c, int ret, char **path,
 		char *carac)

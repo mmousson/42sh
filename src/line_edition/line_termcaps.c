@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "line_edition.h"
-#include <stdlib.h>
 
 int					caps_check_termcaps(t_tc tc)
 {

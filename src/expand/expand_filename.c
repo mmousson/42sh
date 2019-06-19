@@ -11,10 +11,7 @@
 /* ************************************************************************** */
 
 #include "glob.h"
-#include "libft.h"
-#include "pars.h"
 #include "lex.h"
-#include "libft.h"
 #include "job_control_42.h"
 
 static int	error_filename(char **file, char *path)

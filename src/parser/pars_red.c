@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "pars.h"
-#include <stdlib.h>
 #include "libft.h"
 
 t_tree		*ft_red_right(t_tok *token, int start, int end, int typ)

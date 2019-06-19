@@ -10,18 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <dirent.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "job_control_42.h"
 
-#include <unistd.h>
 #include "sh42.h"
 
 #include "lex.h"
-#include "libft.h"
-#include "line_edition.h"
-#include "history.h"
 
 struct termios	shell_term_conf;
 int16_t			g_current_ret = -1;

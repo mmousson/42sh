@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exe.h"
 #include "pars.h"
-#include <stdlib.h>
 #include "libft.h"
 
 static char		*ft_cmpct_exp(t_tree *tree, char **arge)

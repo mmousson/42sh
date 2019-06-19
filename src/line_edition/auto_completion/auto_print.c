@@ -12,7 +12,6 @@
 
 #include "line_edition.h"
 #include "sh42.h"
-#include <term.h>
 
 static int			auto_printcomp(void)
 {

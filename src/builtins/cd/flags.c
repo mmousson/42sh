@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "sh42.h"
-#include "cd.h"
 #include "libft.h"
 
 static int		is_valid_option(char c, char *options)

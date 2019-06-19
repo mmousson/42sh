@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <wchar.h>
-#include <unistd.h>
 #include "libft.h"
 
 static void			ft_write_4(wchar_t ch)

@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 
-#include <unistd.h>
-#include <stdlib.h>
 #include <fcntl.h>
 #include "history.h"
 #include "sh42.h"

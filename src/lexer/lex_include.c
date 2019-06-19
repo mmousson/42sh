@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "lex.h"
 
 void	lex_include(char **str, char **sub, int start, int len)

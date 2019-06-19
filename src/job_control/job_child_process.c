@@ -10,12 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 
 #include <fcntl.h>
 #include <signal.h>
-#include <unistd.h>
-#include <sys/types.h>
 #include "sh42.h"
 #include "libft.h"
 #include "job_control_42.h"

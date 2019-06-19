@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "line_edition.h"
-#include "libft.h"
 
 static int		vi_nextcommand(char *str, int ret)
 {

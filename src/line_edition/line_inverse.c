@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "line_edition.h"
-#include <stdio.h>
 
 static void			line_swap(char *a, char *b)
 {

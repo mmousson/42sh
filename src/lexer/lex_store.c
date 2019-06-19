@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "lex.h"
-#include <stdlib.h>
 
-#include "libft.h"
 
 int			lex_last_pile(t_stat *stat)
 {

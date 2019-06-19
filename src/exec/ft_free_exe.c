@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "exe.h"
-#include <stdlib.h>
 
 void	ft_free_lsther(t_lsther *lst)
 {

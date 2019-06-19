@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
-#include <stdlib.h>
 
 t_tree		*ft_pars_rer_rig(t_tok *token, int start, int end)
 {

@@ -11,11 +11,8 @@
 /* ************************************************************************** */
 
 #include "sh42.h"
-#include "exe.h"
 #include "sh42.h"
 #include "expand.h"
-#include "libft.h"
-#include <stdlib.h>
 
 int			is_char_exp(char c)
 {
