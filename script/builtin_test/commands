@@ -15,7 +15,7 @@ test -f /usr/share/man/man2/execve.2 && echo ok || echo wrong
 test -L /dev/null && echo ok || echo wrong
 test -L /var && echo ok || echo wrong
 cd /tmp
-touch notfifo && mkfifo fifo
+touch notfifo && mkfifo fifo 2>&-
 test -p fifo && echo ok || echo wrong
 test -p notfifo && echo ok || echo wrong
 touch read noread; chmod u-r noread

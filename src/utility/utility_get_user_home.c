@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 22:56:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:32:44 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 10:36:08 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,21 @@
 
 char	*utility_get_user_home(void)
 {
+	char			*login;
 	struct passwd	*user_pwd;
-	uid_t			user_id;
 
-	if ((user_id = geteuid()) == (uid_t)-1)
+	login = getlogin();
+	if (login == NULL || *login == '\0')
 	{
-		write(STDERR_FILENO, "geteuid Undefined Error", 23);
-		return (NULL);
+		ft_putendl_fd("42sh: getlogin error, using default value: /tmp/",
+			STDERR_FILENO);
+		return (ft_strdup("/tmp/"));
 	}
+	user_pwd = getpwnam(login);
+	if (user_pwd != NULL)
+		return (ft_strdup(user_pwd->pw_dir));
 	else
-	{
-		user_pwd = getpwuid(user_id);
-		if (user_pwd != NULL)
-			return (user_pwd->pw_dir);
-		else
-			return (NULL);
-	}
+		return (NULL);
 }
 
 /*
@@ -69,5 +68,6 @@ char	*utility_get_aliases_file_full_path(void)
 	}
 	if ((alias_file = ft_strjoin(user_home, ALIAS_FILE)) == NULL)
 		ft_putendl_fd("42sh: Internal malloc error", STDERR_FILENO);
+	ft_strdel(&user_home);
 	return (alias_file);
 }

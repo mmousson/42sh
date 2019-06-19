@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/17 15:34:02 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/18 11:35:03 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static char	*lex_following(char **str, int pos, int *len)
 	process_sign(str, &pos, &sub, buff);
 	was_char = ft_isalpha((*str)[pos]);
 	if ((*str)[pos] == '!' && (pos)++)
+	{
+		*len = 1;
 		return (ft_strdup("!"));
+	}
 	while (ft_isdigit((*str)[pos])
 			|| (was_char && ft_isalpha((*str)[pos])))
 	{

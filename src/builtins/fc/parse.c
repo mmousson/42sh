@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 08:12:46 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/15 16:26:05 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 12:33:45 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ t_options_infos		*blt_fc_parse_options(int argc, char **av, char **env)
 			ft_putstr_fd("42sh: ", STDERR_FILENO);
 			ft_putstr_fd(res->editor_name, STDERR_FILENO);
 			ft_putendl_fd(": command not found", STDERR_FILENO);
-			blt_fc_free_memory(res);
 			return (NULL);
 		}
 		ft_strdel(&res->editor_name);

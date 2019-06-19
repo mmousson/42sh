@@ -1,2 +1,0 @@
-45       echo hello world | cat -e
-46       fc -ln -- -1 -2

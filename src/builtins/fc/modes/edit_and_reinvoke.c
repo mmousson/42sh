@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 17:26:52 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/17 09:45:03 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:59:27 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static int	launch_commands(char *filename, char ***env)
 	char	*line;
 
 	ret = 0;
-	if ((fd = open(filename, O_RDONLY)) == -1)
+	line = NULL;
+	if ((fd = open(filename, O_RDWR)) == -1)
 	{
 		ft_putstr_fd("42sh: fc: Failed to open file '", STDERR_FILENO);
 		ft_putstr_fd(filename, STDERR_FILENO);
@@ -80,7 +81,6 @@ static int	launch_commands(char *filename, char ***env)
 	}
 	while (get_next_line(fd, &line) > 0)
 	{
-		ft_putendl_fd(line, 2);
 		ret = !lex_str(&line, env);
 		ft_strdel(&line);
 	}

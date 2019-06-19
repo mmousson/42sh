@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/15 16:26:32 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 10:58:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ static void	notify_bad_command(t_process *pr, const char *cmd, const char *msg,
 		close(pr->io_channels.input);
 	if (pr->io_channels.output != STDOUT_FILENO)
 		close(pr->io_channels.output);
-	if (pr->next != NULL)
-	{
-		close(pr->p[0]);
-		close(pr->p[1]);
-	}
 	pr->status = code;
 	pr->completed = true;
 	pr->valid_to_wait_for = false;
@@ -156,21 +151,18 @@ void		job_command_search_and_exec(t_job *job, t_process *pr, int fg)
 		if (is_path_valid(pr, pr->argv[0]))
 			launch_proc(job, pr, fg);
 	}
-	else
+	else if (job->first_process->next == NULL
+		&& (blt_pos = utility_is_builtin(pr->argv[0])) != -1)
 	{
-		if (job->first_process->next == NULL
-			&& (blt_pos = utility_is_builtin(pr->argv[0])) != -1)
-		{
-			job->pgid = 0;
-			job_open_files(pr);
-			job_builtin_redirect(pr);
-			pr->status = g_builtins[blt_pos].handler(job_argc(pr->argv),
-				pr->argv, pr->environ);
-			pr->completed = true;
-			pr->valid_to_wait_for = false;
-			job_builtin_restore(pr);
-		}
-		else
-			search_using_path(job, pr, fg);
+		job->pgid = 0;
+		job_open_files(pr);
+		job_builtin_redirect(pr);
+		pr->status = g_builtins[blt_pos].handler(job_argc(pr->argv),
+			pr->argv, pr->environ);
+		pr->completed = true;
+		pr->valid_to_wait_for = false;
+		job_builtin_restore(pr);
 	}
+	else
+		search_using_path(job, pr, fg);
 }

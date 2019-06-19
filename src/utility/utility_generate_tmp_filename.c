@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 10:20:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/17 15:05:08 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 16:02:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,16 @@
 **
 **	Arguments:
 **	base -> The current combination
-**	new_suffix -> The new number of the file
 **
 **	Return Value:
 **	NULL -> A malloc error occured
 **	NON-NULL -> The next permutation
 */
 
-static char	*next_permutation(const int fd, const char *base)
+static char	*next_permutation(const char *base)
 {
 	size_t	len;
 	char	*new;
-	char	*line;
 
 	len = ft_strlen(base);
 	if ((new = ft_strnew(len + 1)) == NULL)
@@ -41,9 +39,7 @@ static char	*next_permutation(const int fd, const char *base)
 		return (NULL);
 	}
 	ft_strcpy(new, base);
-	get_next_line(fd, &line);
-	new[len] = (ft_abs(line[0]) % 40) + 48;
-	ft_strdel(&line);
+	new[len] = ((ft_strlen(new) * 3) % 40) + 48;
 	return (new);
 }
 
@@ -68,24 +64,21 @@ char		*utility_generate_tmp_filename(void)
 	char	*res;
 	char	*tmp;
 	int		i;
-	int		fd;
 
 	if ((res = ft_strdup("/tmp/.42sh_tmpfile_")) != NULL)
 	{
 		i = 0;
-		fd = open("/dev/urandom", O_RDONLY);
 		while (42)
 		{
-			if ((tmp = next_permutation(fd, res)) == NULL)
+			if ((tmp = next_permutation(res)) == NULL)
 				return (NULL);
 			ft_strdel(&res);
 			res = tmp;
 			if (!utility_file_exists(res))
-				break;
+				break ;
 			i %= 10;
 			i++;
 		}
-		close(fd);
 		return (res);
 	}
 	ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);

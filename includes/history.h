@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 10:08:21 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/15 11:43:45 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:04:51 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void				hist_addline(char *line, int forwards);
 **	utils
 */
 
+int					hist_must_skip_cmd(const char *line);
 int					hist_strstr(char *haystack, char *needle);
 
 #endif

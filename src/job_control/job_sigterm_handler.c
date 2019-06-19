@@ -6,9 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 14:40:07 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 17:35:35 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 13:22:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include <time.h>
 #include <signal.h>
@@ -17,7 +19,7 @@
 #include "libft.h"
 #include "job_control_42.h"
 
-static void	job_signal_all_processes(int signal)
+void	job_signal_all_processes(int signal)
 {
 	t_job		*next_job;
 	t_job		*current_job;
@@ -30,7 +32,8 @@ static void	job_signal_all_processes(int signal)
 		current_process = current_job->first_process;
 		while (current_process != NULL)
 		{
-			kill(current_process->pid, SIGTERM);
+			if (current_process->pid != 0)
+				kill(current_process->pid, signal);
 			current_process = current_process->next;
 		}
 		if (signal == SIGKILL)
@@ -39,13 +42,16 @@ static void	job_signal_all_processes(int signal)
 	}
 }
 
-void		job_sigterm(int signo)
+void	job_sigterm(int signo)
 {
 	time_t	seconds;
 
 	(void)signo;
-	ft_putendl("\n42sh: Received deadly signal SIGTERM");
-	seconds = time(NULL) + (time_t)3;
+	if (signo == SIGTERM)
+		ft_putendl("\n42sh: Received deadly signal SIGTERM");
+	else
+		ft_putendl("\n42sh: Received deadly signal SIGHUP");
+	seconds = time(NULL) + (time_t)2;
 	ft_putendl("Sending SIGTERM to all processes...");
 	job_signal_all_processes(SIGTERM);
 	while (time(NULL) != seconds)

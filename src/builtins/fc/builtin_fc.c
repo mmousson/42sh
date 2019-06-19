@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 17:47:35 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 16:53:18 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/18 16:02:36 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int			blt_fc(int argc, char **argv, char ***env)
 
 	if ((inf = blt_fc_parse_options(argc, argv, *env)) == NULL
 		|| inf->invalid)
+	{
+		blt_fc_free_memory(inf);
 		return (2);
+	}
 	argc -= inf->parsed;
 	argv += inf->parsed;
 	blt_fc_read_args(argc, argv, inf);

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 20:43:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 17:58:24 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/18 14:29:16 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,18 @@ char		*get_alias(char *word)
 	t_tok	*names;
 	char	*exp;
 	int		loop;
+	int		it;
 
 	names = lex_init_token();
+	it = 0;
 	if ((loop = 1) && is_reserved(word))
 		return (NULL);
 	exp = get_multi_alias(word, names);
-	while (exp && loop && !((loop = 0)))
+	while (it < 80 && exp && loop && !((loop = 0)))
+	{
 		loop = loop_iter(&exp, names);
+		it++;
+	}
 	lex_free_token(names);
 	return (exp);
 }
