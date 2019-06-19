@@ -1,1 +1,1 @@
-ls: cannot access 'DOESNOTEXIST': No such file or directory
+ls: DOESNOTEXIST: No such file or directory

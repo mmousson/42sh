@@ -1,2 +1,2 @@
-echo hello world | cat -e
-fc -ln -- -1 -2
+       echo hello world | cat -e
+       fc -ln -- -1 -2
