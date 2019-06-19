@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:30:37 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/19 13:44:54 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/19 13:49:03 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int			walk_range(char **beg)
 	}
 	return (1);
 }
-
-#include "libft.h"
 
 void		parse_range(char *allow, char *s)
 {
