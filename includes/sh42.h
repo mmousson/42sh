@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/18 12:10:51 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:20:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ void				utility_put_set_posix_str(const char *str);
 void				utility_put_posix_string(const char *str);
 void				utility_set_var(char *name, char *value, char ***env,
 	int export_var);
+void				utility_nullify_shell_var(t_vars *holder);
 void				utility_delete_var(char *name, char ***env);
 char				*utility_internal_var_exists(char *name, t_vars **holder);
 

@@ -6,14 +6,14 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:46:01 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/19 14:03:09 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:20:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "sh42.h"
 
-static void	nullify_shell_var(t_vars *holder)
+void	utility_nullify_shell_var(t_vars *holder)
 {
 	t_vars	*current;
 	t_vars	*prev;
@@ -49,7 +49,7 @@ static void	nullify_shell_var(t_vars *holder)
 **	Return Value: NONE
 */
 
-void		utility_delete_var(char *name, char ***env)
+void	utility_delete_var(char *name, char ***env)
 {
 	char	*ret;
 	t_vars	*holder;
@@ -65,7 +65,7 @@ void		utility_delete_var(char *name, char ***env)
 		if (holder->prev != NULL)
 			holder->prev->next = holder_next;
 		ft_strdel(&ret);
-		nullify_shell_var(holder);
+		utility_nullify_shell_var(holder);
 	}
 	else
 		utility_rm_entry_from_environ(env, name);

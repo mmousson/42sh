@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 02:19:56 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/18 10:38:25 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:16:07 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,31 @@ int			job_wait_completion(t_job *job, t_process *proc)
 }
 
 /*
+**	Function completing the work done 'job_launch' by sending
+**	jobs and processes to the correct 'pgrp', etc...
+**	Also decides if the shell shall hang and wait for completion or not
+**
+**	Arguments:
+**	job -> A pointer to the Data-Structure holding the informations about
+**		the job that's about to be launched
+**	fg -> A boolean value to determine whether the job has be send
+**		to foreground or to background
+**
+**	Return Value: Return value of the last process in the job
+*/
+
+static int	job_drop_to_jobcontrol(t_job *job, int fg)
+{
+	job_add_to_active_job_list(job);
+	if (!isatty(STDIN_FILENO))
+		return (job_wait_completion(job, job->first_process));
+	else if (fg)
+		return (job_send_to_foreground(job, START_JOB));
+	else
+		return (job_send_to_background(job, START_JOB));
+}
+
+/*
 **	Job Control's core function
 **	It launches all the processes contained in a job
 **
@@ -142,14 +167,11 @@ int			job_launch(t_job *job, int fg)
 			pipe_cleanup(current_process);
 		}
 		else
+		{
 			current_process->valid_to_wait_for = false;
+			current_process->completed = true;
+		}
 		current_process = current_process->next;
 	}
-	job_add_to_active_job_list(job);
-	if (!isatty(STDIN_FILENO))
-		return (job_wait_completion(job, job->first_process));
-	else if (fg)
-		return (job_send_to_foreground(job, START_JOB));
-	else
-		return (job_send_to_background(job, START_JOB));
+	return (job_drop_to_jobcontrol(job, fg));
 }

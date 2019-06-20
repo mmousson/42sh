@@ -6,7 +6,7 @@
 #    By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 00:08:26 by mmousson          #+#    #+#              #
-#    Updated: 2019/06/18 12:46:02 by mmousson         ###   ########.fr        #
+#    Updated: 2019/06/20 10:42:58 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,15 +42,15 @@ NAME = 42sh
 OBJS = $(subst .c,.o,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 DEPS = $(subst .c,.d,$(subst ./src/,./$(OBJDIR)/,$(SRCS)))
 
-all: lib_rule $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) | lib_rule
 	@$(RM) tmp_log
 	@$(RM) tmp_errors
 	@if [ -e files_missing ]; then \
 		printf "\033[1;31m\n[42SH COMPILATION FAILED]\033[0m\n"; \
 	else \
-		if [ -e /tmp/.42sh_makefile_link ]; then \
+		if [ -e /tmp/.42sh_makefile_link ] || [ ! -e $(NAME) ]; then \
 			$(CC) $(OBJS) -o $(NAME) $(LIBSFOLDERS) $(LIBS) -ltermcap; \
 			printf "\033[1;36m\n[42SH COMPILATION SUCCESSFUL]\033[0m\n"; \
 		fi;\
@@ -101,6 +101,5 @@ re_nolib: fclean_nolib all
 lib_rule:
 	@$(MAKE) -C $(LIBFT) --no-print-directory
 
-.NOTPARALLEL:
 .PHONY: lib_rule all clean fclean re re_nolib fclean_nolib
 -include $(DEPS)

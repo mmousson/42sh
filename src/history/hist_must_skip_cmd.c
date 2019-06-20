@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:54:56 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/18 15:28:21 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/20 10:53:47 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			hist_must_skip_cmd(const char *line)
 				i++;
 			if (line[i] == '-')
 			{
-				while (!is_cmd_whitespace(line[i]))
+				while (line[i] != '\0' && !is_cmd_whitespace(line[i]))
 				{
 					if (line[i] == 's' || line[i] == 'e')
 						return (1);

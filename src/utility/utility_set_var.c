@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 06:20:40 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/18 12:11:18 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:26:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,14 +157,17 @@ static char	*delete_internal_var_and_get_value(char *name)
 
 	if ((ret = utility_internal_var_exists(name, &holder)) != NULL)
 	{
+		if (holder == g_shell_var_list)
+			g_shell_var_list = g_shell_var_list->next;
 		holder_next = holder->next;
 		if (holder_next != NULL)
 			holder_next->prev = holder->prev;
 		if (holder->prev != NULL)
 			holder->prev->next = holder_next;
-		ft_strdel(&holder->name);
-		ret = holder->value;
-		ft_memdel((void **)&(holder));
+		utility_nullify_shell_var(holder);
+		// ft_strdel(&holder->name);
+		// ret = holder->value;
+		// ft_memdel((void **)&(holder));
 	}
 	return (ret);
 }
