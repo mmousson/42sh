@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 20:14:37 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 20:31:49 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/20 10:59:20 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int				lex_pile_up(t_stat *stat, char buff[BUF]);
 int				lex_step(t_stat **stat, char **str);
 int				lex_welding(t_stat *stat);
 int				error_ep_or_ec(char close, t_stat *stat);
-void			lex_include(char **str, char **sub, int start, int end);
+void			lex_include(char **str, char **sub, int *start, int end);
 int				lex_reline(t_stat *stat, t_tok **token, char buff[BUF]);
 void			lex_add_arg_token(t_tok *tok, char *content, int status);
 void			lex_add_hist(char **str, int status);

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:54:10 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/18 11:35:03 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:09:45 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,8 @@ int			lex_exclam(char **str)
 			if (!sub || !(exclam = 1))
 				return (event_not_found(&old_sub));
 			ft_strdel(&old_sub);
-			lex_include(str, &sub, k, len + 1);
-			k = k + ft_strlen(sub) - len;
+			lex_include(str, &sub, &k, len + 1);
 		}
-		if ((*str)[k + 1] == '!')
-			k++;
 	}
 	return (exclam);
 }
