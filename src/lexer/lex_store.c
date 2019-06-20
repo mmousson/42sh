@@ -6,12 +6,11 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 11:51:09 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 12:50:20 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:43:11 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
-
 
 int			lex_last_pile(t_stat *stat)
 {
