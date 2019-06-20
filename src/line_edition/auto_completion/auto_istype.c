@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   auto_istype.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 09:00:35 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/30 11:44:41 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:47:45 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 int				auto_ispathcarac(char c)
 {

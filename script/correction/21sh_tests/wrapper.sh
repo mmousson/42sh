@@ -25,6 +25,7 @@ for cmd in command_files/*; do
 	if [ $system != 'Linux' ]
 	then
 		sed -i '' "/SIGPIPE/d" /tmp/outputs/out_$i
+		sed -i '' "/Undefined SIGNAL/d" /tmp/outputs/out_$i
 		sed -i '' "s/Yes/No/g" /tmp/outputs/out_$i
 		sed -i '' "s/Yes/No/g" /tmp/expected_outputs/out_$i
 		sed -i '' "s/42sh:/bash:/g" /tmp/outputs/out_$i

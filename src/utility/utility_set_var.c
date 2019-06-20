@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 06:20:40 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/20 11:26:35 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:45:11 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,9 +165,6 @@ static char	*delete_internal_var_and_get_value(char *name)
 		if (holder->prev != NULL)
 			holder->prev->next = holder_next;
 		utility_nullify_shell_var(holder);
-		// ft_strdel(&holder->name);
-		// ret = holder->value;
-		// ft_memdel((void **)&(holder));
 	}
 	return (ret);
 }

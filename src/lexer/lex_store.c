@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lex_store.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 11:51:09 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/09 12:50:20 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:47:55 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
-
 
 int			lex_last_pile(t_stat *stat)
 {

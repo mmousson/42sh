@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   auto_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 12:21:36 by roliveir          #+#    #+#             */
-/*   Updated: 2019/05/15 13:19:30 by roliveir         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:47:28 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 void			auto_swapstr(char **a, char **b)
 {
