@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 19:33:08 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/15 14:40:45 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/23 13:36:30 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void		clean_absolute_path(char **path)
 	}
 }
 
-static char		*check_cdpath(char *cdpath, char *dir)
+static char		*check_cdpath(char *pwd, char *cdpath, char **dir, int options)
 {
 	char	**list;
 	char	*res;
@@ -72,24 +72,25 @@ static char		*check_cdpath(char *cdpath, char *dir)
 	list = ft_strsplit(cdpath, ':');
 	while (list && list[i])
 	{
-		if (list[i][ft_strlen(list[i]) - 1] == '/')
-			res = ft_strjoin(list[i], dir);
-		else
-			res = ft_strjoin3fs(list[i], "/", dir, 0);
+		res = ft_strjoin3fs(list[i],
+			(list[i][ft_strlen(list[i]) - 1] == '/' ? NULL : "/"), *dir, 0);
 		if (access(res, F_OK) == 0)
 		{
-			ft_strtabdel(&list);
+			if (res[0] != '/' && !(options & 2))
+				ft_putstr2_fd(pwd, "/", 1);
 			ft_putendl_fd(res, 1);
-			return (res);
+			free(*dir);
+			*dir = res;
+			break ;
 		}
 		ft_strdel(&res);
 		++i;
 	}
 	ft_strtabdel(&list);
-	return (NULL);
+	return (options & 2 ? ft_strdup(res) : NULL);
 }
 
-char			*get_final_path(char **path, char **cdenv)
+char			*get_final_path(char **path, char **cdenv, int options)
 {
 	char			**arg_tab;
 	char			**pwd_tab;
@@ -101,7 +102,7 @@ char			*get_final_path(char **path, char **cdenv)
 	if (cdenv[3] && (*path)[0] != '/' && !ft_strnequ(*path, "./", 2)
 		&& !ft_strnequ(*path, "../", 3) && !ft_strequ(*path, ".")
 		&& !ft_strequ(*path, "..")
-		&& (str = check_cdpath(cdenv[3], *path)))
+		&& (str = check_cdpath(cdenv[2], cdenv[3], path, options)))
 		return (str);
 	if ((*path)[0] == '/' && (*path)[1] != '.')
 		return (ft_strdup(get_complete_path(cdenv[2], *path)));

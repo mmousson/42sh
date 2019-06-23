@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 14:09:13 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/16 15:32:04 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/06/23 13:20:11 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			blt_cd(int argc, char **argv, char ***env)
 	if (cd_options_parser(argv, &options, &pos_args) > 0)
 		return (1);
 	init_cdenv(&cdenv[0], *env, options);
-	if (!(pwd = get_pwd_for_cd(pos_args, argv, &cdenv[0]))
+	if (!(pwd = get_pwd_for_cd(pos_args, argv, &cdenv[0], options))
 		|| !change_directory(env, pwd, &cdenv[0], options))
 		res = 1;
 	free_cdenv(cdenv);
