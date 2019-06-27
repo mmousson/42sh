@@ -6,7 +6,7 @@
 #    By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/22 12:16:40 by oboutrol          #+#    #+#              #
-#    Updated: 2019/06/15 15:11:54 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/06/27 17:42:23 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ EXPAND_NAME =	expand_manager.c													\
 				expand_alias.c														\
 				expand_alias_tools.c												\
 				expand_grep.c														\
+				expand_cmd_sub.c													\
 				expand_param/expand_substring/remove_substring/remove_substring.c	\
 				expand_param/expand_substring/remove_substring/tokenize.c			\
 				expand_param/expand_substring/remove_substring/match_pattern.c

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 12:03:45 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/27 13:33:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:41:53 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*grep_first(char *word);
 char	*grep_next_word(char *str, t_stat *stat);
 char	*grep_iter(char *word, int iter, int *start);
 char	*get_alias(char *value);
+int		expand_cmd_sub(char **path, char ***arge, t_tok *token);
 int		job_command_substitution(char **command, char ***env);
 
 #endif

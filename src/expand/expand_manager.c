@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:52:12 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/27 13:56:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:42:56 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		expand_manager(char **str, char ***arge, t_tok *token, int red)
 		return (1);
 	if ((ret = expand_shell_param(str, arge)))
 		return (ret);
-	if ((ret = job_command_substitution(str, arge)))
+	if ((ret = expand_cmd_sub(str, arge, token)))
 		return (0);
 	if ((ret = expand_arithmetic(str, arge)))
 		return (ret);
