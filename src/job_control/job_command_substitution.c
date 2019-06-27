@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 11:53:49 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/27 15:44:35 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 16:55:16 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,45 +86,45 @@ static void	fds_setup_and_restore(char *path, int *bkp_out, int *bkp_err,
 	}
 }
 
-static int	get_actual_command(char **command)
+static int	get_actual_command(char **cmd)
 {
 	size_t	new_len;
 	char	*result;
 
-	new_len = ft_strlen(*command + 2) - 1;
+	new_len = ft_strlen(*cmd + 2) - 1;
 	if ((result = ft_strnew(new_len)) == NULL)
 	{
 		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 		return (0);
 	}
-	ft_strncpy(result, *command + 2, new_len);
-	ft_strdel(command);
-	*command = result;
+	ft_strncpy(result, *cmd + 2, new_len);
+	ft_strdel(cmd);
+	*cmd = result;
 	return (1);
 }
 
-int			job_command_substitution(char **command, char ***env)
+int			job_command_substitution(char **c, char ***env)
 {
 	pid_t	pid;
 	int		bkp_out;
 	int		bkp_err;
 	char	*tmp_file;
 
-	if (ft_strnequ(*command, "$(", 2) && ft_strendswith(*command, ")"))
+	if (ft_strnequ(*c, "$(", 2) && ft_strendswith(*c, ")") && *(*c + 2) != '(')
 	{
 		tmp_file = utility_generate_tmp_filename();
 		fds_setup_and_restore(tmp_file, &bkp_out, &bkp_err, SETUP);
-		if (!get_actual_command(command) || (pid = fork()) == -1)
+		if (!get_actual_command(c) || (pid = fork()) == -1)
 			return (0);
 		else if (pid == 0)
 		{
-			lex_str(command, env);
+			lex_str(c, env);
 			blt_exit(1, NULL, env);
 		}
-		ft_strdel(command);
+		ft_strdel(c);
 		waitpid(pid, NULL, WUNTRACED);
 		fds_setup_and_restore(tmp_file, &bkp_out, &bkp_err, RESTORE);
-		*command = file_get_content(tmp_file);
+		*c = file_get_content(tmp_file);
 		unlink(tmp_file);
 		ft_strdel(&tmp_file);
 		return (1);

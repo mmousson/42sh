@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 01:13:45 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 18:53:17 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:42:39 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	*core_spec_var_setget(int id, char *new_value, int set_or_get)
 	{
 		ft_strdel(&(g_spec_vars[id].value));
 		if ((g_spec_vars[id].value = ft_strdup(new_value)) == NULL)
-			ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
+			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 		return (g_spec_vars[id].value);
 	}
 	else if (set_or_get == GET)
@@ -116,7 +116,7 @@ char	*core_spec_var_setget(int id, char *new_value, int set_or_get)
 		if ((tmp = ft_strdup(g_spec_vars[id].value)) == NULL)
 		{
 			if (g_spec_vars[id].value != NULL)
-				ft_putendl_fd("Internal Malloc Error", STDERR_FILENO);
+				ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 		}
 		return (tmp);
 	}

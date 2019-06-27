@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/27 14:59:21 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:42:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void			bootup(int argc, char **argv, char ***env)
 	char	*tmp;
 
 	if ((tmp = ft_itoa(getpid())) == NULL)
-		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
+		ft_putendl_fd("42sh: bootup: Internal Malloc Error", STDERR_FILENO);
 	core_spec_var_setget(SPEC_0, argv[0], SET);
 	core_spec_var_setget(SPEC_UNDERSCORE, argv[0], SET);
 	core_spec_var_setget(SPEC_DOLLAR, tmp, SET);

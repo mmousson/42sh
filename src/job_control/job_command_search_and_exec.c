@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/27 11:32:35 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:41:31 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 #include "sh42.h"
 #include "libft.h"
 #include "job_control_42.h"
+
+/*
+**	This function is called whenever an invalid pathname is provided as a
+**	process command
+**
+**	Arguments:
+**	pr -> A pointer to the Data Strucutre representing the process to be
+**		launched
+**	cmd -> The name of the file that has been detected as invalid
+**	msg -> The error message to display
+**
+**	Return Value: NONE
+*/
 
 static void	notify_bad_command(t_process *pr, const char *cmd, const char *msg,
 	int code)
@@ -29,6 +42,23 @@ static void	notify_bad_command(t_process *pr, const char *cmd, const char *msg,
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putendl_fd(msg, STDERR_FILENO);
 }
+
+/*
+**	This function checks the validity of a directory entry pointed by 'path'
+**	A 'path' is considered valid if it points to an existing regular file with
+**	execution right for the current user
+**	If 'path' is invalid, the function shall call 'notify_bad_command' with
+**	an appropriate error message and set the process's status accordingly
+**
+**	Arguments:
+**	pr -> A pointer to the Data Strucutre representing the process to be
+**		launched
+**	path -> A string holding the path to the file being checked
+**
+**	Return Value:
+**	0 -> The 'path' argument doesn't point to a valid file
+**	1 -> The 'path' argument does point to a valid file
+*/
 
 static int	is_path_valid(t_process *pr, const char *path)
 {
@@ -57,7 +87,16 @@ static int	is_path_valid(t_process *pr, const char *path)
 }
 
 /*
-**	Function launching a process if it is not a built-in utlity
+**	Function launching a process if it is not a built-in utility
+**
+**	Arguments:
+**	job -> A pointer to the Data Structure representing the job being launched
+**	pr -> A pointer to the Data Strucutre representing the process to be
+**		launched
+**	fg -> A boolean value telling whether we should launch the process
+**		in foreground or background
+**
+**	Return Value: NONE
 */
 
 static void	launch_proc(t_job *job, t_process *pr, int fg)
@@ -69,7 +108,7 @@ static void	launch_proc(t_job *job, t_process *pr, int fg)
 	else if (pid > 0)
 		job_parent_process(job, pr, pid);
 	else
-		write(STDERR_FILENO, "Fork Failed\n", 12);
+		write(STDERR_FILENO, "42sh: launch_proc: Fork Failed\n", 31);
 }
 
 /*
@@ -132,10 +171,11 @@ static void	search_using_path(t_job *job, t_process *pr, int fg)
 **			an exit status of 127 and the shell shall write an error message
 **
 **	Arguments:
-**	job ->
-**	pr ->
-**	fg ->
-**	pipe ->
+**	job -> A pointer to the Data Structure representing the job being launched
+**	pr -> A pointer to the Data Strucutre representing the process to be
+**		launched
+**	fg -> A boolean value telling whether we should launch the process
+**		in foreground or background
 **
 **	Return Value: NONE
 */
