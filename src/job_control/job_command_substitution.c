@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 11:53:49 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/27 12:15:18 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 13:52:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,41 @@
 #include "lex.h"
 #include "sh42.h"
 
+static void	update_buffer(char **buffer, char *tmp)
+{
+	char	*tmp_buffer;
+
+	tmp_buffer = *buffer;
+	*buffer = ft_strjoin(*buffer, tmp);
+	ft_strdel(&tmp);
+	ft_strdel(&tmp_buffer);
+	if (buffer == NULL)
+	{
+		ft_putendl_fd("42sh: 1 Internal Malloc Error", STDERR_FILENO);
+		return ;
+	}
+	tmp_buffer = *buffer;
+	*buffer = ft_strjoin(*buffer, "\n");
+	ft_strdel(&tmp);
+	ft_strdel(&tmp_buffer);
+	if (buffer == NULL)
+		ft_putendl_fd("42sh: 1 Internal Malloc Error", STDERR_FILENO);
+}
+
 static char	*file_get_content(char *path)
 {
 	int		fd;
 	char	*tmp;
-	char	*tmp_buffer;
 	char	*buffer;
 
-	buffer = NULL;
+	buffer = ft_strnew(1);
 	if ((fd = open(path, O_RDONLY)) != -1)
 	{
 		while (get_next_line(fd, &tmp) > 0)
 		{
-			tmp_buffer = buffer;
-			buffer = ft_strjoin(buffer, tmp);
-			ft_strdel(&tmp);
-			ft_strdel(&tmp_buffer);
+			update_buffer(&buffer, tmp);
 			if (buffer == NULL)
-			{
-				ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 				break ;
-			}
 		}
 		close(fd);
 	}
@@ -44,51 +58,73 @@ static char	*file_get_content(char *path)
 	return (buffer);
 }
 
-static void	setup_file_descriptors(char *path, int *bkp_out, int *bkp_err)
+static void	fds_setup_and_restore(char *path, int *bkp_out, int *bkp_err,
+	int save_or_restore)
 {
 	int	file_fd;
 
-	if ((file_fd = open(path, O_RDWR)) == -1)
+	if (save_or_restore == SETUP)
 	{
-		ft_putendl3_fd("42sh: opening file ", path, " failed", STDERR_FILENO);
-		return ;
+		if ((file_fd = open(path, O_RDWR | O_CREAT, 0644)) == -1)
+		{
+			ft_putendl3_fd("42sh: opening file ", path, " failed", STDERR_FILENO);
+			return ;
+		}
+		*bkp_out = dup(STDOUT_FILENO);
+		*bkp_err = dup(STDERR_FILENO);
+		dup2(file_fd, STDOUT_FILENO);
+		close(file_fd);
+		close(STDERR_FILENO);
 	}
-	*bkp_out = dup(STDOUT_FILENO);
-	*bkp_err = dup(STDERR_FILENO);
-	dup2(file_fd, STDOUT_FILENO);
-	close(file_fd);
-	close(STDERR_FILENO);
+	else
+	{
+		dup2(*bkp_out, STDOUT_FILENO);
+		close(*bkp_out);
+		dup2(*bkp_err, STDERR_FILENO);
+		close(*bkp_err);
+	}
 }
 
-static void	restore_file_descriptors(int bkp_out, int bkp_err)
+static int	get_actual_command(char **command)
 {
-	if (bkp_out != -1)
+	size_t	new_len;
+	char	*result;
+
+	new_len = ft_strlen(*command + 2) - 1;
+	if ((result = ft_strnew(new_len)) == NULL)
 	{
-		dup2(bkp_out, STDOUT_FILENO);
-		close(bkp_out);
+		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
+		return (0);
 	}
-	if (bkp_err != -1)
-	{
-		dup2(bkp_err, STDOUT_FILENO);
-		close(bkp_err);
-	}
+	ft_strncpy(result, *command + 2, new_len);
+	ft_strdel(command);
+	*command = result;
+	return (1);
 }
 
-char		*job_command_substitution(char *command, char ***env)
+int			job_command_substitution(char **command, char ***env)
 {
 	int		bkp_out;
 	int		bkp_err;
 	char	*res;
 	char	*tmp_file;
 
-	bkp_out = -1;
-	bkp_err = -1;
-	tmp_file = utility_generate_tmp_filename();
-	setup_file_descriptors(tmp_file, &bkp_out, &bkp_err);
-	lex_str(&command, env);
-	restore_file_descriptors(bkp_out, bkp_err);
-	res = file_get_content(tmp_file);
-	unlink(tmp_file);
-	ft_strdel(&tmp_file);
-	return (res);
+	if (ft_strnequ(*command, "$(", 2) && ft_strendswith(*command, ")"))
+	{
+		bkp_out = -1;
+		bkp_err = -1;
+		tmp_file = utility_generate_tmp_filename();
+		fds_setup_and_restore(tmp_file, &bkp_out, &bkp_err, SETUP);
+		if (!get_actual_command(command))
+			return (0);
+		lex_str(command, env);
+		fds_setup_and_restore(tmp_file, &bkp_out, &bkp_err, RESTORE);
+		res = file_get_content(tmp_file);
+		*command = res;
+		unlink(tmp_file);
+		ft_strdel(&tmp_file);
+		return (1);
+	}
+	else
+		return (0);
 }

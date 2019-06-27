@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:37 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/20 11:20:14 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 13:48:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ typedef struct		s_builtins
 # define INVALID_OPTION 2
 # define SH_OPTS "c"
 # define C_OPTION_OFFSET 0
+
+# define SETUP 0
+# define RESTORE 1
 
 /*
 **	Structure representing an element of the shell's hashtable
