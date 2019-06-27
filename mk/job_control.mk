@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:56:59 by mmousson          #+#    #+#              #
-#    Updated: 2019/06/27 11:31:41 by mmousson         ###   ########.fr        #
+#    Updated: 2019/06/27 12:07:00 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ JOB_CTRL =	job_initialize.c					\
 			job_open_files.c					\
 			job_child_process.c					\
 			job_launch_inside_process.c			\
+			job_command_substitution.c			\
 			job_free.c							\
 			job_parent_process.c				\
 			job_drop_unnecessary_processes.c	\
