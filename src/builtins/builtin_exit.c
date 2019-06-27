@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 12:06:58 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/17 15:38:01 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 16:51:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,6 @@ static void	blt_exit_select_argument(int argc, char **argv)
 		exit(g_last_ret);
 }
 
-static void	blt_exit_free_and_kill_jobs(void)
-{
-	time_t		seconds;
-
-	seconds = time(NULL) + (time_t)1;
-	job_signal_all_processes(SIGTERM);
-	while (time(NULL) < seconds)
-		;
-	job_signal_all_processes(SIGKILL);
-}
-
 int			blt_exit(int argc, char **argv, char ***env)
 {
 	(void)env;
@@ -84,7 +73,7 @@ int			blt_exit(int argc, char **argv, char ***env)
 		utility_purge_hash_table();
 		utility_free_alias_list();
 		utility_free_shell_vars_list();
-		blt_exit_free_and_kill_jobs();
+		job_signal_all_processes(SIGTERM);
 		blt_exit_select_argument(argc, argv);
 	}
 	return (0);
