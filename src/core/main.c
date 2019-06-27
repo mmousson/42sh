@@ -6,14 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/20 11:13:00 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 14:59:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control_42.h"
-
 #include "sh42.h"
-
 #include "lex.h"
 
 struct termios	shell_term_conf;

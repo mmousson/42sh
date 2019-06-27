@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 11:53:49 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/27 13:52:23 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 15:42:01 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "lex.h"
 #include "sh42.h"
+#include "job_control_42.h"
 
 static void	update_buffer(char **buffer, char *tmp)
 {
@@ -25,7 +26,7 @@ static void	update_buffer(char **buffer, char *tmp)
 	ft_strdel(&tmp_buffer);
 	if (buffer == NULL)
 	{
-		ft_putendl_fd("42sh: 1 Internal Malloc Error", STDERR_FILENO);
+		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 		return ;
 	}
 	tmp_buffer = *buffer;
@@ -33,7 +34,7 @@ static void	update_buffer(char **buffer, char *tmp)
 	ft_strdel(&tmp);
 	ft_strdel(&tmp_buffer);
 	if (buffer == NULL)
-		ft_putendl_fd("42sh: 1 Internal Malloc Error", STDERR_FILENO);
+		ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 }
 
 static char	*file_get_content(char *path)
@@ -67,7 +68,7 @@ static void	fds_setup_and_restore(char *path, int *bkp_out, int *bkp_err,
 	{
 		if ((file_fd = open(path, O_RDWR | O_CREAT, 0644)) == -1)
 		{
-			ft_putendl3_fd("42sh: opening file ", path, " failed", STDERR_FILENO);
+			ft_putendl3_fd("42sh: opening file '", path, "' failed", 2);
 			return ;
 		}
 		*bkp_out = dup(STDOUT_FILENO);
@@ -104,27 +105,29 @@ static int	get_actual_command(char **command)
 
 int			job_command_substitution(char **command, char ***env)
 {
+	pid_t	pid;
 	int		bkp_out;
 	int		bkp_err;
-	char	*res;
 	char	*tmp_file;
 
 	if (ft_strnequ(*command, "$(", 2) && ft_strendswith(*command, ")"))
 	{
-		bkp_out = -1;
-		bkp_err = -1;
 		tmp_file = utility_generate_tmp_filename();
 		fds_setup_and_restore(tmp_file, &bkp_out, &bkp_err, SETUP);
-		if (!get_actual_command(command))
+		if (!get_actual_command(command)
+			|| (pid = fork()) == -1)
 			return (0);
-		lex_str(command, env);
+		else if (pid == 0)
+		{
+			lex_str(command, env);
+			blt_exit(1, NULL, env);
+		}
+		waitpid(pid, NULL, WUNTRACED);
 		fds_setup_and_restore(tmp_file, &bkp_out, &bkp_err, RESTORE);
-		res = file_get_content(tmp_file);
-		*command = res;
+		*command = file_get_content(tmp_file);
 		unlink(tmp_file);
 		ft_strdel(&tmp_file);
 		return (1);
 	}
-	else
-		return (0);
+	return (0);
 }
