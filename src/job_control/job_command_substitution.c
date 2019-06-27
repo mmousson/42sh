@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 11:53:49 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/27 15:42:01 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 15:44:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,14 @@ int			job_command_substitution(char **command, char ***env)
 	{
 		tmp_file = utility_generate_tmp_filename();
 		fds_setup_and_restore(tmp_file, &bkp_out, &bkp_err, SETUP);
-		if (!get_actual_command(command)
-			|| (pid = fork()) == -1)
+		if (!get_actual_command(command) || (pid = fork()) == -1)
 			return (0);
 		else if (pid == 0)
 		{
 			lex_str(command, env);
 			blt_exit(1, NULL, env);
 		}
+		ft_strdel(command);
 		waitpid(pid, NULL, WUNTRACED);
 		fds_setup_and_restore(tmp_file, &bkp_out, &bkp_err, RESTORE);
 		*command = file_get_content(tmp_file);
