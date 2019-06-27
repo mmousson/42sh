@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/27 11:21:53 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 19:03:00 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,23 @@ int					is_to_load(int fd)
 	return (0);
 }
 
+void				load_cmd(t_launch *cmd, t_process *proc)
+{
+	if (cmd->argv)
+	{
+		if (cmd->argv[0][0] == '{' || cmd->argv[0][0] == '(')
+		{
+			proc->compound_command = ft_strdup(cmd->argv[0]);
+			proc->compound = 1;
+		}
+		else
+			proc->name = ft_strdup(cmd->argv[0]);
+		if (cmd->argv[0][0] == '(')
+			proc->subshell = 1;
+		proc->argv = ft_tabdup(cmd->argv);
+	}
+}
+
 t_process			*load_process(t_launch *cmd, char ***env)
 {
 	t_process		*proc;
@@ -29,8 +46,7 @@ t_process			*load_process(t_launch *cmd, char ***env)
 		return (NULL);
 	if (cmd->next && !(proc->next = load_process(cmd->next, env)))
 		return (NULL);
-	proc->name = cmd->argv ? ft_strdup(cmd->argv[0]) : NULL;
-	proc->argv = ft_tabdup(cmd->argv);
+	load_cmd(cmd, proc);
 	proc->valid_to_wait_for = true;
 	proc->environ = env;
 	proc->io_channels.output = 1;
