@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 17:18:31 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 11:21:53 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,8 @@ t_process			*load_process(t_launch *cmd, char ***env)
 		return (NULL);
 	if (!(proc = (t_process*)ft_memalloc(sizeof(t_process))))
 		return (NULL);
-	if (cmd->next)
-	{
-		if (!(proc->next = load_process(cmd->next, env)))
-			return (NULL);
-	}
+	if (cmd->next && !(proc->next = load_process(cmd->next, env)))
+		return (NULL);
 	proc->name = cmd->argv ? ft_strdup(cmd->argv[0]) : NULL;
 	proc->argv = ft_tabdup(cmd->argv);
 	proc->valid_to_wait_for = true;
@@ -41,6 +38,8 @@ t_process			*load_process(t_launch *cmd, char ***env)
 	proc->builtin_bkp.input = -1;
 	proc->builtin_bkp.output = -1;
 	proc->builtin_bkp.error = -1;
+	proc->subshell = 0;
+	proc->compound_command = 0;
 	ft_launch_red(cmd->red, cmd, env);
 	proc->lstred = cmd->lstred;
 	proc->lstfd = NULL;

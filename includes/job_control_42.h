@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/17 15:37:04 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/27 11:30:46 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct			s_process
 {
 	pid_t				pid;
 	char				*name;
+	char				*compound_command;
 	char				**argv;
 	char				***environ;
 	t_bool				completed;
@@ -157,6 +158,8 @@ typedef struct			s_process
 	t_io_channels		io_channels;
 	int					status;
 	int					p[2];
+	int					subshell;
+	int					compound;
 	struct s_process	*next;
 }						t_process;
 
@@ -221,6 +224,8 @@ void					job_parent_process(t_job *job, t_process *proc,
 																	pid_t pid);
 void					job_child_process(t_job *job, t_process *proc,
 	int foreground, pid_t pgid);
+void					job_launch_inside_process(int blt_pos, t_job *job,
+	t_process *pr);
 int						job_open_files(t_process *process);
 int						job_send_to_foreground(t_job *job, int must_continue);
 int						job_send_to_background(t_job *job, int must_continue);
