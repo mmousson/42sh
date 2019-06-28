@@ -1,0 +1,217 @@
+{
+   tgetstr_calloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_find_type_entry
+   fun:tgetstr
+   fun:caps_addtermcaps
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+   fun:main
+
+}
+{
+   tgetent_realloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:_nc_doalloc
+   fun:_nc_read_termtype
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_read_entry
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+
+}
+{
+   tgetent_malloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nc_read_termtype
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_read_entry
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+
+}
+{
+   tgetent_calloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_nc_read_termtype
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_read_entry
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+
+}
+{
+   tgetent_setup_malloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+   fun:main
+
+}
+{
+   tgetent_trim_malloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nc_tparm_analyze
+   fun:tparm
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_trim_sgr0
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+   fun:main
+
+}
+{
+   tgetent_read_first_malloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nc_first_db
+   fun:_nc_read_entry
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+   fun:main
+
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_nc_first_db
+   fun:_nc_read_entry
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+   fun:main
+
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nc_home_terminfo
+   fun:_nc_first_db
+   fun:_nc_read_entry
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+   fun:main
+
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+   fun:main
+
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:_nc_doalloc
+   fun:tparm
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_trim_sgr0
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+   fun:main
+
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_first_db
+   fun:_nc_read_entry
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:_nc_trim_sgr0
+   fun:tgetent
+   fun:sh_initerm
+   fun:sh_configterm
+   fun:sh_term_manager
+   fun:bootup
+   fun:main
+
+}

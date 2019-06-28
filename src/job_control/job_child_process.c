@@ -6,9 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/27 11:17:02 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/28 14:23:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include <fcntl.h>
 #include <signal.h>
@@ -107,7 +109,10 @@ static void	job_child_exec(t_process *proc)
 	static const char	*exit_args[3] = {"exit", "126", NULL};
 
 	if (proc->subshell)
+	{
+		dprintf(2, "Exiting\n");
 		exit(!lex_str(&(proc->compound_command), proc->environ));
+	}
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
 	{
 		execve(proc->name, proc->argv, job_join_env_tmpvars(*(proc->environ)));

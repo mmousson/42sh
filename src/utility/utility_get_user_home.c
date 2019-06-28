@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 22:56:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/19 14:03:47 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/28 11:39:34 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,47 @@
 #include "libft.h"
 #include "sh42.h"
 
+#ifdef __linux__
+
 /*
 **	This functions returns the Path to the HOME directory associated with
 **	the current USER ID
-**	Simply gets the effective user ID of the calling process
-**	with the 'geteuid' system call
-**	Once it has been done, translates this ID into the corresponding HOME dir
+**	Simply gets the user definition from /etc/passwd associated with the
+**	current effective user ID
+**	Once it has been done, exctract the HOME dir from this definition
+**	The returned (char *) is a freshly allocated string
+**	No error handling is needed since 'geteuid' syscall can't fail
+**
+**	Arguments: NONE
+**
+**	Return Value: The path the HOME directory of the user
+*/
+
+char	*utility_get_user_home(void)
+{
+	struct passwd	*user_pwd;
+
+	user_pwd = getpwuid(geteuid());
+	if (user_pwd != NULL)
+		return (ft_strdup(user_pwd->pw_dir));
+	else
+		return (NULL);
+}
+
+#else
+
+/*
+**	This functions returns the Path to the HOME directory associated with
+**	the current logged in user
+**	Simply gets the effective user login with the 'getlogin' call
+**	Once it has been done, translates this login into the corresponding
+**	HOME dir with 'getpwnam'
+**	'getlogin' CAN and MAY fail, and if so, a default value of '/tmp/' will
+**	be used as a HOME directory for the current session
+**
+**	Arguments: NONE
+**
+**	Return Value: The path the HOME directory of the user
 */
 
 char	*utility_get_user_home(void)
@@ -40,6 +75,8 @@ char	*utility_get_user_home(void)
 	else
 		return (NULL);
 }
+
+#endif
 
 /*
 **	This function conputes the Full and Absolute path to the aliases file

@@ -6,9 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/27 17:41:31 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/06/28 14:26:12 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include "lex.h"
 #include "sh42.h"
@@ -103,6 +105,7 @@ static void	launch_proc(t_job *job, t_process *pr, int fg)
 {
 	pid_t	pid;
 
+	ft_putendl_fd("Forking", 2);
 	if ((pid = fork()) == 0)
 		job_child_process(job, pr, fg, job->pgid);
 	else if (pid > 0)
@@ -185,9 +188,12 @@ void		job_command_search_and_exec(t_job *job, t_process *pr, int fg)
 	int	blt_pos;
 
 	blt_pos = 0;
+	dprintf(2, "Starting command search and exec with: %s and %s\n", pr->compound_command, pr->argv[0]);
 	if (job_check_variable_declaration(pr, pr->environ) == DROP_PROCESS)
 		return ;
-	if ((pr->compound && pr->subshell) || ft_strchr(pr->argv[0], '/') != NULL)
+	if (pr->compound && pr->subshell)
+		launch_proc(job, pr, fg);
+	else if (ft_strchr(pr->argv[0], '/') != NULL)
 	{
 		if (is_path_valid(pr, pr->argv[0]))
 			launch_proc(job, pr, fg);
