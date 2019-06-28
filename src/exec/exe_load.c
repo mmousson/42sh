@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/27 19:03:00 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/06/28 12:29:34 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@ int					is_to_load(int fd)
 
 void				load_cmd(t_launch *cmd, t_process *proc)
 {
+	int				k;
+
 	if (cmd->argv)
 	{
 		if (cmd->argv[0][0] == '{' || cmd->argv[0][0] == '(')
 		{
-			proc->compound_command = ft_strdup(cmd->argv[0]);
+			proc->compound_command = ft_strdup(cmd->argv[0] + 1);
+			k = -1;
+			while (proc->compound_command[++k] 
+					&& !ft_strchr("})", proc->compound_command[k]))
+				k++;
+			proc->compound_command[k] = '\0';
 			proc->compound = 1;
 		}
 		else
@@ -54,8 +61,6 @@ t_process			*load_process(t_launch *cmd, char ***env)
 	proc->builtin_bkp.input = -1;
 	proc->builtin_bkp.output = -1;
 	proc->builtin_bkp.error = -1;
-	proc->subshell = 0;
-	proc->compound_command = 0;
 	ft_launch_red(cmd->red, cmd, env);
 	proc->lstred = cmd->lstred;
 	proc->lstfd = NULL;
