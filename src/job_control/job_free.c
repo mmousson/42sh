@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 23:53:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/16 19:48:21 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/01 14:20:21 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ static void	job_delete_process(t_process *to_del)
 
 	i = -1;
 	ft_strdel(&to_del->name);
+	ft_strdel(&to_del->compound_command);
 	if (to_del->argv != NULL)
 	{
 		while (to_del->argv[++i] != NULL)

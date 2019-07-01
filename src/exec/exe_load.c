@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 22:40:50 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/29 21:29:33 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/07/01 14:20:23 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,16 @@ static void			remove_last(char *str, char ch)
 	char			end;
 
 	end = ch == '{' ? '}' : ')';
-	k = -1;
-	while (str[++k])
+	if (!str || !str[0])
+		return ;
+	k = 0;
+	while (str[k])
 		k++;
-	while (k >= 0 && str[k] != end)
+	return ;
+	while (k > 0 && str[k] != end)
 		k--;
-	str[k] = '\0';
+	if (k >= 0)
+		str[k] = '\0';
 }
 
 void				load_cmd(t_launch *cmd, t_process *proc)
@@ -39,7 +43,7 @@ void				load_cmd(t_launch *cmd, t_process *proc)
 	{
 		if (cmd->argv[0][0] == '{' || cmd->argv[0][0] == '(')
 		{
-			proc->compound_command = ft_strdup(cmd->argv[0] + 1);
+			proc->compound_command = ft_strdup(&cmd->argv[0][1]);
 			proc->compound = 1;
 			remove_last(proc->compound_command, cmd->argv[0][0]);
 		}
