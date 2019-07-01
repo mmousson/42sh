@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 20:35:29 by oboutrol          #+#    #+#              #
-#    Updated: 2019/05/28 17:46:22 by oboutrol         ###   ########.fr        #
+#    Updated: 2019/07/01 11:44:47 by oboutrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ PARSER_NAME =	pars.c					\
 				pars_part.c				\
 				pars_red.c				\
 				pars_tool.c				\
-				expand_arith.c			\
 				pars_print_tree.c		\
+				pars_bracket.c			\
 				free_tree.c				\
 				pars_is_delimiter.c		\
 				pars_work_tree.c

@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 11:04:39 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/13 07:19:47 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/07/01 12:18:19 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int				pars_prepars(t_tok *token)
 		type = ft_get_type(tmp);
 		if (is_sepa_tok(tmp))
 			type = SEPA;
-		if (tmp && tmp->status == PAC)
-			expand_arith(&tmp);
+		if (tmp && tmp->status == CH && pars_bracket(&tmp))
+			return (0);
 		else if (type == REDI && red_valid(tmp))
 			return (0);
 		old_type = ft_mat_type(old_type, type);

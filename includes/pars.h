@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 19:08:58 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/15 19:10:47 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/07/01 11:44:59 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int					lex_get_ch(char c);
 int					is_sepa_tok(t_tok *token);
 int					is_sep(int status);
 int					pars_prepars(t_tok *token);
-void				expand_arith(t_tok **token);
 int					is_charkind(int status);
 int					ft_get_type(t_tok *token);
 int					get_sub_type(int stat);
@@ -122,6 +121,7 @@ t_tree				*ft_pars_pipe(t_tok *tok, int start, int end);
 t_tree				*ft_pars_part(t_tok *tok, int start, int end);
 t_tree				*ft_pars_red(t_tok *tok, int start, int end);
 int					pars_is_delimiter(int status);
+int					pars_bracket(t_tok **tok);
 
 /*
 ** Function parsing son
