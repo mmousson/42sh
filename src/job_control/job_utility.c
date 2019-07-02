@@ -6,10 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/15 12:25:26 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/02 12:22:13 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/types.h>
+#include <signal.h>
 #include "libft.h"
 #include "job_control_42.h"
 
@@ -137,8 +139,21 @@ int		job_is_completed(t_job *j, int action)
 
 void	job_inform_user_about_completion(t_job *j, char *msg)
 {
+	t_process	*proc;
+
 	if (j == NULL || (j != NULL && j->notified))
 		return ;
+	if (j->first_process->compound)
+	{
+		proc = j->first_process;
+		while (proc != NULL)
+		{
+			kill(proc->pid, SIGKILL);
+			proc = proc->next;
+		}
+		job_free(j);
+		return ;
+	}
 	ft_putstr_fd("\nJob '", STDERR_FILENO);
 	ft_putstr_fd(j->command, STDERR_FILENO);
 	ft_putstr_fd("' has ", STDERR_FILENO);
