@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/03 18:43:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:53:16 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ static void	job_child_exec(t_process *proc)
 		g_subshell = 1;
 		signal(SIGUSR1, job_subshell_signal);
 		blt_pos = !lex_str(&(proc->compound_command), proc->environ);
+		g_last_ret = blt_pos;
 		blt_exit(1, (char **)exit_args, proc->environ);
 	}
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
