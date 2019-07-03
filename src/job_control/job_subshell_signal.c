@@ -6,11 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 15:47:26 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/03 15:49:24 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:16:55 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 #include "sh42.h"
 #include "line_edition.h"
 

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/02 12:23:09 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 16:32:16 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "sh42.h"
 #include "lex.h"
 
+int				g_subshell = 0;
 struct termios	shell_term_conf;
 int16_t			g_current_ret = -1;
 uint8_t			g_last_ret = 0;

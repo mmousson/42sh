@@ -6,12 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:23 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/19 14:10:11 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 16:28:58 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <signal.h>
+#include "libft.h"
 #include "job_control_42.h"
 
 pid_t	g_shell_proc_group_id;
@@ -37,7 +38,11 @@ int		init_job_ctrl(void)
 	if (is_shell_intercative)
 	{
 		while (tcgetpgrp(STDERR_FILENO) != (g_shell_proc_group_id = getpgrp()))
+		{
+			ft_putendl_fd("Can't obtain terminal control, sending SIGTTIN", 0);
 			kill(-g_shell_proc_group_id, SIGTTIN);
+		}
+		signal(SIGUSR1, SIG_IGN);
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGTSTP, SIG_IGN);

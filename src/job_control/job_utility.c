@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/03 15:50:50 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 16:17:55 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,21 +139,22 @@ int		job_is_completed(t_job *j, int action)
 
 void	job_inform_user_about_completion(t_job *j, char *msg)
 {
-	t_process	*proc;
+	// t_process	*proc;
 
 	if (j == NULL || (j != NULL && j->notified))
 		return ;
-	if (j->first_process->compound)
-	{
-		proc = j->first_process;
-		while (proc != NULL)
-		{
-			kill(proc->pid, SIGUSR1);
-			proc = proc->next;
-		}
-		job_free(j);
-		return ;
-	}
+	// if (j->first_process->compound)
+	// {
+	// 	proc = j->first_process;
+	// 	while (proc != NULL)
+	// 	{
+	// 		if (proc->compound)
+	// 			kill(proc->pid, SIGUSR1);
+	// 		proc = proc->next;
+	// 	}
+	// 	job_free(j);
+	// 	return ;
+	// }
 	ft_putstr_fd("\nJob '", STDERR_FILENO);
 	ft_putstr_fd(j->command, STDERR_FILENO);
 	ft_putstr_fd("' has ", STDERR_FILENO);

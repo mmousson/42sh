@@ -6,12 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 14:12:12 by roliveir          #+#    #+#             */
-/*   Updated: 2019/06/11 15:14:44 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:09:01 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "line_edition.h"
+#include "job_control_42.h"
 
 #ifndef __linux__
 
@@ -48,8 +49,11 @@ void			sh_switch_term(int reset)
 		tputs(g_env.tc->key[0], 1, ft_putchar);
 		set_term_vdsusp(_POSIX_VDISABLE);
 	}
-	if ((tcsetattr(g_env.t_fd, TCSANOW, &(g_env.term))) == -1)
-		sh_errorterm(TBADFD);
+	if (!g_subshell)
+	{
+		if ((tcsetattr(g_env.t_fd, TCSANOW, &(g_env.term))) == -1)
+			sh_errorterm(TBADFD);
+	}
 }
 
 static void		sh_initerm(void)

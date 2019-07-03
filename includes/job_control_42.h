@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/03 15:49:56 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:17:08 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct			s_sig_matcher
 **	source files
 */
 
+extern int				g_subshell;
 extern uint8_t			g_last_ret;
 extern int16_t			g_current_ret;
 extern pid_t			g_shell_proc_group_id;

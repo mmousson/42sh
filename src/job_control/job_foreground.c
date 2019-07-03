@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 19:17:10 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 16:56:32 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	job_send_to_foreground(t_job *job, int must_continue)
 		}
 	}
 	ret = job_wait_completion(job, job->first_process);
-	tcsetpgrp(STDIN_FILENO, g_shell_proc_group_id);
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell_term_conf);
+	if (!g_subshell)
+	{
+		tcsetpgrp(STDIN_FILENO, g_shell_proc_group_id);
+		tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell_term_conf);
+	}
 	return (ret);
 }
