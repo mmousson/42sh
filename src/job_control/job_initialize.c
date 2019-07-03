@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:23 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/03 16:28:58 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:28:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		init_job_ctrl(void)
 	is_shell_intercative = isatty(STDIN_FILENO);
 	if (is_shell_intercative)
 	{
-		while (tcgetpgrp(STDERR_FILENO) != (g_shell_proc_group_id = getpgrp()))
+		while (tcgetpgrp(STDIN_FILENO) != (g_shell_proc_group_id = getpgrp()))
 		{
 			ft_putendl_fd("Can't obtain terminal control, sending SIGTTIN", 0);
 			kill(-g_shell_proc_group_id, SIGTTIN);

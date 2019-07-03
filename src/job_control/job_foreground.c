@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 09:03:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/03 16:56:32 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:44:03 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	job_send_to_foreground(t_job *job, int must_continue)
 {
 	int	ret;
 
-	tcsetpgrp(STDIN_FILENO, job->pgid);
+	if (job->pgid > 0 && (getpgrp() == tcgetpgrp(STDIN_FILENO)))
+		tcsetpgrp(STDIN_FILENO, job->pgid);
 	if (must_continue == CONTINUE_JOB)
 	{
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &job->tmodes);

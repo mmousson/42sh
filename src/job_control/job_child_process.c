@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/03 18:17:38 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:43:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void		job_child_process(t_job *job, t_process *proc, int foreground,
 		if (pgid == 0)
 			pgid = child_id;
 		setpgid(child_id, pgid);
-		if (foreground)
+		if (foreground && !g_subshell)
 			tcsetpgrp(STDIN_FILENO, pgid);
 		reset_signals_actions();
 	}
