@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_bracket.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 11:41:42 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/07/01 14:43:59 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/07/03 19:07:03 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int			pars_bracket(t_tok **tok)
 		end = line[0] == '{' ? '}' : 0;
 	k = -1;
 	while (line[++k] && line[k] != end)
-		if (!end && !is_esc(line[k]) && (line[k] == '{' || line [k] == '('))
+		if (!end && !is_esc(line[k]) && (line[k] == '{' || line[k] == '('))
 		{
 			ft_putstr_fd("42sh: Parse Error\n", 2);
 			return (1);
 		}
-	if (k >= 0 &&  line[k] && line[k +1])
+	if (k >= 0 && line[k] && line[k + 1])
 	{
 		ft_putstr_fd("42sh: Parse Error\n", 2);
 		return (1);

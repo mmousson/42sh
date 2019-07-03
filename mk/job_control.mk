@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/26 11:56:59 by mmousson          #+#    #+#              #
-#    Updated: 2019/07/03 15:50:16 by mmousson         ###   ########.fr        #
+#    Updated: 2019/07/03 19:06:01 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ JOB_CTRL =	job_initialize.c					\
 			job_sig_table.c						\
 			job_sigchld_handler.c				\
 			job_sigterm_handler.c				\
-			job_subshell_signal.c				\
 			job_utility.c
 
 JOB_CTRL_SRCS = $(addprefix $(JOB_CTRL_PATH),$(JOB_CTRL))
