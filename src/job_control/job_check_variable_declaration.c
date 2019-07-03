@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 16:52:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 18:57:42 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 19:47:17 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int				job_check_variable_declaration(t_process *proc, char ***env)
 	char	*value;
 	size_t	val_len;
 
+	if (proc->compound)
+		return (CONTINUE_PROCESS);
 	while ((catch = ft_strchr(proc->argv[0], '=')) != NULL)
 	{
 		if (!(name = ft_strsub(proc->argv[0], 0, catch - proc->argv[0])))
