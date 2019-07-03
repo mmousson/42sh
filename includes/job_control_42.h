@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:33:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/27 19:03:01 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/07/03 15:49:56 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ extern t_job			*g_active_job_list;
 **	job_update_status -> job_control/job_update_job_status.c
 **	job_unstop -> job_control/job_update_job_status.c
 **	job_sigchld_handler -> job_control/job_sigchld_handler.c
+**	job_subshell_signal -> job_control/job_subshell_signal.c
 */
 
 void					job_add_to_active_job_list(t_job *job);
@@ -236,6 +237,7 @@ void					job_unstop(t_job *job, int foreground);
 void					job_sigchld_handler(int signo);
 void					job_sigterm(int signo);
 void					job_signal_all_processes(int signal);
+void					job_subshell_signal(int signo);
 
 /*
 **	=================== Job-objects' utility functions ===================

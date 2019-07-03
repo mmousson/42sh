@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 06:07:12 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/02 12:22:13 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 15:50:50 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	job_inform_user_about_completion(t_job *j, char *msg)
 		proc = j->first_process;
 		while (proc != NULL)
 		{
-			kill(proc->pid, SIGKILL);
+			kill(proc->pid, SIGUSR1);
 			proc = proc->next;
 		}
 		job_free(j);
