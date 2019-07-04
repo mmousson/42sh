@@ -6,28 +6,12 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 14:40:16 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/08 18:54:08 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/07/04 14:22:57 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 #include "libft.h"
-
-void
-	walk_const(char **s)
-{
-	while (**s)
-	{
-		if (**s == '[' || **s == '*' || **s == '?' || **s == '/')
-			break ;
-		if (**s == '\\')
-			++*s;
-		else if (is_quote(**s))
-			walk_quote(s);
-		if (**s)
-			++*s;
-	}
-}
 
 static void
 	free_submatch(t_submatch *sm)

@@ -6,12 +6,17 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:24:38 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/05/27 19:20:28 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/07/04 14:35:46 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 #include "libft.h"
+
+static int is_specialchar(char c)
+{
+	return (c == '"' || c == '$' || c == '\\' || c == '\n');
+}
 
 void		walk_quote(char **str)
 {
@@ -20,14 +25,35 @@ void		walk_quote(char **str)
 
 	ptr = *str;
 	quote_val = *ptr;
-	ptr++;
+	++ptr;
 	while (*ptr)
 	{
-		if (*ptr == '\\' && is_quote(*(ptr + 1)) && quote_val == '"')
+		if (*ptr == '\\' && quote_val == '"')
+			++ptr;
+		else if (*ptr == quote_val)
+			break ;
+		if (*ptr)
+			++ptr;
+	}
+	*str = ptr;
+}
+
+void		walk_quote_unquote(char **str)
+{
+	char	*ptr;
+	char	quote_val;
+
+	ptr = *str;
+	quote_val = *ptr;
+	++ptr;
+	while (*ptr)
+	{
+		if (*ptr == '\\' && is_specialchar(*(ptr + 1)) && quote_val == '"')
 			ft_strrmvfirst(ptr);
 		else if (*ptr == quote_val)
 			break ;
-		++ptr;
+		if (*ptr)
+			++ptr;
 	}
 	*str = ptr;
 }

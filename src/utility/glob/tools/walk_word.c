@@ -6,13 +6,14 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:33:15 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/05 14:46:46 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/07/04 14:36:13 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 
-void	walk_word(char **s)
+void
+	walk_const(char **s)
 {
 	while (**s)
 	{

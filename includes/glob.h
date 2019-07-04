@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 08:36:51 by akarasso          #+#    #+#             */
-/*   Updated: 2019/06/11 13:06:10 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/07/04 14:34:27 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ t_globtok		*globtoknew(void *data);
 t_globtok		*globlex_pushback(t_globlex *container, void *data);
 int				slice_path(t_glob *gl, char *path);
 void			walk_quote(char **str);
+void			walk_quote_unquote(char **str);
 void			walk_word(char **s);
 t_rng_token		*glob_new_range_token(int type, char **rng);
 t_str_token		*glob_new_str_token(int type, char **str);

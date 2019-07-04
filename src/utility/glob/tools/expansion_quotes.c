@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:20:18 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/06/05 14:46:38 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/07/04 14:36:43 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t		expansion_unquote(char *str)
 			else if (is_quote(*str))
 			{
 				endquote = str;
-				walk_quote(&endquote);
+				walk_quote_unquote(&endquote);
 				if (*endquote == *str)
 				{
 					ft_strrmvfirst(endquote);
