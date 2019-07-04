@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 21:44:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/03 19:05:41 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/03 20:00:02 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,15 @@ static int	build_redirections(t_lstfd *fds, t_process *proc)
 static void	job_child_exec(t_process *proc)
 {
 	int			blt_pos;
-	static char	*exit_args[2] = {"exit", NULL};
+	static char	*exit_args[3] = {"exit", "126", NULL};
+	static char	*exit_no_args[2] = {"exit", NULL};
 
 	if (proc->subshell)
 	{
 		g_subshell = 1;
 		blt_pos = !lex_str(&(proc->compound_command), proc->environ);
 		g_last_ret = blt_pos;
-		blt_exit(1, (char **)exit_args, proc->environ);
+		blt_exit(1, (char **)exit_no_args, proc->environ);
 	}
 	if ((blt_pos = utility_is_builtin(proc->argv[0])) == -1)
 	{
