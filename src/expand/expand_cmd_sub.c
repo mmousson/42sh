@@ -6,7 +6,7 @@
 /*   By: oboutrol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:29:40 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/06/27 17:56:46 by oboutrol         ###   ########.fr       */
+/*   Updated: 2019/07/06 07:26:16 by oboutrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int			expand_cmd_sub(char **str, char ***arge, t_tok *token)
 	int		k;
 	int		ret;
 
+	if (!token)
+		return (0);
 	end = token->next;
 	if (!str || !(*str) || !(*str)[0])
 		return (0);
