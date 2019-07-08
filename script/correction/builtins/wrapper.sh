@@ -24,6 +24,7 @@ for cmd in command_files/*; do
 	fi
 	if [ $system != 'Linux' ]
 	then
+		sed -i '' "s/no such file or directory: \/Users\/mmousson\/goinfre/goinfre: No such file or directory/g" /tmp/outputs/out_$i
 		sed -i '' "/SIGPIPE/d" /tmp/outputs/out_$i
 		sed -i '' "s/Yes/No/g" /tmp/outputs/out_$i
 		sed -i '' "s/42sh:/bash:/g" /tmp/outputs/out_$i
