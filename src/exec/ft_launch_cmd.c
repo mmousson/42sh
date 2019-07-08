@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 12:23:04 by oboutrol          #+#    #+#             */
-/*   Updated: 2019/07/03 17:03:12 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/08 22:07:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int			ft_launch_cmd(t_launch **cmd, char ***arge, int status)
 	{
 		if ((*cmd)->argv)
 		{
-			fg = status == ESP ? BACKGROUND_LAUNCH : FOREGROUND_LAUNCH;
+			fg = (status == ESP ? BACKGROUND_LAUNCH : FOREGROUND_LAUNCH)
+				| g_subshell;
 			if (!(job = exe_load_job(*cmd, arge)))
 				return (1);
 			g_current_ret = job_launch(job, fg);

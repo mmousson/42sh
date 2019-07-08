@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 17:25:11 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/10 16:55:25 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/08 20:00:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,12 @@ int			blt_fc_reinvoke(t_options_infos *inf, char ***env)
 		fresh = get_fresh_command(inf);
 	else
 	{
+		if (inf->from == NULL)
+		{
+			ft_putendl_fd("42sh: fc: no command found", STDERR_FILENO);
+			return (1);
+		}
+		ft_putendl(inf->from->line);
 		if ((fresh = ft_strdup(inf->from->line)) == NULL)
 		{
 			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
