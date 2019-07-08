@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:02:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/04/29 21:42:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/08 23:56:58 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 
 static int		check_job(t_job *job, pid_t jobspec)
 {
+	if (job == NULL)
+		return (0);
 	if (job->pgid == jobspec)
 	{
 		job_unstop(job, BACKGROUND_LAUNCH);
@@ -77,7 +79,7 @@ static int		format_bg_infos(t_job *current, int argc, char **argv)
 	pid_t	tmp;
 
 	ret = BG_NO_SUCH_JOB;
-	while (--argc > 0)
+	if (--argc > 0)
 	{
 		argv++;
 		tmp = get_jobspec(argv[0]);

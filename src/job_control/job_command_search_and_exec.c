@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:20:38 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/02 12:23:00 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/09 01:27:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,14 +189,14 @@ void		job_command_search_and_exec(t_job *job, t_process *pr, int fg)
 		return ;
 	if (pr->compound && pr->subshell)
 		launch_proc(job, pr, fg);
+	else if (pr->compound || (job->first_process->next == NULL
+		&& (blt_pos = utility_is_builtin(pr->argv[0])) != -1))
+		job_launch_inside_process(blt_pos, job, pr);
 	else if (ft_strchr(pr->argv[0], '/') != NULL)
 	{
 		if (is_path_valid(pr, pr->argv[0]))
 			launch_proc(job, pr, fg);
 	}
-	else if (pr->compound || (job->first_process->next == NULL
-		&& (blt_pos = utility_is_builtin(pr->argv[0])) != -1))
-		job_launch_inside_process(blt_pos, job, pr);
 	else
 		search_using_path(job, pr, fg);
 }
