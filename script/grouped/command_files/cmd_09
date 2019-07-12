@@ -1,0 +1,1 @@
+{ echo baz; echo buz >out2; } >out

@@ -1,0 +1,1 @@
+(echo foo; echo bar >out; ls DO_NOT_EXIST) >out 2>err

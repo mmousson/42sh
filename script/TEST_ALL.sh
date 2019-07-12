@@ -99,6 +99,24 @@ printf "=================================================\n\n"
 categories=0
 
 
+printf "=== TESTING GROUPED COMMANDS IMPLEMENTATION ===== > "
+bash --posix grouped/wrapper.sh "$1" 1>/tmp/unit_out 2>&1
+ok=`cat /tmp/unit_out | grep "DIFF OK" | wc -l`
+ko=`cat /tmp/unit_out | grep "DIFF KO" | wc -l`
+if [ $ko = 0 ]
+then
+	printf $BLUE"%02d/%02d"$COLRESET $ok $(($ko+$ok))
+else
+	categories=$(($categories+1))
+	printf $RED"%02d/%02d"$COLRESET $ok $(($ko+$ok))
+fi
+if [ -e /tmp/pattern_memory_report ]
+then
+	printf " < "$RED"[MEMORY ERRORS! REPORT AVAILABLE IN /tmp/hash_table_memory_report]\n"$COLRESET
+else
+	printf " < "$BGREEN"[ALL HEAP BLOCKS WERE FREED -- NO LEAKS ARE POSSIBLE]\n"$COLRESET
+fi
+
 printf "=== TESTING STANDALONE COMMANDS ================= > "
 bash --posix standalone_commands/wrapper.sh "$1" 1>/tmp/unit_out 2>&1
 ok=`cat /tmp/unit_out | grep "DIFF OK" | wc -l`
