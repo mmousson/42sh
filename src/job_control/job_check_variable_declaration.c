@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 16:52:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/03 19:47:17 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:27:08 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,7 @@ int				job_check_variable_declaration(t_process *proc, char ***env)
 		}
 		val_len = ft_strlen(proc->argv[0]) - ft_strlen(name) - 1;
 		if (!(value = ft_strsub(proc->argv[0], ft_strlen(name) + 1, val_len)))
-		{
-			ft_putendl_fd("42sh: Internal Malloc Error", STDERR_FILENO);
 			return (DROP_PROCESS);
-		}
 		if (list_manager(VAR_ADD, new_var(name, value, proc), env) == -1)
 			break ;
 		if (proc->argv[0] == NULL)

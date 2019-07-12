@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   walk_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:24:38 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/07/04 14:35:46 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:28:57 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 #include "libft.h"
 
-static int is_specialchar(char c)
+static int	is_specialchar(char c)
 {
 	return (c == '"' || c == '$' || c == '\\' || c == '\n');
 }
