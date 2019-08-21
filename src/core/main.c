@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 04:26:47 by mmousson          #+#    #+#             */
-/*   Updated: 2019/07/09 01:26:15 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/08/21 11:14:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void			loop_on_input(int argc, char **argv, char ***env)
 	{
 		job_sigchld_handler(0);
 		line = line_get_readline(PBASIC, argv[1]);
+		(void)argv;
+		// line = ft_strdup("vim & echo & fg");
 		lex_add_hist(&line, 0);
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &shell_term_conf);
 		ret = !lex_str(&line, env);
