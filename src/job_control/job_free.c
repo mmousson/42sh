@@ -6,11 +6,9 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 23:53:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/08/21 11:32:31 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/08/21 11:34:49 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include "libft.h"
 #include "job_control_42.h"
@@ -58,13 +56,6 @@ static void	remove_job_from_list(t_job *pointer)
 	t_job	*previous;
 	t_job	*current;
 
-	//dprintf(2, "=== Current job list =================\n");
-	current = g_active_job_list;
-	while (current)
-	{
-		//dprintf(2, "=> %10s -- %p ========================\n", current->first_process->argv[0], current);
-		current = current->next;
-	}
 	previous = NULL;
 	current = g_active_job_list;
 	while (current != NULL && current != pointer)
@@ -72,23 +63,12 @@ static void	remove_job_from_list(t_job *pointer)
 		previous = current;
 		current = current->next;
 	}
-	// if (current)
-		//dprintf(2, "Stopped on: %s\n", current->first_process->argv[0]);
-	// else
-		//dprintf(2, "Job list empty\n");
 	if (current != NULL)
 	{
 		if (previous != NULL)
 			previous->next = current->next;
 		else
 			g_active_job_list = current->next;
-	}
-	//dprintf(2, "=== After free job list ==============\n");
-	current = g_active_job_list;
-	while (current)
-	{
-		//dprintf(2, "=> %10s =========================\n", current->first_process->argv[0]);
-		current = current->next;
 	}
 }
 
@@ -162,7 +142,6 @@ void		job_free(t_job *job)
 	t_process	*current_process;
 	t_process	*next_process;
 
-	//dprintf(2, "Freing: %s with pgid: %d and pointer %p\n", job->first_process->argv[0], job->pgid, job);
 	remove_job_from_list(job);
 	ft_strdel(&job->command);
 	current_process = job->first_process;
