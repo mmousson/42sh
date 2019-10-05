@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 22:56:44 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/28 11:39:34 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/10/05 11:01:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ char	*utility_get_user_home(void)
 	{
 		ft_putendl_fd("42sh: getlogin error, using default HOME value: /tmp/",
 			STDERR_FILENO);
+		return (ft_strdup("/tmp/"));
+	}
+	else if (ft_strequ(login, "_cvmsroot"))
+	{
+		ft_putendl_fd("42sh: getlogin returned default account '_cvmsroot'"
+			", HOME value set to default: /tmp/", 2);
 		return (ft_strdup("/tmp/"));
 	}
 	user_pwd = getpwnam(login);
