@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 08:24:16 by mmousson          #+#    #+#             */
-/*   Updated: 2019/06/13 09:34:05 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/11/09 19:21:23 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,15 @@
 
 static void	job_update_var(t_vars *internal, t_vars **target)
 {
-	t_vars	*slider;
-
-	slider = *target;
 	internal->prev = NULL;
 	internal->next = NULL;
-	while (slider != NULL && slider->next != NULL)
-		slider = slider->next;
-	if (slider == NULL)
+	if (*target == NULL)
 		*target = internal;
 	else
 	{
 		internal->next = *target;
+		internal->prev = NULL;
+		(*target)->prev = internal;
 		*target = internal;
 		(*target)->prev = NULL;
 	}
